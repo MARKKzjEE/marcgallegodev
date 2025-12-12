@@ -1,0 +1,33 @@
+<section class="relative min-h-screen">
+
+	<video
+		id="hero-video"
+		class="absolute inset-0 h-full w-full object-cover blur-[0px]"
+		src="/assets/bg-video.webm"
+		autoplay
+		muted
+		loop
+		playsinline
+		preload="metadata"
+		poster="/assets/bg-frame.png"
+	></video>
+
+	<div class="absolute inset-0 bg-white/45 dark:bg-black/80"></div>	
+
+	<div class="relative z-10 flex min-h-screen items-center py-16">
+		<div class="container mx-auto">
+			<div class="grid items-center gap-16 md:grid-cols-2">
+				<div class="aspect-square overflow-hidden max-h-[500px] mx-auto animate-slide-in-top animate-duration-1000 border-3 border-light-secondary dark:border-dark-primary">
+					<img src="/assets/profile.jpeg" alt="Marc Gallego" class="card-content h-full w-full object-cover" />
+				</div>
+				<div class="space-y-5">
+					<h2 class="text-lg uppercase tracking-[0.4em]">Software Engineer</h2>
+					<h1 class="text-7xl font-regular">Marc Gallego Ginés</h1>
+					<p class="text-base font-normal">Actualmente vivo en Barcelona y soy un desarrollador FullStack freelance.</p>
+					<button class="btn-special mr-2"><span>Sobre mi</span></button> 
+					<button class="btn-special toggle-button"><span>Toggle</span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

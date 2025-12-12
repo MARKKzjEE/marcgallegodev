@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es" class="">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>Marc Gallego | Dev</title>
+		<meta name="description" content="Marc Gallego | Dev" />
+		<meta name="keywords" content="Marc Gallego, Developer, Software Engineer, Full Stack Developer, Frontend Developer, Backend Developer, Mobile Developer, AI Developer" />
+		<meta name="author" content="Marc Gallego" />
+		<meta name="robots" content="index, follow" />
+		<meta name="googlebot" content="index, follow" />
+		<meta name="bingbot" content="index, follow" />
+		<meta name="yandexbot" content="index, follow" />
+		<meta name="sitemap" content="https://marcgallegodev.com/sitemap.xml" />
+
+		<script is:inline>
+			const root = document.documentElement;
+			const stored = localStorage.getItem("theme");
+			const prefersDark = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : null;
+			// Si no hay preferencia guardada, respeta el sistema; si no hay dato de sistema, usa oscuro por defecto
+			const isDark = stored === "dark" || (!stored && (prefersDark ?? true));
+			root.classList.toggle("dark", isDark);
+		</script>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	@import "../styles/tailwind.css";
+</style>
+
+<script>
+	const root = document.documentElement;
+	const toggleButton = document.querySelector('.toggle-button');
+	toggleButton?.addEventListener('click', () => {
+		root.classList.toggle('dark');
+		localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+	});
+</script>
