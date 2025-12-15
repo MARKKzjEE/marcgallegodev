@@ -124,10 +124,10 @@
 	--font-sans: "Just Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 	--font-heading: "Vogun", system-ui, -apple-system, sans-serif;
 	--font-buttons: "NORD", system-ui, -apple-system, sans-serif;
-	--color-dark-primary: #121212;
-	--color-dark-secondary: #F5F5F5;
-	--color-light-primary: #0b1727;
-	--color-light-secondary: #d4d4d4;
+	--color-dark-primary: rgb(18, 18, 18);
+	--color-dark-secondary: rgb(245, 245, 245);
+	--color-light-primary: rgb(11, 23, 39);
+	--color-light-secondary: rgb(212, 212, 212);
 
 }
 
@@ -173,7 +173,7 @@
 		transform: translateX(-100%);
 	}
 	.btn-special:hover {
-		box-shadow: 0 5px 15px rgba(0, 0, 0, 1);
+		box-shadow: 0 5px 15px color-mix(in srgb, var(--color-light-primary) 50%, transparent);
 	}
 	.btn-special:hover::before {
 		border-color: currentColor;
