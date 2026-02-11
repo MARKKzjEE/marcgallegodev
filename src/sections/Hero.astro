@@ -3,31 +3,31 @@
 	<video
 		id="hero-video"
 		class="absolute inset-0 h-full w-full object-cover blur-[1px]"
-		src="/assets/bg-video.webm"
+		src="/assets/bg-background-loop-optimized.mp4"
 		autoplay
 		muted
 		loop
 		playsinline
-		preload="metadata"
-		poster="/assets/bg-frame.png"
+		preload="auto"
+		poster="/assets/bg-background-loop-poster.webp"
 	></video>
 
-	<div class="absolute inset-0 bg-[#bdbdbd]/40 dark:bg-black/70"></div>	
+	<div class="absolute inset-0 bg-[#bdbdbd]/50 dark:bg-black/70"></div>	
 
 	<div class="relative z-10 flex min-h-screen items-center py-16">
-		<div class="container mx-auto">
+		<div class="container mx-auto px-6">
 			<div class="grid items-center gap-4 md:grid-cols-2">
 				<div class="aspect-square overflow-hidden max-h-[500px] mx-auto animate-slide-in-top animate-duration-1000 border-2 border-light-secondary/30 dark:border-dark-primary">
-					<img src="/assets/profile.png" alt="Marc Gallego" class="card-content h-full w-full object-cover" />
+					<img src="/assets/profile-image.png" alt="Marc Gallego" class="card-content h-full w-full object-cover dark:hidden" />
+					<img src="/assets/profile-image-dark.png" alt="Marc Gallego" class="card-content hidden h-full w-full object-cover dark:block" />
 				</div>
-				<div class="card-glass rounded-lg border-1 border-light-secondary/30 dark:border-dark-primary/60 p-8">
+				<div class="card-glass rounded-lg border border-light-secondary/30 dark:border-dark-primary/60 p-8">
 					<div class="space-y-5">
 						<h2 class="text-lg font-semibold uppercase tracking-[0.4em]">Ingeniero del Software</h2>
 						<h1 class="text-7xl font-regular">Marc Gallego Ginés</h1>
-						<p class="text-lg font-normal">Actualmente trabajo como desarrollador fullstack freelance en diferentes proycectos tanto web como app.</p>
+						<p class="text-lg font-normal">Bienvenid@ a mi portfolio. Aquí quiero transmitir mi toque más personal y creativo a parte de lo profesional. Actualmente soy desarrollador freelance y me gusta cumplir ideas de negocio con una total confianza con el cliente.</p>
 						<div class="mt-8">
 							<button class="btn-special mr-2"><span>Sobre mi</span></button> 
-							<button class="btn-special toggle-button"><span>Día/Noche</span></button>
 						</div>
 					</div>
 				</div>
@@ -38,9 +38,12 @@
 
 <style>
 	.card-glass {
-		background: rgba(212, 212, 212, 0);
+		background: rgba(212, 212, 212, 0.1);
 		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 		backdrop-filter: blur(4px);
 		-webkit-backdrop-filter: blur(4px);
+	}
+	:global(html.dark) .card-glass {
+		background: rgba(0, 0, 0, 0.25);
 	}
 </style>

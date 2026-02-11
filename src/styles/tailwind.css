@@ -128,7 +128,6 @@
 	--color-dark-secondary: rgb(245, 245, 245);
 	--color-light-primary: rgb(11, 23, 39);
 	--color-light-secondary: rgb(212, 212, 212);
-
 }
 
 /* Estilos base y tipografía */
@@ -145,108 +144,25 @@
 
 /* Componentes reutilizables */
 @layer components {
-	/* Botón con borde animado */
 	.btn-special {
-		@apply relative inline-flex px-6 py-3 overflow-hidden isolate text-center font-medium tracking-[0.05em] transition duration-500 bg-light-secondary text-light-primary dark:bg-dark-primary dark:text-dark-secondary;
+		@apply inline-block cursor-pointer rounded-lg border-0 p-0 text-base font-semibold;
+		@apply bg-light-primary text-light-secondary dark:bg-dark-secondary dark:text-dark-primary;
 		font-family: var(--font-buttons);
 	}
 
-	.btn-special::before,
-	.btn-special::after {
-		content: "";
-		position: absolute;
-		left: 0;
-		width: 100%;
-		height: 2px;
-		box-sizing: border-box;
-	}
-	.btn-special::before {
-		bottom: 0;
-		border-bottom: 2px solid transparent;
-		border-left: 2px solid transparent;
-		transform: translateX(100%);
-	}
-	.btn-special::after {
-		top: 0;
-		border-top: 2px solid transparent;
-		border-right: 2px solid transparent;
-		transform: translateX(-100%);
-	}
-	.btn-special:hover {
-		box-shadow: 0 5px 15px color-mix(in srgb, var(--color-light-primary) 50%, transparent);
-	}
-	.btn-special:hover::before {
-		border-color: currentColor;
-		height: 100%;
-		transform: translateX(0);
-		transition: transform 0.3s linear, height 0.3s linear 0.3s;
-	}
-	.btn-special:hover::after {
-		border-color: currentColor;
-		height: 100%;
-		transform: translateX(0);
-		transition: transform 0.3s linear, height 0.3s linear 0.5s;
+	.btn-special span {
+		@apply block box-border rounded-lg border px-6 py-3;
+		@apply border-light-primary bg-light-secondary text-light-primary;
+		@apply dark:border-dark-secondary dark:bg-dark-primary dark:text-dark-secondary;
+		transition: transform 0.1s ease;
+		transform: translateY(-0.25em);
 	}
 
-	.btn2 {
-		position: relative;
-		display: inline-block;
-		padding: 15px 30px;
-		border: 2px solid #fefefe;
-		text-transform: uppercase;
-		color: #fefefe;
-		text-decoration: none;
-		font-weight: 600;
-		font-size: 20px;
-		transition: 0.3s;
-		background-color: transparent;
-		cursor: pointer;
-	  }
-	  
-	  .btn2::before {
-		content: "";
-		position: absolute;
-		top: -2px;
-		left: -2px;
-		width: calc(100% + 6px);
-		height: calc(100% + 2px);
-		background-color: #212121;
-		transition: 0.3s ease-out;
-		transform: scaleY(1);
-	  }
-	  
-	  .btn2::after {
-		content: "";
-		position: absolute;
-		top: -2px;
-		left: -2px;
-		width: calc(100% + 4px);
-		height: calc(100% - 50px);
-		background-color: #212121;
-		transition: 0.3s ease-out;
-		transform: scaleY(1);
-	  }
-	  
-	  .btn2:hover::before {
-		transform: translateY(-25px);
-		height: 0;
-	  }
-	  
-	  .btn2:hover::after {
-		transform: scaleX(0);
-		transition-delay: 0.15s;
-	  }
-	  
-	  .btn2:hover {
-		border: 2px solid #fefefe;
-	  }
-	  
-	  .btn2 .spn2 {
-		position: relative;
-		z-index: 3;
-		text-decoration: none;
-		border: none;
-		background-color: transparent;
-	  }
-	  
+	.btn-special:hover span {
+		transform: translateY(-0.4em);
+	}
+
+	.btn-special:active span {
+		transform: translateY(0);
+	}
 }

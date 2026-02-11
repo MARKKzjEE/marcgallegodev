@@ -1,0 +1,96 @@
+---
+const navItems = [
+	{ label: "Experiencia", href: "#experience" },
+	{ label: "Proyectos", href: "#projects" },
+	{ label: "Contacto", href: "#contact" }
+];
+---
+
+<header class="absolute inset-x-0 top-0 z-40 bg-transparent">
+	<div class="container mx-auto flex items-center justify-end h-[64px] gap-6 px-6">
+
+		<nav class="hidden items-center gap-6 text-sm font-semibold md:flex">
+			{navItems.map((item) => (
+				<a
+					href={item.href}
+					class="relative pb-1 font-buttons transition-colors duration-300 after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-light-primary after:transition-transform hover:text-light-primary hover:after:scale-x-100 dark:after:bg-dark-secondary dark:hover:text-dark-secondary"
+				>
+					{item.label}
+				</a>
+			))}
+		</nav>
+        <div class="h-[32px] w-[2px] bg-light-primary dark:bg-dark-secondary"></div>
+        <div class="toggle-switch">
+            <label class="switch-label" id="theme-toggle">
+              <input type="checkbox" class="checkbox">
+              <span class="slider"></span>
+            </label>
+        </div>  
+
+	</div>
+</header>
+
+<style>
+  .toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 28px;
+    --primary: var(--color-light-secondary);
+    --secondary: var(--color-light-primary);
+  }
+
+  :global(.dark) .toggle-switch {
+      --primary: var(--color-dark-secondary);
+      --secondary: var(--color-dark-primary);
+  }
+
+  .switch-label {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary);
+    border-radius: 16px;
+    cursor: pointer;
+    border: 2px solid var(--secondary);
+  }
+
+  .checkbox {
+    position: absolute;
+    display: none;
+  }
+
+  .slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+  }
+
+  .slider::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    -webkit-box-shadow: inset 8px -4px 0px 0px var(--primary);
+    box-shadow: inset 8px -4px 0px 0px var(--primary);
+    background-color: var(--secondary);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+  }
+
+  .checkbox:checked ~ .slider::before {
+    -webkit-transform: translateX(24px);
+    -ms-transform: translateX(24px);
+    transform: translateX(22px);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: var(--primary);
+  }
+
+
+</style>
