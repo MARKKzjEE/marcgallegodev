@@ -1,4 +1,4 @@
-<section class="relative min-h-screen">
+<section id="hero" class="relative min-h-screen">
 
 	<video
 		id="hero-video"
@@ -12,7 +12,7 @@
 		poster="/assets/bg-background-loop-poster.webp"
 	></video>
 
-	<div class="absolute inset-0 bg-[#bdbdbd]/50 dark:bg-black/70"></div>	
+	<div class="absolute inset-0 bg-[#bdbdbd]/30 dark:bg-black/60"></div>	
 
 	<div class="relative z-10 flex min-h-screen items-center py-16">
 		<div class="container mx-auto px-6">
@@ -21,13 +21,16 @@
 					<img src="/assets/profile-image.png" alt="Marc Gallego" class="card-content h-full w-full object-cover dark:hidden" />
 					<img src="/assets/profile-image-dark.png" alt="Marc Gallego" class="card-content hidden h-full w-full object-cover dark:block" />
 				</div>
-				<div class="card-glass rounded-lg border border-light-secondary/30 dark:border-dark-primary/60 p-8">
-					<div class="space-y-5">
-						<h2 class="text-lg font-semibold uppercase tracking-[0.4em]">Ingeniero del Software</h2>
-						<h1 class="text-7xl font-regular">Marc Gallego Ginés</h1>
-						<p class="text-lg font-normal">Bienvenid@ a mi portfolio. Aquí quiero transmitir mi toque más personal y creativo a parte de lo profesional. Actualmente soy desarrollador freelance y me gusta cumplir ideas de negocio con una total confianza con el cliente.</p>
-						<div class="mt-8">
-							<button class="btn-special mr-2"><span>Sobre mi</span></button> 
+				<div data-about-slot>
+					<div id="about-card-panel" class="card-glass about-card rounded-lg border border-light-secondary/30 dark:border-dark-primary/60 p-8" data-about-card tabindex="-1" aria-expanded="false">
+						<button type="button" class="about-close" data-about-close aria-label="Cerrar sobre mi">Cerrar</button>
+						<div class="space-y-5">
+							<h2 class="text-lg font-semibold uppercase tracking-[0.4em]">Ingeniero del Software</h2>
+							<h1 class="text-7xl font-regular">Marc Gallego Ginés</h1>
+							<p class="text-lg font-normal">Bienvenid@ a mi portfolio. Aquí quiero transmitir mi toque más personal y creativo a parte de lo profesional. Actualmente soy desarrollador freelance y me gusta cumplir ideas de negocio con una total confianza con el cliente.</p>
+							<div class="mt-8">
+								<button type="button" class="btn-special mr-2" data-about-open aria-controls="about-card-panel" aria-expanded="false"><span>Sobre mi</span></button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -38,12 +41,53 @@
 
 <style>
 	.card-glass {
-		background: rgba(212, 212, 212, 0.1);
+		background: rgba(212, 212, 212, 0.3);
 		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 		backdrop-filter: blur(4px);
 		-webkit-backdrop-filter: blur(4px);
 	}
+
 	:global(html.dark) .card-glass {
-		background: rgba(0, 0, 0, 0.25);
+		background: rgba(0, 0, 0, 0.3);
+	}
+
+	.about-card {
+		position: relative;
+		will-change: transform;
+	}
+
+	.about-card.is-expanded {
+		position: fixed;
+		inset: var(--about-gap, 24px);
+		margin: 0;
+		z-index: 70;
+		overflow: auto;
+		border-radius: 1rem;
+	}
+
+	.about-close {
+		position: absolute;
+		top: 0.75rem;
+		right: 0.75rem;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+		padding: 0.25rem 0.75rem;
+		font-size: 0.75rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 180ms ease;
+	}
+
+	.about-card.is-expanded .about-close {
+		opacity: 1;
+		pointer-events: auto;
 	}
 </style>
+
+<script>
+	import { initHeroAboutCard } from "../scripts/hero-about";
+
+	initHeroAboutCard();
+</script>
