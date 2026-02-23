@@ -6,7 +6,7 @@ const navItems = [
 ];
 ---
 
-<header class="absolute inset-x-0 top-0 z-40 bg-transparent">
+<header class="site-header absolute inset-x-0 top-0 z-40 bg-transparent" data-site-header>
 	<div class="container mx-auto flex items-center justify-end h-[64px] gap-6 px-6">
 
 		<nav class="hidden items-center gap-6 text-sm font-semibold md:flex">
@@ -31,6 +31,17 @@ const navItems = [
 </header>
 
 <style>
+  .site-header {
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+  }
+
+  .site-header.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+  }
+
   .toggle-switch {
     position: relative;
     width: 50px;
@@ -40,8 +51,8 @@ const navItems = [
   }
 
   :global(.dark) .toggle-switch {
-      --primary: var(--color-dark-secondary);
-      --secondary: var(--color-dark-primary);
+      --primary: var(--color-dark-primary);
+      --secondary: var(--color-dark-secondary);
   }
 
   .switch-label {
