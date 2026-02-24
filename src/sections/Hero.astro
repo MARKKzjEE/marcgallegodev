@@ -1,3 +1,10 @@
+---
+import { Image } from 'astro:assets';
+import profileLight from '../assets/profile-image.png';
+import profileDark from '../assets/profile-image-dark.png';
+import AboutCard from '../components/AboutCard.astro';
+---
+
 <section id="hero" class="relative min-h-screen">
 
 	<video
@@ -8,163 +15,21 @@
 		muted
 		loop
 		playsinline
-		preload="auto"
+		preload="metadata"
 		poster="/assets/bg-background-loop-poster.webp"
 	></video>
 
-	<div class="absolute inset-0 bg-[#bdbdbd]/30 dark:bg-black/60"></div>	
-
-	<div class="about-backdrop" data-about-backdrop hidden aria-hidden="true"></div>
+	<div class="absolute inset-0 bg-[#bdbdbd]/30 dark:bg-black/60"></div>
 
 	<div class="relative flex min-h-screen items-center py-16">
 		<div class="container mx-auto px-6">
 			<div class="grid items-center gap-4 md:grid-cols-2">
 				<div class="aspect-square overflow-hidden max-h-[500px] mx-auto animate-slide-in-top animate-duration-1000 border-2 border-light-secondary/30 dark:border-dark-primary">
-					<img src="/assets/profile-image.png" alt="Marc Gallego" class="card-content h-full w-full object-cover dark:hidden" />
-					<img src="/assets/profile-image-dark.png" alt="Marc Gallego" class="card-content hidden h-full w-full object-cover dark:block" />
+					<Image src={profileLight} alt="Marc Gallego" widths={[400, 500]} sizes="(max-width: 768px) 400px, 500px" format="webp" quality={80} class="card-content h-full w-full object-cover dark:hidden" />
+					<Image src={profileDark} alt="Marc Gallego" widths={[400, 500]} sizes="(max-width: 768px) 400px, 500px" format="webp" quality={80} class="card-content hidden h-full w-full object-cover dark:block" />
 				</div>
-				<div data-about-slot>
-					<div id="about-card-panel" class="card-glass about-card rounded-lg border border-light-secondary/30 dark:border-dark-primary/60 p-8" data-about-card tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="about-title" aria-expanded="false">
-							<button type="button" class="about-close" data-about-close aria-label="Cerrar sobre mi">
-								<span class="about-close-x" aria-hidden="true"></span>
-								<span class="about-close-y" aria-hidden="true"></span>
-							</button>
-						<div class="about-compact space-y-5" data-about-compact>
-							<h2 class="text-lg font-semibold uppercase tracking-[0.4em]">Ingeniero del Software</h2>
-							<h1 id="about-title" class="text-7xl font-regular">Marc Gallego Ginés</h1>
-							<p class="text-lg font-normal">Bienvenid@ a mi portfolio. Aquí quiero transmitir mi toque más personal y creativo a parte de lo profesional. Actualmente soy desarrollador freelance y me gusta cumplir ideas de negocio con una total confianza con el cliente.</p>
-							<div class="mt-8">
-								<button type="button" class="btn-special mr-2" data-about-open aria-controls="about-card-panel" aria-expanded="false"><span>Sobre mi</span></button>
-							</div>
-						</div>
-					</div>
-				</div>
+				<AboutCard />
 			</div>
 		</div>
 	</div>
 </section>
-
-<style>
-	.card-glass {
-		--about-card-bg: color-mix(in srgb, var(--color-light-secondary) 30%, transparent);
-		background-color: var(--about-card-bg);
-		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-		backdrop-filter: blur(4px);
-		-webkit-backdrop-filter: blur(4px);
-		transition: background-color 320ms ease;
-	}
-
-	:global(html.dark) .card-glass {
-		--about-card-bg: color-mix(in srgb, var(--color-dark-primary) 30%, transparent);
-	}
-
-	.about-card {
-		position: relative;
-		will-change: transform;
-	}
-
-	.about-card.is-expanded {
-		position: fixed;
-		inset: var(--about-gap, 24px);
-		margin: 0;
-		z-index: 70;
-		overflow: auto;
-		border-radius: 1rem;
-		--about-card-bg: var(--color-light-secondary);
-	}
-
-	:global(html.dark) .about-card.is-expanded {
-		--about-card-bg: var(--color-dark-primary);
-	}
-
-	.about-backdrop {
-		position: fixed;
-		inset: 0;
-		z-index: 60;
-		background: rgba(0, 0, 0, 0.35);
-		opacity: 0;
-		pointer-events: none;
-		transition: opacity 180ms ease;
-	}
-
-	.about-backdrop.is-visible {
-		opacity: 1;
-		pointer-events: auto;
-	}
-
-	.about-close {
-		position: absolute;
-		top: 0.75rem;
-		right: 0.75rem;
-		width: 2em;
-		height: 2em;
-		border: none;
-		border-radius: 0.5rem;
-		cursor: pointer;
-		background-color: color-mix(in srgb, var(--color-light-primary) 12%, transparent);
-		opacity: 0;
-		pointer-events: none;
-		transition: opacity 180ms ease, background-color 220ms ease;
-	}
-
-	.about-card.is-expanded .about-close {
-		opacity: 1;
-		pointer-events: auto;
-	}
-
-	:global(html.dark) .about-close {
-		background-color: color-mix(in srgb, var(--color-dark-secondary) 12%, transparent);
-	}
-
-	.about-close:hover {
-		background-color: #d31515;
-	}
-
-	.about-close:active {
-		background-color: #820000;
-	}
-
-	:global(html.dark) .about-close:hover {
-		background-color: #d31515;
-	}
-
-	:global(html.dark) .about-close:active {
-		background-color: #820000;
-	}
-
-	.about-close-x,
-	.about-close-y {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 1em;
-		height: 1.5px;
-		background-color: currentColor;
-		transform-origin: center;
-	}
-
-	.about-close-x {
-		transform: translate(-50%, -50%) rotate(45deg);
-	}
-
-	.about-close-y {
-		transform: translate(-50%, -50%) rotate(-45deg);
-	}
-
-	.about-compact {
-		transition: opacity 120ms ease-out, transform 120ms ease-out, visibility 120ms ease-out;
-	}
-
-	.about-card.is-compact-hidden .about-compact {
-		opacity: 0;
-		transform: translateY(8px);
-		pointer-events: none;
-		visibility: hidden;
-	}
-</style>
-
-<script>
-	import { initHeroAboutCard } from "../scripts/hero-about";
-
-	initHeroAboutCard();
-</script>

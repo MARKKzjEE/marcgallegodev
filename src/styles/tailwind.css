@@ -132,7 +132,6 @@
 
 /* Estilos base y tipografía */
 @layer base {
-    *, *::before, *::after { box-sizing: border-box; }
 	body {
 		font-family: var(--font-sans);
 		@apply bg-light-secondary text-light-primary dark:bg-dark-primary dark:text-dark-secondary;
@@ -145,7 +144,7 @@
 /* Componentes reutilizables */
 @layer components {
 	.btn-special {
-		@apply inline-block cursor-pointer rounded-lg border-0 p-0 text-base font-semibold;
+		@apply inline-block cursor-pointer rounded-lg border-0 p-0 text-base font-medium;
 		@apply bg-light-primary text-light-secondary dark:bg-dark-secondary dark:text-dark-primary;
 		font-family: var(--font-buttons);
 	}

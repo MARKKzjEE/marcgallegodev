@@ -1,4 +1,4 @@
-export function initHeroAboutCard(): void {
+export function initAboutCard(): void {
 	const hero = document.getElementById("hero");
 	if (!(hero instanceof HTMLElement)) return;
 	if (hero.dataset.aboutInit === "true") return;

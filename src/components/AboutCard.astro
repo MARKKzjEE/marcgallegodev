@@ -1,0 +1,28 @@
+---
+import '../styles/about-card.css';
+---
+
+<div class="about-backdrop" data-about-backdrop hidden aria-hidden="true"></div>
+
+<div data-about-slot>
+	<div id="about-card-panel" class="card-glass about-card rounded-lg border border-light-secondary/30 dark:border-dark-primary/60 p-8" data-about-card tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="about-title" aria-expanded="false">
+			<button type="button" class="about-close" data-about-close aria-label="Cerrar sobre mi">
+				<span class="about-close-x" aria-hidden="true"></span>
+				<span class="about-close-y" aria-hidden="true"></span>
+			</button>
+		<div class="about-compact space-y-5" data-about-compact>
+			<h2 class="text-lg font-semibold uppercase tracking-[0.4em]">Ingeniero del Software</h2>
+			<h1 id="about-title" class="text-7xl font-regular">Marc Gallego Ginés</h1>
+			<p class="text-lg font-normal">Bienvenid@ a mi portfolio. Aquí quiero transmitir mi toque más personal y creativo a parte de lo profesional. Actualmente soy desarrollador freelance y me gusta cumplir ideas de negocio con una total confianza con el cliente.</p>
+			<div class="mt-8">
+				<button type="button" class="btn-special mr-2" data-about-open aria-controls="about-card-panel" aria-expanded="false"><span>Sobre mi</span></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	import { initAboutCard } from "../scripts/about-card";
+
+	initAboutCard();
+</script>
