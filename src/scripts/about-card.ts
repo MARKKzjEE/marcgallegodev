@@ -10,9 +10,10 @@ export function initAboutCard(): void {
 	const closeButton = hero.querySelector<HTMLButtonElement>("[data-about-close]");
 	const backdrop = hero.querySelector<HTMLElement>("[data-about-backdrop]");
 	const compactContent = hero.querySelector<HTMLElement>("[data-about-compact]");
+	const expandedContent = hero.querySelector<HTMLElement>("[data-about-expanded]");
 	const siteHeader = document.querySelector<HTMLElement>("[data-site-header]");
 
-	if (!card || !slot || !openButton || !closeButton || !backdrop || !compactContent) return;
+	if (!card || !slot || !openButton || !closeButton || !backdrop || !compactContent || !expandedContent) return;
 
 	const DURATION_MS = 560;
 	const BACKDROP_DURATION_MS = 180;
@@ -135,6 +136,25 @@ export function initAboutCard(): void {
 		compactContent.setAttribute("aria-hidden", visible ? "false" : "true");
 	};
 
+	const CONTENT_FADE_MS = 280;
+
+	const setExpandedContentVisible = (visible: boolean): void => {
+		if (visible) {
+			expandedContent.classList.remove("hidden");
+			// Force reflow so the transition triggers from opacity 0
+			void expandedContent.offsetHeight;
+			expandedContent.classList.add("is-visible");
+		} else {
+			expandedContent.classList.remove("is-visible");
+		}
+		expandedContent.setAttribute("aria-hidden", visible ? "false" : "true");
+	};
+
+	const hideExpandedContent = (): void => {
+		expandedContent.classList.add("hidden");
+		expandedContent.classList.remove("is-visible");
+	};
+
 	const trapFocus = (event: KeyboardEvent): void => {
 		if (!isExpanded || event.key !== "Tab") return;
 
@@ -169,38 +189,65 @@ export function initAboutCard(): void {
 		isAnimating = true;
 		lastTrigger = trigger;
 
-		const fromRect = card.getBoundingClientRect();
-		lockSlotHeight();
-		hero.style.setProperty("--about-gap", `${getGap()}px`);
-		setExpandedState(true);
+		// Phase 1: fade out compact content
 		setCompactVisible(false);
 
-		const toRect = card.getBoundingClientRect();
-		playFlip(fromRect, toRect, () => {
-			isExpanded = true;
-			isAnimating = false;
-			card.focus();
-		});
+		const afterFade = (): void => {
+			// Phase 2: FLIP expand (card is visually empty)
+			const fromRect = card.getBoundingClientRect();
+			lockSlotHeight();
+			hero.style.setProperty("--about-gap", `${getGap()}px`);
+			setExpandedState(true);
+
+			const toRect = card.getBoundingClientRect();
+			playFlip(fromRect, toRect, () => {
+				// Phase 3: fade in expanded content
+				setExpandedContentVisible(true);
+				isExpanded = true;
+				isAnimating = false;
+				card.focus();
+			});
+		};
+
+		if (prefersReducedMotion) {
+			afterFade();
+		} else {
+			window.setTimeout(afterFade, 120);
+		}
 	};
 
 	const closeAbout = (): void => {
 		if (isAnimating || !isExpanded) return;
 		isAnimating = true;
 
-		const fromRect = card.getBoundingClientRect();
-		setCompactVisible(true);
-		setExpandedState(false);
-		const toRect = card.getBoundingClientRect();
+		// Phase 1: fade out expanded content
+		setExpandedContentVisible(false);
 
-		playFlip(fromRect, toRect, () => {
-			isExpanded = false;
-			isAnimating = false;
-			lastTrigger?.focus();
-			lastTrigger = null;
-			requestAnimationFrame(() => {
-				if (!isExpanded && !isAnimating) unlockSlotHeight();
+		const afterFade = (): void => {
+			hideExpandedContent();
+
+			// Phase 2: FLIP animate back to compact
+			const fromRect = card.getBoundingClientRect();
+			setCompactVisible(true);
+			setExpandedState(false);
+			const toRect = card.getBoundingClientRect();
+
+			playFlip(fromRect, toRect, () => {
+				isExpanded = false;
+				isAnimating = false;
+				lastTrigger?.focus();
+				lastTrigger = null;
+				requestAnimationFrame(() => {
+					if (!isExpanded && !isAnimating) unlockSlotHeight();
+				});
 			});
-		});
+		};
+
+		if (prefersReducedMotion) {
+			afterFade();
+		} else {
+			window.setTimeout(afterFade, CONTENT_FADE_MS);
+		}
 	};
 
 	openButton.addEventListener("click", () => openAbout(openButton));
@@ -228,4 +275,7 @@ export function initAboutCard(): void {
 	}
 
 	setCompactVisible(true);
+
+	// DEV: start expanded for easier styling
+	openAbout(openButton);
 }

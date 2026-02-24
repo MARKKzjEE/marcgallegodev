@@ -1,0 +1,95 @@
+// ─── About Card: glassmorphism ───
+
+.card-glass {
+	--about-card-bg: color-mix(in srgb, var(--color-light-secondary) 50%, transparent);
+	background-color: var(--about-card-bg);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	transition: background-color 320ms ease;
+
+	html.dark & {
+		--about-card-bg: color-mix(in srgb, var(--color-dark-primary) 50%, transparent);
+	}
+}
+
+// ─── About Card: expanded state ───
+
+.about-card {
+	&.is-expanded {
+		position: fixed;
+		top: var(--about-gap, 24px);
+		bottom: var(--about-gap, 24px);
+		left: var(--about-gap, 24px);
+		right: var(--about-gap, 24px);
+		max-width: 1400px;
+		max-height: 900px;
+		margin: auto;
+		z-index: 70;
+		overflow: hidden;
+		border-radius: 1rem;
+		display: flex;
+		flex-direction: column;
+		--about-card-bg: var(--color-light-secondary);
+
+		html.dark & {
+			--about-card-bg: var(--color-dark-primary);
+		}
+
+		.about-close {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.about-compact {
+			display: none;
+		}
+	}
+
+	&.is-compact-hidden .about-compact {
+		opacity: 0;
+		transform: translateY(8px);
+		pointer-events: none;
+		visibility: hidden;
+	}
+}
+
+// ─── Backdrop ───
+
+.about-backdrop {
+	transition: opacity 180ms ease;
+
+	&.is-visible {
+		opacity: 1;
+		pointer-events: auto;
+	}
+}
+
+// ─── Close button ───
+
+.about-close-x {
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.about-close-y {
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+// ─── Compact content ───
+
+.about-compact {
+	transition: opacity 120ms ease-out, transform 120ms ease-out, visibility 120ms ease-out;
+}
+
+// ─── Expanded content ───
+
+.about-expanded {
+	opacity: 0;
+	transform: translateY(-8px);
+	transition: opacity 280ms ease-out, transform 280ms ease-out;
+
+	&.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
