@@ -1,8 +1,12 @@
 ---
 import '../styles/about-card.scss';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import aboutCafe from '../assets/about-cafe.jpeg';
+
+const optimizedCafe = await getImage({ src: aboutCafe, format: 'webp', quality: 90, width: 900 });
 ---
+
+<link rel="preload" href={optimizedCafe.src} as="image" type="image/webp" />
 
 <div class="about-backdrop fixed inset-0 z-60 opacity-0 pointer-events-none" data-about-backdrop hidden aria-hidden="true"></div>
 
@@ -36,7 +40,9 @@ import aboutCafe from '../assets/about-cafe.jpeg';
 								</p>
 							</div>
 							<div class="flex-1 flex items-end">
-								<p class="font-sans text-sm font-light leading-7 text-justify">Más allá del desarrollo, el mar es mi equilibrio. Es el lugar donde desconecto, ordeno ideas y vuelvo con claridad. También me mueve la moda y la creatividad contemporánea: me inspira cómo el arte y la identidad se mezclan y se expresan sin límites. Esa forma de entender la creatividad también define mi trabajo: no solo construyo soluciones, busco que tengan carácter.</p>
+								<p class="font-sans text-sm font-light leading-7 text-justify">
+									Más allá del desarrollo, podrás ver una clara referencia al mar, mi equilibrio. Es el lugar donde desconecto, ordeno ideas y vuelvo con claridad. 
+									<br><br>También me mueve la moda y la creatividad contemporánea: me inspira cómo el arte y la identidad se mezclan y se expresan sin límites. Esa forma de entender la creatividad también define mi trabajo: no solo construyo soluciones, busco que tengan carácter.</p>
 							</div>
 						</div>
 					</div>
@@ -59,7 +65,7 @@ import aboutCafe from '../assets/about-cafe.jpeg';
 			</div>
 			<!-- SOBRE MI: ancho completo abajo -->
 			<div class="flex border-t py-4">
-				<h3 class="font-buttons mx-4 text-9xl font-bold">SOBRE MI</h3>
+				<h3 class="font-buttons mx-4 text-9xl font-bold tracking-tighter" aria-hidden="true">SOBRE MI</h3>
 			</div>
 		</div>
 	</div>

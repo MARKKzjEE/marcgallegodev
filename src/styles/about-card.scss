@@ -86,7 +86,7 @@
 .about-expanded {
 	opacity: 0;
 	transform: translateY(-8px);
-	transition: opacity 280ms ease-out, transform 280ms ease-out;
+	transition: opacity 150ms ease-out, transform 150ms ease-out;
 
 	&.is-visible {
 		opacity: 1;

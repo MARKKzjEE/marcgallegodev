@@ -15,8 +15,12 @@ export function initAboutCard(): void {
 
 	if (!card || !slot || !openButton || !closeButton || !backdrop || !compactContent || !expandedContent) return;
 
-	const DURATION_MS = 560;
+	const DURATION_MS = 500;
+	const CONTENT_FADE_MS = 150;
+	const COMPACT_FADE_MS = 120;
 	const BACKDROP_DURATION_MS = 180;
+	const CONTENT_MIDPOINT = 0.5;
+	const GAP = 24;
 	const EASING = "cubic-bezier(0.22, 1, 0.36, 1)";
 	const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 	let prefersReducedMotion = reducedMotionQuery.matches;
@@ -26,8 +30,6 @@ export function initAboutCard(): void {
 	let isExpanded = false;
 	let lastTrigger: HTMLButtonElement | null = null;
 	let previousBodyOverflow = "";
-
-	const getGap = (): number => 24;
 
 	const FOCUSABLE_SELECTOR = [
 		"a[href]",
@@ -136,8 +138,6 @@ export function initAboutCard(): void {
 		compactContent.setAttribute("aria-hidden", visible ? "false" : "true");
 	};
 
-	const CONTENT_FADE_MS = 280;
-
 	const setExpandedContentVisible = (visible: boolean): void => {
 		if (visible) {
 			expandedContent.classList.remove("hidden");
@@ -196,13 +196,17 @@ export function initAboutCard(): void {
 			// Phase 2: FLIP expand (card is visually empty)
 			const fromRect = card.getBoundingClientRect();
 			lockSlotHeight();
-			hero.style.setProperty("--about-gap", `${getGap()}px`);
+			hero.style.setProperty("--about-gap", `${GAP}px`);
 			setExpandedState(true);
 
 			const toRect = card.getBoundingClientRect();
-			playFlip(fromRect, toRect, () => {
-				// Phase 3: fade in expanded content
+
+			// Start fade in of expanded content at midpoint of FLIP
+			window.setTimeout(() => {
 				setExpandedContentVisible(true);
+			}, DURATION_MS * CONTENT_MIDPOINT);
+
+			playFlip(fromRect, toRect, () => {
 				isExpanded = true;
 				isAnimating = false;
 				card.focus();
@@ -212,7 +216,7 @@ export function initAboutCard(): void {
 		if (prefersReducedMotion) {
 			afterFade();
 		} else {
-			window.setTimeout(afterFade, 120);
+			window.setTimeout(afterFade, COMPACT_FADE_MS);
 		}
 	};
 
@@ -265,7 +269,7 @@ export function initAboutCard(): void {
 
 	window.addEventListener("resize", () => {
 		if (!isExpanded) return;
-		hero.style.setProperty("--about-gap", `${getGap()}px`);
+		hero.style.setProperty("--about-gap", `${GAP}px`);
 	});
 
 	if ("addEventListener" in reducedMotionQuery) {
@@ -276,6 +280,4 @@ export function initAboutCard(): void {
 
 	setCompactVisible(true);
 
-	// DEV: start expanded for easier styling
-	openAbout(openButton);
 }
