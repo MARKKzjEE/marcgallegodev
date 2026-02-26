@@ -125,58 +125,56 @@
 	--font-heading: "Vogun", system-ui, -apple-system, sans-serif;
 	--font-buttons: "NORD", system-ui, -apple-system, sans-serif;
 
-	--color-dark-primary: rgb(18, 18, 18);
-	--color-dark-secondary: rgb(245, 245, 245);
-	--color-light-primary: rgb(8, 12, 28);
-	--color-light-secondary: rgb(212, 212, 212);
-
-	--color-th-bg: var(--th-main-bg);
+	--color-th-bg: var(--th-bg);
 	--color-th-text: var(--th-text);
 	--color-th-heading: var(--th-heading);
 
-	--color-header-text: var(--header-text);
-	--color-header-divider: var(--header-divider);
+	--color-th-header-text: var(--th-header-text);
 }
 
 :root {
-
-	/* LIGHT THEME */
-	--th-l-med-blue: #011633; /* Headings */
-	--th-l-high-blue: #0C111D; /* Normal text | border/details/text buttons */
+	/* RAW VALUES */
+	/* Light theme */
+	--th-l-deep-blue: #011633; /* Headings */
+	--th-l-dark-blue: #0C111D; /* Normal text | border/details/text buttons */
 	--th-l-cream: #F0EEE9; /* Background sections/buttons */
 	--th-l-orange: #F2542D;
-	--th-l-grey: #364156;
-	--th-l-white: #FFFFFF;
-	--th-l-black: #000000;
+	--th-l-charcoal: #364156;
 
-	/* DARK THEME */
-	--th-d-greyblack: #171717; /* Background sections/buttons */
+	/* Dark theme */
+	--th-d-carbon: #171717; /* Background sections/buttons */
 	--th-d-white: #FFFFFF; /* Headings | Normal text | border/details/text buttons */
-	--th-d-black: #000000;
-	--th-d-grey: #D5D5D5;
-	--th-d-grey: #868686;
+	--th-d-grey-light: #D5D5D5;
+	--th-d-grey-dark: #868686;
+	/*------------*/
 
-	--th-main-bg: var(--th-l-cream);
-	--th-text: var(--th-l-high-blue);
-	--th-heading: var(--th-l-med-blue);
+	/* SEMANTIC TOKENS */
+	--th-bg: var(--th-l-cream);
+	--th-text: var(--th-l-dark-blue);
+	--th-heading: var(--th-l-deep-blue);
 
-	--toggle-track: var(--th-l-cream);
-	--toggle-thumb: var(--th-l-high-blue);
+	--th-toggle-track: var(--th-l-cream);
+	--th-toggle-thumb: var(--th-l-dark-blue);
 
-	--header-text: var(--th-l-cream);
-  	--header-divider: var(--th-l-cream);
+	--th-header-text: var(--th-l-cream);
+
+	--th-card-glass-bg: color-mix(in srgb, var(--th-l-charcoal) 10%, transparent);
+	/*------------*/
 }
 
 html.dark {
-	--th-main-bg: var(--th-d-greyblack);
+	/* SEMANTIC TOKENS */
+	--th-bg: var(--th-d-carbon);
   	--th-text: var(--th-d-white);
   	--th-heading: var(--th-d-white);
 
-	--toggle-track: var(--th-d-greyblack);
-	--toggle-thumb: var(--th-d-white);
+	--th-toggle-track: var(--th-d-carbon);
+	--th-toggle-thumb: var(--th-d-white);
 
-	--header-text: var(--th-d-white);
-  	--header-divider: var(--th-d-white);
+	--th-header-text: var(--th-d-white);
+
+	--th-card-glass-bg: color-mix(in srgb, var(--th-d-carbon) 10%, transparent);
+	/*------------*/
 }
 
 /* Estilos base y tipografía */
@@ -184,6 +182,7 @@ html.dark {
 
 	body {
 		font-family: var(--font-sans);
+		background-color: var(--color-th-bg);
 	}
 
 	h1, h2, h3, h4 {
