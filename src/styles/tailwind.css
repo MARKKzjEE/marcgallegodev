@@ -124,18 +124,68 @@
 	--font-sans: "Just Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 	--font-heading: "Vogun", system-ui, -apple-system, sans-serif;
 	--font-buttons: "NORD", system-ui, -apple-system, sans-serif;
+
 	--color-dark-primary: rgb(18, 18, 18);
 	--color-dark-secondary: rgb(245, 245, 245);
 	--color-light-primary: rgb(8, 12, 28);
 	--color-light-secondary: rgb(212, 212, 212);
+
+	--color-th-bg: var(--th-main-bg);
+	--color-th-text: var(--th-text);
+	--color-th-heading: var(--th-heading);
+
+	--color-header-text: var(--header-text);
+	--color-header-divider: var(--header-divider);
+}
+
+:root {
+
+	/* LIGHT THEME */
+	--th-l-med-blue: #011633; /* Headings */
+	--th-l-high-blue: #0C111D; /* Normal text | border/details/text buttons */
+	--th-l-cream: #F0EEE9; /* Background sections/buttons */
+	--th-l-orange: #F2542D;
+	--th-l-grey: #364156;
+	--th-l-white: #FFFFFF;
+	--th-l-black: #000000;
+
+	/* DARK THEME */
+	--th-d-greyblack: #171717; /* Background sections/buttons */
+	--th-d-white: #FFFFFF; /* Headings | Normal text | border/details/text buttons */
+	--th-d-black: #000000;
+	--th-d-grey: #D5D5D5;
+	--th-d-grey: #868686;
+
+	--th-main-bg: var(--th-l-cream);
+	--th-text: var(--th-l-high-blue);
+	--th-heading: var(--th-l-med-blue);
+
+	--toggle-track: var(--th-l-cream);
+	--toggle-thumb: var(--th-l-high-blue);
+
+	--header-text: var(--th-l-cream);
+  	--header-divider: var(--th-l-cream);
+}
+
+html.dark {
+	--th-main-bg: var(--th-d-greyblack);
+  	--th-text: var(--th-d-white);
+  	--th-heading: var(--th-d-white);
+
+	--toggle-track: var(--th-d-greyblack);
+	--toggle-thumb: var(--th-d-white);
+
+	--header-text: var(--th-d-white);
+  	--header-divider: var(--th-d-white);
 }
 
 /* Estilos base y tipografía */
 @layer base {
+
 	body {
 		font-family: var(--font-sans);
-		@apply bg-light-secondary text-light-primary dark:bg-dark-primary dark:text-dark-secondary;
 	}
+
 	h1, h2, h3, h4 {
 		font-family: var(--font-heading);
 	}
@@ -143,24 +193,21 @@
 
 /* Componentes reutilizables */
 @layer components {
+
 	.btn-special {
 		@apply inline-block cursor-pointer rounded-lg border-0 p-0 text-base font-medium;
-		@apply bg-light-primary text-light-secondary dark:bg-dark-secondary dark:text-dark-primary;
+		@apply bg-th-text  text-th-text;
 		font-family: var(--font-buttons);
 	}
-
 	.btn-special span {
 		@apply block box-border rounded-lg border px-6 py-3;
-		@apply border-light-primary bg-light-secondary text-light-primary;
-		@apply dark:border-dark-secondary dark:bg-dark-primary dark:text-dark-secondary;
+		@apply border-th-text text-th-text bg-th-bg;
 		transition: transform 0.1s ease;
 		transform: translateY(-0.25em);
 	}
-
 	.btn-special:hover span {
 		transform: translateY(-0.4em);
 	}
-
 	.btn-special:active span {
 		transform: translateY(0);
 	}
