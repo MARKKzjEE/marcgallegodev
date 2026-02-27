@@ -1,16 +1,11 @@
 // ─── About Card: glassmorphism ───
 
 .card-glass {
-	--about-card-bg: color-mix(in srgb, var(--color-light-secondary) 50%, transparent);
-	background-color: var(--about-card-bg);
+	background-color: var(--th-card-glass-bg);
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(4px);
+	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(4px);
 	transition: background-color 320ms ease;
-
-	html.dark & {
-		--about-card-bg: color-mix(in srgb, var(--color-dark-primary) 50%, transparent);
-	}
 }
 
 // ─── About Card: expanded state ───
@@ -30,11 +25,7 @@
 		border-radius: 1rem;
 		display: flex;
 		flex-direction: column;
-		--about-card-bg: var(--color-light-secondary);
-
-		html.dark & {
-			--about-card-bg: var(--color-dark-primary);
-		}
+		background-color: var(--th-bg);
 
 		.about-close {
 			opacity: 1;
@@ -84,11 +75,13 @@
 // ─── Expanded content ───
 
 .about-expanded {
+	display: none;
 	opacity: 0;
 	transform: translateY(-8px);
 	transition: opacity 150ms ease-out, transform 150ms ease-out;
 
 	&.is-visible {
+		display: flex;
 		opacity: 1;
 		transform: translateY(0);
 	}

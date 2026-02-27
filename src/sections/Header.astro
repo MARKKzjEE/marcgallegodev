@@ -4,98 +4,125 @@ const navItems = [
 	{ label: "Proyectos", href: "#projects" },
 	{ label: "Contacto", href: "#contact" }
 ];
+
 ---
 
 <header class="site-header absolute inset-x-0 top-0 z-40 bg-transparent" data-site-header>
-	<div class="container mx-auto flex items-center justify-end h-[64px] gap-6 px-6">
-
-		<nav class="hidden items-center gap-6 text-sm font-semibold md:flex" aria-label="Navegación principal">
+	<div class="hidden container mx-auto md:flex items-center justify-end h-[64px] gap-6 px-6">
+		<nav class="flex items-center gap-6 text-sm font-normal" aria-label="Navegación principal">
 			{navItems.map((item) => (
-				<a
-					href={item.href}
-					class="relative pb-1 font-buttons transition-colors duration-300 after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-light-primary after:transition-transform hover:text-light-primary hover:after:scale-x-100 dark:after:bg-dark-secondary dark:hover:text-dark-secondary"
-				>
+				<a href={item.href} class="nav-link">
 					{item.label}
 				</a>
 			))}
 		</nav>
-        <div class="h-[32px] w-[2px] bg-light-primary dark:bg-dark-secondary"></div>
-        <div class="toggle-switch">
-            <label class="switch-label" id="theme-toggle">
-              <input type="checkbox" class="checkbox" aria-label="Cambiar entre modo claro y oscuro">
-              <span class="slider"></span>
-            </label>
-        </div>  
-
+    <div class="h-[32px] w-[2px] bg-th-header-text"></div>
+    <div class="flex items-center gap-1 text-sm" aria-label="Selector de idioma">
+      <button type="button" class="lang-btn lang-active" data-lang="es" aria-pressed="true">ES</button>
+      <span class="text-th-header-text/75 font-buttons">/</span>
+      <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <div class="toggle-switch">
+        <label class="switch-label" id="theme-toggle">
+          <input type="checkbox" class="checkbox" aria-label="Cambiar entre modo claro y oscuro">
+          <span class="slider"></span>
+        </>
+    </div>  
 	</div>
 </header>
 
-<style>
+<style lang="scss">
+  .nav-link {
+    position: relative;
+    padding-bottom: 0.25rem;
+    font-family: var(--font-buttons);
+    color: var(--th-header-text);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-inline: 0;
+      bottom: -0.25rem;
+      height: 2px;
+      background: var(--th-header-text);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 300ms;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  .lang-btn {
+    font-family: var(--font-buttons);
+    color: var(--th-header-text);
+    opacity: 0.75;
+    transition: opacity 300ms;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.lang-active {
+      opacity: 1;
+
+      &::before { content: '['; margin-right: 2px; }
+      &::after { content: ']'; margin-left: 2px; }
+    }
+  }
+
   .site-header {
     transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+    &.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-8px);
+    }
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 28px;
+    }
+    .switch-label {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: var(--th-toggle-track);
+      border: 2px solid var(--th-toggle-track);
+      border-radius: 16px;
+      cursor: pointer;
+      .checkbox {
+        position: absolute;
+        display: none;
+      }
+      .slider {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+        transition: 0.3s;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 4px;
+          left: 4px;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          box-shadow: inset 8px -4px 0px 0px var(--th-toggle-thumb);
+          background-color: var(--th-toggle-track);
+          transition: 0.3s;
+        }
+      }
+      .checkbox:checked ~ .slider::before {
+        transform: translateX(22px);
+        box-shadow: none;
+        background-color: var(--th-toggle-thumb);
+      }
+    }
   }
-
-  .site-header.is-hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(-8px);
-  }
-
-  .toggle-switch {
-    position: relative;
-    width: 50px;
-    height: 28px;
-    --primary: var(--color-light-secondary);
-    --secondary: var(--color-light-primary);
-  }
-
-  :global(.dark) .toggle-switch {
-      --primary: var(--color-dark-primary);
-      --secondary: var(--color-dark-secondary);
-  }
-
-  .switch-label {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: var(--secondary);
-    border-radius: 16px;
-    cursor: pointer;
-    border: 2px solid var(--secondary);
-  }
-
-  .checkbox {
-    position: absolute;
-    display: none;
-  }
-
-  .slider {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    transition: 0.3s;
-  }
-
-  .slider::before {
-    content: "";
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    box-shadow: inset 8px -4px 0px 0px var(--primary);
-    background-color: var(--secondary);
-    transition: 0.3s;
-  }
-
-  .checkbox:checked ~ .slider::before {
-    transform: translateX(22px);
-    box-shadow: none;
-    background-color: var(--primary);
-  }
-
-
 </style>

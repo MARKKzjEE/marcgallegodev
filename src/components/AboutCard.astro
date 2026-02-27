@@ -11,20 +11,19 @@ const optimizedCafe = await getImage({ src: aboutCafe, format: 'webp', quality: 
 <div class="about-backdrop fixed inset-0 z-60 opacity-0 pointer-events-none" data-about-backdrop hidden aria-hidden="true"></div>
 
 <div data-about-slot>
-	<div id="about-card-panel" class="card-glass about-card relative rounded-lg border border-light-secondary/30 dark:border-dark-primary/60 outline-none" data-about-card tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="about-title" aria-expanded="false">
+	<div id="about-card-panel" class="card-glass about-card relative rounded-lg border border-th-bg/10 dark:border-th-bg/30 outline-none" data-about-card tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="about-title" aria-expanded="false">
 		<div class="about-compact space-y-5 p-8" data-about-compact>
-			<h2 class="text-lg font-semibold uppercase tracking-[0.4em]">Ingeniero del Software</h2>
-			<h1 id="about-title" class="text-7xl font-regular">Marc Gallego Ginés</h1>
-			<p class="text-lg font-normal">
-				Bienvenid@.<br>
-				Este es mi espacio donde lo técnico y lo creativo se encuentran.
-				Soy desarrollador freelance y disfruto convirtiendo ideas en proyectos reales, trabajando con claridad, criterio y confianza desde el primer momento.
+			<h2 class="text-th-header-text text-lg font-semibold uppercase tracking-[0.4em]">Ingeniero del Software</h2>
+			<h1 id="about-title" class="text-th-header-text text-7xl font-regular">Marc Gallego Ginés</h1>
+			<p class="text-th-header-text text-lg font-normal">
+				¡Bienvenid@!<br>
+				Adéntrate en mi espacio donde lo técnico y lo creativo se encuentran. Si te gusta lo que ves no dudes en contactarme.
 			</p>
 			<div class="mt-8">
 				<button type="button" class="btn-special mr-2" data-about-open aria-controls="about-card-panel" aria-expanded="false"><span>Sobre mi</span></button>
 			</div>
 		</div>
-		<div class="about-expanded flex flex-1 flex-col min-h-0 hidden" data-about-expanded>
+		<div class="about-expanded flex-1 flex-col min-h-0" data-about-expanded>
 			<!-- Zona superior: contenido + columna derecha -->
 			<div class="flex flex-1 min-h-0">
 				<!-- Contenido principal (izquierda) -->
@@ -33,13 +32,13 @@ const optimizedCafe = await getImage({ src: aboutCafe, format: 'webp', quality: 
 					<div class="flex flex-3 flex-col min-h-0">
 						<div class="flex-1 flex gap-6 p-6">
 							<div class="flex-1 flex items-start">
-								<p class="font-sans text-sm font-light leading-7 text-justify">
+								<p class="text-th-text font-sans text-sm font-light leading-7 text-justify">
 									Me apasiona la tecnología y su evolución constante. Disfruto aprendiendo y probando nuevas herramientas, siempre con criterio y pensando en qué aporta realmente valor al proyecto.
 									<br><br>Soy exigente con mi trabajo y cuido los detalles. No busco solo que algo funcione, sino que esté bien pensado y bien construido.
 									<br><br>Trabajo con transparencia porque creo que es la base de cualquier buena colaboración: claridad en lo que se hace, por qué se hace y hacia dónde vamos.
 								</p>
 							</div>
-							<div class="flex-1 flex items-end">
+							<div class="text-th-text flex-1 flex items-end">
 								<p class="font-sans text-sm font-light leading-7 text-justify">
 									Más allá del desarrollo, podrás ver una clara referencia al mar, mi equilibrio. Es el lugar donde desconecto, ordeno ideas y vuelvo con claridad. 
 									<br><br>También me mueve la moda y la creatividad contemporánea: me inspira cómo el arte y la identidad se mezclan y se expresan sin límites. Esa forma de entender la creatividad también define mi trabajo: no solo construyo soluciones, busco que tengan carácter.</p>
@@ -48,24 +47,24 @@ const optimizedCafe = await getImage({ src: aboutCafe, format: 'webp', quality: 
 					</div>
 					<!-- Derecha: imagen -->
 					<div class="relative flex-2 rounded-lg overflow-hidden min-h-0 m-2">
-						<Image src={aboutCafe} alt="Marc Gallego en café" widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={90} class="h-full w-full object-cover grayscale" />
-						<div class="absolute inset-0 bg-light-primary/50 mix-blend-color dark:hidden"></div>
+						<Image src={aboutCafe} alt="Marc Gallego en café" widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={90} class="h-full w-full object-cover grayscale object-[50%_100%]" />
+						<div class="absolute inset-0 bg-th-text/50 mix-blend-color dark:hidden"></div>
 					</div>
 				</div>
 				<!-- Columna derecha con bordes -->
-				<div class="flex flex-col border-l">
-					<button type="button" class="about-close relative w-10 h-10 border-b cursor-pointer opacity-0 pointer-events-none transition-[opacity,background-color] duration-200" data-about-close aria-label="Cerrar sobre mi">
-						<span class="about-close-x absolute top-1/2 left-1/2 w-4 h-0.5 bg-light-primary dark:bg-dark-secondary" aria-hidden="true"></span>
-						<span class="about-close-y absolute top-1/2 left-1/2 w-4 h-0.5 bg-light-primary dark:bg-dark-secondary" aria-hidden="true"></span>
+				<div class="flex flex-col border-l border-th-text">
+					<button type="button" class="about-close relative w-10 h-10 border-b border-th-text cursor-pointer opacity-0 pointer-events-none transition-[opacity,background-color] duration-200" data-about-close aria-label="Cerrar sobre mi">
+						<span class="about-close-x absolute top-1/2 left-1/2 w-4 h-0.5 bg-th-text" aria-hidden="true"></span>
+						<span class="about-close-y absolute top-1/2 left-1/2 w-4 h-0.5 bg-th-text" aria-hidden="true"></span>
 					</button>
 					<div class="flex flex-1 items-center justify-center">
-						<p class="text-[10px] font-extralight font-buttons uppercase tracking-[0.2em] [writing-mode:vertical-rl] rotate-180">Diseño creativo & desarrollo digital desde 2018 ®</p>
+						<p class="text-th-text text-[10px] font-extralight font-buttons uppercase tracking-[0.2em] [writing-mode:vertical-rl] rotate-180">Diseño creativo & desarrollo digital desde 2018 <span class="inline-block rotate-90">™</span></p>
 					</div>
 				</div>
 			</div>
 			<!-- SOBRE MI: ancho completo abajo -->
-			<div class="flex border-t py-4">
-				<h3 class="font-buttons mx-4 text-9xl font-bold tracking-tighter" aria-hidden="true">SOBRE MI</h3>
+			<div class="flex border-t border-th-text py-4">
+				<h3 class="text-th-heading font-buttons mx-4 text-9xl font-bold tracking-tighter" aria-hidden="true">SOBRE MI</h3>
 			</div>
 		</div>
 	</div>
