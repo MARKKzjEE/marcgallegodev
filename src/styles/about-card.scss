@@ -86,3 +86,37 @@
 		transform: translateY(0);
 	}
 }
+
+.btn-special {
+	display: inline-block;
+	cursor: pointer;
+	border-radius: 0.5rem;
+	border: 0;
+	padding: 0;
+	font-size: 1rem;
+	font-weight: 500;
+	background-color: var(--th-text);
+	color: var(--th-text);
+	font-family: var(--font-nord);
+	font-weight: 500;
+
+	span {
+		display: block;
+		box-sizing: border-box;
+		border-radius: 0.5rem;
+		border: 1px solid var(--th-text);
+		padding: 0.75rem 1.5rem;
+		color: var(--th-text);
+		background-color: var(--th-bg);
+		transition: transform 0.1s ease;
+		transform: translateY(-0.25em);
+	}
+
+	&:hover span {
+		transform: translateY(-0.4em);
+	}
+
+	&:active span {
+		transform: translateY(0);
+	}
+}

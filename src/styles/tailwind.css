@@ -2,7 +2,19 @@
 @import "tailwind-animations";
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Headings (Vogun) */
+/*
+100Thin / Hairline
+200Extra Light
+300Light
+400Regular/Normal
+500Medium
+600Semi Bold
+700Bold
+800Extra Bold
+900Black / Heavy
+*/
+
+/* VOGUN FONT*/
 @font-face {
 	font-family: "Vogun";
 	src: url("/fonts/Vogun-Medium.woff2") format("woff2");
@@ -10,120 +22,86 @@
 	font-style: normal;
 	font-display: swap;
 }
-@font-face {
-	font-family: "Vogun";
-	src: url("/fonts/Vogun-MediumItalic.woff2") format("woff2");
-	font-weight: 500;
-	font-style: italic;
-	font-display: swap;
-}
 
-/* Texto (Just Sans) */
-@font-face {
-	font-family: "Just Sans";
-	src: url("/fonts/JustSans-ExtraLight.woff2") format("woff2");
-	font-weight: 200;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Just Sans";
-	src: url("/fonts/JustSans-Light.woff2") format("woff2");
-	font-weight: 300;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Just Sans";
-	src: url("/fonts/JustSans-Regular.woff2") format("woff2");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Just Sans";
-	src: url("/fonts/JustSans-Medium.woff2") format("woff2");
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Just Sans";
-	src: url("/fonts/JustSans-SemiBold.woff2") format("woff2");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Just Sans";
-	src: url("/fonts/JustSans-Bold.woff2") format("woff2");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Just Sans";
-	src: url("/fonts/JustSans-ExtraBold.woff2") format("woff2");
-	font-weight: 800;
-	font-style: normal;
-	font-display: swap;
-}
-
-/* NORD (texto alternativo) */
+/* NORD FONT */
 @font-face {
 	font-family: "NORD";
-	src: url("/fonts/NORD-Thin.woff2") format("woff2");
+	src: url("/fonts/NORD/NORD-Thin.woff2") format("woff2");
 	font-weight: 100;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: "NORD";
-	src: url("/fonts/NORD-Light.woff2") format("woff2");
-	font-weight: 200;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "NORD";
-	src: url("/fonts/NORD-Book.woff2") format("woff2");
+	src: url("/fonts/NORD/NORD-Light.woff2") format("woff2");
 	font-weight: 300;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: "NORD";
-	src: url("/fonts/NORD-Regular.woff2") format("woff2");
+	src: url("/fonts/NORD/NORD-Regular.woff2") format("woff2");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: "NORD";
-	src: url("/fonts/NORD-Medium.woff2") format("woff2");
+	src: url("/fonts/NORD/NORD-Medium.woff2") format("woff2");
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: "NORD";
-	src: url("/fonts/NORD-Bold.woff2") format("woff2");
-	font-weight: 600;
+	src: url("/fonts/NORD/NORD-Bold.woff2") format("woff2");
+	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
 	font-family: "NORD";
-	src: url("/fonts/NORD-Black.woff2") format("woff2");
-	font-weight: 700;
+	src: url("/fonts/NORD/NORD-Black.woff2") format("woff2");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* COTTORWAYPRO FONT */
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayPro-Light.woff2") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayPro-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayPro-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayPro-Semibold.woff2") format("woff2");
+	font-weight: 600;
 	font-style: normal;
 	font-display: swap;
 }
 
 @theme {
-	--font-sans: "Just Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-	--font-heading: "Vogun", system-ui, -apple-system, sans-serif;
-	--font-buttons: "NORD", system-ui, -apple-system, sans-serif;
+	/*--font-sans: "Just Sans", system-ui, -apple-system, "Segoe UI", sans-serif;*/
+	--font-vogun: "Vogun", system-ui, -apple-system, sans-serif;
+	--font-nord: "NORD", system-ui, -apple-system, sans-serif;
+	--font-cottor: "CottorwayPro", system-ui, -apple-system, sans-serif;
 
 	--color-th-bg: var(--th-bg);
 	--color-th-text: var(--th-text);
@@ -181,33 +159,9 @@ html.dark {
 @layer base {
 
 	body {
-		font-family: var(--font-sans);
 		background-color: var(--color-th-bg);
 	}
 
 	h1, h2, h3, h4 {
-		font-family: var(--font-heading);
-	}
-}
-
-/* Componentes reutilizables */
-@layer components {
-
-	.btn-special {
-		@apply inline-block cursor-pointer rounded-lg border-0 p-0 text-base font-medium;
-		@apply bg-th-text  text-th-text;
-		font-family: var(--font-buttons);
-	}
-	.btn-special span {
-		@apply block box-border rounded-lg border px-6 py-3;
-		@apply border-th-text text-th-text bg-th-bg;
-		transition: transform 0.1s ease;
-		transform: translateY(-0.25em);
-	}
-	.btn-special:hover span {
-		transform: translateY(-0.4em);
-	}
-	.btn-special:active span {
-		transform: translateY(0);
 	}
 }
