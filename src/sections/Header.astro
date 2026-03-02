@@ -7,7 +7,7 @@ const navItems = [
 
 ---
 
-<header class="site-header absolute inset-x-0 top-0 z-40 bg-transparent" data-site-header>
+<header class="site-header fixed inset-x-0 top-0 z-40 bg-transparent" data-site-header>
 	<div class="font-nord font-medium hidden container mx-auto md:flex items-center justify-end h-[64px] gap-6 px-6">
 		<nav class="flex items-center gap-6 text-sm" aria-label="Navegación principal">
 			{navItems.map((item) => (
@@ -73,7 +73,14 @@ const navItems = [
   }
 
   .site-header {
-    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, background-color 300ms ease, box-shadow 300ms ease;
+    &.is-past-hero {
+      --th-header-text: var(--th-heading);
+      --color-th-header-text: var(--th-heading);
+      --th-toggle-track: var(--th-heading);
+      --th-toggle-thumb: var(--th-bg);
+      background-color: var(--th-bg);
+    }
     &.is-hidden {
       opacity: 0;
       visibility: hidden;
@@ -124,3 +131,8 @@ const navItems = [
     }
   }
 </style>
+
+<script>
+	import { initHeaderScroll } from "../scripts/header-scroll";
+	initHeaderScroll();
+</script>

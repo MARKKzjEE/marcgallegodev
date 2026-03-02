@@ -20,11 +20,10 @@ import AboutCard from '../components/AboutCard.astro';
 	></video>
 
 	<div class="absolute inset-0 bg-th-bg/5 dark:bg-th-bg/70"></div>
-
 	<div class="relative flex min-h-screen items-center py-16">
 		<div class="container mx-auto px-6">
 			<div class="grid items-center gap-4 md:grid-cols-2">
-				<div class="object-cover aspect-[4/5] max-h-[550px] overflow-hidden mx-auto border-2 border-th-bg/10 dark:border-th-bg/30">
+				<div data-hero-photo class="object-cover aspect-[4/5] max-h-[550px] overflow-hidden mx-auto border-2 border-th-bg/10 dark:border-th-bg/30">
 					<Image src={profileLight} alt="Marc Gallego" widths={[400, 500, 750]} sizes="(max-width: 768px) 400px, 500px" format="webp" quality={92} class="card-content h-full w-full object-cover dark:hidden" />
 					<Image src={profileDark} alt="Marc Gallego" widths={[400, 500, 750]} sizes="(max-width: 768px) 400px, 500px" format="webp" quality={92} class="card-content hidden h-full w-full object-cover dark:block" />
 				</div>
