@@ -113,7 +113,6 @@
 :root {
 	/* RAW VALUES */
 	/* Light theme */
-	--th-l-deep-blue: #011633; /* Headings */
 	--th-l-dark-blue: #0C111D; /* Normal text | border/details/text buttons */
 	--th-l-cream: #F0EEE9; /* Background sections/buttons */
 	--th-l-orange: #F2542D;
@@ -129,7 +128,7 @@
 	/* SEMANTIC TOKENS */
 	--th-bg: var(--th-l-cream);
 	--th-text: var(--th-l-dark-blue);
-	--th-heading: var(--th-l-deep-blue);
+	--th-heading: var(--th-l-dark-blue);
 
 	--th-toggle-track: var(--th-l-cream);
 	--th-toggle-thumb: var(--th-l-dark-blue);

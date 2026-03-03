@@ -16,7 +16,7 @@ const navItems = [
 				</a>
 			))}
 		</nav>
-    <div class="h-[32px] w-[2px] bg-th-header-text"></div>
+    <div class="header-divider h-[32px] w-[1px] bg-th-header-text transition-all duration-300"></div>
     <div class="flex items-center gap-1 text-sm" aria-label="Selector de idioma">
       <button type="button" class="lang-btn lang-active" data-lang="es" aria-pressed="true">ES</button>
       <span class="text-th-header-text/75">/</span>
@@ -80,6 +80,11 @@ const navItems = [
       --th-toggle-track: var(--th-heading);
       --th-toggle-thumb: var(--th-bg);
       background-color: var(--th-bg);
+      border-bottom: 1px solid var(--th-heading);
+
+      .header-divider {
+        height: 100%;
+      }
     }
     &.is-hidden {
       opacity: 0;

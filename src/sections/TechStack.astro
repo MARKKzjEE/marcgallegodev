@@ -1,7 +1,318 @@
-<section id="tech" class="min-h-screen bg-th-bg">
-	<div class="container mx-auto px-6 pt-32 pb-24">
-		<h2 class="font-nord text-th-heading text-6xl md:text-8xl font-black uppercase tracking-tight">
-			Tecnologías
-		</h2>
+---
+const techs = [
+	{ name: "Laravel", slug: "laravel" },
+	{ name: "Django", slug: "django" },
+	{ name: "NodeJS", slug: "nodejs" },
+	{ name: "Tailwind", slug: "tailwindcss" },
+	{ name: "Docker", slug: "docker" },
+	{ name: "GitHub", slug: "github" },
+	{ name: "SEO", slug: "google" },
+	{ name: "Astro", slug: "astro" },
+];
+
+const total = techs.length;
+---
+
+<section id="tech" class="bg-th-bg min-h-[calc(100vh-64px)] flex flex-col">
+	<div class="container mx-auto px-10 py-10 flex flex-col flex-1">
+
+		<!-- Fila superior -->
+		<div class="flex items-start justify-between">
+			<div class="tech-title relative" aria-label="Mis Tecnologías">
+				<span class="tech-title__horizontal font-vogun text-th-heading font-bold uppercase">Tecnologías</span>
+				<span class="tech-title__vertical font-vogun text-th-heading font-bold uppercase">Mis</span>
+			</div>
+			<button type="button" class="font-nord text-[10px] font-medium uppercase tracking-widest bg-th-heading text-th-bg py-2 px-4 cursor-pointer opacity-90 transition-opacity duration-300 hover:opacity-100 aria-pressed:opacity-100" data-toggle-names aria-pressed="false">Mostrar nombres</button>
+		</div>
+
+		<!-- Centro: wheel -->
+		<div class="flex-1 hidden md:flex items-center justify-center">
+			<div class="tech-wheel relative" data-tech-wheel>
+				{techs.map((tech, i) => (
+					<button
+						type="button"
+						class="tech-icon absolute top-1/2 left-1/2"
+						style={`--i: ${i}; --total: ${total};`}
+						data-tech={tech.name}
+						aria-label={tech.name}
+					>
+						<div class="tech-icon__logo">
+							<img class="tech-icon__svg tech-icon__svg--light" src={`/tech-icons/${tech.slug}-l.svg`} alt={tech.name} />
+							<img class="tech-icon__svg tech-icon__svg--dark" src={`/tech-icons/${tech.slug}-d.svg`} alt={tech.name} />
+						</div>
+						<div class="tech-icon__text">
+							<span class="font-nord">{tech.name}</span>
+						</div>
+					</button>
+				))}
+			</div>
+		</div>
+
+		<!-- Mobile: grid -->
+		<div class="flex-1 grid grid-cols-4 gap-6 place-content-center md:hidden">
+			{techs.map((tech) => (
+				<div class="flex flex-col items-center gap-2">
+					<img class="tech-icon__svg tech-icon__svg--light w-10 h-10" src={`/tech-icons/${tech.slug}-l.svg`} alt={tech.name} />
+					<img class="tech-icon__svg tech-icon__svg--dark w-10 h-10" src={`/tech-icons/${tech.slug}-d.svg`} alt={tech.name} />
+					<span class="font-nord text-th-text text-[10px] uppercase tracking-wider text-center">{tech.name}</span>
+				</div>
+			))}
+		</div>
+
+		<!-- Fila inferior -->
+		<div class="flex items-end justify-end">
+			<p class="font-cottor text-th-text text-xs max-w-70 text-right leading-relaxed opacity-80">
+				Estos son los lenguajes y tecnologías con las que suelo trabajar. Prueba a interactuar con cada icono para saber más de cada una.
+			</p>
+		</div>
+
 	</div>
 </section>
+
+<style lang="scss">
+	.tech-title__horizontal {
+		font-size: clamp(2rem, 5vw, 3rem);
+		line-height: 1;
+		letter-spacing: 0.15em;
+	}
+
+	.tech-title__vertical {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		font-size: clamp(2rem, 5vw, 3rem);
+		line-height: 1;
+		letter-spacing: 0.15em;
+		writing-mode: vertical-rl;
+		transform: rotate(180deg);
+		white-space: nowrap;
+	}
+
+	.tech-wheel {
+		--radius: 240px;
+		--icon-size: 90px;
+		width: calc(var(--radius) * 2 + var(--icon-size));
+		height: calc(var(--radius) * 2 + var(--icon-size));
+	}
+
+	.tech-icon {
+		--angle: calc(360deg / var(--total) * var(--i));
+		width: var(--icon-size);
+		height: var(--icon-size);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		border-radius: 8px;
+		border: 2px solid transparent;
+		cursor: pointer;
+		overflow: hidden;
+		outline: none;
+		transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+		// Estado inicial (scroll animation)
+		opacity: 0;
+		transform: translate(-50%, -50%);
+
+		// Shine effect (dos barridos cruzados)
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		&::before {
+			left: -100%;
+		}
+
+		&::after {
+			left: 100%;
+		}
+
+		// Estado colocado (después de scroll animation)
+		&.is-placed {
+			opacity: 1;
+			transform:
+				translate(-50%, -50%)
+				rotate(var(--angle))
+				translateY(calc(-1 * var(--radius)))
+				rotate(calc(-1 * var(--angle)));
+			transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+			z-index: 1;
+
+			&.is-active,
+			&:focus-visible {
+				z-index: 10;
+				transform:
+					translate(-50%, -50%)
+					scale(2);
+
+				&::before {
+					animation: swipeRight 1s ease 0.6s forwards;
+				}
+
+				&::after {
+					animation: swipeLeft 1s ease 0.6s forwards;
+				}
+
+				.tech-icon__svg {
+					width: 48px;
+					height: 48px;
+				}
+
+				.tech-icon__text {
+					opacity: 1;
+					max-height: 40px;
+					margin-top: 4px;
+					font-size: 10px;
+				}
+			}
+		}
+
+	}
+
+	// Estado "mostrar nombres" global
+	.tech-wheel.show-names .tech-icon.is-placed {
+		.tech-icon__text {
+			opacity: 1;
+			max-height: 40px;
+			margin-top: 4px;
+			font-size: 10px;
+		}
+	}
+
+	.tech-icon__logo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+		z-index: 1;
+	}
+
+	.tech-icon__svg {
+		width: 44px;
+		height: 44px;
+		object-fit: contain;
+		transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+		@media (min-width: 1024px) {
+			width: 50px;
+			height: 50px;
+		}
+
+		&--dark {
+			display: none;
+		}
+	}
+
+	.tech-icon__text {
+		display: flex;
+		align-items: center;
+		text-align: center;
+		font-size: 10px;
+		font-weight: 500;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--th-heading);
+		opacity: 0;
+		max-height: 0;
+		overflow: hidden;
+		transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+		z-index: 1;
+	}
+
+	// ── Colores / Temas ──────────────────────────────
+	// Edita solo estos bloques para cambiar colores de las cards
+
+	// ── LIGHT ────────────────────────────────────────
+	.tech-icon {
+		background-color: #fff;
+		border-color: var(--th-l-dark-blue);
+		box-shadow: 3px 3px 0 var(--th-l-dark-blue);
+
+		&::before,
+		&::after {
+			background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--th-l-dark-blue) 10%, transparent), transparent);
+		}
+
+		&.is-active,
+		&.is-placed:focus-visible {
+			border-color: var(--th-l-dark-blue);
+			box-shadow: 8px 8px 0 var(--th-l-dark-blue);
+		}
+
+		&:focus-visible {
+			box-shadow: 0 0 0 2px var(--th-l-dark-blue);
+		}
+	}
+
+	// ── DARK ─────────────────────────────────────────
+	:global(.dark) {
+		.tech-icon__svg--light {
+			display: none;
+		}
+		.tech-icon__svg--dark {
+			display: block;
+		}
+
+		.tech-icon {
+			background-color: var(--th-d-grey-dark);
+			border-color: var(--th-d-grey-light);
+			box-shadow: 3px 3px 0 var(--th-d-grey-light);
+
+			&::before,
+			&::after {
+				background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+			}
+
+			&.is-active,
+			&.is-placed:focus-visible {
+				border-color: var(--th-text);
+				box-shadow: 8px 8px 0 var(--th-text);
+			}
+
+			&:focus-visible {
+				box-shadow: 0 0 0 2px var(--th-heading);
+			}
+		}
+	}
+
+	@keyframes swipeRight {
+		80% {
+			transform: translateX(200%) skew(-45deg);
+			opacity: 1;
+		}
+		100% {
+			transform: translateX(200%) skew(-45deg);
+			opacity: 0;
+		}
+	}
+
+	@keyframes swipeLeft {
+		80% {
+			transform: translateX(-200%) skew(-45deg);
+			opacity: 1;
+		}
+		100% {
+			transform: translateX(-200%) skew(-45deg);
+			opacity: 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.tech-icon,
+		.tech-icon__logo,
+		.tech-icon__svg,
+		.tech-icon__text {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	import { initTechWheel } from "../scripts/tech-wheel";
+	initTechWheel();
+</script>
