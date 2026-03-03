@@ -90,7 +90,7 @@
 .btn-special {
 	display: inline-block;
 	cursor: pointer;
-	border-radius: 0.5rem;
+	border-radius: 4px;
 	border: 0;
 	padding: 0;
 	font-size: 1rem;
@@ -103,7 +103,7 @@
 	span {
 		display: block;
 		box-sizing: border-box;
-		border-radius: 0.5rem;
+		border-radius: 4px;
 		border: 1px solid var(--th-text);
 		padding: 0.75rem 1.5rem;
 		color: var(--th-text);

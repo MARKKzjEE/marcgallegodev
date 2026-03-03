@@ -146,7 +146,6 @@ export function initTechWheel(): void {
 		toggleBtn.addEventListener("click", () => {
 			const active = wheel.classList.toggle("show-names");
 			toggleBtn.setAttribute("aria-pressed", String(active));
-			toggleBtn.textContent = active ? "Ocultar nombres" : "Mostrar nombres";
 		});
 	}
 
