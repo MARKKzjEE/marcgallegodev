@@ -23,6 +23,14 @@
 	font-display: swap;
 }
 
+/* PIXEL BOTS */
+@font-face {
+	font-family: "PixelBots";
+	src: url("/fonts/PixelBots-Regular.woff2") format("woff2");
+	font-style: normal;
+	font-display: swap;
+}
+
 /* NORD FONT */
 @font-face {
 	font-family: "NORD";
@@ -97,11 +105,78 @@
 	font-display: swap;
 }
 
+/* NEBULICA MODERN */
+@font-face {
+	font-family: "Nebulica";
+	src: url("/fonts/Nebulica/Nebulica-Thin.woff2") format("woff2");
+	font-weight: 100;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nebulica";
+	src: url("/fonts/Nebulica/Nebulica-ExtraLight.woff2") format("woff2");
+	font-weight: 200;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nebulica";
+	src: url("/fonts/Nebulica/Nebulica-Light.woff2") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nebulica";
+	src: url("/fonts/Nebulica/Nebulica-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nebulica";
+	src: url("/fonts/Nebulica/Nebulica-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nebulica";
+	src: url("/fonts/Nebulica/Nebulica-SemiBold.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nebulica";
+	src: url("/fonts/Nebulica/Nebulica-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nebulica";
+	src: url("/fonts/Nebulica/Nebulica-ExtraBold.woff2") format("woff2");
+	font-weight: 800;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nebulica";
+	src: url("/fonts/Nebulica/Nebulica-Black.woff2") format("woff2");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
 @theme {
 	/*--font-sans: "Just Sans", system-ui, -apple-system, "Segoe UI", sans-serif;*/
 	--font-vogun: "Vogun", system-ui, -apple-system, sans-serif;
 	--font-nord: "NORD", system-ui, -apple-system, sans-serif;
 	--font-cottor: "CottorwayPro", system-ui, -apple-system, sans-serif;
+	--font-nebulica: "Nebulica", system-ui, -apple-system, sans-serif;
+	--font-pixelbots: "PixelBots", system-ui, -apple-system, sans-serif;
 
 	--color-th-bg: var(--th-bg);
 	--color-th-text: var(--th-text);

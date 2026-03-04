@@ -1,0 +1,187 @@
+---
+const handIcon = "/icons/Gestures & Hands/hand.svg";
+const handshakeIcon = "/icons/Gestures & Hands/handshake.svg";
+
+const callItems = 8;
+const linkedinItems = 6;
+---
+
+<div class="marquee-bands">
+	<!-- Fila 1: Llámame -->
+	<a href="tel:+34647604048" class="marquee-band marquee-band--call" data-punch="18">
+		<div class="marquee-track" data-marquee>
+			<!-- Mitad A -->
+			<div class="marquee-half">
+				{[...Array(callItems)].map(() => (
+					<div class="marquee-item">
+						<img src={handIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
+						<span class="marquee-text font-pixelbots">HAZME UNA LLAMADA</span>
+					</div>
+				))}
+			</div>
+			<!-- Mitad B (clon exacto) -->
+			<div class="marquee-half">
+				{[...Array(callItems)].map(() => (
+					<div class="marquee-item">
+						<img src={handIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
+						<span class="marquee-text font-pixelbots">HAZME UNA LLAMADA</span>
+					</div>
+				))}
+			</div>
+		</div>
+	</a>
+
+	<!-- Fila 2: Conectemos en LinkedIn -->
+	<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="marquee-band marquee-band--linkedin" data-punch="30">
+		<div class="marquee-track marquee-track--reverse" data-marquee>
+			<!-- Mitad A -->
+			<div class="marquee-half">
+				{[...Array(linkedinItems)].map(() => (
+					<div class="marquee-item">
+						<img src={handshakeIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
+						<span class="marquee-text text-4xl font-pixelbots">CONECTEMOS EN LINKEDIN</span>
+					</div>
+				))}
+			</div>
+			<!-- Mitad B (clon exacto) -->
+			<div class="marquee-half">
+				{[...Array(linkedinItems)].map(() => (
+					<div class="marquee-item">
+						<img src={handshakeIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
+						<span class="marquee-text text-4xl font-pixelbots">CONECTEMOS EN LINKEDIN</span>
+					</div>
+				))}
+			</div>
+		</div>
+	</a>
+</div>
+
+<style lang="scss">
+	.marquee-bands {
+		overflow: hidden;
+	}
+
+	.marquee-band {
+		display: block;
+		text-decoration: none;
+		padding: 10px 0;
+		overflow: hidden;
+	}
+
+	.marquee-band--call {
+		background-color: var(--th-l-charcoal);
+		color: var(--th-l-cream);
+	}
+
+	.marquee-band--linkedin {
+		background-color: var(--th-l-dark-blue);
+		color: var(--th-l-cream);
+	}
+
+	.marquee-track {
+		display: flex;
+		width: max-content;
+		animation: marquee-scroll 45s linear infinite;
+	}
+
+	.marquee-track--reverse {
+		animation-direction: reverse;
+	}
+
+	.marquee-half {
+		display: flex;
+		flex-shrink: 0;
+	}
+
+	.marquee-item {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		padding: 0 32px;
+		flex-shrink: 0;
+	}
+
+	.marquee-icon {
+		flex-shrink: 0;
+	}
+
+	.marquee-text {
+		font-size: 18px;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		white-space: nowrap;
+		paint-order: stroke fill;
+		-webkit-text-stroke: 4px black;
+	}
+
+	@keyframes marquee-scroll {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
+	// ── Dark mode ──
+	:global(.dark) {
+		.marquee-band--call {
+			background-color: var(--th-d-white);
+			color: var(--th-d-carbon);
+		}
+
+		.marquee-band--linkedin {
+			background-color: var(--th-d-grey-dark);
+			color: var(--th-d-carbon);
+		}
+
+		.marquee-text {
+			color: var(--th-d-white);
+			-webkit-text-stroke-color: black;
+		}
+	}
+
+	// ── Reduced motion ──
+	@media (prefers-reduced-motion: reduce) {
+		.marquee-track {
+			animation: none;
+		}
+	}
+</style>
+
+<script>
+	document.querySelectorAll<HTMLElement>('.marquee-band').forEach((band) => {
+		const track = band.querySelector<HTMLElement>('.marquee-track');
+		if (!track) return;
+
+		const animations = track.getAnimations();
+		if (!animations.length) return;
+
+		let currentRate = 1;
+		let targetRate = 1;
+		let rafId: number | null = null;
+
+		function lerp() {
+			currentRate += (targetRate - currentRate) * 0.030;
+			if (Math.abs(currentRate - targetRate) < 0.01) {
+				currentRate = targetRate;
+			}
+			animations.forEach((a) => (a.playbackRate = currentRate));
+			if (currentRate !== targetRate) {
+				rafId = requestAnimationFrame(lerp);
+			} else {
+				rafId = null;
+			}
+		}
+
+		const punchSpeed = parseFloat(band.dataset.punch || '10');
+
+		band.addEventListener('mouseenter', () => {
+			currentRate = punchSpeed;
+			targetRate = 1;
+			animations.forEach((a) => (a.playbackRate = currentRate));
+			if (!rafId) rafId = requestAnimationFrame(lerp);
+		});
+	});
+</script>

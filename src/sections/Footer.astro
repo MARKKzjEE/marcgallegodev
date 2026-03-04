@@ -1,0 +1,150 @@
+---
+const navItems = [
+	{ label: "Experiencia", href: "/experiencia" },
+	{ label: "Proyectos", href: "/proyectos" },
+	{ label: "Contacto", href: "#contact" },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer-section bg-th-bg px-6">
+	<!-- Zona superior: Título -->
+	<div class="footer-top">
+		<h2 class="footer-title font-vogun text-th-heading">Trabajemos juntos</h2>
+	</div>
+
+	<!-- Navegación -->
+	<div class="footer-nav-wrapper" data-reveal data-reveal-radius="32px">
+		<!-- Capa base -->
+		<nav class="footer-nav footer-nav--base" aria-label="Navegación del footer">
+			{navItems.map((item) => (
+				<a href={item.href} class="footer-nav-link font-nord" data-reveal-trigger>
+					{item.label}
+				</a>
+			))}
+		</nav>
+		<!-- Capa negativo -->
+		<nav class="footer-nav footer-nav--reveal reveal-layer" aria-hidden="true">
+			{navItems.map((item) => (
+				<a href={item.href} class="footer-nav-link font-nord" tabindex="-1">
+					{item.label}
+				</a>
+			))}
+		</nav>
+	</div>
+
+	<!-- Copyright -->
+	<div class="footer-bottom">
+		<span class="footer-copyright font-nord">&copy;{currentYear} Marc Gallego. Todos los derechos reservados.</span>
+		<span class="footer-email font-nord">mark.gallego.gines@gmail.com</span>
+	</div>
+</footer>
+
+<style lang="scss">
+	.footer-section {
+		padding-top: 80px;
+		padding-bottom: 32px;
+	}
+
+	// ── Zona superior ──
+	.footer-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		padding-bottom: 48px;
+	}
+
+	.footer-title {
+		font-size: clamp(3rem, 8vw, 5.5rem);
+		line-height: 1;
+		letter-spacing: -0.02em;
+	}
+
+	// ── Navegación ──
+	.footer-nav-wrapper {
+		--reveal-extend: 50px;
+		position: relative;
+	}
+
+	.footer-nav {
+		display: flex;
+		justify-content: space-between;
+		padding: 20px 0;
+		border-top: 1px solid var(--th-l-dark-blue);
+		border-bottom: 1px solid var(--th-l-dark-blue);
+	}
+
+	.footer-nav-link {
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--th-heading);
+		text-decoration: none;
+		text-transform: capitalize;
+	}
+
+	.footer-nav--reveal {
+		background: var(--th-heading);
+		border-color: transparent;
+		padding: calc(20px + var(--reveal-extend)) var(--reveal-extend);
+
+		.footer-nav-link {
+			color: var(--th-bg);
+		}
+	}
+
+	// ── Copyright ──
+	.footer-bottom {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-top: 24px;
+	}
+
+	.footer-copyright,
+	.footer-email {
+		font-size: 12px;
+		font-weight: 400;
+		color: var(--th-text);
+	}
+
+	// ── Dark mode ──
+	:global(.dark) {
+		.footer-nav {
+			border-color: var(--th-d-grey-light);
+		}
+		.footer-nav--reveal {
+			background: var(--th-d-white);
+			.footer-nav-link {
+				color: var(--th-d-carbon);
+			}
+		}
+	}
+
+	// ── Mobile ──
+	@media (max-width: 768px) {
+		.footer-top {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 24px;
+			padding-bottom: 32px;
+		}
+
+		.footer-nav {
+			flex-direction: column;
+			gap: 12px;
+			padding: 16px 0;
+		}
+
+		.footer-bottom {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 8px;
+		}
+	}
+
+</style>
+
+<script>
+	import '../scripts/circle-reveal.ts';
+</script>
