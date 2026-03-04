@@ -1,13 +1,21 @@
 ---
 import { Image } from 'astro:assets';
 import gradientBg from '../assets/fqm-gradient.png';
+import gradientBgDark from '../assets/fqm-gradient-dark.png';
 ---
 
 <section class="gradient-section border-t border-th-text py-40">
 	<Image
 		src={gradientBg}
 		alt=""
-		class="gradient-section__bg"
+		class="gradient-section__bg gradient-section__bg--light"
+		quality={90}
+		aria-hidden="true"
+	/>
+	<Image
+		src={gradientBgDark}
+		alt=""
+		class="gradient-section__bg gradient-section__bg--dark"
 		quality={90}
 		aria-hidden="true"
 	/>
@@ -29,6 +37,19 @@ import gradientBg from '../assets/fqm-gradient.png';
 		height: 100%;
 		object-fit: cover;
 		z-index: 0;
+	}
+
+	.gradient-section__bg--dark {
+		display: none;
+	}
+
+	:global(.dark) {
+		.gradient-section__bg--light {
+			display: none;
+		}
+		.gradient-section__bg--dark {
+			display: block;
+		}
 	}
 
 	.gradient-section__content {
