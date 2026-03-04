@@ -7,7 +7,29 @@ const linkedinItems = 6;
 ---
 
 <div class="marquee-bands">
-	<!-- Fila 1: Llámame -->
+	<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="marquee-band marquee-band--linkedin" data-punch="30">
+		<div class="marquee-track marquee-track--reverse" data-marquee>
+			<!-- Mitad A -->
+			<div class="marquee-half">
+				{[...Array(linkedinItems)].map(() => (
+					<div class="marquee-item">
+						<img src={handshakeIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
+						<span class="marquee-text text-4xl font-pixelbots">CONECTEMOS EN LINKEDIN</span>
+					</div>
+				))}
+			</div>
+			<!-- Mitad B (clon exacto) -->
+			<div class="marquee-half">
+				{[...Array(linkedinItems)].map(() => (
+					<div class="marquee-item">
+						<img src={handshakeIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
+						<span class="marquee-text text-4xl font-pixelbots">CONECTEMOS EN LINKEDIN</span>
+					</div>
+				))}
+			</div>
+		</div>
+	</a>
+
 	<a href="tel:+34647604048" class="marquee-band marquee-band--call" data-punch="18">
 		<div class="marquee-track" data-marquee>
 			<!-- Mitad A -->
@@ -31,29 +53,6 @@ const linkedinItems = 6;
 		</div>
 	</a>
 
-	<!-- Fila 2: Conectemos en LinkedIn -->
-	<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="marquee-band marquee-band--linkedin" data-punch="30">
-		<div class="marquee-track marquee-track--reverse" data-marquee>
-			<!-- Mitad A -->
-			<div class="marquee-half">
-				{[...Array(linkedinItems)].map(() => (
-					<div class="marquee-item">
-						<img src={handshakeIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
-						<span class="marquee-text text-4xl font-pixelbots">CONECTEMOS EN LINKEDIN</span>
-					</div>
-				))}
-			</div>
-			<!-- Mitad B (clon exacto) -->
-			<div class="marquee-half">
-				{[...Array(linkedinItems)].map(() => (
-					<div class="marquee-item">
-						<img src={handshakeIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
-						<span class="marquee-text text-4xl font-pixelbots">CONECTEMOS EN LINKEDIN</span>
-					</div>
-				))}
-			</div>
-		</div>
-	</a>
 </div>
 
 <style lang="scss">
@@ -64,17 +63,18 @@ const linkedinItems = 6;
 	.marquee-band {
 		display: block;
 		text-decoration: none;
-		padding: 10px 0;
+		padding: 4px 0;
 		overflow: hidden;
 	}
 
 	.marquee-band--call {
-		background-color: var(--th-l-charcoal);
+		background-color: var(--th-l-dark-blue);
 		color: var(--th-l-cream);
 	}
 
 	.marquee-band--linkedin {
-		background-color: var(--th-l-dark-blue);
+		background-color: transparent;
+		border-top: 1px solid var(--th-l-dark-blue);
 		color: var(--th-l-cream);
 	}
 
@@ -106,7 +106,7 @@ const linkedinItems = 6;
 	}
 
 	.marquee-text {
-		font-size: 18px;
+		font-size: 30px;
 		font-weight: 500;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;

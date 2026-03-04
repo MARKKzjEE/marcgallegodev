@@ -1,0 +1,93 @@
+---
+const text = "Nuestro viaje comenzó con una pasión por contar historias visuales y un compromiso por convertir ideas en diseños impactantes. Con un equipo de profesionales dedicados, hemos perfeccionado nuestras habilidades para ofrecer resultados excepcionales a nuestros clientes.";
+const words = text.split(' ');
+---
+
+<section id="what-we-do" class="what-we-do bg-th-bg py-40 border-t border-th-text">
+	<div class="container mx-auto px-6">
+		<div class="grid md:grid-cols-[200px_1fr] gap-8 md:gap-16 items-start">
+
+			<!-- Label izquierda -->
+			<span class="what-we-do__label font-nord text-th-text text-sm uppercase tracking-widest">Qué es lo que hago</span>
+
+			<!-- Texto con reveal por palabra -->
+			<div class="what-we-do__content">
+				<p class="what-we-do__text font-cottor font-light leading-[1.15] text-justify" data-scroll-reveal>
+					{words.map((word, i) => (
+						<span class="reveal-word" style={`--word-index: ${i}`}>{word} </span>
+					))}
+				</p>
+				</div>
+
+		</div>
+	</div>
+</section>
+
+<style lang="scss">
+	.what-we-do__text {
+		font-size: clamp(28px, 4vw, 52px);
+	}
+
+	.reveal-word {
+		color: color-mix(in srgb, var(--th-l-dark-blue) 20%, transparent);
+		transition: color 0.3s ease;
+	}
+
+	.reveal-word.is-visible {
+		color: var(--th-l-dark-blue);
+	}
+
+	// ── Dark ──
+	:global(.dark) {
+		.reveal-word {
+			color: color-mix(in srgb, var(--th-d-white) 15%, transparent);
+
+			&.is-visible {
+				color: var(--th-d-white);
+			}
+		}
+	}
+</style>
+
+<script>
+	function initScrollReveal() {
+		const container = document.querySelector<HTMLElement>('[data-scroll-reveal]');
+		if (!container) return;
+
+		const words = container.querySelectorAll<HTMLElement>('.reveal-word');
+		const totalWords = words.length;
+
+		function update() {
+			const rect = container!.getBoundingClientRect();
+			const viewH = window.innerHeight;
+
+			// Progress: 0 when section enters bottom, 1 when section is centered
+			const start = viewH * 0.85;
+			const end = viewH * 0.4;
+			const progress = Math.min(Math.max((start - rect.top) / (start - end), 0), 1);
+
+			// Map progress to word index
+			const revealCount = Math.floor(progress * totalWords);
+
+			words.forEach((word, i) => {
+				word.classList.toggle('is-visible', i < revealCount);
+			});
+
+		}
+
+		let ticking = false;
+		window.addEventListener('scroll', () => {
+			if (!ticking) {
+				requestAnimationFrame(() => {
+					update();
+					ticking = false;
+				});
+				ticking = true;
+			}
+		}, { passive: true });
+
+		update();
+	}
+
+	initScrollReveal();
+</script>

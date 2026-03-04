@@ -2,49 +2,65 @@
 const navItems = [
 	{ label: "Experiencia", href: "/experiencia" },
 	{ label: "Proyectos", href: "/proyectos" },
-	{ label: "Contacto", href: "#contact" },
+	{ label: "Contacto", href: "/contacto" },
 ];
 
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="footer-section bg-th-bg px-6">
-	<!-- Zona superior: Título -->
-	<div class="footer-top">
-		<h2 class="footer-title font-vogun text-th-heading">Trabajemos juntos</h2>
-	</div>
-
-	<!-- Navegación -->
-	<div class="footer-nav-wrapper" data-reveal data-reveal-radius="32px">
-		<!-- Capa base -->
-		<nav class="footer-nav footer-nav--base" aria-label="Navegación del footer">
+<footer class="footer-section bg-th-bg px-6" data-reveal data-reveal-radius="32px">
+	<!-- Capa base -->
+	<div class="footer-base">
+		<div class="footer-top">
+			<h2 class="footer-title font-vogun text-th-heading" data-reveal-trigger>Trabajemos juntos</h2>
+			<div class="footer-contact">
+				<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="footer-contact-link font-nord font-light" data-reveal-trigger>LinkedIn</a>
+				<a href="tel:+34647604048" class="footer-contact-link font-nord font-light" data-reveal-trigger>+34 647 60 40 48</a>
+			</div>
+		</div>
+		<nav class="footer-nav" aria-label="Navegación del footer">
 			{navItems.map((item) => (
 				<a href={item.href} class="footer-nav-link font-nord" data-reveal-trigger>
 					{item.label}
 				</a>
 			))}
 		</nav>
-		<!-- Capa negativo -->
-		<nav class="footer-nav footer-nav--reveal reveal-layer" aria-hidden="true">
+		<div class="footer-bottom">
+			<span class="footer-copyright font-nord font-light opacity-90" data-reveal-trigger>&copy;{currentYear} Marc Gallego. Todos los derechos reservados.</span>
+			<span class="footer-email font-nord font-light" data-reveal-trigger>mark.gallego.gines@gmail.com</span>
+		</div>
+	</div>
+
+	<!-- Capa reveal (clon visual) -->
+	<div class="footer-reveal reveal-layer" aria-hidden="true">
+		<div class="footer-top">
+			<h2 class="footer-title font-vogun">Trabajemos juntos</h2>
+			<div class="footer-contact">
+				<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="footer-contact-link font-nord font-light" tabindex="-1">LinkedIn</a>
+				<a href="tel:+34647604048" class="footer-contact-link font-nord font-light" tabindex="-1">+34 647 60 40 48</a>
+			</div>
+		</div>
+		<nav class="footer-nav">
 			{navItems.map((item) => (
-				<a href={item.href} class="footer-nav-link font-nord" tabindex="-1">
+				<a href={item.href} class="footer-nav-link font-nord font-light" tabindex="-1">
 					{item.label}
 				</a>
 			))}
 		</nav>
-	</div>
-
-	<!-- Copyright -->
-	<div class="footer-bottom">
-		<span class="footer-copyright font-nord">&copy;{currentYear} Marc Gallego. Todos los derechos reservados.</span>
-		<span class="footer-email font-nord">mark.gallego.gines@gmail.com</span>
+		<div class="footer-bottom">
+			<span class="footer-copyright font-nord font-light opacity-90">&copy;{currentYear} Marc Gallego. Todos los derechos reservados.</span>
+			<span class="footer-email font-nord font-light">mark.gallego.gines@gmail.com</span>
+		</div>
 	</div>
 </footer>
 
 <style lang="scss">
 	.footer-section {
-		padding-top: 80px;
-		padding-bottom: 32px;
+		--reveal-extend: 50px;
+		position: relative;
+		padding-top: 150px;
+		padding-bottom: calc(32px + var(--reveal-extend));
+		overflow: clip;
 	}
 
 	// ── Zona superior ──
@@ -61,12 +77,18 @@ const currentYear = new Date().getFullYear();
 		letter-spacing: -0.02em;
 	}
 
-	// ── Navegación ──
-	.footer-nav-wrapper {
-		--reveal-extend: 50px;
-		position: relative;
+	.footer-contact {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 4px;
 	}
 
+	.footer-contact-link {
+		text-decoration: none;
+	}
+
+	// ── Navegación ──
 	.footer-nav {
 		display: flex;
 		justify-content: space-between;
@@ -77,20 +99,9 @@ const currentYear = new Date().getFullYear();
 
 	.footer-nav-link {
 		font-size: 14px;
-		font-weight: 500;
 		color: var(--th-heading);
 		text-decoration: none;
 		text-transform: capitalize;
-	}
-
-	.footer-nav--reveal {
-		background: var(--th-heading);
-		border-color: transparent;
-		padding: calc(20px + var(--reveal-extend)) var(--reveal-extend);
-
-		.footer-nav-link {
-			color: var(--th-bg);
-		}
 	}
 
 	// ── Copyright ──
@@ -102,10 +113,38 @@ const currentYear = new Date().getFullYear();
 	}
 
 	.footer-copyright,
-	.footer-email {
+	.footer-email,
+	.footer-contact-link {
 		font-size: 12px;
-		font-weight: 400;
 		color: var(--th-text);
+	}
+
+	// ── Reveal layer ──
+	.footer-reveal {
+		background: var(--th-heading);
+		color: var(--th-bg);
+		padding: calc(150px + var(--reveal-extend)) calc(24px + var(--reveal-extend)) calc(32px + var(--reveal-extend));
+
+		.footer-title {
+			color: var(--th-bg);
+		}
+
+		.footer-nav {
+			border-color: var(--th-bg);
+		}
+
+		.footer-nav-link {
+			color: var(--th-bg);
+		}
+
+		.footer-copyright,
+		.footer-email {
+			color: var(--th-bg);
+		}
+
+		.footer-contact-link {
+			color: var(--th-bg);
+		}
 	}
 
 	// ── Dark mode ──
@@ -113,10 +152,20 @@ const currentYear = new Date().getFullYear();
 		.footer-nav {
 			border-color: var(--th-d-grey-light);
 		}
-		.footer-nav--reveal {
+
+		.footer-reveal {
 			background: var(--th-d-white);
-			.footer-nav-link {
+
+			.footer-title,
+			.footer-nav-link,
+			.footer-copyright,
+			.footer-email,
+			.footer-contact-link {
 				color: var(--th-d-carbon);
+			}
+
+			.footer-nav {
+				border-color: var(--th-d-carbon);
 			}
 		}
 	}

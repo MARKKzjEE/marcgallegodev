@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import gradientBg from '../assets/fqm-gradient.png';
+---
+
+<section class="gradient-section border-t border-th-text py-40">
+	<Image
+		src={gradientBg}
+		alt=""
+		class="gradient-section__bg"
+		quality={90}
+		aria-hidden="true"
+	/>
+	<div class="container mx-auto px-6 gradient-section__content">
+		<h2 class="gradient-section__title font-vogun font-light leading-[1.2] text-th-bg/75">¿Y si sale bien?</h2>
+	</div>
+</section>
+
+<style lang="scss">
+	.gradient-section {
+		position: relative;
+		overflow: clip;
+	}
+
+	.gradient-section__bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: 0;
+	}
+
+	.gradient-section__content {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 100%;
+	}
+
+	.gradient-section__title {
+		font-size: clamp(30px, 6vw, 60px);
+		text-align: center;
+	}
+</style>

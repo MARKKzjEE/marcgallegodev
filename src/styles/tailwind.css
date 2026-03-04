@@ -229,6 +229,11 @@ html.dark {
 	/*------------*/
 }
 
+/* Prevenir scroll lateral */
+html, body {
+	overflow-x: clip;
+}
+
 /* Estilos base y tipografía */
 @layer base {
 
