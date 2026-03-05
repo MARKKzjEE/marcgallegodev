@@ -4,14 +4,18 @@ export function initHeaderScroll(): void {
 	header.dataset.scrollInit = "true";
 
 	const hero = document.querySelector<HTMLElement>("#hero");
+	const contactHero = document.querySelector<HTMLElement>("[data-contact-hero]");
 	const heroPhoto = document.querySelector<HTMLElement>("[data-hero-photo]");
 	const heroCard = document.querySelector<HTMLElement>("[data-about-card]");
 
-	// Pages without Hero start with solid header
-	if (!hero) {
+	// Pages without Hero or contact hero start with solid header
+	if (!hero && !contactHero) {
 		header.classList.add("is-past-hero");
 		return;
 	}
+
+	// Contact page: use contact hero as the reference zone
+	const heroZone = hero || contactHero!;
 
 	const HEADER_HEIGHT = 64;
 	const FADE_BUFFER = 40; // content fully hidden this far below header
@@ -47,10 +51,10 @@ export function initHeaderScroll(): void {
 
 	function update() {
 		const scrollY = window.scrollY;
-		const heroHeight = hero!.offsetHeight;
+		const zoneHeight = heroZone.offsetHeight;
 
-		// Header: solid bg + color changes when past hero
-		header!.classList.toggle("is-past-hero", scrollY >= heroHeight - HEADER_HEIGHT);
+		// Header: solid bg + color changes when past hero/contact-hero
+		header!.classList.toggle("is-past-hero", scrollY >= zoneHeight - HEADER_HEIGHT);
 
 		// Fade zone grows with scroll: 0 at rest → FADE_ZONE max
 		const fadeZone = Math.min(scrollY, FADE_ZONE);

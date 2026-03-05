@@ -67,15 +67,18 @@ const linkedinItems = 6;
 		overflow: hidden;
 	}
 
+	.marquee-text {
+		color: white;
+		-webkit-text-stroke-color: black;
+	}
+
 	.marquee-band--call {
 		background-color: var(--th-l-dark-blue);
-		color: var(--th-l-cream);
 	}
 
 	.marquee-band--linkedin {
-		background-color: transparent;
+		background-color: var(--th-l-cream);
 		border-top: 1px solid var(--th-l-dark-blue);
-		color: var(--th-l-cream);
 	}
 
 	.marquee-track {
@@ -128,17 +131,10 @@ const linkedinItems = 6;
 	:global(.dark) {
 		.marquee-band--call {
 			background-color: var(--th-d-white);
-			color: var(--th-d-carbon);
 		}
 
 		.marquee-band--linkedin {
 			background-color: var(--th-d-grey-dark);
-			color: var(--th-d-carbon);
-		}
-
-		.marquee-text {
-			color: var(--th-d-white);
-			-webkit-text-stroke-color: black;
 		}
 	}
 

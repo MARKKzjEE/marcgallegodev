@@ -1,21 +1,21 @@
 ---
 import { Image } from 'astro:assets';
 import gradientBg from '../assets/fqm-gradient.png';
-import gradientBgDark from '../assets/fqm-gradient-dark.png';
+import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 ---
 
 <section class="gradient-section border-t border-th-text py-40">
 	<Image
 		src={gradientBg}
 		alt=""
-		class="gradient-section__bg gradient-section__bg--light"
+		class="gradient-section__bg dark:opacity-0 transition-opacity duration-500"
 		quality={90}
 		aria-hidden="true"
 	/>
 	<Image
 		src={gradientBgDark}
 		alt=""
-		class="gradient-section__bg gradient-section__bg--dark"
+		class="gradient-section__bg opacity-0 dark:opacity-100 transition-opacity duration-500"
 		quality={90}
 		aria-hidden="true"
 	/>
@@ -36,23 +36,11 @@ import gradientBgDark from '../assets/fqm-gradient-dark.png';
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		object-position: center center;
 		z-index: 0;
 	}
 
-	.gradient-section__bg--dark {
-		display: none;
-	}
-
-	:global(.dark) {
-		.gradient-section__bg--light {
-			display: none;
-		}
-		.gradient-section__bg--dark {
-			display: block;
-		}
-	}
-
-	.gradient-section__content {
+.gradient-section__content {
 		position: relative;
 		z-index: 1;
 		display: flex;
