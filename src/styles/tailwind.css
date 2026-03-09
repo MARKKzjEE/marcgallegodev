@@ -75,7 +75,21 @@
 	font-display: swap;
 }
 
-/* COTTORWAYPRO FONT */
+/* COTTORWAYPRO FONT — Normal */
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayPro-Thin.woff2") format("woff2");
+	font-weight: 100;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayPro-ExtraLight.woff2") format("woff2");
+	font-weight: 200;
+	font-style: normal;
+	font-display: swap;
+}
 @font-face {
 	font-family: "CottorwayPro";
 	src: url("/fonts/CottorwayPro/CottorwayPro-Light.woff2") format("woff2");
@@ -99,9 +113,94 @@
 }
 @font-face {
 	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayPro-Semibold.woff2") format("woff2");
+	src: url("/fonts/CottorwayPro/CottorwayPro-SemiBold.woff2") format("woff2");
 	font-weight: 600;
 	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayPro-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayPro-ExtraBold.woff2") format("woff2");
+	font-weight: 800;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayPro-Black.woff2") format("woff2");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+/* COTTORWAYPRO FONT — Italic */
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayItalics-Thin.woff2") format("woff2");
+	font-weight: 100;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayItalics-ExtraLight.woff2") format("woff2");
+	font-weight: 200;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayItalics-Light.woff2") format("woff2");
+	font-weight: 300;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayItalics-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayItalics-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayItalics-SemiBold.woff2") format("woff2");
+	font-weight: 600;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayItalics-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayItalics-ExtraBold.woff2") format("woff2");
+	font-weight: 800;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "CottorwayPro";
+	src: url("/fonts/CottorwayPro/CottorwayItalics-Black.woff2") format("woff2");
+	font-weight: 900;
+	font-style: italic;
 	font-display: swap;
 }
 
