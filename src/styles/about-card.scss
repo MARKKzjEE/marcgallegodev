@@ -1,11 +1,17 @@
 // ─── About Card: glassmorphism ───
 
 .card-glass {
-	background-color: var(--th-card-glass-bg);
+	background-color: rgba(0, 0, 0, 0.10);
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(4px);
 	transition: background-color 320ms ease;
+	border-radius: 0.5rem;
+	border: 1px solid color-mix(in srgb, var(--primary) 5%, transparent);
+
+	.dark & {
+		border-color: color-mix(in srgb, var(--primary) 30%, transparent);
+	}
 }
 
 // ─── About Card: expanded state ───
@@ -25,7 +31,7 @@
 		border-radius: 1rem;
 		display: flex;
 		flex-direction: column;
-		background-color: var(--th-bg);
+		background-color: var(--terciary);
 
 		.about-close {
 			opacity: 1;
@@ -83,40 +89,6 @@
 	&.is-visible {
 		display: flex;
 		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-.btn-special {
-	display: inline-block;
-	cursor: pointer;
-	border-radius: 4px;
-	border: 0;
-	padding: 0;
-	font-size: 1rem;
-	font-weight: 500;
-	background-color: var(--th-text);
-	color: var(--th-text);
-	font-family: var(--font-nord);
-	font-weight: 500;
-
-	span {
-		display: block;
-		box-sizing: border-box;
-		border-radius: 4px;
-		border: 1px solid var(--th-text);
-		padding: 0.75rem 1.5rem;
-		color: var(--th-text);
-		background-color: var(--th-bg);
-		transition: transform 0.1s ease;
-		transform: translateY(-0.25em);
-	}
-
-	&:hover span {
-		transform: translateY(-0.4em);
-	}
-
-	&:active span {
 		transform: translateY(0);
 	}
 }

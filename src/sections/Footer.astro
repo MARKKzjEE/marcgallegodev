@@ -8,11 +8,11 @@ const navItems = [
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="footer-section bg-th-bg px-6" data-reveal data-reveal-radius="32px">
+<footer class="footer-section bg-primary px-6" data-reveal data-reveal-radius="32px">
 	<!-- Capa base -->
 	<div class="footer-base">
 		<div class="footer-top">
-			<h2 class="footer-title font-vogun text-th-heading" data-reveal-trigger>Trabajemos juntos</h2>
+			<h2 class="footer-title font-vogun text-secondary" data-reveal-trigger>Trabajemos juntos</h2>
 			<div class="footer-contact">
 				<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="footer-contact-link font-nord font-light" data-reveal-trigger>LinkedIn</a>
 				<a href="tel:+34647604048" class="footer-contact-link font-nord font-light" data-reveal-trigger>+34 647 60 40 48</a>
@@ -93,13 +93,13 @@ const currentYear = new Date().getFullYear();
 		display: flex;
 		justify-content: space-between;
 		padding: 20px 0;
-		border-top: 1px solid var(--th-l-dark-blue);
-		border-bottom: 1px solid var(--th-l-dark-blue);
+		border-top: 1px solid var(--secondary);
+		border-bottom: 1px solid var(--secondary);
 	}
 
 	.footer-nav-link {
 		font-size: 14px;
-		color: var(--th-heading);
+		color: var(--secondary);
 		text-decoration: none;
 		text-transform: capitalize;
 	}
@@ -116,56 +116,56 @@ const currentYear = new Date().getFullYear();
 	.footer-email,
 	.footer-contact-link {
 		font-size: 12px;
-		color: var(--th-text);
+		color: var(--secondary);
 	}
 
 	// ── Reveal layer ──
 	.footer-reveal {
-		background: var(--th-heading);
-		color: var(--th-bg);
+		background: var(--secondary);
+		color: var(--primary);
 		padding: calc(150px + var(--reveal-extend)) calc(24px + var(--reveal-extend)) calc(24px + var(--reveal-extend));
 
 		.footer-title {
-			color: var(--th-bg);
+			color: var(--primary);
 		}
 
 		.footer-nav {
-			border-color: var(--th-bg);
+			border-color: var(--primary);
 		}
 
 		.footer-nav-link {
-			color: var(--th-bg);
+			color: var(--primary);
 		}
 
 		.footer-copyright,
 		.footer-email {
-			color: var(--th-bg);
+			color: var(--primary);
 		}
 
 		.footer-contact-link {
-			color: var(--th-bg);
+			color: var(--primary);
 		}
 	}
 
-	// ── Dark mode ──
+	// ── Dark ──
 	:global(.dark) {
 		.footer-nav {
-			border-color: var(--th-d-grey-light);
+			border-color: var(--terciary);
 		}
 
 		.footer-reveal {
-			background: var(--th-d-white);
+			background: var(--secondary);
 
 			.footer-title,
 			.footer-nav-link,
 			.footer-copyright,
 			.footer-email,
 			.footer-contact-link {
-				color: var(--th-d-carbon);
+				color: var(--primary);
 			}
 
 			.footer-nav {
-				border-color: var(--th-d-carbon);
+				border-color: var(--primary);
 			}
 		}
 	}

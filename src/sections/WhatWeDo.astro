@@ -3,12 +3,12 @@ const text = "Mi camino comenzó con una pasión por construir soluciones digita
 const words = text.split(' ');
 ---
 
-<section id="what-we-do" class="what-we-do bg-th-bg py-40 border-t border-th-text">
+<section id="what-we-do" class="what-we-do bg-primary py-40 border-t border-secondary">
 	<div class="container mx-auto px-6">
 		<div class="grid md:grid-cols-[200px_1fr] gap-8 md:gap-16 items-start">
 
 			<!-- Label izquierda -->
-			<span class="what-we-do__label font-nord text-th-text text-sm uppercase tracking-widest">Qué es lo que hago</span>
+			<span class="what-we-do__label font-nord text-secondary text-sm uppercase tracking-widest">Qué es lo que hago</span>
 
 			<!-- Texto con reveal por palabra -->
 			<div class="what-we-do__content">
@@ -29,23 +29,12 @@ const words = text.split(' ');
 	}
 
 	.reveal-word {
-		color: color-mix(in srgb, var(--th-l-dark-blue) 20%, transparent);
+		color: color-mix(in srgb, var(--secondary) 20%, transparent);
 		transition: color 0.3s ease;
 	}
 
 	.reveal-word.is-visible {
-		color: var(--th-l-dark-blue);
-	}
-
-	// ── Dark ──
-	:global(.dark) {
-		.reveal-word {
-			color: color-mix(in srgb, var(--th-d-white) 15%, transparent);
-
-			&.is-visible {
-				color: var(--th-d-white);
-			}
-		}
+		color: var(--secondary);
 	}
 </style>
 

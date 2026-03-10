@@ -6,14 +6,15 @@ export function initAboutCard(): void {
 
 	const card = hero.querySelector<HTMLElement>("[data-about-card]");
 	const slot = hero.querySelector<HTMLElement>("[data-about-slot]");
-	const openButton = hero.querySelector<HTMLButtonElement>("[data-about-open]");
 	const closeButton = hero.querySelector<HTMLButtonElement>("[data-about-close]");
 	const backdrop = hero.querySelector<HTMLElement>("[data-about-backdrop]");
 	const compactContent = hero.querySelector<HTMLElement>("[data-about-compact]");
 	const expandedContent = hero.querySelector<HTMLElement>("[data-about-expanded]");
+	const triggers = hero.querySelectorAll<HTMLElement>("[data-about-trigger]");
+	const collapsibles = hero.querySelectorAll<HTMLElement>("[data-hero-collapsible]");
 	const siteHeader = document.querySelector<HTMLElement>("[data-site-header]");
 
-	if (!card || !slot || !openButton || !closeButton || !backdrop || !compactContent || !expandedContent) return;
+	if (!card || !slot || !closeButton || !backdrop || !compactContent || !expandedContent) return;
 
 	const DURATION_MS = 500;
 	const CONTENT_FADE_MS = 150;
@@ -115,9 +116,9 @@ export function initAboutCard(): void {
 	const setExpandedState = (expanded: boolean): void => {
 		card.classList.toggle("is-expanded", expanded);
 		card.setAttribute("aria-expanded", expanded ? "true" : "false");
-		openButton.setAttribute("aria-expanded", expanded ? "true" : "false");
 		siteHeader?.classList.toggle("is-hidden", expanded);
 		siteHeader?.setAttribute("aria-hidden", expanded ? "true" : "false");
+		collapsibles.forEach((el) => el.classList.toggle("is-hidden", expanded));
 
 		if (expanded) {
 			backdrop.hidden = false;
@@ -204,7 +205,7 @@ export function initAboutCard(): void {
 		});
 	};
 
-	const openAbout = async (trigger: HTMLButtonElement = openButton): Promise<void> => {
+	const openAbout = async (trigger?: HTMLElement): Promise<void> => {
 		if (isAnimating || isExpanded) return;
 		isAnimating = true;
 		lastTrigger = trigger;
@@ -277,7 +278,10 @@ export function initAboutCard(): void {
 		}
 	};
 
-	openButton.addEventListener("click", () => openAbout(openButton));
+	triggers.forEach((trigger) => {
+		trigger.addEventListener("click", () => openAbout(trigger));
+	});
+
 	closeButton.addEventListener("click", closeAbout);
 	backdrop.addEventListener("click", closeAbout);
 	document.addEventListener("keydown", (event: KeyboardEvent) => {

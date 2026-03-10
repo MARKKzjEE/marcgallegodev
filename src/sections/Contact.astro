@@ -4,10 +4,10 @@ import gradientBg from '../assets/fqm-gradient.png';
 import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 ---
 
-<section id="contact" class="contact-section bg-th-bg border-b border-th-text">
+<section id="contact" class="contact-section bg-primary border-b border-secondary">
 
 	<!-- Gradient hero: 1/3 viewport -->
-	<div class="contact-hero relative overflow-hidden border-b border-th-text" data-contact-hero>
+	<div class="contact-hero relative overflow-hidden border-b border-secondary" data-contact-hero>
 		<Image src={gradientBg} alt="" class="contact-bg dark:opacity-0 transition-opacity duration-500" quality={90} aria-hidden="true" />
 		<Image src={gradientBgDark} alt="" class="contact-bg opacity-0 dark:opacity-100 transition-opacity duration-500" quality={90} aria-hidden="true" />
 		<div class="contact-hero__content container mx-auto px-6">
@@ -19,7 +19,7 @@ import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 	<div class="contact-form-wrapper container mx-auto px-6 py-40">
 		<div class="contact-card">
 			<div class="contact-card__content">
-				<h2 class="font-vogun text-th-heading font-bold text-3xl uppercase tracking-[0.15em]">Contacto</h2>
+				<h2 class="font-vogun text-secondary font-bold text-3xl uppercase tracking-[0.15em]">Contacto</h2>
 				<form class="contact-form" data-contact-form>
 					<div class="contact-field">
 						<label for="contact-name" class="contact-label">Nombre</label>
@@ -110,8 +110,8 @@ import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 
 		// Light
 		background-color: #fff;
-		border: 1px solid var(--th-l-dark-blue);
-		box-shadow: 4px 4px 0 var(--th-l-dark-blue);
+		border: 1px solid var(--secondary);
+		box-shadow: 4px 4px 0 var(--secondary);
 
 		&::before,
 		&::after {
@@ -128,8 +128,8 @@ import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 		}
 
 		&::before {
-			background: var(--th-l-charcoal);
-			border: 1px solid color-mix(in srgb, var(--th-l-dark-blue) 20%, transparent);
+			background: var(--terciary);
+			border: 1px solid color-mix(in srgb, var(--secondary) 20%, transparent);
 			z-index: -1;
 		}
 
@@ -137,8 +137,8 @@ import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 			top: -8%;
 			width: 80%;
 			height: 80%;
-			background: var(--th-l-dark-blue);
-			border: 1px solid color-mix(in srgb, var(--th-l-dark-blue) 30%, transparent);
+			background: var(--secondary);
+			border: 1px solid color-mix(in srgb, var(--secondary) 30%, transparent);
 			z-index: -2;
 		}
 	}
@@ -165,37 +165,37 @@ import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 	:global(.dark) {
 		.contact-card__content {
 			background-color: black;
-			border-color: var(--th-d-grey-light);
-			box-shadow: 4px 4px 0 var(--th-d-grey-light);
+			border-color: var(--terciary);
+			box-shadow: 4px 4px 0 var(--terciary);
 
 			&::before {
-				background: var(--th-d-grey-dark);
-				border-color: color-mix(in srgb, var(--th-d-grey-light) 30%, transparent);
+				background: var(--terciary);
+				border-color: color-mix(in srgb, var(--terciary) 30%, transparent);
 			}
 
 			&::after {
-				background: var(--th-d-white);
-				border-color: color-mix(in srgb, var(--th-d-grey-light) 15%, transparent);
+				background: var(--secondary);
+				border-color: color-mix(in srgb, var(--terciary) 15%, transparent);
 			}
 		}
 
 		.contact-input {
-			border-color: var(--th-d-grey-light);
-			color: var(--th-d-white);
+			border-color: var(--terciary);
+			color: var(--secondary);
 
 			&:focus {
-				border-color: var(--th-d-white);
+				border-color: var(--secondary);
 			}
 		}
 
 		.contact-submit {
-			background-color: var(--th-d-white);
-			color: var(--th-d-carbon);
+			background-color: var(--secondary);
+			color: var(--primary);
 		}
 
 		.contact-submit-reveal {
-			background-color: var(--th-d-carbon);
-			color: var(--th-d-white);
+			background-color: var(--primary);
+			color: var(--secondary);
 		}
 	}
 
@@ -218,28 +218,28 @@ import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 		font-weight: 500;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		color: var(--th-heading);
+		color: var(--secondary);
 	}
 
 	.contact-input {
 		background: transparent;
 		border: none;
-		border-bottom: 1px solid var(--th-l-dark-blue);
+		border-bottom: 1px solid var(--secondary);
 		padding: 8px 0;
 		font-family: var(--font-cottor);
 		font-size: 14px;
 		font-weight: 400;
-		color: var(--th-text);
+		color: var(--secondary);
 		outline: none;
 		transition: border-color 0.3s;
 
 		&:focus {
-			border-color: var(--th-l-dark-blue);
+			border-color: var(--secondary);
 			border-bottom-width: 2px;
 		}
 
 		&::placeholder {
-			color: color-mix(in srgb, var(--th-text) 30%, transparent);
+			color: color-mix(in srgb, var(--secondary) 30%, transparent);
 		}
 	}
 
@@ -257,8 +257,8 @@ import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 	}
 
 	.contact-submit {
-		background-color: var(--th-l-dark-blue);
-		color: var(--th-l-cream);
+		background-color: var(--secondary);
+		color: var(--primary);
 		padding: 10px 28px;
 		border: none;
 		cursor: pointer;
@@ -268,8 +268,8 @@ import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: var(--th-l-cream);
-		color: var(--th-l-dark-blue);
+		background-color: var(--primary);
+		color: var(--secondary);
 		padding: calc(10px + var(--reveal-extend)) calc(28px + var(--reveal-extend));
 	}
 

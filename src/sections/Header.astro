@@ -7,8 +7,9 @@ const navItems = [
 
 ---
 
-<header class="site-header fixed inset-x-0 top-0 z-40 bg-transparent" data-site-header>
-	<div class="font-nord font-medium hidden container mx-auto md:flex items-center justify-end h-[64px] gap-6 px-6">
+<header class="site-header fixed inset-x-0 top-0 z-40 mt-4" data-site-header>
+	<div class="container mx-auto px-10" data-header-wrap>
+	<div class="card-glass font-nord font-medium hidden md:flex items-center justify-end h-14 gap-6 px-8">
 		<nav class="flex items-center gap-6 text-sm" aria-label="Navegación principal">
 			{navItems.map((item) => (
 				<a href={item.href} class="nav-link">
@@ -16,10 +17,10 @@ const navItems = [
 				</a>
 			))}
 		</nav>
-    <div class="header-divider h-[32px] w-[1px] bg-th-header-text transition-all duration-300"></div>
+    <div class="header-divider h-[32px] w-[1px] bg-[var(--header-text)] transition-all duration-300"></div>
     <div class="flex items-center gap-1 text-sm" aria-label="Selector de idioma">
       <button type="button" class="lang-btn lang-active" data-lang="es" aria-pressed="true">ES</button>
-      <span class="text-th-header-text/75">/</span>
+      <span class="text-[var(--header-text)] opacity-75">/</span>
       <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
     </div>
     <div class="toggle-switch">
@@ -27,15 +28,30 @@ const navItems = [
           <input type="checkbox" class="checkbox" aria-label="Cambiar entre modo claro y oscuro">
           <span class="slider"></span>
         </>
-    </div>  
+    </div>
+	</div>
 	</div>
 </header>
 
 <style lang="scss">
+  .site-header {
+    --header-text: #ffffff;
+    --toggle-track: #ffffff;
+    --toggle-thumb: #1D1D1F;
+
+    [data-header-wrap] {
+      transition: max-width 300ms ease, padding 300ms ease;
+    }
+
+    .card-glass {
+      transition: background-color 300ms ease, backdrop-filter 300ms ease, border-color 300ms ease, border-radius 300ms ease, box-shadow 300ms ease;
+    }
+  }
+
   .nav-link {
     position: relative;
     padding-bottom: 0.25rem;
-    color: var(--th-header-text);
+    color: var(--header-text);
 
     &::after {
       content: '';
@@ -43,7 +59,7 @@ const navItems = [
       inset-inline: 0;
       bottom: -0.25rem;
       height: 2px;
-      background: var(--th-header-text);
+      background: var(--header-text);
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 300ms;
@@ -55,7 +71,7 @@ const navItems = [
   }
 
   .lang-btn {
-    color: var(--th-header-text);
+    color: var(--header-text);
     opacity: 0.75;
     transition: opacity 300ms;
     cursor: pointer;
@@ -73,14 +89,26 @@ const navItems = [
   }
 
   .site-header {
-    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, background-color 300ms ease, box-shadow 300ms ease;
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, padding 300ms ease, margin 300ms ease;
     &.is-past-hero {
-      --th-header-text: var(--th-heading);
-      --color-th-header-text: var(--th-heading);
-      --th-toggle-track: var(--th-heading);
-      --th-toggle-thumb: var(--th-bg);
-      background-color: var(--th-bg);
-      border-bottom: 1px solid var(--th-heading);
+      --header-text: var(--secondary);
+      --toggle-track: var(--secondary);
+      --toggle-thumb: var(--primary);
+      margin-top: 0;
+
+      [data-header-wrap] {
+        max-width: 100%;
+        padding-inline: 0;
+      }
+
+      .card-glass {
+        background-color: var(--primary);
+        border-color: var(--secondary);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: none;
+        border-radius: 0;
+      }
 
       .header-divider {
         height: 100%;
@@ -101,8 +129,8 @@ const navItems = [
       position: absolute;
       width: 100%;
       height: 100%;
-      background-color: var(--th-toggle-track);
-      border: 2px solid var(--th-toggle-track);
+      background-color: var(--toggle-track);
+      border: 2px solid var(--toggle-track);
       border-radius: 16px;
       cursor: pointer;
       .checkbox {
@@ -123,15 +151,15 @@ const navItems = [
           width: 16px;
           height: 16px;
           border-radius: 50%;
-          box-shadow: inset 8px -4px 0px 0px var(--th-toggle-thumb);
-          background-color: var(--th-toggle-track);
+          box-shadow: inset 8px -4px 0px 0px var(--toggle-thumb);
+          background-color: var(--toggle-track);
           transition: 0.3s;
         }
       }
       .checkbox:checked ~ .slider::before {
         transform: translateX(22px);
         box-shadow: none;
-        background-color: var(--th-toggle-thumb);
+        background-color: var(--toggle-thumb);
       }
     }
   }

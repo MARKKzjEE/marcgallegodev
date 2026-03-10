@@ -13,15 +13,15 @@ const techs = [
 const total = techs.length;
 ---
 
-<section id="tech" class="bg-th-bg py-40">
+<section id="tech" class="bg-primary py-40">
 	<div class="container mx-auto grid md:grid-cols-2 px-6">
 
 		<!-- Columna izquierda: título + texto + botón -->
 		<div class="flex flex-col">
 			<div class="flex flex-col flex-1">
 				<div class="tech-title relative" aria-label="Mis Tecnologías">
-					<span class="tech-title__horizontal font-vogun text-th-heading font-bold uppercase">Tecnologías</span>
-					<span class="tech-title__vertical font-vogun text-th-heading font-bold uppercase">Mis</span>
+					<span class="tech-title__horizontal font-vogun text-secondary font-bold uppercase">Tecnologías</span>
+					<span class="tech-title__vertical font-vogun text-secondary font-bold uppercase">Mis</span>
 				</div>
 				<div class="tech-description relative">
 					<button type="button" class="tech-toggle-names" data-toggle-names data-reveal data-reveal-radius="32px" aria-pressed="false" aria-label="Mostrar nombres de tecnologías">
@@ -32,7 +32,7 @@ const total = techs.length;
 						<svg class="tech-toggle-eye-closed" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 256 256"><path d="M228,175a8,8,0,0,1-10.92-3l-19-33.2A123.23,123.23,0,0,1,162,155.46l5.87,35.22a8,8,0,0,1-6.58,9.21A8.4,8.4,0,0,1,160,200a8,8,0,0,1-7.88-6.69l-5.77-34.58a133.06,133.06,0,0,1-36.68,0l-5.77,34.58A8,8,0,0,1,96,200a8.4,8.4,0,0,1-1.32-.11,8,8,0,0,1-6.58-9.21L94,155.46a123.23,123.23,0,0,1-36.06-16.69L39,172A8,8,0,1,1,25.06,164l20-35a153.47,153.47,0,0,1-19.3-20A8,8,0,1,1,38.22,99c16.6,20.54,45.64,45,89.78,45s73.18-24.49,89.78-45A8,8,0,1,1,230.22,109a153.47,153.47,0,0,1-19.3,20l20,35A8,8,0,0,1,228,175Z"></path></svg>
 					</span>
 				</button>
-					<p class="font-cottor font-light text-th-text max-w-150 leading-[1.15] opacity-100 text-justify">
+					<p class="font-cottor font-light text-secondary max-w-150 leading-[1.15] opacity-100 text-justify">
 						Este es mi stack más destacado con el que trabajo día a día. <br>
 						Me involucro en todas las fases del proyecto tanto front, back como del propio entorno y servidor.
 					</p>
@@ -72,7 +72,7 @@ const total = techs.length;
 			<div class="flex flex-col items-center gap-2">
 				<img class="tech-icon__svg tech-icon__svg--light w-10 h-10" src={`/tech-icons/${tech.slug}-l.svg`} alt={tech.name} />
 				<img class="tech-icon__svg tech-icon__svg--dark w-10 h-10" src={`/tech-icons/${tech.slug}-d.svg`} alt={tech.name} />
-				<span class="font-nord text-th-text text-[10px] uppercase tracking-wider text-center">{tech.name}</span>
+				<span class="font-nord text-secondary text-[10px] uppercase tracking-wider text-center">{tech.name}</span>
 			</div>
 		))}
 	</div>
@@ -107,8 +107,8 @@ const total = techs.length;
 		margin-top: var(--gap);
 		margin-left: calc(var(--title-size) + var(--gap));
 		padding: 32px 0 64px 32px;
-		border-top: 1px solid var(--th-l-dark-blue);
-		border-left: 1px solid var(--th-l-dark-blue);
+		border-top: 1px solid var(--secondary);
+		border-left: 1px solid var(--secondary);
 
 		p {
 			font-size: clamp(28px, 4vw, 52px);
@@ -123,7 +123,7 @@ const total = techs.length;
 		transform: translateX(-100%);
 		padding-right: 12px;
 		cursor: pointer;
-		color: var(--th-heading);
+		color: var(--secondary);
 		background: none;
 		border: none;
 
@@ -147,8 +147,8 @@ const total = techs.length;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: var(--th-heading);
-		color: var(--th-bg);
+		background: var(--secondary);
+		color: var(--primary);
 		padding: var(--reveal-extend);
 		padding-right: calc(12px + var(--reveal-extend));
 	}
@@ -281,7 +281,7 @@ const total = techs.length;
 		font-weight: 500;
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
-		color: var(--th-heading);
+		color: var(--secondary);
 		opacity: 0;
 		max-height: 0;
 		overflow: hidden;
@@ -295,34 +295,34 @@ const total = techs.length;
 	// ── LIGHT ────────────────────────────────────────
 	.tech-icon {
 		background-color: #fff;
-		border-color: var(--th-l-dark-blue);
-		box-shadow: 3px 3px 0 var(--th-l-dark-blue);
+		border-color: var(--secondary);
+		box-shadow: 3px 3px 0 var(--secondary);
 
 		&::before,
 		&::after {
-			background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--th-l-dark-blue) 10%, transparent), transparent);
+			background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--secondary) 10%, transparent), transparent);
 		}
 
 		&.is-active,
 		&.is-placed:focus-visible {
-			border-color: var(--th-l-dark-blue);
-			box-shadow: 8px 8px 0 var(--th-l-dark-blue);
+			border-color: var(--secondary);
+			box-shadow: 8px 8px 0 var(--secondary);
 		}
 
 		&:focus-visible {
-			box-shadow: 0 0 0 2px var(--th-l-dark-blue);
+			box-shadow: 0 0 0 2px var(--secondary);
 		}
 	}
 
 	// ── DARK ─────────────────────────────────────────
 	:global(.dark) {
 		.tech-description {
-			border-color: var(--th-d-grey-light);
+			border-color: var(--terciary);
 		}
 
 		.tech-toggle-reveal {
-			background: var(--th-d-white);
-			color: var(--th-d-carbon);
+			background: var(--secondary);
+			color: var(--primary);
 		}
 
 		.tech-icon__svg--light {
@@ -333,9 +333,9 @@ const total = techs.length;
 		}
 
 		.tech-icon {
-			background-color: var(--th-d-grey-dark);
-			border-color: var(--th-d-grey-light);
-			box-shadow: 3px 3px 0 var(--th-d-grey-light);
+			background-color: var(--terciary);
+			border-color: var(--terciary);
+			box-shadow: 3px 3px 0 var(--terciary);
 
 			&::before,
 			&::after {
@@ -344,12 +344,12 @@ const total = techs.length;
 
 			&.is-active,
 			&.is-placed:focus-visible {
-				border-color: var(--th-text);
-				box-shadow: 8px 8px 0 var(--th-text);
+				border-color: var(--secondary);
+				box-shadow: 8px 8px 0 var(--secondary);
 			}
 
 			&:focus-visible {
-				box-shadow: 0 0 0 2px var(--th-heading);
+				box-shadow: 0 0 0 2px var(--secondary);
 			}
 		}
 	}

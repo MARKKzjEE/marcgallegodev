@@ -53,10 +53,11 @@ Estructura compartida:
   - **CottorwayPro** — Body text (300-600 weights)
   - **NORD** — Nav, botones, UI elements (100-900 weights)
 
-- **Paleta de colores:**
-  - Light: deep-blue `#011633` (headings), dark-blue `#0C111D` (texto), cream `#F0EEE9` (fondo), orange `#F2542D` (acento), charcoal `#364156` (detalles)
-  - Dark: carbon `#171717` (fondo), white `#FFFFFF` (headings/texto), grey-light `#D5D5D5`, grey-dark `#868686`
-  - Tokens semánticos: `--th-bg`, `--th-text`, `--th-heading`, `--th-header-text`, `--th-card-glass-bg`
+- **Paleta de colores (3 tokens semánticos):**
+  - `--primary`: fondo de la web — `#ebebeb` light / `#000000` dark
+  - `--secondary`: headers, textos — `#1D1D1F` light / `#FFFFFF` dark
+  - `--terciary`: fondo de tarjetas — `#f5f5f7` light / `#1D1D1F` dark
+  - Clases Tailwind: `bg-primary`, `text-secondary`, `bg-tertiary`, etc.
 
 - **Dark mode:** Class-based (`.dark` en `<html>`), variant `@custom-variant dark (&:where(.dark, .dark *))`
 - **Animations:** Plugin `tailwind-animations`
@@ -81,7 +82,7 @@ Estructura compartida:
 
 - Secciones en `src/sections/`, componentes en `src/components/`
 - Selectores JS con `data-*`, nunca con clases CSS
-- Glassmorphism: `color-mix(in srgb, var(--color-*) %, transparent)` + `backdrop-filter: blur()`
+- Glassmorphism: `color-mix(in srgb, var(--terciary) %, transparent)` + `backdrop-filter: blur()`
 - TypeScript strict mode
 - Toda interacción debe respetar `prefers-reduced-motion`
 - Contenido en español, tono personal y cercano

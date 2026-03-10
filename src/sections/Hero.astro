@@ -1,8 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import profileLight from '../assets/hero-profile-light.png';
-import profileDark from '../assets/hero-profile-dark.png';
 import AboutCard from '../components/AboutCard.astro';
+import { MousePointerClick } from 'lucide-astro';
 ---
 
 <section id="hero" class="relative min-h-screen">
@@ -19,16 +17,78 @@ import AboutCard from '../components/AboutCard.astro';
 		poster="/assets/bg-background-loop-poster.webp"
 	></video>
 
-	<div class="absolute inset-0 bg-th-bg/5 dark:bg-th-bg/70"></div>
-	<div class="relative flex min-h-screen items-center py-16">
-		<div class="container mx-auto px-6">
-			<div class="grid items-center gap-4 md:grid-cols-2">
-				<div data-hero-photo class="relative object-cover aspect-[4/5] max-h-[550px] overflow-hidden mx-auto border-2 border-th-bg/10 dark:border-th-bg/30">
-					<Image src={profileLight} alt="Marc Gallego" widths={[400, 500, 750]} sizes="(max-width: 768px) 400px, 500px" format="webp" quality={92} class="card-content h-full w-full object-cover dark:opacity-0 transition-opacity duration-500" loading="eager" />
-					<Image src={profileDark} alt="" widths={[400, 500, 750]} sizes="(max-width: 768px) 400px, 500px" format="webp" quality={92} class="card-content absolute inset-0 h-full w-full object-cover opacity-0 dark:opacity-100 transition-opacity duration-500" loading="eager" />
+	<div class="absolute inset-0 bg-primary/5 dark:bg-primary/70"></div>
+	<div class="relative flex min-h-screen flex-col py-16">
+		<!-- Centro: AboutCard + feature cards -->
+		<div class="flex-1 flex flex-col justify-center container mx-auto px-10">
+			<AboutCard />
+
+			<!-- 4 feature cards -->
+			<div class="hero-collapsible grid grid-cols-4 gap-6 mt-6" data-hero-collapsible>
+				<div class="card-glass flex flex-col justify-center items-center py-10 px-4">
+					<span class="font-nord font-black text-white text-3xl uppercase">+5</span>
+					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">años exp.</span>
 				</div>
-				<AboutCard />
+				<div class="card-glass flex flex-col justify-center items-center py-10 px-4">
+					<span class="font-nord font-black text-white text-3xl uppercase">+100</span>
+					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">proyectos</span>
+				</div>
+				<div class="card-glass flex flex-col justify-center items-center py-10 px-4">
+					<span class="font-nord font-black text-white text-3xl uppercase">+20</span>
+					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">clientes satisfechos</span>
+				</div>
+				<div class="card-glass hero-cta flex justify-center items-center gap-3 py-10 px-4 cursor-pointer" data-about-trigger>
+					<span class="hero-cta__text font-nord font-black text-white text-xl uppercase">Conóceme</span>
+					<MousePointerClick size={32} stroke-width={2.5} class="text-white pb-1" />
+				</div>
+			</div>
+		</div>
+
+		<!-- Bottom elements: pegados abajo -->
+		<div class="hero-collapsible container mx-auto px-10 flex justify-between" data-hero-collapsible>
+			<div class="card-glass px-6 py-3 flex items-center gap-3">
+				<span class="status-dot relative flex h-2.5 w-2.5">
+					<span class="absolute inline-flex h-full w-full animate-ping animate-duration-[2s] rounded-full bg-green-500 opacity-75"></span>
+					<span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
+				</span>
+				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">Disponible para proyectos</span>
+			</div>
+			<div class="card-glass px-6 py-3">
+				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">Ingeniero del software</span>
 			</div>
 		</div>
 	</div>
 </section>
+
+<style lang="scss">
+	.hero-cta__text {
+		position: relative;
+		padding-bottom: 0.25rem;
+
+		&::after {
+			content: '';
+			position: absolute;
+			inset-inline: 0;
+			bottom: -0.25rem;
+			height: 2px;
+			background: white;
+			transform: scaleX(0);
+			transform-origin: left;
+			transition: transform 300ms;
+		}
+	}
+
+	.hero-cta:hover .hero-cta__text::after {
+		transform: scaleX(1);
+	}
+
+	.hero-collapsible {
+		transition: opacity 150ms ease, visibility 150ms ease;
+
+		&.is-hidden {
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+		}
+	}
+</style>

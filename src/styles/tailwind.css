@@ -31,7 +31,7 @@
 	font-display: swap;
 }
 
-/* NORD FONT */
+/* NORD FONT — Normal */
 @font-face {
 	font-family: "NORD";
 	src: url("/fonts/NORD/NORD-Thin.woff2") format("woff2");
@@ -55,6 +55,13 @@
 }
 @font-face {
 	font-family: "NORD";
+	src: url("/fonts/NORD/NORD-Book.woff2") format("woff2");
+	font-weight: 450;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "NORD";
 	src: url("/fonts/NORD/NORD-Medium.woff2") format("woff2");
 	font-weight: 500;
 	font-style: normal;
@@ -72,6 +79,56 @@
 	src: url("/fonts/NORD/NORD-Black.woff2") format("woff2");
 	font-weight: 900;
 	font-style: normal;
+	font-display: swap;
+}
+/* NORD FONT — Italic */
+@font-face {
+	font-family: "NORD";
+	src: url("/fonts/NORD/NORD-ThinItalic.woff2") format("woff2");
+	font-weight: 100;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "NORD";
+	src: url("/fonts/NORD/NORD-LightItalic.woff2") format("woff2");
+	font-weight: 300;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "NORD";
+	src: url("/fonts/NORD/NORD-Italic.woff2") format("woff2");
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "NORD";
+	src: url("/fonts/NORD/NORD-BookItalic.woff2") format("woff2");
+	font-weight: 450;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "NORD";
+	src: url("/fonts/NORD/NORD-MediumItalic.woff2") format("woff2");
+	font-weight: 500;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "NORD";
+	src: url("/fonts/NORD/NORD-BoldItalic.woff2") format("woff2");
+	font-weight: 700;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "NORD";
+	src: url("/fonts/NORD/NORD-BlackItalic.woff2") format("woff2");
+	font-weight: 900;
+	font-style: italic;
 	font-display: swap;
 }
 
@@ -139,6 +196,7 @@
 	font-style: normal;
 	font-display: swap;
 }
+
 /* COTTORWAYPRO FONT — Italic */
 @font-face {
 	font-family: "CottorwayPro";
@@ -204,129 +262,94 @@
 	font-display: swap;
 }
 
-/* NEBULICA MODERN */
+/* MONOBLOCK FONT */
 @font-face {
-	font-family: "Nebulica";
-	src: url("/fonts/Nebulica/Nebulica-Thin.woff2") format("woff2");
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-Thin.woff2") format("woff2");
 	font-weight: 100;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: "Nebulica";
-	src: url("/fonts/Nebulica/Nebulica-ExtraLight.woff2") format("woff2");
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-ExtraLight.woff2") format("woff2");
 	font-weight: 200;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: "Nebulica";
-	src: url("/fonts/Nebulica/Nebulica-Light.woff2") format("woff2");
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-Light.woff2") format("woff2");
 	font-weight: 300;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: "Nebulica";
-	src: url("/fonts/Nebulica/Nebulica-Regular.woff2") format("woff2");
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-Regular.woff2") format("woff2");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: "Nebulica";
-	src: url("/fonts/Nebulica/Nebulica-Medium.woff2") format("woff2");
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-Medium.woff2") format("woff2");
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: "Nebulica";
-	src: url("/fonts/Nebulica/Nebulica-SemiBold.woff2") format("woff2");
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-SemiBold.woff2") format("woff2");
 	font-weight: 600;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: "Nebulica";
-	src: url("/fonts/Nebulica/Nebulica-Bold.woff2") format("woff2");
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-Bold.woff2") format("woff2");
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: "Nebulica";
-	src: url("/fonts/Nebulica/Nebulica-ExtraBold.woff2") format("woff2");
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-ExtraBold.woff2") format("woff2");
 	font-weight: 800;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: "Nebulica";
-	src: url("/fonts/Nebulica/Nebulica-Black.woff2") format("woff2");
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-Black.woff2") format("woff2");
 	font-weight: 900;
 	font-style: normal;
 	font-display: swap;
 }
 
 @theme {
-	/*--font-sans: "Just Sans", system-ui, -apple-system, "Segoe UI", sans-serif;*/
 	--font-vogun: "Vogun", system-ui, -apple-system, sans-serif;
 	--font-nord: "NORD", system-ui, -apple-system, sans-serif;
 	--font-cottor: "CottorwayPro", system-ui, -apple-system, sans-serif;
-	--font-nebulica: "Nebulica", system-ui, -apple-system, sans-serif;
 	--font-pixelbots: "PixelBots", system-ui, -apple-system, sans-serif;
+	--font-monoblock: "Monoblock", system-ui, -apple-system, sans-serif;
 
-	--color-th-bg: var(--th-bg);
-	--color-th-text: var(--th-text);
-	--color-th-heading: var(--th-heading);
-
-	--color-th-header-text: var(--th-header-text);
+	--color-primary: var(--primary);
+	--color-secondary: var(--secondary);
+	--color-tertiary: var(--terciary);
 }
 
 :root {
-	/* RAW VALUES */
-	/* Light theme */
-	--th-l-dark-blue: #0C111D; /* Normal text | border/details/text buttons */
-	--th-l-cream: #F0EEE9; /* Background sections/buttons */
-	--th-l-orange: #F2542D;
-	--th-l-charcoal: #364156;
+	--primary: #ebebeb;
+	--secondary: #1D1D1F;
+	--terciary: #f5f5f7;
 
-	/* Dark theme */
-	--th-d-carbon: #171717; /* Background sections/buttons */
-	--th-d-white: #FFFFFF; /* Headings | Normal text | border/details/text buttons */
-	--th-d-grey-light: #D5D5D5;
-	/*--th-d-grey-dark: #868686;*/
-	--th-d-grey-dark: #3d3d3d;
-	/*------------*/
-
-	/* SEMANTIC TOKENS */
-	--th-bg: var(--th-l-cream);
-	--th-text: var(--th-l-dark-blue);
-	--th-heading: var(--th-l-dark-blue);
-
-	--th-toggle-track: var(--th-l-cream);
-	--th-toggle-thumb: var(--th-l-dark-blue);
-
-	--th-header-text: var(--th-l-cream);
-
-	--th-card-glass-bg: color-mix(in srgb, var(--th-l-charcoal) 10%, transparent);
-	/*------------*/
 }
 
 html.dark {
-	/* SEMANTIC TOKENS */
-	--th-bg: var(--th-d-carbon);
-  	--th-text: var(--th-d-white);
-  	--th-heading: var(--th-d-white);
-
-	--th-toggle-track: var(--th-d-carbon);
-	--th-toggle-thumb: var(--th-d-white);
-
-	--th-header-text: var(--th-d-white);
-
-	--th-card-glass-bg: color-mix(in srgb, var(--th-d-carbon) 10%, transparent);
-	/*------------*/
+	--primary: #000000;
+	--secondary: #FFFFFF;
+	--terciary: #0a0a0a;
 }
 
 /* Prevenir scroll lateral */
@@ -338,9 +361,6 @@ html, body {
 @layer base {
 
 	body {
-		background-color: var(--color-th-bg);
-	}
-
-	h1, h2, h3, h4 {
+		background-color: var(--color-primary);
 	}
 }
