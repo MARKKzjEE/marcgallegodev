@@ -1,11 +1,21 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const defaultDescription = "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida.";
+const { title = "Marc Gallego | Dev", description = defaultDescription } = Astro.props;
+---
+
 <!doctype html>
 <html lang="es" class="">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<title>Marc Gallego | Dev</title>
-		<meta name="description" content="Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida." />
+		<title>{title}</title>
+		<meta name="description" content={description} />
 		<meta name="keywords" content="Marc Gallego, Developer, Software Engineer, Full Stack Developer, Frontend Developer, Backend Developer, Mobile Developer, AI Developer" />
 		<meta name="author" content="Marc Gallego" />
 		<meta name="robots" content="index, follow" />
@@ -17,15 +27,15 @@
 		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://marcgallegodev.com" />
-		<meta property="og:title" content="Marc Gallego | Dev" />
-		<meta property="og:description" content="Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida." />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
 		<meta property="og:image" content="https://marcgallegodev.com/assets/og-image.webp" />
 		<meta property="og:locale" content="es_ES" />
 
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="Marc Gallego | Dev" />
-		<meta name="twitter:description" content="Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance." />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content="https://marcgallegodev.com/assets/og-image.webp" />
 
 		<!-- Theme color -->
@@ -48,6 +58,26 @@
 
 <style is:global>
 	@import "../styles/tailwind.css";
+
+	/* Circle Reveal Effect */
+	.reveal-layer {
+		position: absolute;
+		inset: calc(-1 * var(--reveal-extend, 0px));
+		z-index: 2;
+		clip-path: circle(
+			var(--r, 0px) at
+			calc(var(--cx, -100px) + var(--reveal-extend, 0px))
+			calc(var(--cy, -100px) + var(--reveal-extend, 0px))
+		);
+		transition: clip-path 350ms cubic-bezier(0.22, 1, 0.36, 1);
+		pointer-events: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.reveal-layer {
+			transition: none;
+		}
+	}
 </style>
 
 <script>

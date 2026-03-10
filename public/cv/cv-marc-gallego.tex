@@ -1,0 +1,187 @@
+%-------------------------
+% Currículum en LaTeX
+% Autor : Marc Gallego Gines
+% Licencia : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[spanish]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Márgenes
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Formato de secciones
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{0pt}]
+
+\pdfgentounicode=1
+
+% Comandos personalizados
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------ENCABEZADO----------
+\begin{center}
+    {\Huge \scshape Marc Gallego Gines} \\ \vspace{8pt}
+    \href{https://www.marcgallego.com}{\raisebox{-0.2\height}\faGlobe\ \underline{marcgallego.com}}
+    \hspace{8pt}
+    \small \raisebox{-0.1\height}\faPhone\ +34 647 60 40 48
+    \hspace{8pt}
+    \href{mailto:mark.gallego.gines@gmail.com}{\raisebox{-0.2\height}\faEnvelope\ \underline{mark.gallego.gines@gmail.com}}
+    \hspace{8pt}
+    \href{https://linkedin.com/in/marcgallegodev}{\raisebox{-0.2\height}\faLinkedin\ \underline{marcgallegodev}}
+\end{center}
+
+%-----------RESUMEN-----------
+\section{Resumen}
+\resumeSubHeadingListStart
+    \resumeItem{Soy desarrollador de software con más de 5 años de experiencia creando soluciones web y móviles. A lo largo de mi carrera he tenido la suerte de trabajar en proyectos muy diversos y con diferentes tecnologías, lo que me ha dado una visión más amplia y completa del desarrollo de software. Me apasiona la programación y la tecnología, y disfruto mucho trabajando en equipo, manteniendo siempre buenas vibras y creciendo junto a mis compañeros de trabajo.}
+\resumeSubHeadingListEnd
+
+%-----------EXPERIENCIA-----------
+\section{Experiencia}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Doko Studio}{Jul 2024 -- Presente}
+      {Ingeniero de software}{Barcelona, España}
+      \resumeItemListStart
+        \resumeItem{Participación en múltiples proyectos utilizando tecnologías como \textbf{Laravel, Django, React, Angular}.}
+        \resumeItem{Diseño y desarrollo de \textbf{APIs modulares} con documentación generada mediante \textbf{Swagger}.}
+        \resumeItem{Implementación de \textbf{pipelines CI/CD} y flujos de producción con \textbf{GitLab CI}, facilitando despliegues en distintos entornos de cliente.}
+        \resumeItem{Gestión de dominios y administración de servidores.}
+        \resumeItem{Publicación de apps móviles en play store y app store.}
+        \resumeItem{Experiencia implementando pasarelas de pago tanto integradas como independientes.}
+        \resumeItem{Colaboración con diseñadores en \textbf{Figma} para la creación de interfaces web responsivas y usables.}
+      \resumeItemListEnd
+    \vspace{8pt}
+
+    \resumeSubheading
+      {Lateua}{May 2023 -- Feb 2024}
+      {Desarrollador Full Stack}{Barcelona, España}
+      \resumeItemListStart
+        \resumeItem{Migración de la plataforma heredada en \textbf{WordPress} hacia una nueva solución escalable con \textbf{React} y \textbf{Django}.}
+        \resumeItem{Diseño e implementación de \textbf{microservicios} para desacoplar funcionalidades y mejorar el rendimiento.}
+        \resumeItem{Desarrollo de scripts de migración de datos multiplataforma con \textbf{Python}.}
+        \resumeItem{Creación de procesos basados en \textbf{IA} para detección de colores, formas y generación de imágenes.}
+        \resumeItem{Desarrollo de un modelo conversacional de \textbf{IA} para asistir a los usuarios en la generación de resultados.}
+      \resumeItemListEnd
+    \vspace{8pt}
+
+    \resumeSubheading
+      {Loyic}{Mar 2023 -- Mar 2024}
+      {Desarrollador Full Stack / Líder de Equipo}{Barcelona, España}
+      \resumeItemListStart
+        \resumeItem{Desarrollo y mantenimiento de software interno para la gestión de RRHH: control horario, nóminas, reportes y documentación.}
+        \resumeItem{Liderazgo de un equipo de desarrollo, coordinando tareas y entregas de nuevas funcionalidades y correcciones.}
+        \resumeItem{Supervisión de proyectos de \textbf{desarrollo web} y administración de bases de datos internas.}
+        \resumeItem{Construcción de soluciones sobre la plataforma holandesa \textbf{Exact Synergy}, personalizándola según necesidades de negocio.}
+        \resumeItem{Colaboración con consultores y stakeholders para alinear el desarrollo con los requisitos empresariales.}
+      \resumeItemListEnd
+    \vspace{8pt}
+
+    \resumeSubheading
+      {Social Labs}{Ene 2019 -- Ago 2019}
+      {Desarrollador de Soporte}{Ciudad de México, México}
+      \resumeItemListStart
+        \resumeItem{Soporte en el desarrollo de múltiples proyectos web para clientes como \textbf{Bimbo}, \textbf{Coca-Cola} y \textbf{Ferromex}.}
+        \resumeItem{Colaboración con distintos equipos para implementar funcionalidades, correcciones y tareas de mantenimiento.}
+        \resumeItem{Experiencia práctica trabajando con clientes de gran escala y adaptándome a distintos requisitos de proyecto.}
+        \resumeItem{Apoyo en tareas de front-end y back-end, fortaleciendo mis habilidades globales en desarrollo web.}
+      \resumeItemListEnd
+    \vspace{8pt}
+    
+  \resumeSubHeadingListEnd
+\vspace{-16pt}
+
+
+
+%-----------EDUCACIÓN-----------
+\section{Educación}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Grado en Ingeniería Informática}{Barcelona, España}
+      {Especialización en Desarrollo de Software y Gestión de Proyectos}{2015 -- 2020}
+  \resumeSubHeadingListEnd
+ \vspace{8pt}
+
+
+
+%-----------IDIOMAS-----------
+\section{Idiomas}
+     \textbf{Inglés}{: B2} \\
+     \textbf{Español}{: C2 (Nativo)} \\
+     \textbf{Catalán}{: C2 (Nativo)} \\
+ \vspace{8pt}
+
+
+
+%-----------EXTRACURRICULAR-----------
+\section{Extracurricular}
+    \resumeSubHeadingListStart
+        \resumeSubheading{Planit}{2020}{Fundador \& Desarrollador Full Stack}{Barcelona, España}
+            \resumeItemListStart
+                \resumeItem{Creación de una aplicación móvil y web que, tras validar la idea con usuarios reales, evolucionó a una startup en etapa inicial orientada a la captación de inversión.}
+                \resumeItem{Desarrollo de la plataforma en \textbf{React}, que permitía a los usuarios proponer planes y conectar con otras personas.}
+                \resumeItem{Gestión completa del ciclo de producto: validación de la idea, diseño, desarrollo y lanzamiento privado para inversores.}
+                \resumeItem{Definición de workflows y estrategias de pitch orientadas a la captación de inversión.}
+                \resumeItem{El proyecto alcanzó fase de pre-inversión pero fue pausado a causa de la pandemia de COVID-19.}
+            \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+
+\end{document}

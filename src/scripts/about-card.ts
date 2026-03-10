@@ -184,10 +184,33 @@ export function initAboutCard(): void {
 		}
 	};
 
-	const openAbout = (trigger: HTMLButtonElement = openButton): void => {
+	const scrollToHero = (): Promise<void> => {
+		const heroTop = hero.getBoundingClientRect().top + window.scrollY;
+
+		// Already at hero — no scroll needed
+		if (Math.abs(window.scrollY - heroTop) < 2) return Promise.resolve();
+
+		return new Promise((resolve) => {
+			const onEnd = (): void => {
+				clearTimeout(fallback);
+				window.removeEventListener("scrollend", onEnd);
+				resolve();
+			};
+
+			// Fallback for browsers without scrollend (Safari < 17.4)
+			const fallback = window.setTimeout(onEnd, 600);
+			window.addEventListener("scrollend", onEnd, { once: true });
+			window.scrollTo({ top: heroTop, behavior: "smooth" });
+		});
+	};
+
+	const openAbout = async (trigger: HTMLButtonElement = openButton): Promise<void> => {
 		if (isAnimating || isExpanded) return;
 		isAnimating = true;
 		lastTrigger = trigger;
+
+		// Scroll to hero first so the backdrop doesn't flash mid-page
+		await scrollToHero();
 
 		// Phase 1: fade out compact content
 		setCompactVisible(false);

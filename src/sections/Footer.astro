@@ -1,0 +1,199 @@
+---
+const navItems = [
+	{ label: "Experiencia", href: "/experiencia" },
+	{ label: "Proyectos", href: "/proyectos" },
+	{ label: "Contacto", href: "/contacto" },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer-section bg-th-bg px-6" data-reveal data-reveal-radius="32px">
+	<!-- Capa base -->
+	<div class="footer-base">
+		<div class="footer-top">
+			<h2 class="footer-title font-vogun text-th-heading" data-reveal-trigger>Trabajemos juntos</h2>
+			<div class="footer-contact">
+				<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="footer-contact-link font-nord font-light" data-reveal-trigger>LinkedIn</a>
+				<a href="tel:+34647604048" class="footer-contact-link font-nord font-light" data-reveal-trigger>+34 647 60 40 48</a>
+			</div>
+		</div>
+		<nav class="footer-nav" aria-label="Navegación del footer">
+			{navItems.map((item) => (
+				<a href={item.href} class="footer-nav-link font-nord" data-reveal-trigger>
+					{item.label}
+				</a>
+			))}
+		</nav>
+		<div class="footer-bottom">
+			<span class="footer-copyright font-nord font-light opacity-90" data-reveal-trigger>&copy;{currentYear} Marc Gallego. Todos los derechos reservados.</span>
+			<span class="footer-email font-nord font-light" data-reveal-trigger>mark.gallego.gines@gmail.com</span>
+		</div>
+	</div>
+
+	<!-- Capa reveal (clon visual) -->
+	<div class="footer-reveal reveal-layer" aria-hidden="true">
+		<div class="footer-top">
+			<h2 class="footer-title font-vogun">Trabajemos juntos</h2>
+			<div class="footer-contact">
+				<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="footer-contact-link font-nord font-light" tabindex="-1">LinkedIn</a>
+				<a href="tel:+34647604048" class="footer-contact-link font-nord font-light" tabindex="-1">+34 647 60 40 48</a>
+			</div>
+		</div>
+		<nav class="footer-nav">
+			{navItems.map((item) => (
+				<a href={item.href} class="footer-nav-link font-nord font-light" tabindex="-1">
+					{item.label}
+				</a>
+			))}
+		</nav>
+		<div class="footer-bottom">
+			<span class="footer-copyright font-nord font-light opacity-90">&copy;{currentYear} Marc Gallego. Todos los derechos reservados.</span>
+			<span class="footer-email font-nord font-light">mark.gallego.gines@gmail.com</span>
+		</div>
+	</div>
+</footer>
+
+<style lang="scss">
+	.footer-section {
+		--reveal-extend: 50px;
+		position: relative;
+		padding-top: 150px;
+		padding-bottom: 24px;
+		overflow: clip;
+	}
+
+	// ── Zona superior ──
+	.footer-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		padding-bottom: 48px;
+	}
+
+	.footer-title {
+		font-size: clamp(3rem, 8vw, 5.5rem);
+		line-height: 1;
+		letter-spacing: -0.02em;
+	}
+
+	.footer-contact {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 4px;
+	}
+
+	.footer-contact-link {
+		text-decoration: none;
+	}
+
+	// ── Navegación ──
+	.footer-nav {
+		display: flex;
+		justify-content: space-between;
+		padding: 20px 0;
+		border-top: 1px solid var(--th-l-dark-blue);
+		border-bottom: 1px solid var(--th-l-dark-blue);
+	}
+
+	.footer-nav-link {
+		font-size: 14px;
+		color: var(--th-heading);
+		text-decoration: none;
+		text-transform: capitalize;
+	}
+
+	// ── Copyright ──
+	.footer-bottom {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-top: 24px;
+	}
+
+	.footer-copyright,
+	.footer-email,
+	.footer-contact-link {
+		font-size: 12px;
+		color: var(--th-text);
+	}
+
+	// ── Reveal layer ──
+	.footer-reveal {
+		background: var(--th-heading);
+		color: var(--th-bg);
+		padding: calc(150px + var(--reveal-extend)) calc(24px + var(--reveal-extend)) calc(24px + var(--reveal-extend));
+
+		.footer-title {
+			color: var(--th-bg);
+		}
+
+		.footer-nav {
+			border-color: var(--th-bg);
+		}
+
+		.footer-nav-link {
+			color: var(--th-bg);
+		}
+
+		.footer-copyright,
+		.footer-email {
+			color: var(--th-bg);
+		}
+
+		.footer-contact-link {
+			color: var(--th-bg);
+		}
+	}
+
+	// ── Dark mode ──
+	:global(.dark) {
+		.footer-nav {
+			border-color: var(--th-d-grey-light);
+		}
+
+		.footer-reveal {
+			background: var(--th-d-white);
+
+			.footer-title,
+			.footer-nav-link,
+			.footer-copyright,
+			.footer-email,
+			.footer-contact-link {
+				color: var(--th-d-carbon);
+			}
+
+			.footer-nav {
+				border-color: var(--th-d-carbon);
+			}
+		}
+	}
+
+	// ── Mobile ──
+	@media (max-width: 768px) {
+		.footer-top {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 24px;
+			padding-bottom: 32px;
+		}
+
+		.footer-nav {
+			flex-direction: column;
+			gap: 12px;
+			padding: 16px 0;
+		}
+
+		.footer-bottom {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 8px;
+		}
+	}
+
+</style>
+
+<script>
+	import '../scripts/circle-reveal.ts';
+</script>

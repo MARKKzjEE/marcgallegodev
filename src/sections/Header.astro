@@ -1,25 +1,25 @@
 ---
 const navItems = [
-	{ label: "Experiencia", href: "#experience" },
-	{ label: "Proyectos", href: "#projects" },
-	{ label: "Contacto", href: "#contact" }
+	{ label: "Experiencia", href: "/experiencia" },
+	{ label: "Proyectos", href: "/proyectos" },
+	{ label: "Contacto", href: "/contacto" }
 ];
 
 ---
 
-<header class="site-header absolute inset-x-0 top-0 z-40 bg-transparent" data-site-header>
-	<div class="hidden container mx-auto md:flex items-center justify-end h-[64px] gap-6 px-6">
-		<nav class="flex items-center gap-6 text-sm font-normal" aria-label="Navegación principal">
+<header class="site-header fixed inset-x-0 top-0 z-40 bg-transparent" data-site-header>
+	<div class="font-nord font-medium hidden container mx-auto md:flex items-center justify-end h-[64px] gap-6 px-6">
+		<nav class="flex items-center gap-6 text-sm" aria-label="Navegación principal">
 			{navItems.map((item) => (
 				<a href={item.href} class="nav-link">
 					{item.label}
 				</a>
 			))}
 		</nav>
-    <div class="h-[32px] w-[2px] bg-th-header-text"></div>
+    <div class="header-divider h-[32px] w-[1px] bg-th-header-text transition-all duration-300"></div>
     <div class="flex items-center gap-1 text-sm" aria-label="Selector de idioma">
       <button type="button" class="lang-btn lang-active" data-lang="es" aria-pressed="true">ES</button>
-      <span class="text-th-header-text/75 font-buttons">/</span>
+      <span class="text-th-header-text/75">/</span>
       <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
     </div>
     <div class="toggle-switch">
@@ -35,7 +35,6 @@ const navItems = [
   .nav-link {
     position: relative;
     padding-bottom: 0.25rem;
-    font-family: var(--font-buttons);
     color: var(--th-header-text);
 
     &::after {
@@ -56,7 +55,6 @@ const navItems = [
   }
 
   .lang-btn {
-    font-family: var(--font-buttons);
     color: var(--th-header-text);
     opacity: 0.75;
     transition: opacity 300ms;
@@ -75,7 +73,19 @@ const navItems = [
   }
 
   .site-header {
-    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, background-color 300ms ease, box-shadow 300ms ease;
+    &.is-past-hero {
+      --th-header-text: var(--th-heading);
+      --color-th-header-text: var(--th-heading);
+      --th-toggle-track: var(--th-heading);
+      --th-toggle-thumb: var(--th-bg);
+      background-color: var(--th-bg);
+      border-bottom: 1px solid var(--th-heading);
+
+      .header-divider {
+        height: 100%;
+      }
+    }
     &.is-hidden {
       opacity: 0;
       visibility: hidden;
@@ -126,3 +136,8 @@ const navItems = [
     }
   }
 </style>
+
+<script>
+	import { initHeaderScroll } from "../scripts/header-scroll";
+	initHeaderScroll();
+</script>
