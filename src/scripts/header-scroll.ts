@@ -6,7 +6,7 @@ export function initHeaderScroll(): void {
 	const hero = document.querySelector<HTMLElement>("#hero");
 	const contactHero = document.querySelector<HTMLElement>("[data-contact-hero]");
 	const heroPhoto = document.querySelector<HTMLElement>("[data-hero-photo]");
-	const heroCard = document.querySelector<HTMLElement>("[data-about-card]");
+	const heroCard = document.querySelector<HTMLElement>("[data-about-panel]");
 
 	// Pages without Hero or contact hero start with solid header
 	if (!hero && !contactHero) {

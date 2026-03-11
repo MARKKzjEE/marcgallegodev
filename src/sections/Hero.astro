@@ -1,7 +1,15 @@
 ---
-import AboutCard from '../components/AboutCard.astro';
-import { MousePointerClick } from 'lucide-astro';
+import '../styles/hero.scss';
+import { Image, getImage } from 'astro:assets';
+import profileLight from '../assets/hero-profile-light.png';
+import profileDark from '../assets/hero-profile-dark.png';
+
+const optimizedLight = await getImage({ src: profileLight, format: 'webp', quality: 92, width: 900 });
+const optimizedDark = await getImage({ src: profileDark, format: 'webp', quality: 92, width: 900 });
 ---
+
+<link rel="preload" href={optimizedLight.src} as="image" type="image/webp" />
+<link rel="preload" href={optimizedDark.src} as="image" type="image/webp" />
 
 <section id="hero" class="relative min-h-screen">
 
@@ -19,11 +27,19 @@ import { MousePointerClick } from 'lucide-astro';
 
 	<div class="absolute inset-0 bg-primary/5 dark:bg-primary/70"></div>
 	<div class="relative flex min-h-screen flex-col py-16">
-		<!-- Centro: AboutCard + feature cards -->
+		<!-- Centro: nombre + feature cards -->
 		<div class="flex-1 flex flex-col justify-center container mx-auto px-10">
-			<AboutCard />
 
-			<!-- 4 feature cards -->
+			<!-- Nombre y rol -->
+			<div class="hero-collapsible card-glass p-8 flex flex-col justify-center" data-hero-collapsible>
+				<h1 class="font-nord font-bold text-white text-[125px] leading-[0.9] uppercase flex flex-col items-center">
+					<span>Marc</span>
+					<span>Gallego</span>
+				</h1>
+				<p class="font-monoblock font-normal text-white text-[20px] tracking-[0.3em] flex flex-col items-center mt-3">Full Stack Software Engineer</p>
+			</div>
+
+			<!-- Feature cards -->
 			<div class="hero-collapsible grid grid-cols-4 gap-6 mt-6" data-hero-collapsible>
 				<div class="card-glass flex flex-col justify-center items-center py-10 px-4">
 					<span class="font-nord font-black text-white text-3xl uppercase">+5</span>
@@ -33,18 +49,34 @@ import { MousePointerClick } from 'lucide-astro';
 					<span class="font-nord font-black text-white text-3xl uppercase">+100</span>
 					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">proyectos</span>
 				</div>
-				<div class="card-glass flex flex-col justify-center items-center py-10 px-4">
-					<span class="font-nord font-black text-white text-3xl uppercase">+20</span>
-					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">clientes satisfechos</span>
+				<div class="card-glass flex justify-center items-center gap-6 py-10 px-4">
+					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white cursor-pointer">
+						<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+						<rect width="4" height="12" x="2" y="9"/>
+						<circle cx="4" cy="4" r="2"/>
+					</svg>
+					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white cursor-pointer">
+						<path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>
+					</svg>
+					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white cursor-pointer">
+						<path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/>
+						<rect x="2" y="4" width="20" height="16" rx="2"/>
+					</svg>
 				</div>
 				<div class="card-glass hero-cta flex justify-center items-center gap-3 py-10 px-4 cursor-pointer" data-about-trigger>
-					<span class="hero-cta__text font-nord font-black text-white text-xl uppercase">Conóceme</span>
-					<MousePointerClick size={32} stroke-width={2.5} class="text-white pb-1" />
+					<span class="font-nord font-black text-white text-xl uppercase">Conóceme</span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white pb-1">
+						<path d="M14 4.1 12 6" />
+						<path d="m5.1 8-2.9-.8" />
+						<path d="m6 12-1.9 2" />
+						<path d="M7.2 2.2 8 5.1" />
+						<path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z" />
+					</svg>
 				</div>
 			</div>
 		</div>
 
-		<!-- Bottom elements: pegados abajo -->
+		<!-- Bottom elements -->
 		<div class="hero-collapsible container mx-auto px-10 flex justify-between" data-hero-collapsible>
 			<div class="card-glass px-6 py-3 flex items-center gap-3">
 				<span class="status-dot relative flex h-2.5 w-2.5">
@@ -54,41 +86,88 @@ import { MousePointerClick } from 'lucide-astro';
 				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">Disponible para proyectos</span>
 			</div>
 			<div class="card-glass px-6 py-3">
-				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">Ingeniero del software</span>
+				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">Creado en Barcelona</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- About panel (modal) -->
+	<div class="about-backdrop fixed inset-0 z-60 opacity-0 pointer-events-none" data-about-backdrop aria-hidden="true"></div>
+
+	<div class="about-panel" data-about-panel tabindex="-1" role="dialog" aria-modal="true" aria-label="Sobre mi" aria-expanded="false">
+		<div class="about-expanded flex-1 flex-col min-h-0" data-about-expanded>
+			<!-- Zona superior: contenido + columna derecha -->
+			<div class="flex flex-1 min-h-0">
+				<!-- Contenido principal (izquierda) -->
+				<div class="flex flex-1 min-h-0 p-8 gap-8">
+					<!-- Izquierda: textos -->
+					<div class="flex flex-3 flex-col min-h-0">
+						<div class="flex-1 flex gap-6 p-6">
+							<div class="flex-1 flex items-start">
+								<p class="font-cottor font-light text-secondary leading-7 text-justify">
+									Me apasiona la tecnología y su evolución constante. Disfruto aprendiendo y probando nuevas herramientas, siempre con criterio y pensando en qué aporta realmente valor al proyecto.
+									<br><br>Soy exigente con mi trabajo y cuido los detalles. No busco solo que algo funcione, sino que esté bien pensado y bien construido.
+									<br><br>Trabajo con transparencia porque creo que es la base de cualquier buena colaboración: claridad en lo que se hace, por qué se hace y hacia dónde vamos.
+								</p>
+							</div>
+							<div class="font-cottor font-light text-secondary flex-1 flex items-end">
+								<p class="leading-7 text-justify">
+									Más allá del desarrollo, podrás ver una clara referencia al mar, mi equilibrio. Es el lugar donde desconecto, ordeno ideas y vuelvo con claridad.
+									<br><br>También me mueve la moda y la creatividad contemporánea: me inspira cómo el arte y la identidad se mezclan y se expresan sin límites. Esa forma de entender la creatividad también define mi trabajo: no solo construyo soluciones, busco que tengan carácter.</p>
+							</div>
+						</div>
+					</div>
+					<!-- Derecha: imagen -->
+					<div class="relative flex-2 rounded-lg overflow-hidden min-h-0 m-2">
+						<Image src={profileDark} alt="Marc Gallego" widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={92} class="h-full w-full object-cover object-top dark:hidden" />
+						<Image src={profileLight} alt="Marc Gallego" widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={92} class="hidden h-full w-full object-cover object-top dark:block" />
+					</div>
+				</div>
+				<!-- Columna derecha con bordes -->
+				<div class="flex flex-col border-l border-secondary">
+					<button type="button" class="about-close relative w-10 h-10 border-b border-secondary cursor-pointer opacity-0 pointer-events-none transition-[opacity,background-color] duration-200" data-about-close aria-label="Cerrar sobre mi">
+						<span class="about-close-x absolute top-1/2 left-1/2 w-4 h-0.5 bg-secondary" aria-hidden="true"></span>
+						<span class="about-close-y absolute top-1/2 left-1/2 w-4 h-0.5 bg-secondary" aria-hidden="true"></span>
+					</button>
+					<div class="flex flex-1 items-center justify-center">
+						<p class="font-nord font-light text-secondary text-[10px] uppercase tracking-[0.2em] [writing-mode:vertical-rl] rotate-180">Diseño creativo & desarrollo digital desde 2018 <span class="inline-block rotate-90">™</span></p>
+					</div>
+				</div>
+			</div>
+			<!-- SOBRE MI: ancho completo abajo -->
+			<div class="flex border-t border-secondary py-4">
+				<h3 class="font-nord font-black text-secondary mx-4 text-9xl tracking-tighter" aria-hidden="true">SOBRE MI</h3>
 			</div>
 		</div>
 	</div>
 </section>
 
 <style lang="scss">
-	.hero-cta__text {
-		position: relative;
-		padding-bottom: 0.25rem;
+	.hero-icon {
+		transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 
-		&::after {
-			content: '';
-			position: absolute;
-			inset-inline: 0;
-			bottom: -0.25rem;
-			height: 2px;
-			background: white;
-			transform: scaleX(0);
-			transform-origin: left;
-			transition: transform 300ms;
+		&:hover {
+			transform: scale(1.4);
 		}
 	}
 
-	.hero-cta:hover .hero-cta__text::after {
-		transform: scaleX(1);
+	.hero-cta:hover .hero-icon {
+		transform: scale(1.4);
 	}
 
 	.hero-collapsible {
-		transition: opacity 150ms ease, visibility 150ms ease;
+		transition: opacity 250ms ease, visibility 0ms linear;
 
 		&.is-hidden {
 			opacity: 0;
 			visibility: hidden;
 			pointer-events: none;
+			transition: opacity 0ms, visibility 0ms;
 		}
 	}
 </style>
+
+<script>
+	import { initHero } from "../scripts/hero";
+	initHero();
+</script>

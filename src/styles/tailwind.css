@@ -31,14 +31,7 @@
 	font-display: swap;
 }
 
-/* NORD FONT — Normal */
-@font-face {
-	font-family: "NORD";
-	src: url("/fonts/NORD/NORD-Thin.woff2") format("woff2");
-	font-weight: 100;
-	font-style: normal;
-	font-display: swap;
-}
+/* NORD FONT — Only used weights: 300, 400, 500, 700, 900 */
 @font-face {
 	font-family: "NORD";
 	src: url("/fonts/NORD/NORD-Light.woff2") format("woff2");
@@ -50,13 +43,6 @@
 	font-family: "NORD";
 	src: url("/fonts/NORD/NORD-Regular.woff2") format("woff2");
 	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "NORD";
-	src: url("/fonts/NORD/NORD-Book.woff2") format("woff2");
-	font-weight: 450;
 	font-style: normal;
 	font-display: swap;
 }
@@ -81,72 +67,8 @@
 	font-style: normal;
 	font-display: swap;
 }
-/* NORD FONT — Italic */
-@font-face {
-	font-family: "NORD";
-	src: url("/fonts/NORD/NORD-ThinItalic.woff2") format("woff2");
-	font-weight: 100;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "NORD";
-	src: url("/fonts/NORD/NORD-LightItalic.woff2") format("woff2");
-	font-weight: 300;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "NORD";
-	src: url("/fonts/NORD/NORD-Italic.woff2") format("woff2");
-	font-weight: 400;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "NORD";
-	src: url("/fonts/NORD/NORD-BookItalic.woff2") format("woff2");
-	font-weight: 450;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "NORD";
-	src: url("/fonts/NORD/NORD-MediumItalic.woff2") format("woff2");
-	font-weight: 500;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "NORD";
-	src: url("/fonts/NORD/NORD-BoldItalic.woff2") format("woff2");
-	font-weight: 700;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "NORD";
-	src: url("/fonts/NORD/NORD-BlackItalic.woff2") format("woff2");
-	font-weight: 900;
-	font-style: italic;
-	font-display: swap;
-}
 
-/* COTTORWAYPRO FONT — Normal */
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayPro-Thin.woff2") format("woff2");
-	font-weight: 100;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayPro-ExtraLight.woff2") format("woff2");
-	font-weight: 200;
-	font-style: normal;
-	font-display: swap;
-}
+/* COTTORWAYPRO FONT — Only used weights: 300, 400, 500 */
 @font-face {
 	font-family: "CottorwayPro";
 	src: url("/fonts/CottorwayPro/CottorwayPro-Light.woff2") format("woff2");
@@ -168,161 +90,12 @@
 	font-style: normal;
 	font-display: swap;
 }
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayPro-SemiBold.woff2") format("woff2");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayPro-Bold.woff2") format("woff2");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayPro-ExtraBold.woff2") format("woff2");
-	font-weight: 800;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayPro-Black.woff2") format("woff2");
-	font-weight: 900;
-	font-style: normal;
-	font-display: swap;
-}
 
-/* COTTORWAYPRO FONT — Italic */
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayItalics-Thin.woff2") format("woff2");
-	font-weight: 100;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayItalics-ExtraLight.woff2") format("woff2");
-	font-weight: 200;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayItalics-Light.woff2") format("woff2");
-	font-weight: 300;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayItalics-Regular.woff2") format("woff2");
-	font-weight: 400;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayItalics-Medium.woff2") format("woff2");
-	font-weight: 500;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayItalics-SemiBold.woff2") format("woff2");
-	font-weight: 600;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayItalics-Bold.woff2") format("woff2");
-	font-weight: 700;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayItalics-ExtraBold.woff2") format("woff2");
-	font-weight: 800;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CottorwayPro";
-	src: url("/fonts/CottorwayPro/CottorwayItalics-Black.woff2") format("woff2");
-	font-weight: 900;
-	font-style: italic;
-	font-display: swap;
-}
-
-/* MONOBLOCK FONT */
-@font-face {
-	font-family: "Monoblock";
-	src: url("/fonts/Monoblock/Monoblock-Thin.woff2") format("woff2");
-	font-weight: 100;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Monoblock";
-	src: url("/fonts/Monoblock/Monoblock-ExtraLight.woff2") format("woff2");
-	font-weight: 200;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Monoblock";
-	src: url("/fonts/Monoblock/Monoblock-Light.woff2") format("woff2");
-	font-weight: 300;
-	font-style: normal;
-	font-display: swap;
-}
+/* MONOBLOCK FONT — Only used weight: 400 */
 @font-face {
 	font-family: "Monoblock";
 	src: url("/fonts/Monoblock/Monoblock-Regular.woff2") format("woff2");
 	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Monoblock";
-	src: url("/fonts/Monoblock/Monoblock-Medium.woff2") format("woff2");
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Monoblock";
-	src: url("/fonts/Monoblock/Monoblock-SemiBold.woff2") format("woff2");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Monoblock";
-	src: url("/fonts/Monoblock/Monoblock-Bold.woff2") format("woff2");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Monoblock";
-	src: url("/fonts/Monoblock/Monoblock-ExtraBold.woff2") format("woff2");
-	font-weight: 800;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Monoblock";
-	src: url("/fonts/Monoblock/Monoblock-Black.woff2") format("woff2");
-	font-weight: 900;
 	font-style: normal;
 	font-display: swap;
 }
@@ -340,9 +113,10 @@
 }
 
 :root {
-	--primary: #ebebeb;
+	--primary: #ffffff;
 	--secondary: #1D1D1F;
 	--terciary: #f5f5f7;
+	--quaternary: #ebebeb;
 
 }
 
@@ -350,6 +124,7 @@ html.dark {
 	--primary: #000000;
 	--secondary: #FFFFFF;
 	--terciary: #0a0a0a;
+	--quaternary: #1d1d1d;
 }
 
 /* Prevenir scroll lateral */

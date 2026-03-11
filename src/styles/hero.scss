@@ -1,0 +1,109 @@
+// ─── Card glassmorphism (shared across hero, header, etc.) ───
+
+.card-glass {
+	background-color: rgba(0, 0, 0, 0.10);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(4px);
+	transition: background-color 320ms ease;
+	border-radius: 8px;
+	border: 1px solid color-mix(in srgb, var(--primary) 5%, transparent);
+
+	.dark & {
+		border-color: color-mix(in srgb, var(--primary) 30%, transparent);
+	}
+}
+
+// ─── About panel ───
+
+.about-panel {
+	position: fixed;
+	top: var(--about-gap, 24px);
+	bottom: var(--about-gap, 24px);
+	left: var(--about-gap, 24px);
+	right: var(--about-gap, 24px);
+	max-width: 1400px;
+	max-height: 900px;
+	margin: auto;
+	z-index: 70;
+	overflow: hidden;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	background-color: rgba(0, 0, 0, 0.10);
+	outline: none;
+	visibility: hidden;
+	pointer-events: none;
+	transition:
+		transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
+		border-radius 550ms cubic-bezier(0.22, 1, 0.36, 1),
+		background-color 500ms cubic-bezier(0.22, 1, 0.36, 1);
+
+	&.no-transition {
+		transition: none !important;
+	}
+
+	&.is-expanded {
+		visibility: visible;
+		pointer-events: auto;
+
+		.about-close {
+			opacity: 1;
+			pointer-events: auto;
+		}
+	}
+
+	// Morph: starts as card glass → transitions to solid panel bg
+	&.is-morphing {
+		background-color: var(--terciary);
+	}
+}
+
+// ─── Backdrop ───
+
+.about-backdrop {
+	transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1);
+	background-color: rgba(0, 0, 0, 0.35);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+
+	&.is-visible {
+		opacity: 1;
+		pointer-events: auto;
+	}
+}
+
+// ─── Close button ───
+
+.about-close-x {
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.about-close-y {
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+// ─── Expanded content ───
+
+.about-expanded {
+	display: flex;
+	visibility: hidden;
+	opacity: 0;
+	transform: translateY(6px);
+	pointer-events: none;
+	transition:
+		opacity 280ms ease-out,
+		transform 280ms ease-out,
+		visibility 0ms linear 280ms;
+
+	&.is-visible {
+		visibility: visible;
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateY(0);
+		transition:
+			opacity 280ms ease-out,
+			transform 280ms ease-out,
+			visibility 0ms linear 0ms;
+	}
+}
