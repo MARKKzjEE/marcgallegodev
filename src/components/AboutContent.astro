@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import profileLight from '../assets/hero-profile-light.png';
+import profileDark from '../assets/hero-profile-dark.png';
+
+---
+
+<!-- Zona superior: contenido + columna derecha -->
+<div class="flex flex-1 min-h-0">
+	<!-- Contenido principal (izquierda) -->
+	<div class="flex flex-1 min-h-0 p-8 gap-8 max-w-350 mx-auto">
+		<!-- Izquierda: textos -->
+		<div class="flex flex-3 flex-col min-h-0">
+			<div class="flex-1 flex gap-6 p-6">
+				<div class="flex-1 flex items-start">
+					<p class="font-cottor font-light text-secondary leading-7 text-justify">
+						Me apasiona la tecnología y su evolución constante. Disfruto aprendiendo y probando nuevas herramientas, siempre con criterio y pensando en qué aporta realmente valor al proyecto.
+						<br><br>Soy exigente con mi trabajo y cuido los detalles. No busco solo que algo funcione, sino que esté bien pensado y bien construido.
+						<br><br>Trabajo con transparencia porque creo que es la base de cualquier buena colaboración: claridad en lo que se hace, por qué se hace y hacia dónde vamos.
+					</p>
+				</div>
+				<div class="font-cottor font-light text-secondary flex-1 flex items-end">
+					<p class="leading-7 text-justify">
+						Más allá del desarrollo, podrás ver una clara referencia al mar, mi equilibrio. Es el lugar donde desconecto, ordeno ideas y vuelvo con claridad.
+						<br><br>También me mueve la moda y la creatividad contemporánea: me inspira cómo el arte y la identidad se mezclan y se expresan sin límites. Esa forma de entender la creatividad también define mi trabajo: no solo construyo soluciones, busco que tengan carácter.
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- Derecha: imagen -->
+		<div data-parallax-wrap class="relative flex-2 rounded-lg overflow-hidden min-h-0 mt-2 mx-2">
+			<Image src={profileDark} alt="Marc Gallego" widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={92} class="about-profile-img h-full w-full object-cover object-center dark:hidden" />
+			<Image src={profileLight} alt="Marc Gallego" widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={92} class="about-profile-img hidden h-full w-full object-cover object-center dark:block" />
+		</div>
+	</div>
+	<!-- Columna lateral: tagline vertical + slot para acciones extra (ej. botón close) -->
+	<div class="flex flex-col border-l border-secondary w-10 shrink-0">
+		<slot name="side-top" />
+		<div class="flex flex-1 items-center justify-center overflow-hidden">
+			<p class="font-nord font-light text-secondary text-[10px] uppercase tracking-[0.2em] [writing-mode:vertical-rl] rotate-180">Diseño creativo & desarrollo digital desde 2018 <span class="inline-block rotate-90">™</span></p>
+		</div>
+	</div>
+</div>
+<!-- SOBRE MI: ancho completo abajo -->
+<div class="flex border-t border-secondary py-4">
+	<h3 class="font-nord font-black text-secondary mx-4 text-[125px] tracking-tighter leading-none" aria-hidden="true">SOBRE MI</h3>
+</div>
+
+

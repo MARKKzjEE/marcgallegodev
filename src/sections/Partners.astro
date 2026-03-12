@@ -3,13 +3,11 @@ import { Image } from 'astro:assets';
 import dokostudio from '../assets/dokostudio.webp';
 ---
 
-<section id="partners" class="py-40">
+<section id="partners" class="py-24">
 	<div class="container mx-auto px-10">
 		<div class="flex flex-col gap-8">
 
-			<div class="title-clip">
-			<h3 class="font-nord font-bold text-secondary uppercase partners-title">Partners</h3>
-		</div>
+			<h3 class="font-nord font-bold text-secondary uppercase">Partners</h3>
 
 			<div class="partners-card">
                 <div class="card-image">
@@ -33,24 +31,8 @@ import dokostudio from '../assets/dokostudio.webp';
 <style lang="scss">
     #partners {
         h3 {
-            font-size: clamp(52px, 7vw, 96px);
+            font-size: clamp(44px, 6vw, 84px);
             line-height: 1;
-        }
-    }
-
-    .title-clip {
-        overflow: hidden;
-        padding-bottom: 0.15em;
-    }
-
-    .partners-title {
-        display: block;
-        transform: translateY(110%);
-        transition: transform 0.5s cubic-bezier(0.34, 2.1, 0.64, 1);
-        margin-bottom: 0;
-
-        &.is-visible {
-            transform: translateY(0);
         }
     }
 
@@ -96,12 +78,3 @@ import dokostudio from '../assets/dokostudio.webp';
     }
 </style>
 
-<script>
-	const clip = document.querySelector<HTMLElement>('.title-clip');
-	const title = document.querySelector<HTMLElement>('.partners-title');
-	if (clip && title) {
-		new IntersectionObserver(([entry]) => {
-			title.classList.toggle('is-visible', entry.isIntersecting);
-		}, { threshold: 0, rootMargin: '0px 0px -10% 0px' }).observe(clip);
-	}
-</script>

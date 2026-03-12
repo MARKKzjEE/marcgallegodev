@@ -3,7 +3,7 @@ const text = "Mi camino comenzó con una pasión por construir soluciones digita
 const words = text.split(' ');
 ---
 
-<section id="what-we-do" class="what-we-do py-40">
+<section id="what-we-do" class="what-we-do py-24">
 	<div class="px-10">
 		<div class="grid md:grid-cols-[320px_1fr] gap-8 md:gap-16 items-start">
 
@@ -55,8 +55,8 @@ const words = text.split(' ');
 			const viewH = window.innerHeight;
 
 			// Progress: 0 when section enters bottom, 1 when section is centered
-			const start = viewH * 0.85;
-			const end = viewH * 0.4;
+			const start = viewH * 1.0;
+			const end = viewH * 0;
 			const progress = Math.min(Math.max((start - rect.top) / (start - end), 0), 1);
 
 			// Map progress to word index
