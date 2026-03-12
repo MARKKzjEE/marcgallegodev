@@ -3,12 +3,12 @@ const text = "Mi camino comenzó con una pasión por construir soluciones digita
 const words = text.split(' ');
 ---
 
-<section id="what-we-do" class="what-we-do bg-primary py-40 border-t border-secondary">
-	<div class="container mx-auto px-6">
-		<div class="grid md:grid-cols-[200px_1fr] gap-8 md:gap-16 items-start">
+<section id="what-we-do" class="what-we-do py-40">
+	<div class="px-10">
+		<div class="grid md:grid-cols-[320px_1fr] gap-8 md:gap-16 items-start">
 
 			<!-- Label izquierda -->
-			<span class="what-we-do__label font-nord text-secondary text-sm uppercase tracking-widest">Qué es lo que hago</span>
+			<h3 class="what-we-do__label font-nord text-secondary uppercase tracking-widest">Qué es lo que hago</h3>
 
 			<!-- Texto con reveal por palabra -->
 			<div class="what-we-do__content">
@@ -17,7 +17,7 @@ const words = text.split(' ');
 						<span class="reveal-word" style={`--word-index: ${i}`}>{word} </span>
 					))}
 				</p>
-				</div>
+			</div>
 
 		</div>
 	</div>
@@ -26,6 +26,10 @@ const words = text.split(' ');
 <style lang="scss">
 	.what-we-do__text {
 		font-size: clamp(28px, 4vw, 52px);
+	}
+
+	.what-we-do__label {
+		font-size: clamp(12px, 1.2vw, 18px);
 	}
 
 	.reveal-word {

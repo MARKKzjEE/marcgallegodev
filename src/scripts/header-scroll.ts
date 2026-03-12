@@ -6,7 +6,7 @@ export function initHeaderScroll(): void {
 	const hero = document.querySelector<HTMLElement>("#hero");
 	const contactHero = document.querySelector<HTMLElement>("[data-contact-hero]");
 	const heroPhoto = document.querySelector<HTMLElement>("[data-hero-photo]");
-	const heroCard = document.querySelector<HTMLElement>("[data-about-panel]");
+	const heroContent = document.querySelector<HTMLElement>("[data-hero-content]");
 
 	// Pages without Hero or contact hero start with solid header
 	if (!hero && !contactHero) {
@@ -18,8 +18,9 @@ export function initHeaderScroll(): void {
 	const heroZone = hero || contactHero!;
 
 	const HEADER_HEIGHT = 64;
-	const FADE_BUFFER = 40; // content fully hidden this far below header
-	const FADE_ZONE = 150;
+	const FADE_BUFFER = 20;
+	const FADE_ZONE = 400;
+	const FADE_START = 120; // px scrolled before fade begins
 	let ticking = false;
 
 	function applyScrollMask(el: HTMLElement, fadeZone: number) {
@@ -57,9 +58,9 @@ export function initHeaderScroll(): void {
 		header!.classList.toggle("is-past-hero", scrollY >= zoneHeight - HEADER_HEIGHT);
 
 		// Fade zone grows with scroll: 0 at rest → FADE_ZONE max
-		const fadeZone = Math.min(scrollY, FADE_ZONE);
+		const fadeZone = Math.min(Math.max(scrollY - FADE_START, 0), FADE_ZONE);
 		if (heroPhoto) applyScrollMask(heroPhoto, fadeZone);
-		if (heroCard) applyScrollMask(heroCard, fadeZone);
+		if (heroContent) applyScrollMask(heroContent, fadeZone);
 
 		ticking = false;
 	}

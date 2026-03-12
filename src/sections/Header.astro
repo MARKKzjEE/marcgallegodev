@@ -7,9 +7,8 @@ const navItems = [
 
 ---
 
-<header class="site-header fixed inset-x-0 top-0 z-40 mt-4" data-site-header>
-	<div class="container mx-auto px-10" data-header-wrap>
-	<div class="card-glass font-nord font-medium hidden md:flex items-center justify-end h-14 gap-6 px-8">
+<header class="site-header fixed inset-x-0 top-0 z-40" data-site-header>
+	<div class="px-10 font-nord font-medium hidden md:flex items-center justify-end h-14 gap-6">
 		<nav class="flex items-center gap-6 text-sm" aria-label="Navegación principal">
 			{navItems.map((item) => (
 				<a href={item.href} class="nav-link">
@@ -17,10 +16,10 @@ const navItems = [
 				</a>
 			))}
 		</nav>
-    <div class="header-divider h-[32px] w-[1px] bg-[var(--header-text)] transition-all duration-300"></div>
+    <div class="header-divider h-[32px] w-[1px] transition-all duration-300"></div>
     <div class="flex items-center gap-1 text-sm" aria-label="Selector de idioma">
       <button type="button" class="lang-btn lang-active" data-lang="es" aria-pressed="true">ES</button>
-      <span class="text-[var(--header-text)] opacity-75">/</span>
+      <span class="divider-slash opacity-75">/</span>
       <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
     </div>
     <div class="toggle-switch">
@@ -30,28 +29,67 @@ const navItems = [
         </>
     </div>
 	</div>
-	</div>
 </header>
 
 <style lang="scss">
   .site-header {
-    --header-text: #ffffff;
-    --toggle-track: #ffffff;
-    --toggle-thumb: #1D1D1F;
+    transition: background-color 300ms ease, border-color 300ms ease;
+    border-bottom: 1px solid transparent;
 
-    [data-header-wrap] {
-      transition: max-width 300ms ease, padding 300ms ease;
+    // ─── Sobre el hero: transparente, texto blanco ───
+    .nav-link { color: #fff; }
+    .lang-btn { color: #fff; }
+    .divider-slash { color: #fff; }
+    .header-divider { background-color: #fff; }
+    .switch-label {
+      background-color: #fff;
+      border-color: #fff;
+      .slider::before {
+        box-shadow: inset 8px -4px 0px 0px #1D1D1F;
+        background-color: #fff;
+      }
+      .checkbox:checked ~ .slider::before {
+        box-shadow: none;
+        background-color: #1D1D1F;
+      }
     }
 
-    .card-glass {
-      transition: background-color 300ms ease, backdrop-filter 300ms ease, border-color 300ms ease, border-radius 300ms ease, box-shadow 300ms ease;
+    // ─── Pasado el hero: fondo sólido, tokens semánticos ───
+    &.is-past-hero {
+      background-color: var(--primary);
+      border-bottom-color: var(--secondary);
+
+      .nav-link { color: var(--secondary); }
+      .lang-btn { color: var(--secondary); }
+      .divider-slash { color: var(--secondary); }
+      .header-divider { background-color: var(--secondary); height: 100%; }
+      .switch-label {
+        background-color: var(--secondary);
+        border-color: var(--secondary);
+        .slider::before {
+          box-shadow: inset 8px -4px 0px 0px var(--primary);
+          background-color: var(--secondary);
+        }
+        .checkbox:checked ~ .slider::before {
+          box-shadow: none;
+          background-color: var(--primary);
+        }
+      }
+    }
+
+    &.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
     }
   }
 
   .nav-link {
     position: relative;
     padding-bottom: 0.25rem;
-    color: var(--header-text);
+    transition: color 300ms ease;
 
     &::after {
       content: '';
@@ -59,109 +97,67 @@ const navItems = [
       inset-inline: 0;
       bottom: -0.25rem;
       height: 2px;
-      background: var(--header-text);
+      background: currentColor;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 300ms;
     }
 
-    &:hover::after {
-      transform: scaleX(1);
-    }
+    &:hover::after { transform: scaleX(1); }
   }
 
   .lang-btn {
-    color: var(--header-text);
     opacity: 0.75;
-    transition: opacity 300ms;
+    transition: opacity 300ms, color 300ms ease;
     cursor: pointer;
 
-    &:hover {
-      opacity: 1;
-    }
+    &:hover { opacity: 1; }
 
     &.lang-active {
       opacity: 1;
-
       &::before { content: '['; margin-right: 2px; }
       &::after { content: ']'; margin-left: 2px; }
     }
   }
 
-  .site-header {
-    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, padding 300ms ease, margin 300ms ease;
-    &.is-past-hero {
-      --header-text: var(--secondary);
-      --toggle-track: var(--secondary);
-      --toggle-thumb: var(--primary);
-      margin-top: 0;
+  .toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 28px;
+  }
 
-      [data-header-wrap] {
-        max-width: 100%;
-        padding-inline: 0;
-      }
+  .switch-label {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 300ms ease, border-color 300ms ease;
 
-      .card-glass {
-        background-color: var(--primary);
-        border-color: transparent;
-        border-bottom-color: var(--secondary);
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        box-shadow: none;
-        border-radius: 0;
-      }
+    .checkbox { position: absolute; display: none; }
 
-      .header-divider {
-        height: 100%;
-      }
-    }
-    &.is-hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transform: translateY(-8px);
-    }
-    .toggle-switch {
-      position: relative;
-      width: 50px;
-      height: 28px;
-    }
-    .switch-label {
+    .slider {
       position: absolute;
       width: 100%;
       height: 100%;
-      background-color: var(--toggle-track);
-      border: 2px solid var(--toggle-track);
       border-radius: 16px;
-      cursor: pointer;
-      .checkbox {
+      transition: 0.3s;
+
+      &::before {
+        content: "";
         position: absolute;
-        display: none;
-      }
-      .slider {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 16px;
+        top: 4px;
+        left: 4px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
         transition: 0.3s;
-        &::before {
-          content: "";
-          position: absolute;
-          top: 4px;
-          left: 4px;
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          box-shadow: inset 8px -4px 0px 0px var(--toggle-thumb);
-          background-color: var(--toggle-track);
-          transition: 0.3s;
-        }
       }
-      .checkbox:checked ~ .slider::before {
-        transform: translateX(22px);
-        box-shadow: none;
-        background-color: var(--toggle-thumb);
-      }
+    }
+
+    .checkbox:checked ~ .slider::before {
+      transform: translateX(22px);
     }
   }
 </style>

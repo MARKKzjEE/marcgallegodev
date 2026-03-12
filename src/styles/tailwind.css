@@ -110,6 +110,7 @@
 	--color-primary: var(--primary);
 	--color-secondary: var(--secondary);
 	--color-tertiary: var(--terciary);
+	--color-quaternary: var(--quaternary);
 }
 
 :root {

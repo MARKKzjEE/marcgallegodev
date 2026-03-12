@@ -26,17 +26,21 @@ const optimizedDark = await getImage({ src: profileDark, format: 'webp', quality
 	></video>
 
 	<div class="absolute inset-0 bg-primary/5 dark:bg-primary/70"></div>
-	<div class="relative flex min-h-screen flex-col py-16">
+	<div class="relative flex min-h-screen flex-col py-16" data-hero-content>
 		<!-- Centro: nombre + feature cards -->
 		<div class="flex-1 flex flex-col justify-center container mx-auto px-10">
 
 			<!-- Nombre y rol -->
 			<div class="hero-collapsible card-glass p-8 flex flex-col justify-center" data-hero-collapsible>
-				<h1 class="font-nord font-bold text-white text-[125px] leading-[0.9] uppercase flex flex-col items-center">
-					<span>Marc</span>
-					<span>Gallego</span>
+				<h1 class="font-nord font-black tracking-tighter text-white text-[125px] leading-none uppercase flex flex-col items-center">
+					<div class="hero-name-clip">
+						<span class="hero-name-word" style="--delay: 0ms">Marc</span>
+					</div>
+					<div class="hero-name-clip">
+						<span class="hero-name-word" style="--delay: 120ms">Gallego</span>
+					</div>
 				</h1>
-				<p class="font-monoblock font-normal text-white text-[20px] tracking-[0.3em] flex flex-col items-center mt-3">Full Stack Software Engineer</p>
+				<h2 class="font-monoblock font-normal text-white text-[20px] tracking-[0.3em] flex flex-col items-center mt-3">Full Stack Software Engineer</h2>
 			</div>
 
 			<!-- Feature cards -->
@@ -77,16 +81,16 @@ const optimizedDark = await getImage({ src: profileDark, format: 'webp', quality
 		</div>
 
 		<!-- Bottom elements -->
-		<div class="hero-collapsible container mx-auto px-10 flex justify-between" data-hero-collapsible>
-			<div class="card-glass px-6 py-3 flex items-center gap-3">
+		<div class="hero-collapsible px-10 flex justify-between" data-hero-collapsible>
+			<div class="flex items-center gap-3">
 				<span class="status-dot relative flex h-2.5 w-2.5">
 					<span class="absolute inline-flex h-full w-full animate-ping animate-duration-[2s] rounded-full bg-green-500 opacity-75"></span>
 					<span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
 				</span>
 				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">Disponible para proyectos</span>
 			</div>
-			<div class="card-glass px-6 py-3">
-				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">Creado en Barcelona</span>
+			<div class="">
+				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">Graduado en Ingeniería informática</span>
 			</div>
 		</div>
 	</div>
@@ -136,13 +140,31 @@ const optimizedDark = await getImage({ src: profileDark, format: 'webp', quality
 			</div>
 			<!-- SOBRE MI: ancho completo abajo -->
 			<div class="flex border-t border-secondary py-4">
-				<h3 class="font-nord font-black text-secondary mx-4 text-9xl tracking-tighter" aria-hidden="true">SOBRE MI</h3>
+				<h3 class="font-nord font-black text-secondary mx-4 text-[125px] tracking-tighter leading-none" aria-hidden="true">SOBRE MI</h3>
 			</div>
 		</div>
 	</div>
 </section>
 
 <style lang="scss">
+	.hero-name-clip {
+		overflow: hidden;
+		line-height: 0.9;
+	}
+
+	.hero-name-word {
+		display: block;
+		transform: translateY(110%);
+		animation: hero-name-in 0.5s cubic-bezier(0.34, 2.1, 0.64, 1) forwards;
+		animation-delay: var(--delay, 0ms);
+	}
+
+	@keyframes hero-name-in {
+		to {
+			transform: translateY(0);
+		}
+	}
+
 	.hero-icon {
 		transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 
