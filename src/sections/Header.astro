@@ -5,11 +5,20 @@ const navItems = [
 	{ label: "Contacto", href: "/contacto" }
 ];
 
+const isHome = Astro.url.pathname === '/';
 ---
 
 <header class="site-header fixed inset-x-0 top-0 z-40" data-site-header>
-	<div class="px-10 font-nord font-medium hidden md:flex items-center justify-end h-14 gap-6">
-		<nav class="flex items-center gap-6 text-sm" aria-label="Navegación principal">
+	<div class="px-10 font-nord font-medium hidden md:flex items-center justify-between h-14">
+		<!-- Izquierda: Inicio (solo en páginas internas) -->
+		<div class="text-sm">
+			{!isHome && (
+				<a href="/" class="nav-link">Inicio</a>
+			)}
+		</div>
+		<!-- Derecha: nav + lang + toggle -->
+		<div class="flex items-center gap-6 text-sm">
+		<nav class="flex items-center gap-6" aria-label="Navegación principal">
 			{navItems.map((item) => (
 				<a href={item.href} class="nav-link">
 					{item.label}
@@ -28,6 +37,7 @@ const navItems = [
           <span class="slider"></span>
         </>
     </div>
+		</div>
 	</div>
 </header>
 

@@ -6,8 +6,8 @@ import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 ---
 
 <section id="about" class="about-section border-t border-secondary">
-	<Image src={gradientBg} alt="" class="about-section__bg dark:opacity-0 transition-opacity duration-500" quality={90} aria-hidden="true" />
-	<Image src={gradientBgDark} alt="" class="about-section__bg opacity-0 dark:opacity-100 transition-opacity duration-500" quality={90} aria-hidden="true" />
+	<Image src={gradientBg} alt="" class="about-section__bg dark:opacity-0 transition-opacity duration-500" quality={80} loading="lazy" aria-hidden="true" />
+	<Image src={gradientBgDark} alt="" class="about-section__bg opacity-0 dark:opacity-100 transition-opacity duration-500" quality={80} loading="lazy" aria-hidden="true" />
 	<div class="about-section__content">
 		<AboutContent />
 	</div>
@@ -49,14 +49,17 @@ import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 		const wrap = section?.querySelector<HTMLElement>('[data-parallax-wrap]');
 		if (wrap) {
 			const imgs = wrap.querySelectorAll<HTMLImageElement>('img');
-			imgs.forEach(img => { img.style.willChange = 'transform'; });
+			imgs.forEach(img => {
+				img.style.willChange = 'transform';
+				img.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+			});
 
 			const update = () => {
 				const rect = wrap.getBoundingClientRect();
 				const vh = window.innerHeight;
 				const progress = 1 - (rect.bottom / (vh + rect.height));
 				const clamped = Math.max(0, Math.min(1, progress));
-				const scale = 1.0 + 0.1 * Math.abs(clamped * 2 - 1);
+				const scale = 1.0 + 0.15 * Math.abs(clamped * 2 - 1);
 				imgs.forEach(img => { img.style.transform = `scale(${scale})`; });
 			};
 

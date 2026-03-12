@@ -22,7 +22,6 @@ export function initTechWheel(): void {
 	const SPRING = "0.5s cubic-bezier(0.22, 1, 0.36, 1)";
 
 	let wheelRotation = 0;
-	let lastScrollY = window.scrollY;
 	let ticking = false;
 	let activeIndex: number | null = null;
 	let cachedRadius = 0;
@@ -41,37 +40,48 @@ export function initTechWheel(): void {
 
 	const applyWheelTransforms = (): void => {
 		const r = getRadius();
-		if (r === 0) return; // --radius aún no está calculado, skip
+		if (r === 0) return;
 		icons.forEach((icon, i) => {
 			if (i === activeIndex) return;
-			// Si el icono aún tiene transición activa (viene de deactivate), la limpiamos
 			if (icon.style.transition) icon.style.transition = "";
 			icon.style.transform = getWheelTransform(i, r);
 		});
 	};
 
-	// ── Scroll → rueda gira ──
+	// ── Scroll → rueda gira solo cuando visible ──
+	// Usamos delta acumulado pero con IntersectionObserver solo para activar/desactivar.
+	// Al entrar al viewport sincronizamos prevScrollY para que el primer delta sea 0.
+	let prevScrollY = window.scrollY;
+	let isVisible = false;
+	let rafId = 0;
+
+	new IntersectionObserver((entries) => {
+		isVisible = entries[0].isIntersecting;
+		if (isVisible) {
+			cancelAnimationFrame(rafId); // cancelar rAF pendiente con prevScrollY antiguo
+			prevScrollY = window.scrollY;
+		}
+	}, { threshold: 0 }).observe(wheel!);
+
 	window.addEventListener("scroll", () => {
-		if (ticking) return;
+		if (!isVisible || ticking) return;
 		ticking = true;
-		requestAnimationFrame(() => {
-			const currentScrollY = window.scrollY;
-			const delta = currentScrollY - lastScrollY;
-			lastScrollY = currentScrollY;
-			// Clamp para evitar saltos bruscos (ej. scroll restoration, fast scroll)
-			const clampedDelta = Math.max(-80, Math.min(80, delta));
-			wheelRotation += clampedDelta * DEGREES_PER_PX;
+		rafId = requestAnimationFrame(() => {
+			const dy = window.scrollY - prevScrollY;
+			prevScrollY = window.scrollY;
+			wheelRotation += dy * DEGREES_PER_PX;
 			applyWheelTransforms();
 			ticking = false;
 		});
 	}, { passive: true });
 
-	// Primer render: reintentar hasta que --radius esté calculado (puede tardar más de 2 rAF)
+	// Primer render
 	const initWheelWhenReady = (): void => {
 		if (getRadius() === 0) {
 			requestAnimationFrame(initWheelWhenReady);
 			return;
 		}
+		prevScrollY = window.scrollY;
 		applyWheelTransforms();
 	};
 	requestAnimationFrame(initWheelWhenReady);
@@ -85,7 +95,6 @@ export function initTechWheel(): void {
 		icon.classList.remove("is-active");
 		icon.style.transition = `transform ${SPRING}`;
 		icon.style.transform = getWheelTransform(idx);
-		// Limpiar transition al acabar para que el scroll sea instantáneo
 		icon.addEventListener("transitionend", () => {
 			icon.style.transition = "";
 		}, { once: true });

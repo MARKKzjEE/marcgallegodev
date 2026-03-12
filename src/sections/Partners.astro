@@ -5,17 +5,17 @@ import dokostudio from '../assets/dokostudio.webp';
 
 <section id="partners" class="py-24">
 	<div class="container mx-auto px-10">
-		<div class="flex flex-col gap-8">
+		<div class="flex flex-col gap-8 items-center text-center">
 
 			<h3 class="font-nord font-bold text-secondary uppercase">Partners</h3>
 
 			<div class="partners-card">
                 <div class="card-image">
-                    <Image src={dokostudio} alt="Doko Studio" />
+                    <Image src={dokostudio} alt="Doko Studio" loading="lazy" quality={85} />
                 </div>
                 <div class="card-info">
                     <div class="left">
-                        <h4 class="font-nord font-bold text-secondary text-2xl">Doko Studio</h4>
+                        <h4 class="font-nord font-bold text-secondary text-2xl text-left">Doko Studio</h4>
                         <p class="font-monoblock font-normal text-secondary/90 text-sm mt-1 tracking-widest">Estudio de diseño y desarrollo web</p>
                     </div>
                     <div class="right">
@@ -43,7 +43,7 @@ import dokostudio from '../assets/dokostudio.webp';
         border-radius: 12px;
         background-color: var(--terciary);
         border: 1px solid color-mix(in srgb, var(--secondary) 8%, transparent);
-
+        width: min(800px, 100%);
         .right span {
             border-color: color-mix(in srgb, var(--secondary) 10%, transparent);
         }

@@ -1,17 +1,7 @@
 ---
 import '../styles/hero.scss';
-import { getImage } from 'astro:assets';
-import profileLight from '../assets/hero-profile-light.png';
-import profileDark from '../assets/hero-profile-dark.png';
 import AboutContent from '../components/AboutContent.astro';
-
-// Solo para preload — las imágenes las renderiza AboutContent
-const optimizedLight = await getImage({ src: profileLight, format: 'webp', quality: 92, width: 900 });
-const optimizedDark = await getImage({ src: profileDark, format: 'webp', quality: 92, width: 900 });
 ---
-
-<link rel="preload" href={optimizedLight.src} as="image" type="image/webp" />
-<link rel="preload" href={optimizedDark.src} as="image" type="image/webp" />
 
 <section id="hero" class="relative min-h-screen">
 
