@@ -25,7 +25,7 @@ const isHome = Astro.url.pathname === '/';
 				</a>
 			))}
 		</nav>
-    <div class="header-divider h-[32px] w-[1px] transition-all duration-300"></div>
+    <div class="header-divider w-px"></div>
     <div class="flex items-center gap-1 text-sm" aria-label="Selector de idioma">
       <button type="button" class="lang-btn lang-active" data-lang="es" aria-pressed="true">ES</button>
       <span class="divider-slash opacity-75">/</span>
@@ -35,7 +35,7 @@ const isHome = Astro.url.pathname === '/';
         <label class="switch-label" id="theme-toggle">
           <input type="checkbox" class="checkbox" aria-label="Cambiar entre modo claro y oscuro">
           <span class="slider"></span>
-        </>
+        </label>
     </div>
 		</div>
 	</div>
@@ -50,7 +50,7 @@ const isHome = Astro.url.pathname === '/';
     .nav-link { color: #fff; }
     .lang-btn { color: #fff; }
     .divider-slash { color: #fff; }
-    .header-divider { background-color: #fff; }
+    .header-divider { background-color: #fff; height: 32px; transition: height 300ms ease, background-color 300ms ease; }
     .switch-label {
       background-color: #fff;
       border-color: #fff;
@@ -72,7 +72,7 @@ const isHome = Astro.url.pathname === '/';
       .nav-link { color: var(--secondary); }
       .lang-btn { color: var(--secondary); }
       .divider-slash { color: var(--secondary); }
-      .header-divider { background-color: var(--secondary); height: 100%; }
+      .header-divider { background-color: var(--secondary); height: 56px; }
       .switch-label {
         background-color: var(--secondary);
         border-color: var(--secondary);

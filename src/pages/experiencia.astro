@@ -2,6 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../sections/Header.astro";
 import Footer from "../sections/Footer.astro";
+import { Image } from 'astro:assets';
+import imgDoko from '../assets/clients/dokostudio.png';
+import imgLateua from '../assets/clients/lateua.png';
+import imgLoyic from '../assets/clients/loyic.png';
+import imgSociallabs from '../assets/clients/sociallabs.png';
+import imgUab from '../assets/clients/uab.png';
+import imgPlanit from '../assets/clients/planit.png';
 ---
 
 <Layout
@@ -14,11 +21,9 @@ import Footer from "../sections/Footer.astro";
 
 			<!-- Título -->
 			<div class="cv__name-row">
-				<h1 class="cv__name font-vogun text-secondary">Marc Gallego Gines</h1>
+				<h1 class="cv__name font-vogun text-secondary">Mi trayectoria profesional</h1>
 				<a href="/cv/CV_MarcGallego_spanish.pdf" download class="cv__download" aria-label="Descargar CV en PDF">
-					<svg class="cv__download-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M12 12V18M12 18L15 16M12 18L9 16M13 3.00087C12.9045 3 12.7973 3 12.6747 3H8.2002C7.08009 3 6.51962 3 6.0918 3.21799C5.71547 3.40973 5.40973 3.71547 5.21799 4.0918C5 4.51962 5 5.08009 5 6.2002V17.8002C5 18.9203 5 19.4801 5.21799 19.9079C5.40973 20.2842 5.71547 20.5905 6.0918 20.7822C6.5192 21 7.07899 21 8.19691 21H15.8031C16.921 21 17.48 21 17.9074 20.7822C18.2837 20.5905 18.5905 20.2842 18.7822 19.9079C19 19.4805 19 18.9215 19 17.8036V9.32568C19 9.20296 19 9.09561 18.9991 9M13 3.00087C13.2856 3.00347 13.4663 3.01385 13.6388 3.05526C13.8429 3.10425 14.0379 3.18526 14.2168 3.29492C14.4186 3.41857 14.5918 3.59182 14.9375 3.9375L18.063 7.06298C18.4089 7.40889 18.5809 7.58136 18.7046 7.78319C18.8142 7.96214 18.8953 8.15726 18.9443 8.36133C18.9857 8.53376 18.9963 8.71451 18.9991 9M13 3.00087V5.8C13 6.9201 13 7.47977 13.218 7.90759C13.4097 8.28392 13.7155 8.59048 14.0918 8.78223C14.5192 9 15.079 9 16.1969 9H18.9991M18.9991 9H19.0002" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					</svg>
+					<svg class="cv__download-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
 					<span class="cv__download-label font-nord">Descargar PDF</span>
 				</a>
 			</div>
@@ -42,7 +47,7 @@ import Footer from "../sections/Footer.astro";
 
 				<div class="cv__entry">
 					<div class="cv__entry-icon">
-						<div class="cv__entry-img" aria-hidden="true"></div>
+						<Image class="cv__entry-img" src={imgDoko} alt="Doko Studio" />
 						<div class="cv__entry-line"></div>
 					</div>
 					<div class="cv__entry-body">
@@ -79,7 +84,7 @@ import Footer from "../sections/Footer.astro";
 
 				<div class="cv__entry">
 					<div class="cv__entry-icon">
-						<div class="cv__entry-img" aria-hidden="true"></div>
+						<Image class="cv__entry-img" src={imgLateua} alt="Lateua" />
 						<div class="cv__entry-line"></div>
 					</div>
 					<div class="cv__entry-body">
@@ -113,7 +118,7 @@ import Footer from "../sections/Footer.astro";
 
 				<div class="cv__entry">
 					<div class="cv__entry-icon">
-						<div class="cv__entry-img" aria-hidden="true"></div>
+						<Image class="cv__entry-img" src={imgLoyic} alt="Loyic" />
 						<div class="cv__entry-line"></div>
 					</div>
 					<div class="cv__entry-body">
@@ -145,7 +150,7 @@ import Footer from "../sections/Footer.astro";
 
 				<div class="cv__entry">
 					<div class="cv__entry-icon">
-						<div class="cv__entry-img" aria-hidden="true"></div>
+						<Image class="cv__entry-img" src={imgSociallabs} alt="Social Labs" />
 						<div class="cv__entry-line"></div>
 					</div>
 					<div class="cv__entry-body">
@@ -181,7 +186,7 @@ import Footer from "../sections/Footer.astro";
 				<h2 class="cv__heading">Educación</h2>
 				<div class="cv__entry">
 					<div class="cv__entry-icon">
-						<div class="cv__entry-img" aria-hidden="true"></div>
+						<Image class="cv__entry-img" src={imgUab} alt="UAB" />
 					</div>
 					<div class="cv__entry-body">
 						<div class="cv__entry-header">
@@ -217,7 +222,7 @@ import Footer from "../sections/Footer.astro";
 				<h2 class="cv__heading">Extracurricular</h2>
 				<div class="cv__entry">
 					<div class="cv__entry-icon">
-						<div class="cv__entry-img" aria-hidden="true"></div>
+						<Image class="cv__entry-img" src={imgPlanit} alt="Planit" />
 						<div class="cv__entry-line"></div>
 					</div>
 					<div class="cv__entry-body">
@@ -280,8 +285,13 @@ import Footer from "../sections/Footer.astro";
 	}
 
 	.cv__download-icon {
-		width: 40px;
-		height: 40px;
+		width: 32px;
+		height: 32px;
+		transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.cv__download:hover .cv__download-icon {
+		transform: scale(1.4);
 	}
 
 	.cv__download-label {
@@ -339,12 +349,12 @@ import Footer from "../sections/Footer.astro";
 	}
 
 	.cv__entry-img {
-		width: 44px;
-		height: 44px;
+		width: 64px;
+		height: 64px;
 		border-radius: 4px;
-		background-color: color-mix(in srgb, var(--secondary) 15%, transparent);
 		border: 1px solid color-mix(in srgb, var(--secondary) 25%, transparent);
 		flex-shrink: 0;
+		object-fit: contain;
 	}
 
 	.cv__entry-line {
@@ -376,15 +386,16 @@ import Footer from "../sections/Footer.astro";
 	.cv__entry-title {
 		font-family: var(--font-cottor);
 		font-weight: 600;
-		font-size: 18px;
+		font-size: 20px;
 		color: var(--secondary);
 	}
 
 	.cv__entry-subtitle {
-		font-family: var(--font-cottor);
+		font-family: var(--font-monoblock);
+		letter-spacing: 0.1em;
 		font-weight: 400;
-		font-size: 15px;
-		font-style: italic;
+		font-size: 14px;
+		//font-style: italic;
 		color: var(--secondary);
 		opacity: 0.8;
 	}
