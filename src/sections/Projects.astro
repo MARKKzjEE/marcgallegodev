@@ -1,0 +1,438 @@
+---
+import { Image } from 'astro:assets';
+import cordesuro from '../assets/projects/cordesuro.png';
+import lateua from '../assets/projects/lateua.png';
+import loyic from '../assets/projects/loyic.png';
+import pillositio from '../assets/projects/pillositio.png';
+import planit from '../assets/projects/planit.png';
+import rtth from '../assets/projects/rtth.png';
+import viviq from '../assets/projects/viviq.png';
+
+const projects = [
+	{
+		title: 'Viviq',
+		description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.',
+		image: viviq,
+		color: '#00676A',
+	},
+	{
+		title: 'Cor de suro',
+		description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.',
+		image: cordesuro,
+		color: '#8C4216',
+	},
+	{
+		title: 'Lateua',
+		description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo basadas en IA.',
+		image: lateua,
+		color: '#BD7D60',
+	},
+	{
+		title: 'Loyic',
+		description: 'Portal del empleado de la empresa para registrar registro horario, documentos, nóminas, etc.',
+		image: loyic,
+		color: '#F1EBF1',
+	},
+
+	{
+		title: 'Pillositio',
+		description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.',
+		image: pillositio,
+		color: '#F6F4EE',
+	},
+	{
+		title: 'PlanIT',
+		description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.',
+		image: planit,
+		color: '#FA4D6E',
+	},
+	{
+		title: 'RTTH',
+		description: 'Transformación de ondas sonoras en archivos de audio a imágenes para marcas y recursos para webs.',
+		image: rtth,
+		color: '#7F7FE7',
+	},
+];
+---
+
+<section class="projects-section" id="proyectos-destacados">
+	<!-- Header -->
+	<div class="projects-header px-10">
+		<h1 class="font-vogun font-light text-secondary projects-title">
+			Trabajos destacados.
+		</h1>
+		<p class="font-nord font-light text-secondary/60 text-sm uppercase tracking-widest mt-2">
+			Arrastra para explorar
+		</p>
+	</div>
+
+	<!-- Zona de imágenes: drag + cursor custom -->
+	<div class="projects-images-wrapper" data-projects-track>
+		<div class="projects-track" data-track>
+			{projects.map((project, i) => (
+				<div class="project-image-slot" data-index={i}>
+					<div class="project-card-image" style={`background-color: ${project.color};`}>
+						<Image
+							src={project.image}
+							alt={project.title}
+							widths={[600, 900]}
+							sizes="(max-width: 768px) 90vw, 40vw"
+							format="webp"
+							quality={90}
+							loading="lazy"
+							draggable={false}
+							class="project-img"
+						/>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<!-- Custom cursor -->
+		<div class="projects-cursor" data-cursor aria-hidden="true">
+			<div class="projects-cursor-inner">
+				<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M18 8L22 12L18 16"/>
+					<path d="M6 8L2 12L6 16"/>
+					<line x1="2" y1="12" x2="22" y2="12"/>
+				</svg>
+			</div>
+		</div>
+	</div>
+
+	<!-- Info debajo: sincronizada por JS -->
+	<div class="projects-info-row px-10">
+		{projects.map((project, i) => (
+			<div class="project-info-item" data-info-index={i}>
+				<h2 class="project-card-title font-nord font-medium text-secondary">{project.title}</h2>
+				<p class="project-card-desc font-cottor font-light text-secondary/80">{project.description}</p>
+			</div>
+		))}
+	</div>
+</section>
+
+<style lang="scss">
+.projects-section {
+	padding: 5rem 0;
+	overflow: hidden;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 56px);
+}
+
+.projects-header {
+	margin-bottom: 2rem;
+}
+
+.projects-title {
+	font-size: clamp(48px, 5vw, 80px);
+	line-height: 1.1;
+}
+
+// ─── Images zone (drag + cursor) ───
+
+.projects-images-wrapper {
+	position: relative;
+	width: 100%;
+	cursor: none;
+	flex: 1;
+	min-height: 0;
+	margin-bottom: 1.25rem;
+
+	&:hover .projects-cursor {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+.projects-track {
+	display: flex;
+	gap: 2.5rem;
+	padding: 0 2.5rem;
+	overflow-x: scroll;
+	scrollbar-width: none;
+	-webkit-overflow-scrolling: touch;
+	user-select: none;
+	height: 100%;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	&.is-snapping {
+		scroll-snap-type: x mandatory;
+		scroll-padding-left: 2.5rem;
+	}
+}
+
+.project-image-slot {
+	flex: 0 0 clamp(300px, 40vw, 580px);
+	scroll-snap-align: start;
+	height: 100%;
+}
+
+.project-card-image {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.project-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	-webkit-user-drag: none;
+	pointer-events: none;
+	transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-image-slot:hover .project-img {
+	transform: scale(1.05);
+}
+
+// ─── Info row (no drag zone) ───
+
+.projects-info-row {
+	display: flex;
+	gap: 2.5rem;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.project-info-item {
+	flex: 0 0 clamp(300px, 40vw, 580px);
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	padding-top: 1rem;
+}
+
+.project-card-title {
+	font-size: clamp(1.1rem, 2vw, 1.4rem);
+	line-height: 1.1;
+}
+
+.project-card-desc {
+	font-size: 0.875rem;
+	line-height: 1.6;
+}
+
+// ─── Custom cursor ───
+
+.projects-cursor {
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	opacity: 0;
+	transform: translate(-50%, -50%) scale(0.6);
+	transition:
+		opacity 300ms ease,
+		transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+	z-index: 10;
+	will-change: left, top;
+}
+
+.projects-cursor-inner {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	background: var(--secondary);
+	color: var(--primary);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 3px;
+
+	span {
+		font-size: 0.5rem;
+		letter-spacing: 0.12em;
+	}
+}
+</style>
+
+<script>
+	const wrapper = document.querySelector<HTMLElement>('[data-projects-track]');
+	const track = wrapper?.querySelector<HTMLElement>('[data-track]');
+	const cursor = wrapper?.querySelector<HTMLElement>('[data-cursor]');
+	const infoRow = document.querySelector<HTMLElement>('.projects-info-row');
+
+	if (wrapper && track && cursor && infoRow) {
+
+		// ─── Infinite loop: clone slots ───
+		// Structure: [clones-end | originals | clones-start]
+		// We start scrolled at the "originals" block.
+
+		const originalSlots = Array.from(track.querySelectorAll<HTMLElement>('.project-image-slot'));
+		const n = originalSlots.length;
+
+		// Clone into track (clones-start appended after originals)
+		originalSlots.forEach(slot => {
+			const clone = slot.cloneNode(true) as HTMLElement;
+			clone.setAttribute('aria-hidden', 'true');
+			track.appendChild(clone);
+		});
+
+		// Clone before originals (clones-end prepended)
+		const clonesEnd = originalSlots.map(slot => {
+			const clone = slot.cloneNode(true) as HTMLElement;
+			clone.setAttribute('aria-hidden', 'true');
+			return clone;
+		});
+		clonesEnd.forEach(clone => track.insertBefore(clone, originalSlots[0]));
+
+		// Clone info row items
+		const infoOriginals = Array.from(infoRow.querySelectorAll<HTMLElement>('.project-info-item[data-info-index]'));
+		infoOriginals.forEach(item => {
+			const clone = item.cloneNode(true) as HTMLElement;
+			clone.setAttribute('aria-hidden', 'true');
+			infoRow.appendChild(clone);
+		});
+		infoOriginals.forEach(item => {
+			const clone = item.cloneNode(true) as HTMLElement;
+			clone.setAttribute('aria-hidden', 'true');
+			infoRow.insertBefore(clone, infoOriginals[0]);
+		});
+
+		// After cloning, read the true track padding from the first slot
+		// (which is now a clonesEnd[0], same offsetLeft as original padding)
+		// We need to wait for layout to settle before reading offsetLeft.
+
+		// ─── Snap positions ───
+		// Returns positions of all slots (including clones) relative to scrollLeft=0
+		function getSlotPositions(): number[] {
+			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-image-slot'));
+			if (!allSlots.length) return [];
+			const padding = allSlots[0].offsetLeft;
+			return allSlots.map(slot => slot.offsetLeft - padding);
+		}
+
+		// Total width of one set of originals (used for loop teleport)
+		function getBlockWidth(): number {
+			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-image-slot'));
+			if (allSlots.length < n + 1) return 0;
+			// The first original is at index n (after n clones-end)
+			// The first clone-start is at index 2n
+			return allSlots[2 * n].offsetLeft - allSlots[n].offsetLeft;
+		}
+
+		// Jump to originals block on init (skip the clones-end prefix)
+		requestAnimationFrame(() => {
+			const blockWidth = getBlockWidth();
+			track!.scrollLeft = blockWidth;
+			infoRow!.scrollLeft = blockWidth;
+		});
+
+		// ─── Infinite loop teleport ───
+		let isTeleporting = false;
+
+		function checkLoop() {
+			if (isTeleporting) return;
+			const blockWidth = getBlockWidth();
+			if (blockWidth === 0) return;
+			const sl = track!.scrollLeft;
+
+			// Past clones-start → jump back to originals
+			if (sl >= blockWidth * 2) {
+				isTeleporting = true;
+				track!.scrollLeft = sl - blockWidth;
+				infoRow!.scrollLeft = track!.scrollLeft;
+				isTeleporting = false;
+			}
+			// Before originals → jump forward to originals
+			else if (sl < blockWidth) {
+				isTeleporting = true;
+				track!.scrollLeft = sl + blockWidth;
+				infoRow!.scrollLeft = track!.scrollLeft;
+				isTeleporting = false;
+			}
+		}
+
+		// ─── Sync info row ───
+		track.addEventListener('scroll', () => {
+			if (!isTeleporting) infoRow!.scrollLeft = track!.scrollLeft;
+			checkLoop();
+		}, { passive: true });
+
+		// ─── Custom cursor with lerp ───
+		let cursorX = 0;
+		let cursorY = 0;
+		let targetX = 0;
+		let targetY = 0;
+		let rafCursor: number | null = null;
+
+		function tickCursor() {
+			cursorX += (targetX - cursorX) * 0.14;
+			cursorY += (targetY - cursorY) * 0.14;
+			cursor!.style.left = `${cursorX}px`;
+			cursor!.style.top = `${cursorY}px`;
+
+			if (Math.abs(cursorX - targetX) > 0.3 || Math.abs(cursorY - targetY) > 0.3) {
+				rafCursor = requestAnimationFrame(tickCursor);
+			} else {
+				rafCursor = null;
+			}
+		}
+
+		wrapper.addEventListener('mousemove', (e) => {
+			const rect = wrapper.getBoundingClientRect();
+			targetX = e.clientX - rect.left;
+			targetY = e.clientY - rect.top;
+			if (!rafCursor) rafCursor = requestAnimationFrame(tickCursor);
+		});
+
+		// ─── Snap helper ───
+		function getSnapTarget(direction: number): number {
+			const positions = getSlotPositions();
+			if (!positions.length) return track!.scrollLeft;
+			const current = track!.scrollLeft;
+
+			const raw = positions.findIndex((pos, i) => {
+				const next = positions[i + 1] ?? Infinity;
+				return current >= pos - 2 && current < next - 2;
+			});
+			const currentIdx = raw === -1 ? positions.length - 1 : raw;
+
+			const targetIdx = direction > 0
+				? Math.min(currentIdx + 1, positions.length - 1)
+				: direction < 0
+					? Math.max(currentIdx - 1, 0)
+					: currentIdx;
+
+			return positions[targetIdx];
+		}
+
+		// ─── Drag ───
+		let isDragging = false;
+		let startX = 0;
+		let startScroll = 0;
+		let lastX = 0;
+		let lastDx = 0;
+
+		track.addEventListener('mousedown', (e) => {
+			isDragging = true;
+			startX = e.clientX;
+			startScroll = track.scrollLeft;
+			lastX = e.clientX;
+			lastDx = 0;
+		});
+
+		window.addEventListener('mousemove', (e) => {
+			if (!isDragging) return;
+			lastDx = e.clientX - lastX;
+			lastX = e.clientX;
+			track.scrollLeft = startScroll - (e.clientX - startX);
+		});
+
+		window.addEventListener('mouseup', () => {
+			if (!isDragging) return;
+			isDragging = false;
+			const dir = lastDx > 2 ? -1 : lastDx < -2 ? 1 : 0;
+			const target = getSnapTarget(dir);
+			track.scrollTo({ left: target, behavior: 'smooth' });
+		});
+	}
+</script>

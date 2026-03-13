@@ -70,6 +70,7 @@ const currentYear = new Date().getFullYear();
 		padding-bottom: 24px;
 		overflow: clip;
 		border-top: 1px solid var(--secondary);
+		background-color: var(--quaternary);
 	}
 
 	// ── Zona superior ──
@@ -167,6 +168,10 @@ const currentYear = new Date().getFullYear();
 	}
 
 	// ── Dark ──
+	:global(.dark) .footer-section {
+		background-color: #161616;
+	}
+
 	:global(.dark) {
 		.footer-nav {
 			border-color: var(--secondary);
