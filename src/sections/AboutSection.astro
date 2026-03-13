@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import AboutContent from '../components/AboutContent.astro';
 import gradientBg from '../assets/gradients/fqm-gradient.png';
-import gradientBgDark from '../assets/gradients/fqm-gradient-dark2.png';
+import gradientBgDark from '../assets/gradients/fqm-gradient-dark.png';
 ---
 
 <section id="about" class="about-section border-t border-secondary">
@@ -28,13 +28,12 @@ import gradientBgDark from '../assets/gradients/fqm-gradient-dark2.png';
 		height: 100%;
 		object-fit: cover;
 		object-position: center center;
-		opacity: 0.15;
 		z-index: 0;
 		pointer-events: none;
 	}
 
 	:global(.dark) .about-section__bg.dark\:opacity-100 {
-		opacity: 0.15;
+		filter: brightness(0.5);
 	}
 
 	.about-section__content {
