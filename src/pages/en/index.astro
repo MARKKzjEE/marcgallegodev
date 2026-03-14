@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../sections/Header.astro';
+import Hero from '../../sections/Hero.astro';
+import TechStack from '../../sections/TechStack.astro';
+import WhatWeDo from '../../sections/WhatWeDo.astro';
+import Partners from '../../sections/Partners.astro';
+import FAQ from '../../sections/FAQ.astro';
+import AboutSection from '../../sections/AboutSection.astro';
+import MarqueeBands from '../../sections/MarqueeBands.astro';
+import Footer from '../../sections/Footer.astro';
+import { useTranslations } from '../../i18n/index';
+
+const t = useTranslations('en');
+---
+
+<Layout
+	title={t.meta.indexTitle}
+	description={t.meta.indexDescription}
+	keywords={t.meta.indexKeywords}
+	lang="en"
+>
+	<Header />
+	<main>
+		<Hero />
+		<TechStack />
+		<WhatWeDo />
+		<AboutSection />
+		<MarqueeBands />
+		<Partners />
+		<FAQ />
+	</main>
+	<Footer />
+</Layout>

@@ -1,0 +1,187 @@
+%-------------------------
+% Resume in LaTeX
+% Author : Marc Gallego Gines
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{0pt}]
+
+\pdfgentounicode=1
+
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------HEADER----------
+\begin{center}
+    {\Huge \scshape Marc Gallego Gines} \\ \vspace{8pt}
+    \href{https://www.marcgallego.com}{\raisebox{-0.2\height}\faGlobe\ \underline{marcgallego.com}}
+    \hspace{8pt}
+    \small \raisebox{-0.1\height}\faPhone\ +34 647 60 40 48
+    \hspace{8pt}
+    \href{mailto:mark.gallego.gines@gmail.com}{\raisebox{-0.2\height}\faEnvelope\ \underline{mark.gallego.gines@gmail.com}}
+    \hspace{8pt}
+    \href{https://linkedin.com/in/marcgallegodev}{\raisebox{-0.2\height}\faLinkedin\ \underline{marcgallegodev}}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Summary}
+\resumeSubHeadingListStart
+    \resumeItem{I'm a software developer with more than 5 years of experience building web and mobile solutions. Throughout my career I've been lucky to work on very diverse projects with different technologies, which has given me a broader and more complete vision of software development. I'm passionate about programming and technology, and I really enjoy working as a team, always keeping good vibes and growing alongside my colleagues.}
+\resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Doko Studio}{Jul 2024 -- Present}
+      {Software Engineer}{Barcelona, Spain}
+      \resumeItemListStart
+        \resumeItem{Participation in multiple projects using technologies such as \textbf{Laravel, Django, React, Angular}.}
+        \resumeItem{Design and development of \textbf{modular APIs} with documentation generated through \textbf{Swagger}.}
+        \resumeItem{Implementation of \textbf{CI/CD pipelines} and production workflows with \textbf{GitLab CI}, enabling deployments across different client environments.}
+        \resumeItem{Domain management and server administration.}
+        \resumeItem{Publishing mobile apps on the Play Store and App Store.}
+        \resumeItem{Experience implementing both integrated and standalone payment gateways.}
+        \resumeItem{Collaboration with designers in \textbf{Figma} for the creation of responsive and usable web interfaces.}
+      \resumeItemListEnd
+    \vspace{8pt}
+
+    \resumeSubheading
+      {Lateua}{May 2023 -- Feb 2024}
+      {Full Stack Developer}{Barcelona, Spain}
+      \resumeItemListStart
+        \resumeItem{Migration of the legacy \textbf{WordPress} platform to a new scalable solution with \textbf{React} and \textbf{Django}.}
+        \resumeItem{Design and implementation of \textbf{microservices} to decouple functionalities and improve performance.}
+        \resumeItem{Development of cross-platform data migration scripts with \textbf{Python}.}
+        \resumeItem{Creation of \textbf{AI}-based processes for color detection, shapes and image generation.}
+        \resumeItem{Development of a conversational \textbf{AI} model to assist users in generating results.}
+      \resumeItemListEnd
+    \vspace{8pt}
+
+    \resumeSubheading
+      {Loyic}{Mar 2023 -- Mar 2024}
+      {Full Stack Developer / Team Lead}{Barcelona, Spain}
+      \resumeItemListStart
+        \resumeItem{Development and maintenance of internal HR management software: time tracking, payroll, reports and documentation.}
+        \resumeItem{Leadership of a development team, coordinating tasks and deliveries of new features and fixes.}
+        \resumeItem{Supervision of \textbf{web development} projects and internal database administration.}
+        \resumeItem{Building solutions on the Dutch platform \textbf{Exact Synergy}, customising it according to business needs.}
+        \resumeItem{Collaboration with consultants and stakeholders to align development with business requirements.}
+      \resumeItemListEnd
+    \vspace{8pt}
+
+    \resumeSubheading
+      {Social Labs}{Jan 2019 -- Aug 2019}
+      {Junior Developer}{Barcelona, Spain}
+      \resumeItemListStart
+        \resumeItem{Support in the development of multiple web projects for clients such as \textbf{Bimbo}, \textbf{Coca-Cola} and \textbf{Ferromex}.}
+        \resumeItem{Collaboration with different teams to implement features, fixes and maintenance tasks.}
+        \resumeItem{Hands-on experience working with large-scale clients and adapting to different project requirements.}
+        \resumeItem{Support in front-end and back-end tasks, strengthening my overall web development skills.}
+      \resumeItemListEnd
+    \vspace{8pt}
+
+  \resumeSubHeadingListEnd
+\vspace{-16pt}
+
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {BSc in Computer Science}{Barcelona, Spain}
+      {Specialisation in Software Development and Project Management}{2015 -- 2020}
+  \resumeSubHeadingListEnd
+ \vspace{8pt}
+
+
+
+%-----------LANGUAGES-----------
+\section{Languages}
+     \textbf{English}{: B2} \\
+     \textbf{Spanish}{: C2 (Native)} \\
+     \textbf{Catalan}{: C2 (Native)} \\
+ \vspace{8pt}
+
+
+
+%-----------EXTRACURRICULAR-----------
+\section{Extracurricular}
+    \resumeSubHeadingListStart
+        \resumeSubheading{Planit}{2020}{Founder \& Full Stack Developer}{Barcelona, Spain}
+            \resumeItemListStart
+                \resumeItem{Creation of a mobile and web application that, after validating the idea with real users, evolved into an early-stage startup oriented towards attracting investment.}
+                \resumeItem{Development of the platform in \textbf{React}, allowing users to propose plans and connect with others.}
+                \resumeItem{Full management of the product cycle: idea validation, design, development and private launch for investors.}
+                \resumeItem{Definition of workflows and pitch strategies oriented towards attracting investment.}
+                \resumeItem{The project reached the pre-investment stage but was paused due to the COVID-19 pandemic.}
+            \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+
+\end{document}

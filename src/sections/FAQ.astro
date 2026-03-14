@@ -1,0 +1,147 @@
+---
+import { getLang, useTranslations } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+const faqs = t.faq.items;
+---
+
+<section id="faq" class="py-16 md:py-24" aria-labelledby="faq-heading">
+	<div class="container mx-auto px-4 md:px-10">
+		<div class="flex flex-col gap-8">
+
+			<h2 id="faq-heading" class="font-nord font-bold text-secondary uppercase">{t.faq.heading}</h2>
+
+			<div class="faq-list">
+				{faqs.map((faq) => (
+					<div class="faq-card" data-faq-item>
+						<button
+							type="button"
+							class="faq-trigger"
+							aria-expanded="false"
+							data-faq-trigger
+						>
+							<span class="font-nord font-bold text-secondary uppercase faq-question">{faq.question}</span>
+							<span class="faq-icon shrink-0 text-secondary" aria-hidden="true">
+								<svg class="faq-icon-plus" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+								<svg class="faq-icon-minus" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+							</span>
+						</button>
+						<div class="faq-body" data-faq-body>
+							<p class="font-cottor font-light text-secondary/80 leading-7 text-[15px]">{faq.answer}</p>
+						</div>
+					</div>
+				))}
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<style lang="scss">
+	h2 {
+		font-size: clamp(44px, 8vw, 96px);
+		line-height: 1;
+	}
+
+	.faq-list {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	.faq-card {
+		border-radius: 12px;
+		background-color: var(--quaternary);
+		border: 1px solid color-mix(in srgb, var(--secondary) 8%, transparent);
+		overflow: hidden;
+	}
+
+	.faq-trigger {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 2rem;
+		padding: 1.5rem;
+		cursor: pointer;
+		text-align: left;
+	}
+
+	.faq-question {
+		font-size: clamp(13px, 1.1vw, 15px);
+		letter-spacing: 0.05em;
+	}
+
+	.faq-icon-plus,
+	.faq-icon-minus {
+		width: 32px;
+		height: 32px;
+
+		@media (max-width: 767px) {
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	.faq-icon-minus {
+		display: none;
+	}
+
+	.faq-card[data-open] {
+		.faq-icon-plus { display: none; }
+		.faq-icon-minus { display: block; }
+	}
+
+	.faq-body {
+		display: grid;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+		> p {
+			overflow: hidden;
+			padding: 0 1.5rem;
+		}
+
+		&[data-open] {
+			grid-template-rows: 1fr;
+
+			> p {
+				padding-bottom: 1.5rem;
+			}
+		}
+	}
+</style>
+
+<script>
+	document.querySelectorAll<HTMLElement>('[data-faq-trigger]').forEach((trigger) => {
+		trigger.addEventListener('click', () => {
+			const item = trigger.closest<HTMLElement>('[data-faq-item]')!;
+			const body = item.querySelector<HTMLElement>('[data-faq-body]')!;
+			const isOpen = item.hasAttribute('data-open');
+
+			if (isOpen) {
+				item.removeAttribute('data-open');
+				body.removeAttribute('data-open');
+				trigger.setAttribute('aria-expanded', 'false');
+			} else {
+				item.setAttribute('data-open', '');
+				body.setAttribute('data-open', '');
+				trigger.setAttribute('aria-expanded', 'true');
+			}
+		});
+	});
+</script>
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"mainEntity": faqs.map(faq => ({
+		"@type": "Question",
+		"name": faq.question,
+		"acceptedAnswer": {
+			"@type": "Answer",
+			"text": faq.answer
+		}
+	}))
+})} />

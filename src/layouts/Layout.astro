@@ -1,46 +1,94 @@
 ---
+import type { Lang } from '../i18n/index';
+
 interface Props {
 	title?: string;
 	description?: string;
+	keywords?: string;
+	lang?: Lang;
 }
 
 const defaultDescription = "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida.";
-const { title = "Marc Gallego | Dev", description = defaultDescription } = Astro.props;
+const defaultKeywords = "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles";
+const { title = "Marc Gallego | Desarrollador Full Stack", description = defaultDescription, keywords = defaultKeywords, lang = 'es' } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://marcgallego.com').href;
+
+// hreflang alternate URLs
+const pathname = Astro.url.pathname;
+const esPath = pathname.startsWith('/en') ? pathname.replace(/^\/en/, '') || '/' : pathname;
+const enPath = pathname.startsWith('/en') ? pathname : `/en${pathname === '/' ? '' : pathname}`;
+const esURL = new URL(esPath, 'https://marcgallego.com').href;
+const enURL = new URL(enPath, 'https://marcgallego.com').href;
 ---
 
 <!doctype html>
-<html lang="es" class="">
+<html lang={lang} class="">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={canonicalURL} />
+		<link rel="alternate" hreflang="es" href={esURL} />
+		<link rel="alternate" hreflang="en" href={enURL} />
+		<link rel="alternate" hreflang="x-default" href={esURL} />
+		<!-- Preload fuentes críticas above-the-fold -->
+		<link rel="preload" href="/fonts/NORD/NORD-Black.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="/fonts/NORD/NORD-Bold.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="/fonts/Vogun-Medium.woff2" as="font" type="font/woff2" crossorigin />
+		<!-- Preload poster del vídeo hero -->
+		<link rel="preload" href="/assets/bg-background-loop-poster.webp" as="image" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<meta name="keywords" content="Marc Gallego, Developer, Software Engineer, Full Stack Developer, Frontend Developer, Backend Developer, Mobile Developer, AI Developer" />
+		<meta name="keywords" content={keywords} />
 		<meta name="author" content="Marc Gallego" />
 		<meta name="robots" content="index, follow" />
+		<meta name="geo.region" content="ES-CT" />
+		<meta name="geo.placename" content="Barcelona" />
+		<meta name="geo.position" content="41.3851;2.1734" />
+		<meta name="ICBM" content="41.3851, 2.1734" />
 		<meta name="googlebot" content="index, follow" />
 		<meta name="bingbot" content="index, follow" />
 		<meta name="yandexbot" content="index, follow" />
-		<meta name="sitemap" content="https://marcgallegodev.com/sitemap.xml" />
 
 		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://marcgallegodev.com" />
+		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content="https://marcgallegodev.com/assets/og-image.webp" />
-		<meta property="og:locale" content="es_ES" />
+		<meta property="og:image" content="https://marcgallego.com/assets/og-image.webp" />
+		<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
+		<meta property="og:site_name" content="Marc Gallego" />
 
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@marcgallegodev" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content="https://marcgallegodev.com/assets/og-image.webp" />
+		<meta name="twitter:image" content="https://marcgallego.com/assets/og-image.webp" />
 
 		<!-- Theme color -->
 		<meta name="theme-color" content="rgb(212, 212, 212)" media="(prefers-color-scheme: light)" />
 		<meta name="theme-color" content="rgb(18, 18, 18)" media="(prefers-color-scheme: dark)" />
+
+		<!-- JSON-LD: Person schema -->
+		<script is:inline type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Marc Gallego",
+			"url": "https://marcgallego.com",
+			"jobTitle": "Full Stack Software Engineer",
+			"description": defaultDescription,
+			"sameAs": [
+				"https://linkedin.com/in/marcgallegodev",
+				"https://github.com/marcgallegodev"
+			],
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Barcelona",
+				"addressCountry": "ES"
+			}
+		})} />
 
 		<script is:inline>
 			const root = document.documentElement;

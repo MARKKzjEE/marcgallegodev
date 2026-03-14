@@ -1,10 +1,14 @@
 ---
 import { Image } from 'astro:assets';
-import gradientBg from '../assets/fqm-gradient.png';
-import gradientBgDark from '../assets/fqm-gradient-dark2.png';
+import gradientBg from '../assets/gradients/fqm-gradient.png';
+import gradientBgDark from '../assets/gradients/fqm-gradient-dark2.png';
+import { getLang, useTranslations } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<section class="gradient-section border-t border-th-text py-40">
+<section class="gradient-section border-t border-secondary py-24">
 	<Image
 		src={gradientBg}
 		alt=""
@@ -19,8 +23,8 @@ import gradientBgDark from '../assets/fqm-gradient-dark2.png';
 		quality={90}
 		aria-hidden="true"
 	/>
-	<div class="container mx-auto px-6 gradient-section__content">
-		<h2 class="gradient-section__title font-vogun font-light leading-[1.2] text-th-bg/75">¿Y si sale bien?</h2>
+	<div class="container mx-auto px-10 gradient-section__content">
+		<h2 class="gradient-section__title font-vogun font-normal leading-[1.2] text-primary/60 tracking-wide">{t.gradient.headline}</h2>
 	</div>
 </section>
 

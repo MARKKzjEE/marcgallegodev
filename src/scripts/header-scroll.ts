@@ -6,7 +6,30 @@ export function initHeaderScroll(): void {
 	const hero = document.querySelector<HTMLElement>("#hero");
 	const contactHero = document.querySelector<HTMLElement>("[data-contact-hero]");
 	const heroPhoto = document.querySelector<HTMLElement>("[data-hero-photo]");
-	const heroCard = document.querySelector<HTMLElement>("[data-about-card]");
+	const heroContent = document.querySelector<HTMLElement>("[data-hero-content]");
+
+	// ── Hide on scroll down, show on scroll up (mobile only) ──
+	const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
+	let lastScrollY = window.scrollY;
+	let hideThreshold = 80; // px scrolled before hiding kicks in
+
+	window.addEventListener("scroll", () => {
+		if (!isMobile()) {
+			header.classList.remove("is-hidden");
+			lastScrollY = window.scrollY;
+			return;
+		}
+		const current = window.scrollY;
+		const delta = current - lastScrollY;
+		const heroHeight = hero ? hero.offsetHeight : 0;
+		const pastHero = current > heroHeight - 64;
+		if (pastHero && current > hideThreshold && delta > 0) {
+			header.classList.add("is-hidden");
+		} else if (!pastHero || delta < 0) {
+			header.classList.remove("is-hidden");
+		}
+		lastScrollY = current;
+	}, { passive: true });
 
 	// Pages without Hero or contact hero start with solid header
 	if (!hero && !contactHero) {
@@ -18,8 +41,9 @@ export function initHeaderScroll(): void {
 	const heroZone = hero || contactHero!;
 
 	const HEADER_HEIGHT = 64;
-	const FADE_BUFFER = 40; // content fully hidden this far below header
-	const FADE_ZONE = 150;
+	const FADE_BUFFER = 20;
+	const FADE_ZONE = 400;
+	const FADE_START = 120; // px scrolled before fade begins
 	let ticking = false;
 
 	function applyScrollMask(el: HTMLElement, fadeZone: number) {
@@ -57,9 +81,9 @@ export function initHeaderScroll(): void {
 		header!.classList.toggle("is-past-hero", scrollY >= zoneHeight - HEADER_HEIGHT);
 
 		// Fade zone grows with scroll: 0 at rest → FADE_ZONE max
-		const fadeZone = Math.min(scrollY, FADE_ZONE);
+		const fadeZone = Math.min(Math.max(scrollY - FADE_START, 0), FADE_ZONE);
 		if (heroPhoto) applyScrollMask(heroPhoto, fadeZone);
-		if (heroCard) applyScrollMask(heroCard, fadeZone);
+		if (heroContent) applyScrollMask(heroContent, fadeZone);
 
 		ticking = false;
 	}

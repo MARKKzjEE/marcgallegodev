@@ -1,14 +1,17 @@
 ---
-const text = "Mi camino comenzó con una pasión por construir soluciones digitales sólidas y dar forma técnica a las ideas. Me centro en transformar conceptos en productos funcionales, escalables y bien estructurados. Con una dedicación constante por mejorar y optimizar cada detalle, trabajo para entregar proyectos robustos, eficientes y preparados para crecer.";
-const words = text.split(' ');
+import { getLang, useTranslations } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+const words = t.whatWeDo.text.split(' ');
 ---
 
-<section id="what-we-do" class="what-we-do bg-th-bg py-40 border-t border-th-text">
-	<div class="container mx-auto px-6">
-		<div class="grid md:grid-cols-[200px_1fr] gap-8 md:gap-16 items-start">
+<section id="what-we-do" class="what-we-do py-16 md:py-24" aria-labelledby="what-we-do-heading">
+	<div class="px-4 md:px-10">
+		<div class="grid md:grid-cols-[320px_1fr] gap-8 md:gap-16 items-start">
 
 			<!-- Label izquierda -->
-			<span class="what-we-do__label font-nord text-th-text text-sm uppercase tracking-widest">Qué es lo que hago</span>
+			<h2 id="what-we-do-heading" class="what-we-do__label font-nord text-secondary uppercase tracking-widest">{t.whatWeDo.label}</h2>
 
 			<!-- Texto con reveal por palabra -->
 			<div class="what-we-do__content">
@@ -17,7 +20,7 @@ const words = text.split(' ');
 						<span class="reveal-word" style={`--word-index: ${i}`}>{word} </span>
 					))}
 				</p>
-				</div>
+			</div>
 
 		</div>
 	</div>
@@ -28,24 +31,17 @@ const words = text.split(' ');
 		font-size: clamp(28px, 4vw, 52px);
 	}
 
+	.what-we-do__label {
+		font-size: clamp(12px, 1.2vw, 18px);
+	}
+
 	.reveal-word {
-		color: color-mix(in srgb, var(--th-l-dark-blue) 20%, transparent);
+		color: color-mix(in srgb, var(--secondary) 20%, transparent);
 		transition: color 0.3s ease;
 	}
 
 	.reveal-word.is-visible {
-		color: var(--th-l-dark-blue);
-	}
-
-	// ── Dark ──
-	:global(.dark) {
-		.reveal-word {
-			color: color-mix(in srgb, var(--th-d-white) 15%, transparent);
-
-			&.is-visible {
-				color: var(--th-d-white);
-			}
-		}
+		color: var(--secondary);
 	}
 </style>
 
@@ -62,8 +58,8 @@ const words = text.split(' ');
 			const viewH = window.innerHeight;
 
 			// Progress: 0 when section enters bottom, 1 when section is centered
-			const start = viewH * 0.85;
-			const end = viewH * 0.4;
+			const start = viewH * 1.0;
+			const end = viewH * 0;
 			const progress = Math.min(Math.max((start - rect.top) / (start - end), 0), 1);
 
 			// Map progress to word index

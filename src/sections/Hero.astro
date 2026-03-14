@@ -1,11 +1,12 @@
 ---
-import { Image } from 'astro:assets';
-import profileLight from '../assets/hero-profile-light.png';
-import profileDark from '../assets/hero-profile-dark.png';
-import AboutCard from '../components/AboutCard.astro';
+import '../styles/hero.scss';
+import { getLang, useTranslations } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<section id="hero" class="relative min-h-screen">
+<section id="hero" class="relative min-h-screen" aria-label={t.hero.sectionAriaLabel}>
 
 	<video
 		id="hero-video"
@@ -17,18 +18,123 @@ import AboutCard from '../components/AboutCard.astro';
 		playsinline
 		preload="metadata"
 		poster="/assets/bg-background-loop-poster.webp"
+		title={t.hero.videoTitle}
+		aria-hidden="true"
+		{...{"fetchpriority": "low"}}
 	></video>
 
-	<div class="absolute inset-0 bg-th-bg/5 dark:bg-th-bg/70"></div>
-	<div class="relative flex min-h-screen items-center py-16">
-		<div class="container mx-auto px-6">
-			<div class="grid items-center gap-4 md:grid-cols-2">
-				<div data-hero-photo class="relative object-cover aspect-[4/5] max-h-[550px] overflow-hidden mx-auto border-2 border-th-bg/10 dark:border-th-bg/30">
-					<Image src={profileLight} alt="Marc Gallego" widths={[400, 500, 750]} sizes="(max-width: 768px) 400px, 500px" format="webp" quality={92} class="card-content h-full w-full object-cover dark:opacity-0 transition-opacity duration-500" loading="eager" />
-					<Image src={profileDark} alt="" widths={[400, 500, 750]} sizes="(max-width: 768px) 400px, 500px" format="webp" quality={92} class="card-content absolute inset-0 h-full w-full object-cover opacity-0 dark:opacity-100 transition-opacity duration-500" loading="eager" />
+	<div class="absolute inset-0 bg-primary/5 dark:bg-primary/70"></div>
+	<div class="relative flex min-h-screen flex-col py-16" data-hero-content>
+		<!-- Centro: nombre + feature cards -->
+		<div class="flex-1 flex flex-col justify-center container mx-auto px-4 md:px-10">
+
+			<!-- Nombre y rol -->
+			<div class="card-glass p-8 flex flex-col justify-center">
+				<h1 class="font-nord font-black tracking-tighter text-white leading-none uppercase flex flex-col items-center" style="font-size: clamp(64px, 13vw, 125px)">
+					<div class="hero-name-clip">
+						<span class="hero-name-word" style="--delay: 0ms">Marc</span>
+					</div>
+					<div class="hero-name-clip">
+						<span class="hero-name-word" style="--delay: 120ms">Gallego</span>
+					</div>
+				</h1>
+				<h2 class="font-monoblock font-normal text-white tracking-[0.3em] text-center mt-3 leading-tight" style="font-size: clamp(14px, 2.5vw, 20px)"><span class="hidden md:inline">{t.hero.rolePrefix}</span>{t.hero.role}</h2>
+			</div>
+
+			<!-- Feature cards -->
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+				<div class="card-glass hidden md:flex flex-col justify-center items-center py-10 px-4">
+					<span class="font-nord font-black text-white text-3xl uppercase">{t.hero.yearsLabel}</span>
+					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">{t.hero.yearsDesc}</span>
 				</div>
-				<AboutCard />
+				<div class="card-glass hidden md:flex flex-col justify-center items-center py-10 px-4">
+					<span class="font-nord font-black text-white text-3xl uppercase">{t.hero.projectsLabel}</span>
+					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">{t.hero.projectsDesc}</span>
+				</div>
+				<div class="card-glass flex justify-center items-center gap-6 py-10 px-4 col-span-full md:col-span-1">
+					<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" aria-label={t.hero.linkedinAriaLabel}>
+						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white" aria-hidden="true">
+							<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+							<rect width="4" height="12" x="2" y="9"/>
+							<circle cx="4" cy="4" r="2"/>
+						</svg>
+						<span class="sr-only">{t.hero.linkedinAriaLabel}</span>
+					</a>
+					<a href="tel:+34647604048" aria-label={t.hero.phoneAriaLabel}>
+						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white" aria-hidden="true">
+							<path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>
+						</svg>
+						<span class="sr-only">{t.hero.phoneAriaLabel}</span>
+					</a>
+					<a href={lang === 'en' ? '/en/contact' : '/contact'} aria-label={t.hero.emailAriaLabel}>
+						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white" aria-hidden="true">
+							<path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/>
+							<rect x="2" y="4" width="20" height="16" rx="2"/>
+						</svg>
+						<span class="sr-only">{t.hero.emailAriaLabel}</span>
+					</a>
+				</div>
+				<a href={lang === 'en' ? '/en/experience' : '/experience'} class="card-glass hero-cta hidden md:flex justify-center items-center gap-3 py-10 px-4" aria-label={t.hero.ctaAriaLabel}>
+					<span class="font-nord font-black text-white text-lg uppercase">{t.hero.ctaLabel}</span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white">
+						<path d="m9 18 6-6-6-6"/>
+					</svg>
+				</a>
+			</div>
+		</div>
+
+		<!-- Bottom elements -->
+		<div class="px-4 md:px-10 flex justify-between items-center">
+			<div class="flex items-center gap-3 md:w-auto w-full justify-center md:justify-start">
+				<span class="status-dot relative flex h-2.5 w-2.5">
+					<span class="absolute inline-flex h-full w-full animate-ping animate-duration-[2s] rounded-full bg-green-500 opacity-75"></span>
+					<span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
+				</span>
+				<span class="font-nord font-medium text-white uppercase tracking-widest" style="font-size: clamp(9px, 1.8vw, 14px)">{t.hero.available}</span>
+			</div>
+			<div class="hidden md:block">
+				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">{t.hero.degree}</span>
 			</div>
 		</div>
 	</div>
+
 </section>
+
+<style lang="scss">
+	.hero-name-clip {
+		overflow: hidden;
+		line-height: 0.9;
+	}
+
+	.hero-name-word {
+		display: block;
+		transform: translateY(110%);
+		animation: hero-name-in 0.5s cubic-bezier(0.34, 2.1, 0.64, 1) forwards;
+		animation-delay: var(--delay, 0ms);
+	}
+
+	@keyframes hero-name-in {
+		to {
+			transform: translateY(0);
+		}
+	}
+
+	.hero-icon {
+		transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+
+		&:hover {
+			transform: scale(1.4);
+		}
+	}
+
+	.hero-cta {
+		span, svg {
+			transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		&:hover span,
+		&:hover .hero-icon {
+			transform: scale(1.1);
+		}
+	}
+</style>

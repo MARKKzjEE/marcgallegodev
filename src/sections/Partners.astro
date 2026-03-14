@@ -1,0 +1,89 @@
+---
+import { Image } from 'astro:assets';
+import dokostudio from '../assets/clients/dokostudio.png';
+---
+
+<section id="partners" class="py-16 md:py-24" aria-labelledby="partners-heading">
+	<div class="container mx-auto px-4 md:px-10">
+		<div class="flex flex-col gap-8 items-start md:items-center md:text-center">
+
+			<h2 id="partners-heading" class="font-nord font-bold text-secondary uppercase">Partners</h2>
+
+			<div class="partners-card">
+                <div class="card-image">
+                    <Image src={dokostudio} alt="Logo Doko Studio, estudio de branding, diseño y desarrollo web" loading="lazy" quality={85} widths={[400, 800]} sizes="min(800px, 100vw)" format="webp" />
+                </div>
+                <div class="card-info">
+                    <div class="left">
+                        <h4 class="font-nord font-bold text-secondary text-left" style="font-size: clamp(16px, 4vw, 24px)">Doko Studio</h4>
+                        <p class="font-monoblock font-normal text-secondary/90 text-sm mt-1 tracking-widest text-left">Estudio de branding, diseño y desarrollo web</p>
+                    </div>
+                    <div class="right hidden md:block">
+                        <span class="font-nord text-secondary text-sm uppercase tracking-widest bg-quaternary p-4 rounded-full border">desde 2024</span>
+                    </div>
+                </div>
+            </div>
+
+		</div>
+	</div>
+</section>
+
+<style lang="scss">
+    #partners {
+        h2 {
+            font-size: clamp(44px, 8vw, 96px);
+            line-height: 1;
+        }
+    }
+
+    .partners-card {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border-radius: 12px;
+        background-color: var(--terciary);
+        border: 1px solid color-mix(in srgb, var(--secondary) 8%, transparent);
+        width: min(800px, 100%);
+        .right span {
+            border-color: color-mix(in srgb, var(--secondary) 10%, transparent);
+        }
+    }
+
+    .card-image {
+        width: 100%;
+        height: 400px;
+
+        @media (max-width: 767px) {
+            height: 300px;
+        }
+        overflow: hidden;
+        background-color: #6130EB;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        filter: brightness(0.9);
+
+        img {
+            max-width: 60%;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+    }
+
+    .partners-card:hover .card-image img {
+        transform: scale(1.08);
+    }
+
+    .card-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+
+        @media (max-width: 767px) {
+            padding: 1rem;
+        }
+    }
+</style>
+

@@ -1,41 +1,208 @@
 ---
+import { getLang, useTranslations, getLocalePath } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+
 const navItems = [
-	{ label: "Experiencia", href: "/experiencia" },
-	{ label: "Proyectos", href: "/proyectos" },
-	{ label: "Contacto", href: "/contacto" }
+	{ label: t.header.experience, href: getLocalePath(lang, '/experience') },
+	{ label: t.header.projects, href: getLocalePath(lang, '/projects') },
+	{ label: t.header.contact, href: getLocalePath(lang, '/contact') },
 ];
+
+const homePath = lang === 'en' ? '/en' : '/';
+const isHome = Astro.url.pathname === homePath || Astro.url.pathname === '/en/';
+
+const pathname = Astro.url.pathname;
+const esHref = pathname.startsWith('/en') ? (pathname.replace(/^\/en/, '') || '/') : pathname;
+const enHref = pathname.startsWith('/en') ? pathname : `/en${pathname === '/' ? '' : pathname}`;
 
 ---
 
-<header class="site-header fixed inset-x-0 top-0 z-40 bg-transparent" data-site-header>
-	<div class="font-nord font-medium hidden container mx-auto md:flex items-center justify-end h-[64px] gap-6 px-6">
-		<nav class="flex items-center gap-6 text-sm" aria-label="Navegación principal">
-			{navItems.map((item) => (
-				<a href={item.href} class="nav-link">
-					{item.label}
-				</a>
-			))}
-		</nav>
-    <div class="header-divider h-[32px] w-[1px] bg-th-header-text transition-all duration-300"></div>
-    <div class="flex items-center gap-1 text-sm" aria-label="Selector de idioma">
-      <button type="button" class="lang-btn lang-active" data-lang="es" aria-pressed="true">ES</button>
-      <span class="text-th-header-text/75">/</span>
-      <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-    </div>
-    <div class="toggle-switch">
-        <label class="switch-label" id="theme-toggle">
-          <input type="checkbox" class="checkbox" aria-label="Cambiar entre modo claro y oscuro">
-          <span class="slider"></span>
-        </>
-    </div>  
+<header class="site-header fixed inset-x-0 top-0 z-40" data-site-header>
+
+	<!-- ─── Desktop ─── -->
+	<div class="px-10 font-nord font-medium hidden md:flex items-center justify-between h-14">
+		<div class="text-sm">
+			{!isHome && (
+				<a href={homePath} class="nav-link">{lang === 'en' ? 'Home' : 'Inicio'}</a>
+			)}
+		</div>
+		<div class="flex items-center gap-6 text-sm">
+			<nav class="flex items-center gap-6" aria-label="Navegación principal">
+				{navItems.map((item) => {
+					const isActive = Astro.url.pathname.startsWith(item.href);
+					return (
+						<a href={item.href} class={`nav-link${isActive ? ' is-active' : ''}`} aria-current={isActive ? 'page' : undefined}>
+							{item.label}
+						</a>
+					);
+				})}
+			</nav>
+			<div class="header-divider w-px"></div>
+			<div class="flex items-center gap-1 text-sm" aria-label="Selector de idioma">
+				<a href={esHref} class={`lang-btn${lang === 'es' ? ' lang-active' : ''}`}>ES</a>
+				<span class="divider-slash opacity-75">/</span>
+				<a href={enHref} class={`lang-btn${lang === 'en' ? ' lang-active' : ''}`}>EN</a>
+			</div>
+			<div class="toggle-switch">
+				<label class="switch-label" id="theme-toggle">
+					<input type="checkbox" class="checkbox" aria-label="Cambiar entre modo claro y oscuro">
+					<span class="slider"></span>
+				</label>
+			</div>
+		</div>
 	</div>
+
+	<!-- ─── Mobile bar ─── -->
+	<div class="mobile-bar px-4 font-nord font-medium flex md:hidden items-center justify-end h-14">
+		<button
+			type="button"
+			class="hamburger-btn"
+			aria-label={t.header.mobileMenuOpen}
+			aria-expanded="false"
+			aria-controls="mobile-menu"
+			data-hamburger
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M4 5h16"/>
+				<path d="M4 12h16"/>
+				<path d="M4 19h16"/>
+			</svg>
+		</button>
+	</div>
+
+	<!-- ─── Mobile overlay ─── -->
+	<div
+		id="mobile-menu"
+		class="mobile-overlay font-nord"
+		aria-hidden="true"
+		data-mobile-menu
+	>
+		<!-- Close button -->
+		<button
+			type="button"
+			class="mobile-close-btn"
+			aria-label={t.header.mobileMenuClose}
+			data-menu-close
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+			</svg>
+		</button>
+
+		<!-- Nav links -->
+		<nav class="mobile-nav" aria-label="Navegación móvil">
+			{!isHome && (
+				<a href={homePath} class="mobile-nav-link">{lang === 'en' ? 'Home' : 'Inicio'}</a>
+			)}
+			{navItems.map((item) => {
+				const isActive = Astro.url.pathname.startsWith(item.href);
+				return (
+					<a href={item.href} class={`mobile-nav-link${isActive ? ' is-active' : ''}`} aria-current={isActive ? 'page' : undefined}>
+						{item.label}
+					</a>
+				);
+			})}
+		</nav>
+
+		<!-- Bottom controls -->
+		<div class="mobile-controls">
+			<div class="flex items-center gap-2 text-base" aria-label="Selector de idioma">
+				<a href={esHref} class={`lang-btn${lang === 'es' ? ' lang-active' : ''}`}>ES</a>
+				<span class="divider-slash opacity-75">/</span>
+				<a href={enHref} class={`lang-btn${lang === 'en' ? ' lang-active' : ''}`}>EN</a>
+			</div>
+			<button type="button" class="theme-text-btn" data-theme-mobile aria-label="Cambiar tema">
+				<span data-theme-label>Modo noche</span>
+			</button>
+		</div>
+	</div>
+
 </header>
 
 <style lang="scss">
+  .site-header {
+    transition: background-color 300ms ease, border-color 300ms ease;
+    border-bottom: 1px solid transparent;
+
+    // ─── Sobre el hero: transparente, texto blanco ───
+    .nav-link { color: #fff; }
+    .lang-btn { color: #fff; }
+    .divider-slash { color: #fff; }
+    .header-divider { background-color: #fff; height: 32px; transition: height 300ms ease, background-color 300ms ease; }
+    .switch-label {
+      background-color: #fff;
+      border-color: #fff;
+      .slider::before {
+        box-shadow: inset 8px -4px 0px 0px #1D1D1F;
+        background-color: #fff;
+      }
+      .checkbox:checked ~ .slider::before {
+        box-shadow: none;
+        background-color: #1D1D1F;
+      }
+    }
+
+    // ─── Pasado el hero: fondo sólido, tokens semánticos ───
+    &.is-past-hero {
+      background-color: var(--primary);
+      border-bottom-color: var(--secondary);
+
+      .nav-link { color: var(--secondary); }
+      .lang-btn { color: var(--secondary); }
+      .divider-slash { color: var(--secondary); }
+      .header-divider { background-color: var(--secondary); height: 56px; }
+      .switch-label {
+        background-color: var(--secondary);
+        border-color: var(--secondary);
+        .slider::before {
+          box-shadow: inset 8px -4px 0px 0px var(--primary);
+          background-color: var(--secondary);
+        }
+        .checkbox:checked ~ .slider::before {
+          box-shadow: none;
+          background-color: var(--primary);
+        }
+      }
+    }
+
+    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+
+    &.is-hidden {
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+
+    // ─── Mobile bar (dentro de site-header para heredar estados) ───
+    .mobile-bar {
+      .nav-link { color: #fff; }
+      .hamburger-btn {
+        color: #fff;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 4px;
+        outline: none;
+        transition: opacity 200ms;
+        &:hover { opacity: 0.7; }
+      }
+    }
+
+    &.is-past-hero {
+      .mobile-bar {
+        .nav-link { color: var(--secondary); }
+        .hamburger-btn { color: var(--secondary); }
+      }
+    }
+  }
+
   .nav-link {
     position: relative;
     padding-bottom: 0.25rem;
-    color: var(--th-header-text);
+    transition: color 300ms ease;
 
     &::after {
       content: '';
@@ -43,96 +210,166 @@ const navItems = [
       inset-inline: 0;
       bottom: -0.25rem;
       height: 2px;
-      background: var(--th-header-text);
+      background: currentColor;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 300ms;
     }
 
-    &:hover::after {
-      transform: scaleX(1);
-    }
+    &:hover::after,
+    &.is-active::after { transform: scaleX(1); }
   }
 
   .lang-btn {
-    color: var(--th-header-text);
-    opacity: 0.75;
-    transition: opacity 300ms;
+    opacity: 0.35;
+    transition: opacity 300ms, color 300ms ease;
     cursor: pointer;
 
-    &:hover {
-      opacity: 1;
-    }
+    &:hover { opacity: 0.65; }
 
-    &.lang-active {
-      opacity: 1;
+    &.lang-active { opacity: 1; }
+  }
 
-      &::before { content: '['; margin-right: 2px; }
-      &::after { content: ']'; margin-left: 2px; }
+  // ─── Mobile overlay ───
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    // Cortina: clip-path de arriba hacia abajo
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 800ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 50;
+
+    &.is-open {
+      clip-path: inset(0 0 0% 0);
+      pointer-events: all;
     }
   }
 
-  .site-header {
-    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, background-color 300ms ease, box-shadow 300ms ease;
-    &.is-past-hero {
-      --th-header-text: var(--th-heading);
-      --color-th-header-text: var(--th-heading);
-      --th-toggle-track: var(--th-heading);
-      --th-toggle-thumb: var(--th-bg);
-      background-color: var(--th-bg);
-      border-bottom: 1px solid var(--th-heading);
+  .mobile-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--secondary);
+    padding: 4px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    transition: opacity 200ms;
+    &:hover { opacity: 0.6; }
+  }
 
-      .header-divider {
-        height: 100%;
-      }
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex: 1;
+  }
+
+  .mobile-nav-link {
+    font-size: clamp(28px, 7vw, 44px);
+    font-weight: 300;
+    color: var(--secondary);
+    line-height: 1.15;
+    position: relative;
+    width: fit-content;
+    text-align: center;
+    transition: opacity 200ms;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-inline: 0;
+      bottom: -4px;
+      height: 2px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
     }
-    &.is-hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transform: translateY(-8px);
+
+    &:hover { opacity: 0.7; }
+    &:hover::after,
+    &.is-active::after { transform: scaleX(1); }
+  }
+
+  .mobile-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+
+    .lang-btn { color: var(--secondary); }
+    .divider-slash { color: var(--secondary); }
+  }
+
+  .theme-text-btn {
+    background-color: var(--secondary);
+    color: var(--primary);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    text-align: center;
+    border-radius: 8px;
+    transition: opacity 200ms;
+    span {
+      display: inline-block;
+      width: 100px;
     }
-    .toggle-switch {
-      position: relative;
-      width: 50px;
-      height: 28px;
-    }
-    .switch-label {
+  }
+
+  .toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 28px;
+  }
+
+  .switch-label {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 300ms ease, border-color 300ms ease;
+
+    .checkbox { position: absolute; display: none; }
+
+    .slider {
       position: absolute;
       width: 100%;
       height: 100%;
-      background-color: var(--th-toggle-track);
-      border: 2px solid var(--th-toggle-track);
       border-radius: 16px;
-      cursor: pointer;
-      .checkbox {
+      transition: 0.3s;
+
+      &::before {
+        content: "";
         position: absolute;
-        display: none;
-      }
-      .slider {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 16px;
+        top: 4px;
+        left: 4px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
         transition: 0.3s;
-        &::before {
-          content: "";
-          position: absolute;
-          top: 4px;
-          left: 4px;
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          box-shadow: inset 8px -4px 0px 0px var(--th-toggle-thumb);
-          background-color: var(--th-toggle-track);
-          transition: 0.3s;
-        }
       }
-      .checkbox:checked ~ .slider::before {
-        transform: translateX(22px);
-        box-shadow: none;
-        background-color: var(--th-toggle-thumb);
-      }
+    }
+
+    .checkbox:checked ~ .slider::before {
+      transform: translateX(22px);
     }
   }
 </style>
@@ -140,4 +377,68 @@ const navItems = [
 <script>
 	import { initHeaderScroll } from "../scripts/header-scroll";
 	initHeaderScroll();
+
+	// ─── Mobile menu ───
+	const hamburger = document.querySelector<HTMLButtonElement>('[data-hamburger]');
+	const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+	const closeBtn = document.querySelector<HTMLButtonElement>('[data-menu-close]');
+
+	if (hamburger && menu && closeBtn) {
+		function openMenu() {
+			menu!.classList.add('is-open');
+			menu!.removeAttribute('aria-hidden');
+			hamburger!.setAttribute('aria-expanded', 'true');
+			document.body.style.overflow = 'hidden';
+			closeBtn!.focus();
+		}
+
+		function closeMenu() {
+			menu!.classList.remove('is-open');
+			menu!.setAttribute('aria-hidden', 'true');
+			hamburger!.setAttribute('aria-expanded', 'false');
+			document.body.style.overflow = '';
+			hamburger!.focus();
+		}
+
+		hamburger.addEventListener('click', openMenu);
+		closeBtn.addEventListener('click', closeMenu);
+
+		// Close on nav link click — espera a que termine la animación antes de navegar
+		menu.querySelectorAll<HTMLAnchorElement>('.mobile-nav-link').forEach(link => {
+			link.addEventListener('click', (e) => {
+				const href = link.getAttribute('href');
+				if (!href) return;
+				e.preventDefault();
+				closeMenu();
+				setTimeout(() => { window.location.href = href; }, 600);
+			});
+		});
+
+		// Close on Escape
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && menu!.classList.contains('is-open')) {
+				closeMenu();
+			}
+		});
+
+		// Mobile theme button
+		const themeBtn = menu.querySelector<HTMLButtonElement>('[data-theme-mobile]');
+		const themeLabel = menu.querySelector<HTMLElement>('[data-theme-label]');
+		const desktopToggle = document.querySelector<HTMLInputElement>('#theme-toggle .checkbox');
+
+		function updateThemeLabel() {
+			if (!themeLabel) return;
+			const isDark = document.documentElement.classList.contains('dark');
+			themeLabel.textContent = isDark ? 'Modo día' : 'Modo noche';
+		}
+
+		if (themeBtn && desktopToggle) {
+			updateThemeLabel();
+			themeBtn.addEventListener('click', () => {
+				desktopToggle.checked = !desktopToggle.checked;
+				desktopToggle.dispatchEvent(new Event('change', { bubbles: true }));
+				updateThemeLabel();
+			});
+		}
+	}
 </script>

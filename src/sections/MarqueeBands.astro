@@ -1,4 +1,9 @@
 ---
+import { getLang, useTranslations } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+
 const handIcon = "/icons/Gestures & Hands/hand.svg";
 const handshakeIcon = "/icons/Gestures & Hands/handshake.svg";
 
@@ -6,7 +11,7 @@ const callItems = 8;
 const linkedinItems = 6;
 ---
 
-<div class="marquee-bands">
+<div class="marquee-bands mb-16 md:mb-24">
 	<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="marquee-band marquee-band--linkedin" data-punch="30">
 		<div class="marquee-track marquee-track--reverse" data-marquee>
 			<!-- Mitad A -->
@@ -14,7 +19,7 @@ const linkedinItems = 6;
 				{[...Array(linkedinItems)].map(() => (
 					<div class="marquee-item">
 						<img src={handshakeIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
-						<span class="marquee-text text-4xl font-pixelbots">CONECTEMOS EN LINKEDIN</span>
+						<span class="marquee-text font-pixelbots">{t.marquee.linkedin}</span>
 					</div>
 				))}
 			</div>
@@ -23,7 +28,7 @@ const linkedinItems = 6;
 				{[...Array(linkedinItems)].map(() => (
 					<div class="marquee-item">
 						<img src={handshakeIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
-						<span class="marquee-text text-4xl font-pixelbots">CONECTEMOS EN LINKEDIN</span>
+						<span class="marquee-text font-pixelbots">{t.marquee.linkedin}</span>
 					</div>
 				))}
 			</div>
@@ -37,7 +42,7 @@ const linkedinItems = 6;
 				{[...Array(callItems)].map(() => (
 					<div class="marquee-item">
 						<img src={handIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
-						<span class="marquee-text font-pixelbots">HAZME UNA LLAMADA</span>
+						<span class="marquee-text font-pixelbots">{t.marquee.call}</span>
 					</div>
 				))}
 			</div>
@@ -46,7 +51,7 @@ const linkedinItems = 6;
 				{[...Array(callItems)].map(() => (
 					<div class="marquee-item">
 						<img src={handIcon} alt="" class="marquee-icon" width="40" height="40" aria-hidden="true" />
-						<span class="marquee-text font-pixelbots">HAZME UNA LLAMADA</span>
+						<span class="marquee-text font-pixelbots">{t.marquee.call}</span>
 					</div>
 				))}
 			</div>
@@ -73,12 +78,12 @@ const linkedinItems = 6;
 	}
 
 	.marquee-band--call {
-		background-color: var(--th-l-dark-blue);
+		background-color: var(--secondary);
 	}
 
 	.marquee-band--linkedin {
-		background-color: var(--th-l-cream);
-		border-top: 1px solid var(--th-l-dark-blue);
+		background-color: var(--primary);
+		border-top: 1px solid var(--secondary);
 	}
 
 	.marquee-track {
@@ -109,10 +114,10 @@ const linkedinItems = 6;
 	}
 
 	.marquee-text {
-		font-size: 30px;
+		font-size: clamp(16px, 3.5vw, 20px);
 		font-weight: 500;
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.2em;
 		white-space: nowrap;
 		paint-order: stroke fill;
 		-webkit-text-stroke: 4px black;
@@ -130,11 +135,11 @@ const linkedinItems = 6;
 	// ── Dark mode ──
 	:global(.dark) {
 		.marquee-band--call {
-			background-color: var(--th-d-white);
+			background-color: var(--secondary);
 		}
 
 		.marquee-band--linkedin {
-			background-color: var(--th-d-grey-dark);
+			background-color: var(--terciary);
 		}
 	}
 

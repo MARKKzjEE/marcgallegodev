@@ -4,17 +4,23 @@ import Header from '../sections/Header.astro';
 import Hero from '../sections/Hero.astro';
 import TechStack from '../sections/TechStack.astro';
 import WhatWeDo from '../sections/WhatWeDo.astro';
+import Partners from '../sections/Partners.astro';
+import FAQ from '../sections/FAQ.astro';
+import AboutSection from '../sections/AboutSection.astro';
 import MarqueeBands from '../sections/MarqueeBands.astro';
-import GradientSection from '../sections/GradientSection.astro';
 import Footer from '../sections/Footer.astro';
 ---
 
 <Layout>
 	<Header />
-	<Hero />
-	<TechStack />
-	<WhatWeDo />
-	<GradientSection />
-	<MarqueeBands />
+	<main>
+		<Hero />
+		<TechStack />
+		<WhatWeDo />
+		<AboutSection />
+		<MarqueeBands />
+		<Partners />
+		<FAQ />
+	</main>
 	<Footer />
 </Layout>
