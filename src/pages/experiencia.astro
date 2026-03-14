@@ -16,8 +16,8 @@ import imgPlanit from '../assets/clients/planit.png';
 	description="Trayectoria profesional y experiencia laboral de Marc Gallego como ingeniero del software."
 >
 	<Header />
-	<main class="min-h-screen bg-primary pt-[64px]">
-		<div class="cv container mx-auto px-6 pt-16 pb-[150px]">
+	<main class="min-h-screen bg-primary pt-14">
+		<div class="cv container mx-auto px-4 md:px-10 py-16 md:py-24">
 
 			<!-- Título -->
 			<div class="cv__name-row">
@@ -97,7 +97,7 @@ import imgPlanit from '../assets/clients/planit.png';
 									<span class="cv__tag">Django</span>
 									<span class="cv__tag">Python</span>
 									<span class="cv__tag">WordPress</span>
-									<span class="cv__tag">Modelos IA</span>
+									<span class="cv__tag">IA</span>
 									<span class="cv__tag">PHP</span>
 								</div>
 							</div>
@@ -127,9 +127,10 @@ import imgPlanit from '../assets/clients/planit.png';
 								<h3 class="cv__entry-title">Loyic</h3>
 								<p class="cv__entry-subtitle">Desarrollador Full Stack / Líder de Equipo</p>
 								<div class="cv__tags">
-									<span class="cv__tag">Desarrollo Web</span>
+									<span class="cv__tag">HTML</span>
+									<span class="cv__tag">CSS</span>
+									<span class="cv__tag">Javascript</span>
 									<span class="cv__tag">SQL</span>
-									<span class="cv__tag">Optimización BBDD</span>
 									<span class="cv__tag">BI</span>
 								</div>
 							</div>
@@ -166,7 +167,7 @@ import imgPlanit from '../assets/clients/planit.png';
 							</div>
 							<div class="cv__entry-meta">
 								<span class="cv__entry-date">Ene 2019 — Ago 2019</span>
-								<span class="cv__entry-location">Ciudad de México, México</span>
+								<span class="cv__entry-location">Barcelona, España</span>
 							</div>
 						</div>
 						<ul class="cv__list">
@@ -289,17 +290,45 @@ import imgPlanit from '../assets/clients/planit.png';
 		&:hover {
 			transform: scale(1.1);
 		}
+
+		@media (max-width: 767px) {
+			position: fixed;
+			right: 1.5rem;
+			bottom: 1.5rem;
+			top: auto;
+			height: auto;
+			background-color: color-mix(in srgb, var(--secondary) 10%, transparent);
+			backdrop-filter: blur(20px) saturate(180%);
+			-webkit-backdrop-filter: blur(20px) saturate(180%);
+			border: 1px solid color-mix(in srgb, var(--secondary) 20%, transparent);
+			color: var(--secondary);
+			width: 52px;
+			height: 52px;
+			border-radius: 50%;
+			justify-content: center;
+			z-index: 30;
+			box-shadow: 0 4px 24px color-mix(in srgb, var(--secondary) 10%, transparent);
+		}
 	}
 
 	.cv__download-icon {
 		width: 32px;
 		height: 32px;
+
+		@media (max-width: 767px) {
+			width: 22px;
+			height: 22px;
+		}
 	}
 
 	.cv__download-label {
 		font-size: 8px;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
+
+		@media (max-width: 767px) {
+			display: none;
+		}
 	}
 
 	// ── Horizontal rule ──
@@ -340,6 +369,10 @@ import imgPlanit from '../assets/clients/planit.png';
 		& + .cv__entry {
 			margin-top: 28px;
 		}
+
+		@media (max-width: 767px) {
+			gap: 12px;
+		}
 	}
 
 	// ── Icon column (image + line) ──
@@ -357,6 +390,11 @@ import imgPlanit from '../assets/clients/planit.png';
 		border: 1px solid color-mix(in srgb, var(--secondary) 25%, transparent);
 		flex-shrink: 0;
 		object-fit: contain;
+
+		@media (max-width: 767px) {
+			width: 48px;
+			height: 48px;
+		}
 	}
 
 	.cv__entry-line {
@@ -381,7 +419,7 @@ import imgPlanit from '../assets/clients/planit.png';
 
 		@media (max-width: 600px) {
 			flex-direction: column;
-			gap: 4px;
+			gap: 10px;
 		}
 	}
 

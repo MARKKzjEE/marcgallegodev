@@ -138,19 +138,20 @@ import contactGradient from '../assets/gradients/contact-gradient.jpg';
 	}
 
 	// ── Mobile ──
-	@media (max-width: 768px) {
+	@media (max-width: 767px) {
 		.contact-section {
 			grid-template-columns: 1fr;
-			height: auto;
+			height: calc(100vh - 56px);
 		}
 
 		.contact-left {
-			padding: 48px 32px;
+			padding: 48px 1rem;
+			border-right: none;
+			overflow-y: auto;
 		}
 
 		.contact-photo {
-			height: 300px;
-			order: -1;
+			display: none;
 		}
 	}
 

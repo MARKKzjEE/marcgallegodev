@@ -8,6 +8,27 @@ export function initHeaderScroll(): void {
 	const heroPhoto = document.querySelector<HTMLElement>("[data-hero-photo]");
 	const heroContent = document.querySelector<HTMLElement>("[data-hero-content]");
 
+	// ── Hide on scroll down, show on scroll up (mobile only) ──
+	const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
+	let lastScrollY = window.scrollY;
+	let hideThreshold = 80; // px scrolled before hiding kicks in
+
+	window.addEventListener("scroll", () => {
+		if (!isMobile()) {
+			header.classList.remove("is-hidden");
+			lastScrollY = window.scrollY;
+			return;
+		}
+		const current = window.scrollY;
+		const delta = current - lastScrollY;
+		if (current > hideThreshold && delta > 0) {
+			header.classList.add("is-hidden");
+		} else if (delta < 0) {
+			header.classList.remove("is-hidden");
+		}
+		lastScrollY = current;
+	}, { passive: true });
+
 	// Pages without Hero or contact hero start with solid header
 	if (!hero && !contactHero) {
 		header.classList.add("is-past-hero");
