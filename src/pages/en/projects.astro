@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../sections/Header.astro";
-import Projects from "../../sections/Projects.astro";
+import ProjectsSection from "../../sections/Projects.astro";
 import Footer from "../../sections/Footer.astro";
 import { useTranslations } from '../../i18n/index';
 
@@ -19,12 +19,12 @@ const t = useTranslations('en');
 		"@context": "https://schema.org",
 		"@type": "BreadcrumbList",
 		"itemListElement": [
-			{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://marcgallegodev.com/en/" },
-			{ "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://marcgallegodev.com/en/projects/" }
+			{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://marcgallego.com/en/" },
+			{ "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://marcgallego.com/en/projects/" }
 		]
 	})}</script>
 	<main class="min-h-screen bg-primary pt-14">
-		<Projects />
+		<ProjectsSection />
 	</main>
 	<Footer />
 </Layout>

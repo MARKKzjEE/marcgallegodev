@@ -12,14 +12,14 @@ const defaultDescription = "Portfolio de Marc Gallego, Ingeniero del Software y 
 const defaultKeywords = "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles";
 const { title = "Marc Gallego | Desarrollador Full Stack", description = defaultDescription, keywords = defaultKeywords, lang = 'es' } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, 'https://marcgallegodev.com').href;
+const canonicalURL = new URL(Astro.url.pathname, 'https://marcgallego.com').href;
 
 // hreflang alternate URLs
 const pathname = Astro.url.pathname;
 const esPath = pathname.startsWith('/en') ? pathname.replace(/^\/en/, '') || '/' : pathname;
 const enPath = pathname.startsWith('/en') ? pathname : `/en${pathname === '/' ? '' : pathname}`;
-const esURL = new URL(esPath, 'https://marcgallegodev.com').href;
-const enURL = new URL(enPath, 'https://marcgallegodev.com').href;
+const esURL = new URL(esPath, 'https://marcgallego.com').href;
+const enURL = new URL(enPath, 'https://marcgallego.com').href;
 ---
 
 <!doctype html>
@@ -56,8 +56,8 @@ const enURL = new URL(enPath, 'https://marcgallegodev.com').href;
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content="https://marcgallegodev.com/assets/og-image.webp" />
-		<meta property="og:locale" content="es_ES" />
+		<meta property="og:image" content="https://marcgallego.com/assets/og-image.webp" />
+		<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
 		<meta property="og:site_name" content="Marc Gallego" />
 
 		<!-- Twitter Card -->
@@ -65,7 +65,7 @@ const enURL = new URL(enPath, 'https://marcgallegodev.com').href;
 		<meta name="twitter:site" content="@marcgallegodev" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content="https://marcgallegodev.com/assets/og-image.webp" />
+		<meta name="twitter:image" content="https://marcgallego.com/assets/og-image.webp" />
 
 		<!-- Theme color -->
 		<meta name="theme-color" content="rgb(212, 212, 212)" media="(prefers-color-scheme: light)" />
@@ -76,7 +76,7 @@ const enURL = new URL(enPath, 'https://marcgallegodev.com').href;
 			"@context": "https://schema.org",
 			"@type": "Person",
 			"name": "Marc Gallego",
-			"url": "https://marcgallegodev.com",
+			"url": "https://marcgallego.com",
 			"jobTitle": "Full Stack Software Engineer",
 			"description": defaultDescription,
 			"sameAs": [
