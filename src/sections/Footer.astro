@@ -244,6 +244,29 @@ const currentYear = new Date().getFullYear();
 
 </style>
 
+<script is:inline type="application/ld+json">{JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "Person",
+	"name": "Marc Gallego",
+	"url": "https://marcgallegodev.com",
+	"contactPoint": [
+		{
+			"@type": "ContactPoint",
+			"telephone": "+34-647-604-048",
+			"contactType": "customer support",
+			"availableLanguage": ["Spanish", "Catalan", "English"]
+		},
+		{
+			"@type": "ContactPoint",
+			"email": "mark.gallego.gines@gmail.com",
+			"contactType": "customer support"
+		}
+	],
+	"sameAs": [
+		"https://linkedin.com/in/marcgallegodev"
+	]
+})}</script>
+
 <script>
 	import '../scripts/circle-reveal.ts';
 

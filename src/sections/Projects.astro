@@ -74,7 +74,7 @@ const projects = [
 					<div class="project-card-image" style={`background-color: ${project.color};`}>
 						<Image
 							src={project.image}
-							alt={project.title}
+							alt={`${project.title} — ${project.description}`}
 							widths={[600, 900]}
 							sizes="(max-width: 768px) 90vw, 40vw"
 							format="webp"
