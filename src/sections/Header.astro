@@ -209,11 +209,11 @@ const enHref = pathname.startsWith('/en') ? pathname : `/en${pathname === '/' ? 
       position: absolute;
       inset-inline: 0;
       bottom: -0.25rem;
-      height: 2px;
+      height: 1px;
       background: currentColor;
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform 300ms;
+      transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     &:hover::after,

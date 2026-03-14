@@ -100,7 +100,7 @@ const enURL = new URL(enPath, 'https://marcgallego.com').href;
 			const stored = localStorage.getItem("theme");
 			const prefersDark = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : null;
 			// Si no hay preferencia guardada, respeta el sistema; si no hay dato de sistema, usa oscuro por defecto
-			const isDark = stored === "dark" || (!stored && (prefersDark ?? true));
+			const isDark = stored === "dark" || (!stored && (prefersDark ?? false));
 			root.classList.toggle("dark", isDark);
 		</script>
 	</head>

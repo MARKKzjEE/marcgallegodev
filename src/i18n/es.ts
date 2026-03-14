@@ -52,13 +52,13 @@ export const es = {
 	// ── WhatWeDo ──
 	whatWeDo: {
 		label: "Qué es lo que hago",
-		text: "Mi camino comenzó con una pasión por construir soluciones digitales sólidas y dar forma técnica a las ideas. Me centro en transformar conceptos en productos funcionales, escalables y bien estructurados. Con una dedicación constante por mejorar y optimizar cada detalle, trabajo para entregar proyectos robustos, eficientes y preparados para crecer.",
+		text: "Mi camino empezó cuando era pequeño. Pasaba horas desmontando y montando ordenadores intentando entender cómo funcionaba todo por dentro. Con el tiempo esa curiosidad me llevó al software que hacía funcionar esas máquinas y a descubrir la libertad que existe al crear con tecnología: convertir ideas en soluciones reales. Hoy me dedico precisamente a eso: diseñar y desarrollar productos digitales sólidos, bien estructurados y preparados para crecer.",
 	},
 
 	// ── TechStack ──
 	techStack: {
 		heading: "Tecnologías",
-		descCorner: "Tecnologías del stack",
+		descCorner: "Algunas de las tecnologías con las que trabajo cada día. Me gusta estar involucrado en cada fase del proyecto, desde la idea hasta producción.",
 		toggleShow: "Ver tecnologías",
 		toggleHide: "Ocultar tecnologías",
 	},
@@ -118,16 +118,16 @@ export const es = {
 
 	// ── Projects ──
 	projects: {
-		pageTitle: "Trabajos destacados.",
+		pageTitle: "Destacados.",
 		dragHint: "Arrastra para explorar",
 		items: [
 			{ title: 'Viviq', description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.' },
 			{ title: 'Cor de suro', description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.' },
-			{ title: 'Lateua', description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo basadas en IA.' },
-			{ title: 'Loyic', description: 'Portal del empleado de la empresa para registrar registro horario, documentos, nóminas, etc.' },
+			{ title: 'Lateua', description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo apoyadas con modelos IA.' },
+			{ title: 'Loyic', description: 'Portal del empleado con el que se registra todos los datos de usuarios internos de la empresa como registro horario, documentación, nominas, encuestas internas, etc.' },
 			{ title: 'Pillositio', description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.' },
 			{ title: 'PlanIT', description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.' },
-			{ title: 'RTTH', description: 'Transformación de ondas sonoras en archivos de audio a imágenes para marcas y recursos para webs.' },
+			{ title: 'RTTH', description: 'Generación del territorio de la marca con un servicio que transforma desde las ondas de sonido de un archivo a imagenes como recursos de diseño con las ondas integradas.' },
 		],
 	},
 

@@ -54,7 +54,7 @@ export const en: Translations = {
 	// ── WhatWeDo ──
 	whatWeDo: {
 		label: "What I do",
-		text: "My journey started with a passion for building solid digital solutions and giving technical shape to ideas. I focus on transforming concepts into functional, scalable and well-structured products. With a constant dedication to improving and optimising every detail, I work to deliver robust, efficient projects ready to grow.",
+		text: "My journey started when I was young. I spent hours taking apart and reassembling computers, trying to understand how everything worked inside. Over time, that curiosity led me to the software powering those machines and to discovering the freedom that comes with creating through technology: turning ideas into real solutions. Today, that's exactly what I do: design and develop solid, well-structured digital products ready to grow.",
 	},
 
 	// ── TechStack ──
@@ -120,16 +120,16 @@ export const en: Translations = {
 
 	// ── Projects ──
 	projects: {
-		pageTitle: "Featured work.",
+		pageTitle: "Featured.",
 		dragHint: "Drag to explore",
 		items: [
 			{ title: 'Viviq', description: 'Real estate platform with a CMS adaptable to each client.' },
 			{ title: 'Cor de suro', description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.' },
-			{ title: 'Lateua', description: 'SaaS with marketplace for product management and AI-based interior design solutions.' },
-			{ title: 'Loyic', description: 'Company employee portal for time tracking, documents, payroll, and more.' },
+			{ title: 'Lateua', description: 'SaaS with marketplace for product management and AI-powered interior design solutions.' },
+			{ title: 'Loyic', description: 'Employee portal to manage all internal company data: time tracking, documentation, payroll, internal surveys, and more.' },
 			{ title: 'Pillositio', description: 'App and web platform for bars and restaurants with services for businesses and customers.' },
 			{ title: 'PlanIT', description: 'My side project that evolved into a startup connecting people around any kind of plan or activity.' },
-			{ title: 'RTTH', description: 'Transform sound waves from audio files into images for brands and web resources.' },
+			{ title: 'RTTH', description: 'Brand territory built through a service that transforms sound waves from audio files into design assets with integrated waveforms.' },
 		],
 	},
 
