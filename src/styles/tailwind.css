@@ -2,6 +2,11 @@
 @import "tailwind-animations";
 @custom-variant dark (&:where(.dark, .dark *));
 
+::selection {
+	background-color: var(--secondary);
+	color: var(--primary);
+}
+
 /*
 100Thin / Hairline
 200Extra Light
