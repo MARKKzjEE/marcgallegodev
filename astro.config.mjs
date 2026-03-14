@@ -6,7 +6,15 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://marcgallegodev.com',
-  integrations: [sitemap()],
+  integrations: [sitemap({
+    i18n: {
+      defaultLocale: 'es',
+      locales: {
+        es: 'es',
+        en: 'en',
+      },
+    },
+  })],
   vite: {
     plugins: [tailwindcss()]
   }

@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { getLang, useTranslations } from '../i18n/index';
 import cordesuro from '../assets/projects/cordesuro.png';
 import lateua from '../assets/projects/lateua.png';
 import loyic from '../assets/projects/loyic.png';
@@ -8,61 +9,27 @@ import planit from '../assets/projects/planit.png';
 import rtth from '../assets/projects/rtth.png';
 import viviq from '../assets/projects/viviq.png';
 
-const projects = [
-	{
-		title: 'Viviq',
-		description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.',
-		image: viviq,
-		color: '#00676A',
-	},
-	{
-		title: 'Cor de suro',
-		description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.',
-		image: cordesuro,
-		color: '#8C4216',
-	},
-	{
-		title: 'Lateua',
-		description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo basadas en IA.',
-		image: lateua,
-		color: '#BD7D60',
-	},
-	{
-		title: 'Loyic',
-		description: 'Portal del empleado de la empresa para registrar registro horario, documentos, nóminas, etc.',
-		image: loyic,
-		color: '#F1EBF1',
-	},
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
 
-	{
-		title: 'Pillositio',
-		description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.',
-		image: pillositio,
-		color: '#F6F4EE',
-	},
-	{
-		title: 'PlanIT',
-		description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.',
-		image: planit,
-		color: '#FA4D6E',
-	},
-	{
-		title: 'RTTH',
-		description: 'Transformación de ondas sonoras en archivos de audio a imágenes para marcas y recursos para webs.',
-		image: rtth,
-		color: '#7F7FE7',
-	},
-];
+const projectImages = [viviq, cordesuro, lateua, loyic, pillositio, planit, rtth];
+const projectColors = ['#00676A', '#8C4216', '#BD7D60', '#F1EBF1', '#F6F4EE', '#FA4D6E', '#7F7FE7'];
+
+const projects = t.projects.items.map((item, i) => ({
+	...item,
+	image: projectImages[i],
+	color: projectColors[i],
+}));
 ---
 
 <section class="projects-section" id="proyectos-destacados">
 	<!-- Header -->
 	<div class="projects-header px-4 md:px-10">
 		<h1 class="font-vogun font-light text-secondary projects-title">
-			Trabajos destacados.
+			{t.projects.pageTitle}
 		</h1>
 		<p class="font-nord font-light text-secondary/60 text-sm uppercase tracking-widest mt-2">
-			Arrastra para explorar
+			{t.projects.dragHint}
 		</p>
 	</div>
 

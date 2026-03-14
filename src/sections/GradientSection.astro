@@ -2,6 +2,10 @@
 import { Image } from 'astro:assets';
 import gradientBg from '../assets/gradients/fqm-gradient.png';
 import gradientBgDark from '../assets/gradients/fqm-gradient-dark2.png';
+import { getLang, useTranslations } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="gradient-section border-t border-secondary py-24">
@@ -20,7 +24,7 @@ import gradientBgDark from '../assets/gradients/fqm-gradient-dark2.png';
 		aria-hidden="true"
 	/>
 	<div class="container mx-auto px-10 gradient-section__content">
-		<h2 class="gradient-section__title font-vogun font-normal leading-[1.2] text-primary/60 tracking-wide">Haz realidad tu idea</h2>
+		<h2 class="gradient-section__title font-vogun font-normal leading-[1.2] text-primary/60 tracking-wide">{t.gradient.headline}</h2>
 	</div>
 </section>
 

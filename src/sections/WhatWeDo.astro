@@ -1,6 +1,9 @@
 ---
-const text = "Mi camino comenzó con una pasión por construir soluciones digitales sólidas y dar forma técnica a las ideas. Me centro en transformar conceptos en productos funcionales, escalables y bien estructurados. Con una dedicación constante por mejorar y optimizar cada detalle, trabajo para entregar proyectos robustos, eficientes y preparados para crecer.";
-const words = text.split(' ');
+import { getLang, useTranslations } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+const words = t.whatWeDo.text.split(' ');
 ---
 
 <section id="what-we-do" class="what-we-do py-16 md:py-24" aria-labelledby="what-we-do-heading">
@@ -8,7 +11,7 @@ const words = text.split(' ');
 		<div class="grid md:grid-cols-[320px_1fr] gap-8 md:gap-16 items-start">
 
 			<!-- Label izquierda -->
-			<h2 id="what-we-do-heading" class="what-we-do__label font-nord text-secondary uppercase tracking-widest">Qué es lo que hago</h2>
+			<h2 id="what-we-do-heading" class="what-we-do__label font-nord text-secondary uppercase tracking-widest">{t.whatWeDo.label}</h2>
 
 			<!-- Texto con reveal por palabra -->
 			<div class="what-we-do__content">

@@ -2,23 +2,26 @@
 import { Image } from 'astro:assets';
 import profileLight from '../assets/me/hero-profile-light.png';
 import profileDark from '../assets/me/hero-profile-dark.png';
+import { getLang, useTranslations } from '../i18n/index';
 
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <!-- ─── Mobile layout ─── -->
 <div class="md:hidden">
 	<!-- Título -->
 	<div class="border-b border-secondary p-4">
-		<h2 class="font-nord font-black text-secondary uppercase leading-none" style="font-size: clamp(44px, 8vw, 96px)">Sobre mi</h2>
+		<h2 class="font-nord font-black text-secondary uppercase leading-none" style="font-size: clamp(44px, 8vw, 96px)">{t.about.title}</h2>
 	</div>
 	<!-- Foto + texto -->
 	<div class="p-4 flex flex-col gap-6">
 		<div class="rounded-lg overflow-hidden">
-			<Image src={profileDark} alt="Marc Gallego, desarrollador Full Stack en Barcelona" widths={[600]} sizes="100vw" format="webp" quality={92} loading="lazy" class="w-full object-cover object-center dark:hidden" />
-			<Image src={profileLight} alt="Marc Gallego, desarrollador Full Stack en Barcelona" widths={[600]} sizes="100vw" format="webp" quality={92} loading="lazy" class="hidden w-full object-cover object-center dark:block" />
+			<Image src={profileDark} alt={t.about.profileAlt} widths={[600]} sizes="100vw" format="webp" quality={92} loading="lazy" class="w-full object-cover object-center dark:hidden" />
+			<Image src={profileLight} alt={t.about.profileAlt} widths={[600]} sizes="100vw" format="webp" quality={92} loading="lazy" class="hidden w-full object-cover object-center dark:block" />
 		</div>
 		<p class="font-cottor font-light text-secondary leading-7 text-[16px]">
-			Nacido en Barcelona, fuera del código el mar es mi descontrol y mi paz. Me gusta ser creativo y aplicar mi gusto tanto a soluciones digitales como en mi día a día como fan de la moda y del arte.
+			{t.about.bioMobile}
 		</p>
 	</div>
 </div>
@@ -34,36 +37,29 @@ import profileDark from '../assets/me/hero-profile-dark.png';
 		<div class="flex flex-3 flex-col min-h-0">
 			<div class="flex-1 flex gap-6 p-6">
 				<div class="flex-1 flex items-start">
-					<p class="font-cottor font-light text-secondary leading-7 text-justify text-[18px]">
-						Me apasiona la tecnología y su evolución constante. Disfruto aprendiendo y probando nuevas herramientas, siempre con criterio y pensando en qué aporta realmente valor al proyecto.
-						<br><br>Soy exigente con mi trabajo y cuido los detalles. No busco solo que algo funcione, sino que esté bien pensado y bien construido.
-						<br><br>Trabajo con transparencia porque creo que es la base de cualquier buena colaboración: claridad en lo que se hace, por qué se hace y hacia dónde vamos.
-					</p>
+					<p class="font-cottor font-light text-secondary leading-7 text-justify text-[18px]" set:html={t.about.bioDesktop1.replace(/\n\n/g, '<br><br>')} />
 				</div>
 				<div class="font-cottor font-light text-secondary flex-1 flex items-end">
-					<p class="leading-7 text-justify text-[18px]">
-						Más allá del desarrollo, podrás ver una clara referencia al mar, mi equilibrio. Es el lugar donde desconecto, ordeno ideas y vuelvo con claridad.
-						<br><br>También me mueve la moda y la creatividad contemporánea: me inspira cómo el arte y la identidad se mezclan y se expresan sin límites. Esa forma de entender la creatividad también define mi trabajo: no solo construyo soluciones, busco que tengan carácter.
-					</p>
+					<p class="leading-7 text-justify text-[18px]" set:html={t.about.bioDesktop2.replace(/\n\n/g, '<br><br>')} />
 				</div>
 			</div>
 		</div>
 		<!-- Derecha: imagen -->
 		<div data-parallax-wrap class="relative flex-2 rounded-lg overflow-hidden min-h-0 mt-2 mx-2">
-			<Image src={profileDark} alt="Marc Gallego, desarrollador Full Stack en Barcelona" widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={92} loading="lazy" class="about-profile-img h-full w-full object-cover object-center dark:hidden" />
-			<Image src={profileLight} alt="Marc Gallego, desarrollador Full Stack en Barcelona" widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={92} loading="lazy" class="about-profile-img hidden h-full w-full object-cover object-center dark:block" />
+			<Image src={profileDark} alt={t.about.profileAlt} widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={92} loading="lazy" class="about-profile-img h-full w-full object-cover object-center dark:hidden" />
+			<Image src={profileLight} alt={t.about.profileAlt} widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={92} loading="lazy" class="about-profile-img hidden h-full w-full object-cover object-center dark:block" />
 		</div>
 	</div>
 	<!-- Columna lateral: tagline vertical -->
 	<div class="flex flex-col border-l border-secondary w-10 shrink-0">
 		<div class="flex flex-1 items-center justify-center overflow-hidden">
-			<p class="font-nord font-light text-secondary text-[10px] uppercase tracking-[0.2em] [writing-mode:vertical-rl] rotate-180">Diseño creativo & desarrollo digital desde 2018 <span class="inline-block rotate-90">™</span></p>
+			<p class="font-nord font-light text-secondary text-[10px] uppercase tracking-[0.2em] [writing-mode:vertical-rl] rotate-180">{t.about.tagline} <span class="inline-block rotate-90">™</span></p>
 		</div>
 	</div>
 </div>
 <!-- SOBRE MI: ancho completo abajo -->
 <div class="flex border-t border-secondary py-4">
-	<h3 class="font-nord font-black text-secondary mx-4 text-[125px] tracking-tighter leading-none" aria-hidden="true">SOBRE MI</h3>
+	<h3 class="font-nord font-black text-secondary mx-4 text-[125px] tracking-tighter leading-none" aria-hidden="true">{t.about.titleDecorative}</h3>
 </div>
 
 </div><!-- end desktop layout -->

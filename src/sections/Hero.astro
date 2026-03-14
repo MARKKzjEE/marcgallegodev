@@ -1,8 +1,12 @@
 ---
 import '../styles/hero.scss';
+import { getLang, useTranslations } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<section id="hero" class="relative min-h-screen" aria-label="Presentación de Marc Gallego">
+<section id="hero" class="relative min-h-screen" aria-label={t.hero.sectionAriaLabel}>
 
 	<video
 		id="hero-video"
@@ -14,7 +18,7 @@ import '../styles/hero.scss';
 		playsinline
 		preload="metadata"
 		poster="/assets/bg-background-loop-poster.webp"
-		title="Vídeo de fondo del mar"
+		title={t.hero.videoTitle}
 		aria-hidden="true"
 		{...{"fetchpriority": "low"}}
 	></video>
@@ -34,44 +38,44 @@ import '../styles/hero.scss';
 						<span class="hero-name-word" style="--delay: 120ms">Gallego</span>
 					</div>
 				</h1>
-				<h2 class="font-monoblock font-normal text-white tracking-[0.3em] text-center mt-3 leading-tight" style="font-size: clamp(14px, 2.5vw, 20px)"><span class="hidden md:inline">Full Stack </span>Software Engineer</h2>
+				<h2 class="font-monoblock font-normal text-white tracking-[0.3em] text-center mt-3 leading-tight" style="font-size: clamp(14px, 2.5vw, 20px)"><span class="hidden md:inline">{t.hero.rolePrefix}</span>{t.hero.role}</h2>
 			</div>
 
 			<!-- Feature cards -->
 			<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
 				<div class="card-glass hidden md:flex flex-col justify-center items-center py-10 px-4">
-					<span class="font-nord font-black text-white text-3xl uppercase">+5</span>
-					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">años exp.</span>
+					<span class="font-nord font-black text-white text-3xl uppercase">{t.hero.yearsLabel}</span>
+					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">{t.hero.yearsDesc}</span>
 				</div>
 				<div class="card-glass hidden md:flex flex-col justify-center items-center py-10 px-4">
-					<span class="font-nord font-black text-white text-3xl uppercase">+60</span>
-					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">proyectos</span>
+					<span class="font-nord font-black text-white text-3xl uppercase">{t.hero.projectsLabel}</span>
+					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">{t.hero.projectsDesc}</span>
 				</div>
 				<div class="card-glass flex justify-center items-center gap-6 py-10 px-4 col-span-full md:col-span-1">
-					<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Marc Gallego">
+					<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" aria-label={t.hero.linkedinAriaLabel}>
 						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white" aria-hidden="true">
 							<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
 							<rect width="4" height="12" x="2" y="9"/>
 							<circle cx="4" cy="4" r="2"/>
 						</svg>
-						<span class="sr-only">LinkedIn de Marc Gallego</span>
+						<span class="sr-only">{t.hero.linkedinAriaLabel}</span>
 					</a>
-					<a href="tel:+34647604048" aria-label="Llamar a Marc Gallego">
+					<a href="tel:+34647604048" aria-label={t.hero.phoneAriaLabel}>
 						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white" aria-hidden="true">
 							<path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>
 						</svg>
-						<span class="sr-only">Llamar a Marc Gallego</span>
+						<span class="sr-only">{t.hero.phoneAriaLabel}</span>
 					</a>
-					<a href="/contacto" aria-label="Contactar con Marc Gallego">
+					<a href={lang === 'en' ? '/en/contact' : '/contact'} aria-label={t.hero.emailAriaLabel}>
 						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white" aria-hidden="true">
 							<path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/>
 							<rect x="2" y="4" width="20" height="16" rx="2"/>
 						</svg>
-						<span class="sr-only">Contactar con Marc Gallego</span>
+						<span class="sr-only">{t.hero.emailAriaLabel}</span>
 					</a>
 				</div>
-				<a href="/experiencia" class="card-glass hero-cta hidden md:flex justify-center items-center gap-3 py-10 px-4">
-					<span class="font-nord font-black text-white text-lg uppercase">Trayectoria</span>
+				<a href={lang === 'en' ? '/en/experience' : '/experience'} class="card-glass hero-cta hidden md:flex justify-center items-center gap-3 py-10 px-4" aria-label={t.hero.ctaAriaLabel}>
+					<span class="font-nord font-black text-white text-lg uppercase">{t.hero.ctaLabel}</span>
 					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white">
 						<path d="m9 18 6-6-6-6"/>
 					</svg>
@@ -86,10 +90,10 @@ import '../styles/hero.scss';
 					<span class="absolute inline-flex h-full w-full animate-ping animate-duration-[2s] rounded-full bg-green-500 opacity-75"></span>
 					<span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
 				</span>
-				<span class="font-nord font-medium text-white uppercase tracking-widest" style="font-size: clamp(9px, 1.8vw, 14px)">Disponible para proyectos</span>
+				<span class="font-nord font-medium text-white uppercase tracking-widest" style="font-size: clamp(9px, 1.8vw, 14px)">{t.hero.available}</span>
 			</div>
 			<div class="hidden md:block">
-				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">Graduado en Ingeniería informática</span>
+				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">{t.hero.degree}</span>
 			</div>
 		</div>
 	</div>

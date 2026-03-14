@@ -1,11 +1,22 @@
 ---
+import { getLang, useTranslations, getLocalePath } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+
 const navItems = [
-	{ label: "Experiencia", href: "/experiencia" },
-	{ label: "Proyectos", href: "/proyectos" },
-	{ label: "Contacto", href: "/contacto" }
+	{ label: t.header.experience, href: getLocalePath(lang, '/experience') },
+	{ label: t.header.projects, href: getLocalePath(lang, '/projects') },
+	{ label: t.header.contact, href: getLocalePath(lang, '/contact') },
 ];
 
-const isHome = Astro.url.pathname === '/';
+const homePath = lang === 'en' ? '/en' : '/';
+const isHome = Astro.url.pathname === homePath || Astro.url.pathname === '/en/';
+
+const pathname = Astro.url.pathname;
+const esHref = pathname.startsWith('/en') ? (pathname.replace(/^\/en/, '') || '/') : pathname;
+const enHref = pathname.startsWith('/en') ? pathname : `/en${pathname === '/' ? '' : pathname}`;
+
 ---
 
 <header class="site-header fixed inset-x-0 top-0 z-40" data-site-header>
@@ -14,7 +25,7 @@ const isHome = Astro.url.pathname === '/';
 	<div class="px-10 font-nord font-medium hidden md:flex items-center justify-between h-14">
 		<div class="text-sm">
 			{!isHome && (
-				<a href="/" class="nav-link">Inicio</a>
+				<a href={homePath} class="nav-link">{lang === 'en' ? 'Home' : 'Inicio'}</a>
 			)}
 		</div>
 		<div class="flex items-center gap-6 text-sm">
@@ -30,9 +41,9 @@ const isHome = Astro.url.pathname === '/';
 			</nav>
 			<div class="header-divider w-px"></div>
 			<div class="flex items-center gap-1 text-sm" aria-label="Selector de idioma">
-				<button type="button" class="lang-btn lang-active" data-lang="es" aria-pressed="true">ES</button>
+				<a href={esHref} class={`lang-btn${lang === 'es' ? ' lang-active' : ''}`}>ES</a>
 				<span class="divider-slash opacity-75">/</span>
-				<button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+				<a href={enHref} class={`lang-btn${lang === 'en' ? ' lang-active' : ''}`}>EN</a>
 			</div>
 			<div class="toggle-switch">
 				<label class="switch-label" id="theme-toggle">
@@ -48,7 +59,7 @@ const isHome = Astro.url.pathname === '/';
 		<button
 			type="button"
 			class="hamburger-btn"
-			aria-label="Abrir menú"
+			aria-label={t.header.mobileMenuOpen}
 			aria-expanded="false"
 			aria-controls="mobile-menu"
 			data-hamburger
@@ -72,7 +83,7 @@ const isHome = Astro.url.pathname === '/';
 		<button
 			type="button"
 			class="mobile-close-btn"
-			aria-label="Cerrar menú"
+			aria-label={t.header.mobileMenuClose}
 			data-menu-close
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -83,7 +94,7 @@ const isHome = Astro.url.pathname === '/';
 		<!-- Nav links -->
 		<nav class="mobile-nav" aria-label="Navegación móvil">
 			{!isHome && (
-				<a href="/" class="mobile-nav-link">Inicio</a>
+				<a href={homePath} class="mobile-nav-link">{lang === 'en' ? 'Home' : 'Inicio'}</a>
 			)}
 			{navItems.map((item) => {
 				const isActive = Astro.url.pathname.startsWith(item.href);
@@ -98,9 +109,9 @@ const isHome = Astro.url.pathname === '/';
 		<!-- Bottom controls -->
 		<div class="mobile-controls">
 			<div class="flex items-center gap-2 text-base" aria-label="Selector de idioma">
-				<button type="button" class="lang-btn lang-active" data-lang="es" aria-pressed="true">ES</button>
+				<a href={esHref} class={`lang-btn${lang === 'es' ? ' lang-active' : ''}`}>ES</a>
 				<span class="divider-slash opacity-75">/</span>
-				<button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+				<a href={enHref} class={`lang-btn${lang === 'en' ? ' lang-active' : ''}`}>EN</a>
 			</div>
 			<button type="button" class="theme-text-btn" data-theme-mobile aria-label="Cambiar tema">
 				<span data-theme-label>Modo noche</span>
@@ -210,17 +221,13 @@ const isHome = Astro.url.pathname === '/';
   }
 
   .lang-btn {
-    opacity: 0.75;
+    opacity: 0.35;
     transition: opacity 300ms, color 300ms ease;
     cursor: pointer;
 
-    &:hover { opacity: 1; }
+    &:hover { opacity: 0.65; }
 
-    &.lang-active {
-      opacity: 1;
-      &::before { content: '['; margin-right: 2px; }
-      &::after { content: ']'; margin-left: 2px; }
-    }
+    &.lang-active { opacity: 1; }
   }
 
   // ─── Mobile overlay ───

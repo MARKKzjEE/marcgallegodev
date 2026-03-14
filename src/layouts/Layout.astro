@@ -1,24 +1,37 @@
 ---
+import type { Lang } from '../i18n/index';
+
 interface Props {
 	title?: string;
 	description?: string;
 	keywords?: string;
+	lang?: Lang;
 }
 
 const defaultDescription = "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida.";
 const defaultKeywords = "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles";
-const { title = "Marc Gallego | Desarrollador Full Stack", description = defaultDescription, keywords = defaultKeywords } = Astro.props;
+const { title = "Marc Gallego | Desarrollador Full Stack", description = defaultDescription, keywords = defaultKeywords, lang = 'es' } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://marcgallegodev.com').href;
+
+// hreflang alternate URLs
+const pathname = Astro.url.pathname;
+const esPath = pathname.startsWith('/en') ? pathname.replace(/^\/en/, '') || '/' : pathname;
+const enPath = pathname.startsWith('/en') ? pathname : `/en${pathname === '/' ? '' : pathname}`;
+const esURL = new URL(esPath, 'https://marcgallegodev.com').href;
+const enURL = new URL(enPath, 'https://marcgallegodev.com').href;
 ---
 
 <!doctype html>
-<html lang="es" class="">
+<html lang={lang} class="">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="canonical" href={canonicalURL} />
+		<link rel="alternate" hreflang="es" href={esURL} />
+		<link rel="alternate" hreflang="en" href={enURL} />
+		<link rel="alternate" hreflang="x-default" href={esURL} />
 		<!-- Preload fuentes críticas above-the-fold -->
 		<link rel="preload" href="/fonts/NORD/NORD-Black.woff2" as="font" type="font/woff2" crossorigin />
 		<link rel="preload" href="/fonts/NORD/NORD-Bold.woff2" as="font" type="font/woff2" crossorigin />

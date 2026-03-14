@@ -1,33 +1,16 @@
 ---
-const faqs = [
-	{
-		question: "¿Con qué tipo de proyectos trabajas?",
-		answer: "Trabajo desde ideas de negocio hasta su versión final de web y/o app móvil."
-	},
-	{
-		question: "¿Qué servicios ofreces como desarrollador?",
-		answer: "Ofrezco servicios para desarrollar un proyecto desde una idea o una fase inicial como también rediseños y mantenmientos de webs/apps ya funcionales."
-	},
-	{
-		question: "¿Cómo es tu proceso de trabajo?",
-		answer: "Primero tengamos una reunión para asentar todos los requerimientos y entender bien cual es el problema. Una vez todas las bases bien claras ataco los problemas siempre haciendo seguimiento y reportes al cliente."
-	},
-	{
-		question: "¿Trabajas solo o con equipo?",
-		answer: "Trabajo de forma independiente pero estoy asociado con un estudio de programación llamado Doko Studio con el que podemos integrar cualquier perfil para completar el proceso de diseño y desarrollo."
-	},
-	{
-		question: "¿Cuánto cuesta un proyecto contigo?",
-		answer: "Cada proyecto es único así que no tengo un precio fijo, primero hablemos de qué necesitas y despues encontraremos el mejor acuerdo entre todos."
-	},
-];
+import { getLang, useTranslations } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+const faqs = t.faq.items;
 ---
 
 <section id="faq" class="py-16 md:py-24" aria-labelledby="faq-heading">
 	<div class="container mx-auto px-4 md:px-10">
 		<div class="flex flex-col gap-8">
 
-			<h2 id="faq-heading" class="font-nord font-bold text-secondary uppercase">Preguntas frecuentes</h2>
+			<h2 id="faq-heading" class="font-nord font-bold text-secondary uppercase">{t.faq.heading}</h2>
 
 			<div class="faq-list">
 				{faqs.map((faq) => (
