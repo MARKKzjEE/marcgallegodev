@@ -19,11 +19,11 @@ import '../styles/hero.scss';
 	<div class="absolute inset-0 bg-primary/5 dark:bg-primary/70"></div>
 	<div class="relative flex min-h-screen flex-col py-16" data-hero-content>
 		<!-- Centro: nombre + feature cards -->
-		<div class="flex-1 flex flex-col justify-center container mx-auto px-10">
+		<div class="flex-1 flex flex-col justify-center container mx-auto px-4 md:px-10">
 
 			<!-- Nombre y rol -->
 			<div class="card-glass p-8 flex flex-col justify-center">
-				<h1 class="font-nord font-black tracking-tighter text-white text-[125px] leading-none uppercase flex flex-col items-center">
+				<h1 class="font-nord font-black tracking-tighter text-white leading-none uppercase flex flex-col items-center" style="font-size: clamp(64px, 13vw, 125px)">
 					<div class="hero-name-clip">
 						<span class="hero-name-word" style="--delay: 0ms">Marc</span>
 					</div>
@@ -31,20 +31,20 @@ import '../styles/hero.scss';
 						<span class="hero-name-word" style="--delay: 120ms">Gallego</span>
 					</div>
 				</h1>
-				<h2 class="font-monoblock font-normal text-white text-[20px] tracking-[0.3em] flex flex-col items-center mt-3">Full Stack Software Engineer</h2>
+				<h2 class="font-monoblock font-normal text-white tracking-[0.3em] text-center mt-3 leading-tight" style="font-size: clamp(14px, 2.5vw, 20px)"><span class="hidden md:inline">Full Stack </span>Software Engineer</h2>
 			</div>
 
 			<!-- Feature cards -->
-			<div class="grid grid-cols-4 gap-6 mt-6">
-				<div class="card-glass flex flex-col justify-center items-center py-10 px-4">
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+				<div class="card-glass hidden md:flex flex-col justify-center items-center py-10 px-4">
 					<span class="font-nord font-black text-white text-3xl uppercase">+5</span>
 					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">años exp.</span>
 				</div>
-				<div class="card-glass flex flex-col justify-center items-center py-10 px-4">
+				<div class="card-glass hidden md:flex flex-col justify-center items-center py-10 px-4">
 					<span class="font-nord font-black text-white text-3xl uppercase">+60</span>
 					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">proyectos</span>
 				</div>
-				<div class="card-glass flex justify-center items-center gap-6 py-10 px-4">
+				<div class="card-glass flex justify-center items-center gap-6 py-10 px-4 col-span-full md:col-span-1">
 					<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
 						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white">
 							<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
@@ -64,7 +64,7 @@ import '../styles/hero.scss';
 						</svg>
 					</a>
 				</div>
-				<a href="/experiencia" class="card-glass hero-cta flex justify-center items-center gap-3 py-10 px-4">
+				<a href="/experiencia" class="card-glass hero-cta hidden md:flex justify-center items-center gap-3 py-10 px-4">
 					<span class="font-nord font-black text-white text-lg uppercase">Mi trayectoria</span>
 					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white">
 						<path d="m9 18 6-6-6-6"/>
@@ -74,15 +74,15 @@ import '../styles/hero.scss';
 		</div>
 
 		<!-- Bottom elements -->
-		<div class="px-10 flex justify-between">
-			<div class="flex items-center gap-3">
+		<div class="px-4 md:px-10 flex justify-between items-center">
+			<div class="flex items-center gap-3 md:w-auto w-full justify-center md:justify-start">
 				<span class="status-dot relative flex h-2.5 w-2.5">
 					<span class="absolute inline-flex h-full w-full animate-ping animate-duration-[2s] rounded-full bg-green-500 opacity-75"></span>
 					<span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
 				</span>
-				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">Disponible para proyectos</span>
+				<span class="font-nord font-medium text-white uppercase tracking-widest" style="font-size: clamp(9px, 1.8vw, 14px)">Disponible para proyectos</span>
 			</div>
-			<div class="">
+			<div class="hidden md:block">
 				<span class="font-nord font-medium text-white text-sm uppercase tracking-widest">Graduado en Ingeniería informática</span>
 			</div>
 		</div>

@@ -21,9 +21,11 @@ export function initHeaderScroll(): void {
 		}
 		const current = window.scrollY;
 		const delta = current - lastScrollY;
-		if (current > hideThreshold && delta > 0) {
+		const heroHeight = hero ? hero.offsetHeight : 0;
+		const pastHero = current > heroHeight - 64;
+		if (pastHero && current > hideThreshold && delta > 0) {
 			header.classList.add("is-hidden");
-		} else if (delta < 0) {
+		} else if (!pastHero || delta < 0) {
 			header.classList.remove("is-hidden");
 		}
 		lastScrollY = current;

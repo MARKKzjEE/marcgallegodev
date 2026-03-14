@@ -5,6 +5,27 @@ import profileDark from '../assets/me/hero-profile-dark.png';
 
 ---
 
+<!-- ─── Mobile layout ─── -->
+<div class="md:hidden">
+	<!-- Título -->
+	<div class="border-b border-secondary p-4">
+		<h2 class="font-nord font-black text-secondary uppercase leading-none" style="font-size: clamp(44px, 8vw, 96px)">Sobre mi</h2>
+	</div>
+	<!-- Foto + texto -->
+	<div class="p-4 flex flex-col gap-6">
+		<div class="rounded-lg overflow-hidden">
+			<Image src={profileDark} alt="Marc Gallego" widths={[600]} sizes="100vw" format="webp" quality={92} loading="lazy" class="w-full object-cover object-center dark:hidden" />
+			<Image src={profileLight} alt="Marc Gallego" widths={[600]} sizes="100vw" format="webp" quality={92} loading="lazy" class="hidden w-full object-cover object-center dark:block" />
+		</div>
+		<p class="font-cottor font-light text-secondary leading-7 text-[16px]">
+			Nacido en Barcelona, fuera del código el mar es mi descontrol y mi paz. Me gusta ser creativo y aplicar mi gusto tanto a soluciones digitales como en mi día a día como fan de la moda y del arte.
+		</p>
+	</div>
+</div>
+
+<!-- ─── Desktop layout ─── -->
+<div class="hidden md:flex md:flex-col">
+
 <!-- Zona superior: contenido + columna derecha -->
 <div class="flex flex-1 min-h-0">
 	<!-- Contenido principal (izquierda) -->
@@ -44,5 +65,7 @@ import profileDark from '../assets/me/hero-profile-dark.png';
 <div class="flex border-t border-secondary py-4">
 	<h3 class="font-nord font-black text-secondary mx-4 text-[125px] tracking-tighter leading-none" aria-hidden="true">SOBRE MI</h3>
 </div>
+
+</div><!-- end desktop layout -->
 
 
