@@ -3,7 +3,13 @@ import { getLang, useTranslations } from '../i18n/index';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
-const words = t.whatWeDo.text.split(' ');
+const paragraphs = t.whatWeDo.text.split('\n\n').map((p: string) => p.split(' '));
+let wordOffset = 0;
+const paragraphsWithIndex = paragraphs.map((words: string[]) => {
+	const result = words.map((word: string, i: number) => ({ word, index: wordOffset + i }));
+	wordOffset += words.length;
+	return result;
+});
 ---
 
 <section id="what-we-do" class="what-we-do py-16 md:py-24" aria-labelledby="what-we-do-heading">
@@ -14,12 +20,14 @@ const words = t.whatWeDo.text.split(' ');
 			<h2 id="what-we-do-heading" class="what-we-do__label font-nord text-secondary uppercase tracking-widest">{t.whatWeDo.label}</h2>
 
 			<!-- Texto con reveal por palabra -->
-			<div class="what-we-do__content">
-				<p class="what-we-do__text font-cottor font-light leading-[1.15] text-justify" data-scroll-reveal>
-					{words.map((word, i) => (
-						<span class="reveal-word" style={`--word-index: ${i}`}>{word} </span>
-					))}
-				</p>
+			<div class="what-we-do__content" data-scroll-reveal>
+				{paragraphsWithIndex.map((words) => (
+					<p class="what-we-do__text font-cottor font-light leading-[1.15] text-justify mb-8">
+						{words.map(({ word, index }) => (
+							<span class="reveal-word" style={`--word-index: ${index}`}>{word} </span>
+						))}
+					</p>
+				))}
 			</div>
 
 		</div>

@@ -122,17 +122,22 @@ const total = techs.length;
 	// ─── Descripción desktop ────────────────────────
 	.tech-desc {
 		font-size: var(--desc-size);
-		max-width: 380px;
 		line-height: 1.7;
 		font-weight: 400;
+
+		@media (min-width: 768px) {
+			max-width: 380px;
+		}
 	}
 
 	// ─── Descripción mobile: a la derecha del "Mis", en flujo normal ───
 	.tech-desc--corner {
-		padding-left: calc(var(--title-size) + 8px);
+		margin-left: 30%;
+		width: 70%;
 		margin-top: 8px;
 		font-size: clamp(11px, 2.5vw, 13px);
 		line-height: 1.6;
+		text-align: justify;
 	}
 
 	// ─── Título (L invertida) ───────────────────────

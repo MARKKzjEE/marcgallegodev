@@ -4,16 +4,16 @@ export const en: Translations = {
 	// ── Meta / SEO ──
 	meta: {
 		siteName: "Marc Gallego",
-		defaultTitle: "Marc Gallego | Full Stack Developer",
+		defaultTitle: "Marc Gallego",
 		defaultDescription: "Portfolio of Marc Gallego, Software Engineer and Full Stack freelance developer. Web development, apps and custom digital solutions.",
 		defaultKeywords: "Marc Gallego, Full Stack developer, Software Engineer, Barcelona, freelance developer, web development, mobile apps",
-		indexTitle: "Marc Gallego | Full Stack Developer",
+		indexTitle: "Marc Gallego",
 		indexDescription: "Portfolio of Marc Gallego, Software Engineer and Full Stack freelance developer. Web development, apps and custom digital solutions.",
 		indexKeywords: "Marc Gallego, Full Stack developer, Software Engineer, Barcelona, freelance developer, web development, mobile apps",
-		experienceTitle: "Experience | Marc Gallego — Full Stack Software Engineer",
+		experienceTitle: "Experience | Marc Gallego",
 		experienceDescription: "Professional background of Marc Gallego: 5+ years as a Full Stack Software Engineer in Barcelona. Experience in Laravel, Django, React, Angular, DevOps and mobile app development.",
 		experienceKeywords: "Marc Gallego experience, developer CV Barcelona, Full Stack software engineer, Laravel, Django, React, Angular, DevOps",
-		projectsTitle: "Projects | Marc Gallego — Full Stack Developer Barcelona",
+		projectsTitle: "Projects | Marc Gallego",
 		projectsDescription: "Project portfolio of Marc Gallego: web platforms, SaaS, mobile apps and custom digital solutions developed in Barcelona.",
 		projectsKeywords: "Marc Gallego web projects, developer portfolio Barcelona, SaaS, web platforms, mobile apps, custom development",
 		contactTitle: "Contact | Marc Gallego",
@@ -54,13 +54,13 @@ export const en: Translations = {
 	// ── WhatWeDo ──
 	whatWeDo: {
 		label: "What I do",
-		text: "My journey started when I was young. I spent hours taking apart and reassembling computers, trying to understand how everything worked inside. Over time, that curiosity led me to the software powering those machines and to discovering the freedom that comes with creating through technology: turning ideas into real solutions. Today, that's exactly what I do: design and develop solid, well-structured digital products ready to grow.",
+		text: "I bring to life ideas that people have in mind for their business or simply a motivating concept they want to turn into digital solutions like websites or mobile apps.\n\n\n Understanding beyond the project's objective — things that can't be explained but are felt — transparency and trust are something I always emphasise so the process is enjoyable and the outcome is simply the reward of a job well done.",
 	},
 
 	// ── TechStack ──
 	techStack: {
 		heading: "My Stack",
-		descCorner: "Some of the technologies I work with every day. I like to be involved in every phase of the project, from the idea to production.",
+		descCorner: "These are the technologies I use most day to day. Although I love adapting to the needs of each project.",
 		toggleShow: "Show technologies",
 		toggleHide: "Hide technologies",
 	},
@@ -70,9 +70,9 @@ export const en: Translations = {
 		title: "About me",
 		titleDecorative: "ABOUT ME",
 		tagline: "Creative design & digital development since 2018",
-		bioMobile: "Born in Barcelona, away from the code the sea is my freedom and my peace. I like being creative and applying my taste both to digital solutions and in my daily life as a fan of fashion and art.",
-		bioDesktop1: "I'm passionate about technology and its constant evolution. I enjoy learning and trying new tools, always with criteria and thinking about what truly adds value to the project.\n\nI'm demanding with my work and care about details. I don't just look for something to work — I want it to be well thought out and well built.\n\nI work with transparency because I believe it's the foundation of any good collaboration: clarity in what is done, why it's done and where we're heading.",
-		bioDesktop2: "Beyond development, you'll notice a clear reference to the sea, my balance. It's the place where I disconnect, organise ideas and come back with clarity.\n\nI'm also driven by fashion and contemporary creativity: I'm inspired by how art and identity mix and express themselves without limits. That way of understanding creativity also defines my work: I don't just build solutions, I look for them to have character.",
+		bioMobile: "Born in Barcelona, from a young age I had a love for computers and software. The creative capacity they allow drew me into this world and today I do something I genuinely enjoy. Outside of code, I have two great passions: the sea and fashion. In one I find calm and my chaos, and with the other I get to experiment and be creative.",
+		bioDesktop1: "Born in Barcelona, from a young age I watched my father fix computers for friends because he enjoyed it — and that's how I started spending hours taking them apart and putting them back together. \n\nAs I grew up I found myself drawn into the world of software. The creative capacity I saw in operating systems and video games fascinated me. So little by little I started exploring software development, and here I am today.",
+		bioDesktop2: "Beyond development, you'll notice a clear reference to the sea — my balance. The place where I disconnect, organise ideas and come back with clarity. \n\nI'm also a lover of art and fashion. I'm drawn to people's creative capacity and the diversity of styles that emerge. I apply that creativity and taste to the way I dress and design, as well as the personal touch I bring to my digital solutions.",
 		profileAlt: "Marc Gallego, Full Stack developer in Barcelona",
 	},
 
@@ -86,7 +86,7 @@ export const en: Translations = {
 	partners: {
 		heading: "Partners",
 		badge: "since 2024",
-		dokoDesc: "Web design and development studio",
+		dokoDesc: "Branding, web design and development studio",
 		dokoLogoAlt: "Doko Studio logo",
 		dokoImgAlt: "Doko Studio — web design and development studio",
 	},
@@ -126,16 +126,11 @@ export const en: Translations = {
 			{ title: 'Viviq', description: 'Real estate platform with a CMS adaptable to each client.' },
 			{ title: 'Cor de suro', description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.' },
 			{ title: 'Lateua', description: 'SaaS with marketplace for product management and AI-powered interior design solutions.' },
-			{ title: 'Loyic', description: 'Employee portal to manage all internal company data: time tracking, documentation, payroll, internal surveys, and more.' },
+			{ title: 'Loyic', description: 'Employee portal for managing all internal company user data including time tracking, documentation, payroll, internal surveys, and more.' },
 			{ title: 'Pillositio', description: 'App and web platform for bars and restaurants with services for businesses and customers.' },
 			{ title: 'PlanIT', description: 'My side project that evolved into a startup connecting people around any kind of plan or activity.' },
 			{ title: 'RTTH', description: 'Brand territory built through a service that transforms sound waves from audio files into design assets with integrated waveforms.' },
 		],
-	},
-
-	// ── GradientSection ──
-	gradient: {
-		headline: "Make your idea real",
 	},
 
 	// ── Contact ──
@@ -174,7 +169,7 @@ export const en: Translations = {
 			languages: "Languages",
 			extracurricular: "Extracurricular",
 		},
-		summary: "I'm a software developer with more than 5 years of experience building web and mobile solutions. Throughout my career I've been lucky to work on very diverse projects with different technologies, which has given me a broader and more complete vision of software development. I'm passionate about programming and technology, and I really enjoy working as a team, always keeping good vibes and growing alongside my colleagues.",
+		summary: "I'm a software developer with more than 5 years of experience building web and mobile solutions. Throughout my career I've been lucky to work on diverse projects with incredible working environments that have allowed me to grow both personally and professionally. I currently apply and invest everything I know into my personal brand as a freelancer.",
 		jobs: [
 			{
 				company: "Doko Studio",
@@ -190,6 +185,7 @@ export const en: Translations = {
 					"Experience implementing both integrated and standalone payment gateways.",
 					"Publishing mobile apps on the Play Store and App Store.",
 					"Collaboration with designers in Figma for the creation of responsive and usable web interfaces.",
+				"Web performance optimisation.",
 				],
 				logoAlt: "Doko Studio logo, web design and development studio",
 			},

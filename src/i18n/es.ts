@@ -2,16 +2,16 @@ export const es = {
 	// ── Meta / SEO ──
 	meta: {
 		siteName: "Marc Gallego",
-		defaultTitle: "Marc Gallego | Desarrollador Full Stack",
+		defaultTitle: "Marc Gallego",
 		defaultDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida.",
 		defaultKeywords: "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles",
-		indexTitle: "Marc Gallego | Desarrollador Full Stack",
+		indexTitle: "Marc Gallego",
 		indexDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida.",
 		indexKeywords: "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles",
-		experienceTitle: "Experiencia | Marc Gallego — Ingeniero de Software Full Stack",
+		experienceTitle: "Experiencia | Marc Gallego",
 		experienceDescription: "Trayectoria profesional de Marc Gallego: +5 años como ingeniero de software Full Stack en Barcelona. Experiencia en Laravel, Django, React, Angular, DevOps y desarrollo de apps móviles.",
 		experienceKeywords: "experiencia Marc Gallego, CV desarrollador Barcelona, ingeniero software Full Stack, Laravel, Django, React, Angular, DevOps",
-		projectsTitle: "Proyectos | Marc Gallego — Desarrollador Full Stack Barcelona",
+		projectsTitle: "Proyectos | Marc Gallego",
 		projectsDescription: "Portfolio de proyectos de Marc Gallego: plataformas web, SaaS, apps móviles y soluciones digitales a medida desarrolladas en Barcelona.",
 		projectsKeywords: "proyectos web Marc Gallego, portfolio desarrollador Barcelona, SaaS, plataformas web, apps móviles, desarrollo a medida",
 		contactTitle: "Contacto | Marc Gallego",
@@ -52,13 +52,13 @@ export const es = {
 	// ── WhatWeDo ──
 	whatWeDo: {
 		label: "Qué es lo que hago",
-		text: "Mi camino empezó cuando era pequeño. Pasaba horas desmontando y montando ordenadores intentando entender cómo funcionaba todo por dentro. Con el tiempo esa curiosidad me llevó al software que hacía funcionar esas máquinas y a descubrir la libertad que existe al crear con tecnología: convertir ideas en soluciones reales. Hoy me dedico precisamente a eso: diseñar y desarrollar productos digitales sólidos, bien estructurados y preparados para crecer.",
+		text: "Hago realidad ideas que la gente tiene en la cabeza para su negocio o simplemente una idea motivadora que quiere llevar a cabo en soluciones digitales como webs o apps móviles.\n\n\n Entender más allá del objetivo del proyecto, cosas que no se pueden explicar si no que se perciben, la transparencia y confianza es algo que siempre recalco para que el proceso sea un disfrute y el final sea simplemente la recompensa de un buen trabajo hecho.",
 	},
 
 	// ── TechStack ──
 	techStack: {
 		heading: "Tecnologías",
-		descCorner: "Algunas de las tecnologías con las que trabajo cada día. Me gusta estar involucrado en cada fase del proyecto, desde la idea hasta producción.",
+		descCorner: "Estas son las tecnologías que más uso día a día. Aunque me encanta adaptarme siempre a las necesidades de cada proyecto.",
 		toggleShow: "Ver tecnologías",
 		toggleHide: "Ocultar tecnologías",
 	},
@@ -68,9 +68,9 @@ export const es = {
 		title: "Sobre mi",
 		titleDecorative: "SOBRE MI",
 		tagline: "Diseño creativo & desarrollo digital desde 2018",
-		bioMobile: "Nacido en Barcelona, fuera del código el mar es mi descontrol y mi paz. Me gusta ser creativo y aplicar mi gusto tanto a soluciones digitales como en mi día a día como fan de la moda y del arte.",
-		bioDesktop1: "Me apasiona la tecnología y su evolución constante. Disfruto aprendiendo y probando nuevas herramientas, siempre con criterio y pensando en qué aporta realmente valor al proyecto.\n\nSoy exigente con mi trabajo y cuido los detalles. No busco solo que algo funcione, sino que esté bien pensado y bien construido.\n\nTrabajo con transparencia porque creo que es la base de cualquier buena colaboración: claridad en lo que se hace, por qué se hace y hacia dónde vamos.",
-		bioDesktop2: "Más allá del desarrollo, podrás ver una clara referencia al mar, mi equilibrio. Es el lugar donde desconecto, ordeno ideas y vuelvo con claridad.\n\nTambién me mueve la moda y la creatividad contemporánea: me inspira cómo el arte y la identidad se mezclan y se expresan sin límites. Esa forma de entender la creatividad también define mi trabajo: no solo construyo soluciones, busco que tengan carácter.",
+		bioMobile: "Nacido en Barcelona, desde pequeño he tenido un amor por los ordenadores y el software. La capacidad creativa que te permiten me hizo adentrarme en este mundo y a día de hoy me dedico a algo que disfruto. Fuera del código, tengo dos grandes pasiones: el mar y la moda. En uno encuentro la calma y mi desorden y con el otro me sirve para probar y ser creativo.",
+		bioDesktop1: "Nacido en Barcelona, desde pequeño veía a mi padre arreglar ordenadores a amigos porque le gustaba y así empecé yo a pasarme horas desmontando y montándolos. \n\nCuando fui creciendo me fui adentrando en el mundo del software, la capacidad de creatividad que veía en programas de sistemas operativos y videojuegos era algo que me fascinaba. Así que poco a poco fui probando con el desarrollo de software hasta el día de hoy.",
+		bioDesktop2: "Más allá del desarrollo, podrás ver una clara referencia al mar que es mi equilibrio. El lugar donde desconecto, ordeno ideas y vuelvo con claridad. \n\nTambién soy un amante del arte y de la moda, me encanta la capacidad creativa de la gente y la diversidad que se crea en cuanto a estilos. Aplico esta creatividad y gusto en la forma de vestirme y diseñar como también cuando le doy mi toque a mis soluciones digitales.",
 		profileAlt: "Marc Gallego, desarrollador Full Stack en Barcelona",
 	},
 
@@ -84,9 +84,9 @@ export const es = {
 	partners: {
 		heading: "Partners",
 		badge: "desde 2024",
-		dokoDesc: "Estudio de diseño y desarrollo web",
+		dokoDesc: "Estudio de branding, diseño y desarrollo web",
 		dokoLogoAlt: "Logo Doko Studio",
-		dokoImgAlt: "Doko Studio — estudio de diseño y desarrollo",
+		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
 	},
 
 	// ── FAQ ──
@@ -99,7 +99,7 @@ export const es = {
 			},
 			{
 				question: "¿Qué servicios ofreces como desarrollador?",
-				answer: "Ofrezco servicios para desarrollar un proyecto desde una idea o una fase inicial como también rediseños y mantenmientos de webs/apps ya funcionales.",
+				answer: "Ofrezco servicios para desarrollar un proyecto desde una idea o una fase inicial como también rediseños y mantenimientos de webs/apps ya funcionales.",
 			},
 			{
 				question: "¿Cómo es tu proceso de trabajo?",
@@ -124,16 +124,11 @@ export const es = {
 			{ title: 'Viviq', description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.' },
 			{ title: 'Cor de suro', description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.' },
 			{ title: 'Lateua', description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo apoyadas con modelos IA.' },
-			{ title: 'Loyic', description: 'Portal del empleado con el que se registra todos los datos de usuarios internos de la empresa como registro horario, documentación, nominas, encuestas internas, etc.' },
+			{ title: 'Loyic', description: 'Portal del empleado que permite gestionar todos los datos de usuarios internos de la empresa como registro horario, documentación, nóminas, encuestas internas, etc.' },
 			{ title: 'Pillositio', description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.' },
 			{ title: 'PlanIT', description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.' },
-			{ title: 'RTTH', description: 'Generación del territorio de la marca con un servicio que transforma desde las ondas de sonido de un archivo a imagenes como recursos de diseño con las ondas integradas.' },
+			{ title: 'RTTH', description: 'Generación del territorio de la marca con un servicio que transforma las ondas de sonido de un archivo a imágenes como recursos de diseño con las ondas integradas.' },
 		],
-	},
-
-	// ── GradientSection ──
-	gradient: {
-		headline: "Haz realidad tu idea",
 	},
 
 	// ── Contact ──
@@ -172,7 +167,7 @@ export const es = {
 			languages: "Idiomas",
 			extracurricular: "Extracurricular",
 		},
-		summary: "Soy desarrollador de software con más de 5 años de experiencia creando soluciones web y móviles. A lo largo de mi carrera he tenido la suerte de trabajar en proyectos muy diversos y con diferentes tecnologías, lo que me ha dado una visión más amplia y completa del desarrollo de software. Me apasiona la programación y la tecnología, y disfruto mucho trabajando en equipo, manteniendo siempre buenas vibras y creciendo junto a mis compañeros de trabajo.",
+		summary: "Soy desarrollador de software con más de 5 años de experiencia creando soluciones web y móviles. A lo largo de mi carrera he tenido la suerte de poder trabajar en distintos proyectos con ambientes de trabajo increíbles que me han permitido crecer como persona y de manera profesional. Actualmente aplico y apuesto todo lo que sé en mi marca personal como freelance.",
 		jobs: [
 			{
 				company: "Doko Studio",
@@ -188,6 +183,7 @@ export const es = {
 					"Experiencia implementando pasarelas de pago tanto integradas como independientes.",
 					"Publicación de apps móviles en play store y app store.",
 					"Colaboración con diseñadores en Figma para la creación de interfaces web responsivas y usables.",
+					"Optimización de rendimiento de sitios webs.",
 				],
 				logoAlt: "Logo Doko Studio, estudio de diseño y desarrollo web",
 			},
