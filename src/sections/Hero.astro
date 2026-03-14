@@ -11,16 +11,16 @@ const t = useTranslations(lang);
 	<video
 		id="hero-video"
 		class="absolute inset-0 h-full w-full object-cover blur-[1px]"
+		style="background-image: url('/assets/bg-background-loop-poster.webp'); background-size: cover; background-position: center;"
 		src="/assets/bg-background-loop-optimized.mp4"
 		autoplay
 		muted
 		loop
 		playsinline
-		preload="metadata"
+		preload="auto"
 		poster="/assets/bg-background-loop-poster.webp"
 		title={t.hero.videoTitle}
 		aria-hidden="true"
-		{...{"fetchpriority": "low"}}
 	></video>
 
 	<div class="absolute inset-0 bg-primary/5 dark:bg-primary/70"></div>
