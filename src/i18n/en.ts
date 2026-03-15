@@ -41,6 +41,7 @@ export const en: Translations = {
 		projectsLabel: "+60",
 		projectsDesc: "projects",
 		ctaLabel: "Experience",
+		ctaLabelShort: "CV",
 		available: "Available for projects",
 		degree: "Graduated in Computer Engineering",
 		linkedinAriaLabel: "Marc Gallego on LinkedIn",

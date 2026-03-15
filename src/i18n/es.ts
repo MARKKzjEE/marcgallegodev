@@ -39,6 +39,7 @@ export const es = {
 		projectsLabel: "+60",
 		projectsDesc: "proyectos",
 		ctaLabel: "Trayectoria",
+		ctaLabelShort: "CV",
 		available: "Disponible para proyectos",
 		degree: "Graduado en Ingeniería informática",
 		linkedinAriaLabel: "LinkedIn de Marc Gallego",

@@ -43,15 +43,15 @@ const t = useTranslations(lang);
 
 			<!-- Feature cards -->
 			<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-				<div class="card-glass hidden md:flex flex-col justify-center items-center py-10 px-4">
-					<span class="font-nord font-black text-white text-3xl uppercase">{t.hero.yearsLabel}</span>
+				<div class="card-glass hidden md:flex flex-col justify-center items-center py-6 lg:py-10 px-4">
+					<span class="font-nord font-black text-white text-xl lg:text-3xl uppercase">{t.hero.yearsLabel}</span>
 					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">{t.hero.yearsDesc}</span>
 				</div>
-				<div class="card-glass hidden md:flex flex-col justify-center items-center py-10 px-4">
-					<span class="font-nord font-black text-white text-3xl uppercase">{t.hero.projectsLabel}</span>
+				<div class="card-glass hidden md:flex flex-col justify-center items-center py-6 lg:py-10 px-4">
+					<span class="font-nord font-black text-white text-xl lg:text-3xl uppercase">{t.hero.projectsLabel}</span>
 					<span class="font-nord font-normal text-white/80 text-[10px] uppercase tracking-widest mt-1">{t.hero.projectsDesc}</span>
 				</div>
-				<div class="card-glass flex justify-center items-center gap-6 py-10 px-4 col-span-full md:col-span-1">
+				<div class="card-glass flex justify-center items-center gap-6 py-6 lg:py-10 px-4 col-span-full md:col-span-1">
 					<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" aria-label={t.hero.linkedinAriaLabel}>
 						<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white" aria-hidden="true">
 							<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
@@ -74,8 +74,9 @@ const t = useTranslations(lang);
 						<span class="sr-only">{t.hero.emailAriaLabel}</span>
 					</a>
 				</div>
-				<a href={lang === 'en' ? '/en/experience' : '/experience'} class="card-glass hero-cta hidden md:flex justify-center items-center gap-3 py-10 px-4" aria-label={t.hero.ctaAriaLabel}>
-					<span class="font-nord font-black text-white text-lg uppercase">{t.hero.ctaLabel}</span>
+				<a href={lang === 'en' ? '/en/experience' : '/experience'} class="card-glass hero-cta hidden md:flex justify-center items-center gap-3 py-6 lg:py-10 px-4" aria-label={t.hero.ctaAriaLabel}>
+					<span class="font-nord font-black text-white text-sm lg:text-lg uppercase md:hidden lg:block">{t.hero.ctaLabel}</span>
+				<span class="font-nord font-black text-white text-xl uppercase hidden md:block lg:hidden">{t.hero.ctaLabelShort}</span>
 					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hero-icon text-white">
 						<path d="m9 18 6-6-6-6"/>
 					</svg>
@@ -120,7 +121,14 @@ const t = useTranslations(lang);
 	}
 
 	.hero-icon {
+		width: 20px;
+		height: 20px;
 		transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+
+		@media (min-width: 1024px) {
+			width: 28px;
+			height: 28px;
+		}
 
 		&:hover {
 			transform: scale(1.4);
