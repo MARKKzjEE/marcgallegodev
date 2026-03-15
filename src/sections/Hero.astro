@@ -12,7 +12,6 @@ const t = useTranslations(lang);
 		id="hero-video"
 		class="absolute inset-0 h-full w-full object-cover blur-[1px]"
 		style="background-image: url('/assets/bg-background-loop-poster.webp'); background-size: cover; background-position: center;"
-		src="/assets/bg-background-loop-optimized.mp4"
 		autoplay
 		muted
 		loop
@@ -21,7 +20,10 @@ const t = useTranslations(lang);
 		poster="/assets/bg-background-loop-poster.webp"
 		title={t.hero.videoTitle}
 		aria-hidden="true"
-	></video>
+	>
+		<source src="/assets/bg-mobile.webm" type="video/webm" media="(max-width: 768px)">
+		<source src="/assets/bg-background-loop-optimized.mp4" type="video/mp4">
+	</video>
 
 	<div class="absolute inset-0 bg-primary/5 dark:bg-primary/70"></div>
 	<div class="relative flex min-h-screen flex-col py-16" data-hero-content>
