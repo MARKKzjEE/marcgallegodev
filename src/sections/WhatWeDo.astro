@@ -3,16 +3,11 @@ import { getLang, useTranslations } from '../i18n/index';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
-const paragraphs = t.whatWeDo.text.split('\n\n').map((p: string) => p.split(' '));
-let wordOffset = 0;
-const paragraphsWithIndex = paragraphs.map((words: string[]) => {
-	const result = words.map((word: string, i: number) => ({ word, index: wordOffset + i }));
-	wordOffset += words.length;
-	return result;
-});
+const words = t.whatWeDo.text.split(' ');
+const paragraphsWithIndex = [words.map((word: string, i: number) => ({ word, index: i }))];
 ---
 
-<section id="what-we-do" class="what-we-do py-16 md:py-24" aria-labelledby="what-we-do-heading">
+<section id="what-we-do" class="what-we-do pt-16 md:pt-30" aria-labelledby="what-we-do-heading">
 	<div class="px-4 md:px-10">
 		<div class="grid md:grid-cols-[320px_1fr] gap-8 md:gap-16 items-start">
 

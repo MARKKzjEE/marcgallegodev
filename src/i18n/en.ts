@@ -54,7 +54,7 @@ export const en: Translations = {
 	// ── WhatWeDo ──
 	whatWeDo: {
 		label: "What I do",
-		text: "I bring to life ideas that people have in mind for their business or simply a motivating concept they want to turn into digital solutions like websites or mobile apps.\n\n\n Understanding beyond the project's objective — things that can't be explained but are felt — transparency and trust are something I always emphasise so the process is enjoyable and the outcome is simply the reward of a job well done.",
+		text: "I transform ideas into digital solutions, creating websites, apps and products that start as a vision and become something real. For me, it's not just about building a solution, but about understanding the project beyond the technical goal. The kind of things that sometimes can't be explained with words, but can be felt when a project is built the right way.",
 	},
 
 	// ── TechStack ──

@@ -52,7 +52,7 @@ export const es = {
 	// ── WhatWeDo ──
 	whatWeDo: {
 		label: "Qué es lo que hago",
-		text: "Hago realidad ideas que la gente tiene en la cabeza para su negocio o simplemente una idea motivadora que quiere llevar a cabo en soluciones digitales como webs o apps móviles.\n\n\n Entender más allá del objetivo del proyecto, cosas que no se pueden explicar si no que se perciben, la transparencia y confianza es algo que siempre recalco para que el proceso sea un disfrute y el final sea simplemente la recompensa de un buen trabajo hecho.",
+		text: "Transformo ideas en soluciones digitales, creando webs, apps y productos que nacen como una visión y se convierten en algo real. Para mí no se trata solo de desarrollar una solución, sino de entender el proyecto más allá del objetivo técnico. Esas cosas que a veces no se explican con palabras, pero se perciben cuando un proyecto se construye bien.",
 	},
 
 	// ── TechStack ──
