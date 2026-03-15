@@ -58,7 +58,7 @@ export const es = {
 	// ── TechStack ──
 	techStack: {
 		heading: "Tecnologías",
-		descCorner: "Estas son las tecnologías que más uso día a día. Aunque me encanta adaptarme siempre a las necesidades de cada proyecto.",
+		descCorner: "Estas son las tecnologías que utilizo en mi día a día. Siempre me gusta seguir explorando nuevas herramientas para poder elegir la mejor solución según las necesidades de cada proyecto.",
 		toggleShow: "Ver tecnologías",
 		toggleHide: "Ocultar tecnologías",
 	},

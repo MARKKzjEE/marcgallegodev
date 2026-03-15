@@ -60,7 +60,7 @@ export const en: Translations = {
 	// ── TechStack ──
 	techStack: {
 		heading: "My Stack",
-		descCorner: "These are the technologies I use most day to day. Although I love adapting to the needs of each project.",
+		descCorner: "These are the technologies I use in my daily work. I always enjoy exploring new tools to choose the best solution for the needs of each project.",
 		toggleShow: "Show technologies",
 		toggleHide: "Hide technologies",
 	},

@@ -1,6 +1,6 @@
 {
-  "name": "MarcGallego",
-  "short_name": "MarcGallego",
+  "name": "MarcDev",
+  "short_name": "Marc",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#f1f1f1",
-  "background_color": "#fcfcfc",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "display": "standalone"
 }
