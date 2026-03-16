@@ -3,12 +3,15 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../sections/Header.astro";
 import Projects from "../sections/Projects.astro";
 import Footer from "../sections/Footer.astro";
+import { useTranslations } from '../i18n/index';
+
+const t = useTranslations('es');
 ---
 
 <Layout
-	title="Proyectos | Marc Gallego — Desarrollador Full Stack Barcelona"
-	description="Portfolio de proyectos de Marc Gallego: plataformas web, SaaS, apps móviles y soluciones digitales a medida desarrolladas en Barcelona."
-	keywords="proyectos web Marc Gallego, portfolio desarrollador Barcelona, SaaS, plataformas web, apps móviles, desarrollo a medida"
+	title={t.meta.projectsTitle}
+	description={t.meta.projectsDescription}
+	keywords={t.meta.projectsKeywords}
 >
 	<Header />
 	<script is:inline type="application/ld+json">{JSON.stringify({
@@ -16,7 +19,7 @@ import Footer from "../sections/Footer.astro";
 		"@type": "BreadcrumbList",
 		"itemListElement": [
 			{ "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://marcgallego.com/" },
-			{ "@type": "ListItem", "position": 2, "name": "Proyectos", "item": "https://marcgallego.com/projects/" }
+			{ "@type": "ListItem", "position": 2, "name": "Proyectos", "item": "https://marcgallego.com/proyectos/" }
 		]
 	})}</script>
 	<main class="min-h-screen bg-primary pt-14">

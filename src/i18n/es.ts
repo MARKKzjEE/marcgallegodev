@@ -16,6 +16,7 @@ export const es = {
 		projectsKeywords: "proyectos web Marc Gallego, portfolio desarrollador Barcelona, SaaS, plataformas web, apps móviles, desarrollo a medida",
 		contactTitle: "Contacto | Marc Gallego",
 		contactDescription: "¿Tienes un proyecto en mente? Escríbeme y hablemos.",
+		contactKeywords: "contacto Marc Gallego, contratar desarrollador Barcelona, freelance Full Stack, presupuesto web, desarrollo a medida",
 	},
 
 	// ── Header / Nav ──

@@ -1,5 +1,6 @@
 ---
 import type { Lang } from '../i18n/index';
+import { getAlternatePath } from '../i18n/index';
 
 interface Props {
 	title?: string;
@@ -15,11 +16,10 @@ const { title = "Marc Gallego | Desarrollador Full Stack", description = default
 const canonicalURL = new URL(Astro.url.pathname, 'https://marcgallego.com').href;
 
 // hreflang alternate URLs
-const pathname = Astro.url.pathname;
-const esPath = pathname.startsWith('/en') ? pathname.replace(/^\/en/, '') || '/' : pathname;
-const enPath = pathname.startsWith('/en') ? pathname : `/en${pathname === '/' ? '' : pathname}`;
-const esURL = new URL(esPath, 'https://marcgallego.com').href;
-const enURL = new URL(enPath, 'https://marcgallego.com').href;
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const { esHref, enHref } = getAlternatePath(pathname);
+const esURL = new URL(esHref, 'https://marcgallego.com').href;
+const enURL = new URL(enHref, 'https://marcgallego.com').href;
 ---
 
 <!doctype html>
@@ -62,6 +62,7 @@ const enURL = new URL(enPath, 'https://marcgallego.com').href;
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content="https://marcgallego.com/assets/og-image.webp" />
+		<meta property="og:image:alt" content="Marc Gallego — Full Stack Software Engineer" />
 		<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
 		<meta property="og:site_name" content="Marc Gallego" />
 

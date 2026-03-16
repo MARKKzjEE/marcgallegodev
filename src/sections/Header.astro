@@ -1,5 +1,5 @@
 ---
-import { getLang, useTranslations, getLocalePath } from '../i18n/index';
+import { getLang, useTranslations, getLocalePath, getAlternatePath } from '../i18n/index';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
@@ -13,9 +13,8 @@ const navItems = [
 const homePath = lang === 'en' ? '/en' : '/';
 const isHome = Astro.url.pathname === homePath || Astro.url.pathname === '/en/';
 
-const pathname = Astro.url.pathname;
-const esHref = pathname.startsWith('/en') ? (pathname.replace(/^\/en/, '') || '/') : pathname;
-const enHref = pathname.startsWith('/en') ? pathname : `/en${pathname === '/' ? '' : pathname}`;
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const { esHref, enHref } = getAlternatePath(pathname);
 
 ---
 

@@ -18,6 +18,7 @@ export const en: Translations = {
 		projectsKeywords: "Marc Gallego web projects, developer portfolio Barcelona, SaaS, web platforms, mobile apps, custom development",
 		contactTitle: "Contact | Marc Gallego",
 		contactDescription: "Have a project in mind? Write to me and let's talk.",
+		contactKeywords: "contact Marc Gallego, hire developer Barcelona, Full Stack freelance, web quote, custom development",
 	},
 
 	// ── Header / Nav ──
