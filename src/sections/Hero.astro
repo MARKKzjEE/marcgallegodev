@@ -8,24 +8,26 @@ const t = useTranslations(lang);
 
 <section id="hero" class="relative min-h-screen" aria-label={t.hero.sectionAriaLabel}>
 
-	<video
-		id="hero-video"
-		class="absolute inset-0 h-full w-full object-cover blur-[1px]"
-		style="background-image: url('/assets/bg-background-loop-poster.webp'); background-size: cover; background-position: center;"
-		autoplay
-		muted
-		loop
-		playsinline
-		preload="auto"
-		poster="/assets/bg-background-loop-poster.webp"
-		title={t.hero.videoTitle}
-		aria-hidden="true"
-	>
-		<source src="/assets/bg-mobile.webm" type="video/webm" media="(max-width: 768px)">
-		<source src="/assets/bg-background-loop-optimized.mp4" type="video/mp4">
-	</video>
+	<!-- Unicorn Studio gradient -->
+	<div id="hero-gradient" class="absolute inset-0 w-full h-full" aria-hidden="true"></div>
 
-	<div class="absolute inset-0 bg-primary/5 dark:bg-primary/70"></div>
+	<script src="unicorn/unicornStudio.umd.js" is:inline></script>
+	<script is:inline>
+		document.addEventListener('DOMContentLoaded', function() {
+			UnicornStudio.addScene({
+				elementId: 'hero-gradient',
+				fps: 60,
+				scale: 1,
+				dpi: window.devicePixelRatio || 1,
+				filePath: '/unicorn/mouse-tracking-gradient.json',
+				interactivity: {
+					mouse: {
+						disableMobile: false,
+					}
+				}
+			});
+		});
+	</script>
 	<div class="relative flex min-h-screen flex-col py-16" data-hero-content>
 		<!-- Centro: nombre + feature cards -->
 		<div class="flex-1 flex flex-col justify-center container mx-auto px-4 md:px-10">
