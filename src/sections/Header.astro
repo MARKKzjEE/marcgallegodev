@@ -130,7 +130,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 	</div>
 
 	<!-- ─── Mobile overlay ─── -->
-	<div id="mobile-menu" class="mobile-overlay font-nord" aria-hidden="true" data-mobile-menu>
+	<div id="mobile-menu" class="mobile-overlay" aria-hidden="true" data-mobile-menu>
 		<div class="mobile-overlay-bar">
 			<div class="mobile-overlay-spacer"></div>
 			<button type="button" class="mobile-close-btn" aria-label={t.header.mobileMenuClose} data-menu-close>
@@ -189,6 +189,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
     white-space: nowrap;
 
     &[style*="grid-column:1"] { border-left: none; }
+    &[style*="grid-row:1"]    { border-bottom: 1px solid var(--secondary); }
     &[style*="grid-row:2"]    { border-bottom: 1px solid var(--secondary); }
     &[style*="grid-row:1/3"]  { border-bottom: 1px solid var(--secondary); }
   }
@@ -378,7 +379,6 @@ const { esHref, enHref } = getAlternatePath(pathname);
     white-space: nowrap;
     text-decoration: none;
 
-    &.lang-active { font-weight: 700; }
   }
 
   .mobile-lang-stack {

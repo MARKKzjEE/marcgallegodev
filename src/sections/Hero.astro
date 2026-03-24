@@ -210,13 +210,15 @@ const t = useTranslations(lang);
 		});
 	}
 
-	fillRoleBand();
-	const roleBand = document.querySelector('[data-role-band]');
-	if (roleBand) new ResizeObserver(fillRoleBand).observe(roleBand);
+	requestAnimationFrame(() => {
+		fillRoleBand();
+		const roleBand = document.querySelector('[data-role-band]');
+		if (roleBand) new ResizeObserver(fillRoleBand).observe(roleBand);
 
-	fillStatSeps();
-	const statBand = document.querySelector('[data-stats-band]');
-	if (statBand) new ResizeObserver(fillStatSeps).observe(statBand);
+		fillStatSeps();
+		const statBand = document.querySelector('[data-stats-band]');
+		if (statBand) new ResizeObserver(fillStatSeps).observe(statBand);
+	});
 
 	// ─── Binary glitch animation on separators ───
 	if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
