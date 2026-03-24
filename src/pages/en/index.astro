@@ -9,6 +9,7 @@ import FAQ from '../../sections/FAQ.astro';
 import AboutSection from '../../sections/AboutSection.astro';
 import MarqueeBands from '../../sections/MarqueeBands.astro';
 import Footer from '../../sections/Footer.astro';
+import AboutModal from '../../components/AboutModal.astro';
 import { useTranslations } from '../../i18n/index';
 
 const t = useTranslations('en');
@@ -20,7 +21,8 @@ const t = useTranslations('en');
 	keywords={t.meta.indexKeywords}
 	lang="en"
 >
-	<Header />
+	<Header hasHero />
+	<AboutModal />
 	<main>
 		<Hero />
 		<TechStack />

@@ -92,8 +92,6 @@ const currentYear = new Date().getFullYear();
 
 	.footer-title {
 		font-size: clamp(3rem, 8vw, 5.5rem);
-		line-height: 1;
-		letter-spacing: -0.02em;
 	}
 
 	.footer-contact {
@@ -248,29 +246,6 @@ const currentYear = new Date().getFullYear();
 	}
 
 </style>
-
-<script is:inline type="application/ld+json">{JSON.stringify({
-	"@context": "https://schema.org",
-	"@type": "Person",
-	"name": "Marc Gallego",
-	"url": "https://marcgallego.com",
-	"contactPoint": [
-		{
-			"@type": "ContactPoint",
-			"telephone": "+34-647-604-048",
-			"contactType": "customer support",
-			"availableLanguage": ["Spanish", "Catalan", "English"]
-		},
-		{
-			"@type": "ContactPoint",
-			"email": "mark.gallego.gines@gmail.com",
-			"contactType": "customer support"
-		}
-	],
-	"sameAs": [
-		"https://linkedin.com/in/marcgallegodev"
-	]
-})}</script>
 
 <script>
 	import '../scripts/circle-reveal.ts';

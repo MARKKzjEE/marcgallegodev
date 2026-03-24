@@ -1,6 +1,11 @@
 ---
 import { getLang, useTranslations, getLocalePath, getAlternatePath } from '../i18n/index';
 
+interface Props {
+	hasHero?: boolean;
+}
+
+const { hasHero = false } = Astro.props;
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 
@@ -18,7 +23,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 
 ---
 
-<header class="site-header fixed inset-x-0 top-0 z-40" data-site-header>
+<header class={`site-header fixed inset-x-0 top-0 z-40 no-transition${!hasHero ? ' is-past-hero' : ''}`} data-site-header>
 
 	<!-- ─── Desktop ─── -->
 	<div class="px-10 font-nord font-medium hidden md:flex items-center justify-between h-14">
@@ -54,7 +59,12 @@ const { esHref, enHref } = getAlternatePath(pathname);
 	</div>
 
 	<!-- ─── Mobile bar ─── -->
-	<div class="mobile-bar px-4 font-nord font-medium flex md:hidden items-center justify-end h-14">
+	<div class="mobile-bar px-4 font-nord font-medium flex md:hidden items-center justify-between h-14">
+		{!isHome ? (
+			<a href={homePath} class="nav-link text-sm">{lang === 'en' ? 'Home' : 'Inicio'}</a>
+		) : (
+			<span></span>
+		)}
 		<button
 			type="button"
 			class="hamburger-btn"
@@ -124,6 +134,11 @@ const { esHref, enHref } = getAlternatePath(pathname);
   .site-header {
     transition: background-color 300ms ease, border-color 300ms ease;
     border-bottom: 1px solid transparent;
+
+    &.no-transition,
+    &.no-transition *  {
+      transition: none !important;
+    }
 
     // ─── Sobre el hero: transparente, texto blanco ───
     .nav-link { color: #fff; }
@@ -278,7 +293,6 @@ const { esHref, enHref } = getAlternatePath(pathname);
     font-size: clamp(28px, 7vw, 44px);
     font-weight: 300;
     color: var(--secondary);
-    line-height: 1.15;
     position: relative;
     width: fit-content;
     text-align: center;
@@ -319,8 +333,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
     font-family: inherit;
     font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+
     padding: 8px 16px;
     text-align: center;
     border-radius: 8px;
@@ -376,6 +389,16 @@ const { esHref, enHref } = getAlternatePath(pathname);
 <script>
 	import { initHeaderScroll } from "../scripts/header-scroll";
 	initHeaderScroll();
+
+	// Remove no-transition class after first paint to enable animations
+	const headerEl = document.querySelector<HTMLElement>('[data-site-header]');
+	if (headerEl) {
+		requestAnimationFrame(() => {
+			requestAnimationFrame(() => {
+				headerEl.classList.remove('no-transition');
+			});
+		});
+	}
 
 	// ─── Mobile menu ───
 	const hamburger = document.querySelector<HTMLButtonElement>('[data-hamburger]');

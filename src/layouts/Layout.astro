@@ -85,6 +85,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 			"url": "https://marcgallego.com",
 			"jobTitle": "Full Stack Software Engineer",
 			"description": defaultDescription,
+			"image": "https://marcgallego.com/assets/og-image.webp",
 			"sameAs": [
 				"https://linkedin.com/in/marcgallegodev",
 				"https://github.com/marcgallegodev"
@@ -93,7 +94,25 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 				"@type": "PostalAddress",
 				"addressLocality": "Barcelona",
 				"addressCountry": "ES"
-			}
+			},
+			"contactPoint": [
+				{
+					"@type": "ContactPoint",
+					"telephone": "+34-647-604-048",
+					"contactType": "customer support",
+					"availableLanguage": ["Spanish", "Catalan", "English"]
+				},
+				{
+					"@type": "ContactPoint",
+					"email": "mark.gallego.gines@gmail.com",
+					"contactType": "customer support"
+				}
+			],
+			"alumniOf": {
+				"@type": "EducationalOrganization",
+				"name": "Universitat Autònoma de Barcelona"
+			},
+			"knowsAbout": ["Laravel", "Django", "React", "Angular", "Node.js", "Docker", "CI/CD", "Astro", "TypeScript"]
 		})} />
 
 		<script is:inline>

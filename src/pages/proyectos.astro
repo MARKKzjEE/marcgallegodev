@@ -1,8 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../sections/Header.astro";
-import Projects from "../sections/Projects.astro";
-import Footer from "../sections/Footer.astro";
+import Layout from '../layouts/Layout.astro';
+import Header from '../sections/Header.astro';
+import Projects from '../sections/Projects.astro';
+import Footer from '../sections/Footer.astro';
 import { useTranslations } from '../i18n/index';
 
 const t = useTranslations('es');
@@ -14,16 +14,6 @@ const t = useTranslations('es');
 	keywords={t.meta.projectsKeywords}
 >
 	<Header />
-	<script is:inline type="application/ld+json">{JSON.stringify({
-		"@context": "https://schema.org",
-		"@type": "BreadcrumbList",
-		"itemListElement": [
-			{ "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://marcgallego.com/" },
-			{ "@type": "ListItem", "position": 2, "name": "Proyectos", "item": "https://marcgallego.com/proyectos/" }
-		]
-	})}</script>
-	<main class="min-h-screen bg-primary pt-14">
-		<Projects />
-	</main>
+	<Projects />
 	<Footer />
 </Layout>

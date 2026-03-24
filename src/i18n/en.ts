@@ -43,6 +43,7 @@ export const en: Translations = {
 		projectsDesc: "projects",
 		ctaLabel: "Experience",
 		ctaLabelShort: "CV",
+		aboutTrigger: "Click me",
 		available: "Available for projects",
 		degree: "Graduated in Computer Engineering",
 		linkedinAriaLabel: "Marc Gallego on LinkedIn",
@@ -91,6 +92,10 @@ export const en: Translations = {
 		dokoDesc: "Branding, web design and development studio",
 		dokoLogoAlt: "Doko Studio logo",
 		dokoImgAlt: "Doko Studio — web design and development studio",
+		studioLabel: "How do you collaborate?",
+		studioText1: "It's a small studio with specialised profiles for every phase of a project: branding, design, development and deployment. They can deliver a full solution or integrate into existing teams to cover specific needs at any stage.",
+		studioText2: "On my side, I contribute my experience and services, participating on a project basis or working jointly on larger-scale projects.",
+		studioLink: "Learn more",
 	},
 
 	// ── FAQ ──

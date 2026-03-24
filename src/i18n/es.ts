@@ -41,6 +41,7 @@ export const es = {
 		projectsDesc: "proyectos",
 		ctaLabel: "Trayectoria",
 		ctaLabelShort: "CV",
+		aboutTrigger: "Púlsame",
 		available: "Disponible para proyectos",
 		degree: "Graduado en Ingeniería informática",
 		linkedinAriaLabel: "LinkedIn de Marc Gallego",
@@ -89,6 +90,10 @@ export const es = {
 		dokoDesc: "Estudio de branding, diseño y desarrollo web",
 		dokoLogoAlt: "Logo Doko Studio",
 		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
+		studioLabel: "¿Cómo colaboras?",
+		studioText1: "Es un pequeño estudio que cuenta con perfiles especializados para cada fase de un proyecto: branding, diseño, desarrollo y puesta en producción. Pueden ofrecer una solución completa o integrarse en equipos existentes para cubrir necesidades concretas en cualquier etapa.",
+		studioText2: "Por mi parte, colaboro aportando mi experiencia y servicios, participando tanto de forma puntual como trabajando conjuntamente en proyectos de mayor envergadura.",
+		studioLink: "Saber más",
 	},
 
 	// ── FAQ ──

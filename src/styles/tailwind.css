@@ -144,4 +144,11 @@ html, body {
 	body {
 		background-color: var(--color-primary);
 	}
+
+	/* Tipografía base por fuente */
+	.font-cottor    { line-height: 1.5; letter-spacing: 0; }
+	.font-nord      { line-height: 1.4; letter-spacing: 0.08em; }
+	.font-vogun     { line-height: 1.1; letter-spacing: -0.02em; }
+	.font-monoblock { line-height: 1.4; letter-spacing: 0.1em; }
+	.font-pixelbots { line-height: 1.4; letter-spacing: 0.2em; }
 }

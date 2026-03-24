@@ -3,7 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../sections/Header.astro';
 ---
 
-<Layout title="404 — Marc Gallego">
+<Layout
+	title="404 — Marc Gallego"
+	description="Página no encontrada. Vuelve al inicio del portfolio de Marc Gallego."
+	keywords="404, página no encontrada, Marc Gallego"
+>
 	<Header />
 	<main class="notfound">
 		<p class="notfound__code font-nord">404</p>
@@ -28,20 +32,16 @@ import Header from '../sections/Header.astro';
 		font-size: clamp(80px, 15vw, 160px);
 		font-weight: 900;
 		color: color-mix(in srgb, var(--secondary) 8%, transparent);
-		line-height: 1;
-		letter-spacing: -0.05em;
 	}
 
 	.notfound__title {
 		font-size: clamp(28px, 4vw, 52px);
-		line-height: 1.1;
 	}
 
 	.notfound__link {
 		font-size: 13px;
 		font-weight: 500;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
+
 		opacity: 0.5;
 		transition: opacity 300ms;
 		&:hover { opacity: 1; }

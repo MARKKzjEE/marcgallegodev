@@ -1,30 +1,48 @@
 ---
 import { Image } from 'astro:assets';
 import dokostudio from '../assets/clients/dokostudio.png';
+import { getLang, useTranslations } from '../i18n';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section id="partners" class="pt-16 md:pt-30" aria-labelledby="partners-heading">
 	<div class="container mx-auto px-4 md:px-10">
-		<div class="flex flex-col gap-8 items-start md:items-center md:text-center">
 
-			<h2 id="partners-heading" class="font-nord font-bold text-secondary uppercase">Partners</h2>
+		<h2 id="partners-heading" class="font-nord font-bold text-secondary mb-8">{t.partners.heading}</h2>
 
+		<div class="partners-grid">
 			<div class="partners-card">
-                <div class="card-image">
-                    <Image src={dokostudio} alt="Logo Doko Studio, estudio de branding, diseño y desarrollo web" loading="lazy" quality={85} widths={[400, 800]} sizes="min(800px, 100vw)" format="webp" />
-                </div>
-                <div class="card-info">
-                    <div class="left">
-                        <h4 class="font-nord font-bold text-secondary text-left" style="font-size: clamp(16px, 4vw, 24px)">Doko Studio</h4>
-                        <p class="font-monoblock font-normal text-secondary/90 text-sm mt-1 tracking-widest text-left">Estudio de branding, diseño y desarrollo web</p>
-                    </div>
-                    <div class="right hidden md:block">
-                        <span class="font-nord text-secondary text-sm uppercase tracking-widest bg-quaternary p-4 rounded-full border">desde 2024</span>
-                    </div>
-                </div>
-            </div>
+				<div class="card-image">
+					<Image src={dokostudio} alt={t.partners.dokoImgAlt} loading="lazy" quality={85} widths={[400, 800]} sizes="(min-width: 768px) 66vw, 100vw" format="webp" />
+				</div>
+				<div class="card-info">
+					<div class="left min-w-0">
+						<h4 class="font-nord font-bold text-secondary" style="font-size: clamp(16px, 4vw, 24px)">Doko Studio</h4>
+						<p class="font-monoblock font-normal text-secondary/90 text-sm mt-1">{t.partners.dokoDesc}</p>
+					</div>
+					<div class="right hidden md:block">
+						<span class="font-nord text-secondary text-xs bg-quaternary p-4 rounded-full border text-center whitespace-nowrap">{t.partners.badge}</span>
+					</div>
+				</div>
+			</div>
 
+			<div class="studio-card" data-reveal data-reveal-radius="32px">
+				<span class="studio-label font-nord font-bold text-secondary text-sm uppercase">{t.partners.studioLabel}</span>
+				<p class="font-cottor font-normal text-secondary text-sm mt-4">{t.partners.studioText1}</p>
+				<p class="font-cottor font-normal text-secondary text-sm mt-3">{t.partners.studioText2}</p>
+				<a href="https://doko.studio/" target="_blank" rel="noopener noreferrer" class="studio-link mt-8 font-nord font-medium text-xs text-secondary inline-flex items-center gap-1" data-reveal-trigger>{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+				<!-- Reveal layer -->
+				<div class="studio-card__reveal reveal-layer" aria-hidden="true">
+					<span class="studio-label font-nord font-bold text-sm uppercase">{t.partners.studioLabel}</span>
+					<p class="font-cottor font-normal text-sm mt-4">{t.partners.studioText1}</p>
+					<p class="font-cottor font-normal text-sm mt-3">{t.partners.studioText2}</p>
+					<span class="studio-link mt-8 font-nord font-medium text-xs inline-flex items-center gap-1">{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+				</div>
+			</div>
 		</div>
+
 	</div>
 </section>
 
@@ -32,7 +50,17 @@ import dokostudio from '../assets/clients/dokostudio.png';
     #partners {
         h2 {
             font-size: clamp(44px, 8vw, 96px);
-            line-height: 1;
+        }
+    }
+
+    .partners-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
+        align-items: stretch;
+
+        @media (max-width: 767px) {
+            grid-template-columns: 1fr;
         }
     }
 
@@ -40,10 +68,10 @@ import dokostudio from '../assets/clients/dokostudio.png';
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        border-radius: 12px;
+        border-radius: 10px;
         background-color: var(--terciary);
         border: 1px solid color-mix(in srgb, var(--secondary) 8%, transparent);
-        width: min(800px, 100%);
+
         .right span {
             border-color: color-mix(in srgb, var(--secondary) 10%, transparent);
         }
@@ -52,16 +80,16 @@ import dokostudio from '../assets/clients/dokostudio.png';
     .card-image {
         width: 100%;
         height: 400px;
-
-        @media (max-width: 767px) {
-            height: 300px;
-        }
         overflow: hidden;
         background-color: #6130EB;
         display: flex;
         align-items: center;
         justify-content: center;
         filter: brightness(0.9);
+
+        @media (max-width: 767px) {
+            height: 300px;
+        }
 
         img {
             max-width: 60%;
@@ -79,11 +107,46 @@ import dokostudio from '../assets/clients/dokostudio.png';
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 0.5rem;
         padding: 1.5rem;
 
         @media (max-width: 767px) {
             padding: 1rem;
         }
     }
+
+    .studio-card {
+        --reveal-extend: 20px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1.5rem;
+        border-radius: 10px;
+        background-color: var(--terciary);
+        border: 1px solid color-mix(in srgb, var(--secondary) 8%, transparent);
+
+        @media (max-width: 767px) {
+            padding: 1rem;
+        }
+    }
+
+    .studio-card__reveal {
+        background: var(--secondary);
+        color: var(--primary);
+        padding: calc(1.5rem + var(--reveal-extend, 0px));
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @media (max-width: 767px) {
+            padding: calc(1rem + var(--reveal-extend, 0px));
+        }
+    }
 </style>
+
+<script>
+	import '../scripts/circle-reveal.ts';
+</script>
 
