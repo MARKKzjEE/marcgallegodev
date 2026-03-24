@@ -10,6 +10,8 @@
  * The reveal layer uses CSS vars: --r (radius), --cx / --cy (position).
  */
 export function initCircleReveal() {
+	if (window.matchMedia('(hover: none)').matches) return;
+
 	document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((wrapper) => {
 		if (wrapper.dataset.revealInit) return;
 		wrapper.dataset.revealInit = 'true';
@@ -47,7 +49,6 @@ export function initCircleReveal() {
 			if (!rafId) rafId = requestAnimationFrame(tick);
 		});
 
-		// If there are specific trigger elements, only reveal on their hover
 		if (triggers.length > 0) {
 			triggers.forEach((trigger) => {
 				trigger.addEventListener('mouseenter', () => {
@@ -58,7 +59,6 @@ export function initCircleReveal() {
 				});
 			});
 		} else {
-			// Otherwise, reveal on the whole wrapper hover
 			wrapper.addEventListener('mouseenter', () => {
 				wrapper.style.setProperty('--r', radius);
 			});

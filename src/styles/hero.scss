@@ -6,7 +6,7 @@
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(4px);
 	transition: background-color 320ms ease;
-	border-radius: 8px;
+	border-radius: 10px;
 	border: 1px solid color-mix(in srgb, var(--primary) 5%, transparent);
 
 	.dark & {

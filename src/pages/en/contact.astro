@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../sections/Header.astro';
-import Contact from '../../sections/Contact.astro';
+import ContactSection from '../../sections/Contact.astro';
 import Footer from '../../sections/Footer.astro';
 import { useTranslations } from '../../i18n/index';
 
@@ -11,11 +11,10 @@ const t = useTranslations('en');
 <Layout
 	title={t.meta.contactTitle}
 	description={t.meta.contactDescription}
+	keywords={t.meta.contactKeywords}
 	lang="en"
 >
 	<Header />
-	<main>
-		<Contact />
-	</main>
+	<ContactSection />
 	<Footer />
 </Layout>

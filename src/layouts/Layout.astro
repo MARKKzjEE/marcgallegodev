@@ -1,5 +1,6 @@
 ---
 import type { Lang } from '../i18n/index';
+import { getAlternatePath } from '../i18n/index';
 
 interface Props {
 	title?: string;
@@ -15,11 +16,10 @@ const { title = "Marc Gallego | Desarrollador Full Stack", description = default
 const canonicalURL = new URL(Astro.url.pathname, 'https://marcgallego.com').href;
 
 // hreflang alternate URLs
-const pathname = Astro.url.pathname;
-const esPath = pathname.startsWith('/en') ? pathname.replace(/^\/en/, '') || '/' : pathname;
-const enPath = pathname.startsWith('/en') ? pathname : `/en${pathname === '/' ? '' : pathname}`;
-const esURL = new URL(esPath, 'https://marcgallego.com').href;
-const enURL = new URL(enPath, 'https://marcgallego.com').href;
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const { esHref, enHref } = getAlternatePath(pathname);
+const esURL = new URL(esHref, 'https://marcgallego.com').href;
+const enURL = new URL(enHref, 'https://marcgallego.com').href;
 ---
 
 <!doctype html>
@@ -27,7 +27,12 @@ const enURL = new URL(enPath, 'https://marcgallego.com').href;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="MarcGallego" />
+		<link rel="manifest" href="/site.webmanifest" />
 		<link rel="canonical" href={canonicalURL} />
 		<link rel="alternate" hreflang="es" href={esURL} />
 		<link rel="alternate" hreflang="en" href={enURL} />
@@ -57,6 +62,7 @@ const enURL = new URL(enPath, 'https://marcgallego.com').href;
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content="https://marcgallego.com/assets/og-image.webp" />
+		<meta property="og:image:alt" content="Marc Gallego — Full Stack Software Engineer" />
 		<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
 		<meta property="og:site_name" content="Marc Gallego" />
 
@@ -79,6 +85,7 @@ const enURL = new URL(enPath, 'https://marcgallego.com').href;
 			"url": "https://marcgallego.com",
 			"jobTitle": "Full Stack Software Engineer",
 			"description": defaultDescription,
+			"image": "https://marcgallego.com/assets/og-image.webp",
 			"sameAs": [
 				"https://linkedin.com/in/marcgallegodev",
 				"https://github.com/marcgallegodev"
@@ -87,7 +94,25 @@ const enURL = new URL(enPath, 'https://marcgallego.com').href;
 				"@type": "PostalAddress",
 				"addressLocality": "Barcelona",
 				"addressCountry": "ES"
-			}
+			},
+			"contactPoint": [
+				{
+					"@type": "ContactPoint",
+					"telephone": "+34-647-604-048",
+					"contactType": "customer support",
+					"availableLanguage": ["Spanish", "Catalan", "English"]
+				},
+				{
+					"@type": "ContactPoint",
+					"email": "mark.gallego.gines@gmail.com",
+					"contactType": "customer support"
+				}
+			],
+			"alumniOf": {
+				"@type": "EducationalOrganization",
+				"name": "Universitat Autònoma de Barcelona"
+			},
+			"knowsAbout": ["Laravel", "Django", "React", "Angular", "Node.js", "Docker", "CI/CD", "Astro", "TypeScript"]
 		})} />
 
 		<script is:inline>
@@ -95,7 +120,7 @@ const enURL = new URL(enPath, 'https://marcgallego.com').href;
 			const stored = localStorage.getItem("theme");
 			const prefersDark = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : null;
 			// Si no hay preferencia guardada, respeta el sistema; si no hay dato de sistema, usa oscuro por defecto
-			const isDark = stored === "dark" || (!stored && (prefersDark ?? true));
+			const isDark = stored === "dark" || (!stored && (prefersDark ?? false));
 			root.classList.toggle("dark", isDark);
 		</script>
 	</head>

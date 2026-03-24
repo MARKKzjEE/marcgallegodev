@@ -4,22 +4,25 @@ import { getLang, useTranslations } from '../i18n/index';
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 const words = t.whatWeDo.text.split(' ');
+const paragraphsWithIndex = [words.map((word: string, i: number) => ({ word, index: i }))];
 ---
 
-<section id="what-we-do" class="what-we-do py-16 md:py-24" aria-labelledby="what-we-do-heading">
+<section id="what-we-do" class="what-we-do pt-16 md:pt-30" aria-labelledby="what-we-do-heading">
 	<div class="px-4 md:px-10">
 		<div class="grid md:grid-cols-[320px_1fr] gap-8 md:gap-16 items-start">
 
 			<!-- Label izquierda -->
-			<h2 id="what-we-do-heading" class="what-we-do__label font-nord text-secondary uppercase tracking-widest">{t.whatWeDo.label}</h2>
+			<h2 id="what-we-do-heading" class="what-we-do__label font-nord text-secondary">{t.whatWeDo.label}</h2>
 
 			<!-- Texto con reveal por palabra -->
-			<div class="what-we-do__content">
-				<p class="what-we-do__text font-cottor font-light leading-[1.15] text-justify" data-scroll-reveal>
-					{words.map((word, i) => (
-						<span class="reveal-word" style={`--word-index: ${i}`}>{word} </span>
-					))}
-				</p>
+			<div class="what-we-do__content" data-scroll-reveal>
+				{paragraphsWithIndex.map((words) => (
+					<p class="what-we-do__text font-cottor font-light mb-8">
+						{words.map(({ word, index }) => (
+							<span class="reveal-word" style={`--word-index: ${index}`}>{word} </span>
+						))}
+					</p>
+				))}
 			</div>
 
 		</div>
@@ -28,7 +31,7 @@ const words = t.whatWeDo.text.split(' ');
 
 <style lang="scss">
 	.what-we-do__text {
-		font-size: clamp(28px, 4vw, 52px);
+		font-size: clamp(32px, 5vw, 60px);
 	}
 
 	.what-we-do__label {
@@ -37,11 +40,6 @@ const words = t.whatWeDo.text.split(' ');
 
 	.reveal-word {
 		color: color-mix(in srgb, var(--secondary) 20%, transparent);
-		transition: color 0.3s ease;
-	}
-
-	.reveal-word.is-visible {
-		color: var(--secondary);
 	}
 </style>
 
@@ -51,24 +49,27 @@ const words = t.whatWeDo.text.split(' ');
 		if (!container) return;
 
 		const words = container.querySelectorAll<HTMLElement>('.reveal-word');
-		const totalWords = words.length;
+
+		const containerWidth = container.offsetWidth;
 
 		function update() {
-			const rect = container!.getBoundingClientRect();
 			const viewH = window.innerHeight;
+			const center = viewH * 0.5;
+			const lineOffset = 40;
+			// Zona de transición: las palabras pasan de 20% a 100% opacidad en este rango de px
+			const fadeRange = 120;
 
-			// Progress: 0 when section enters bottom, 1 when section is centered
-			const start = viewH * 1.0;
-			const end = viewH * 0;
-			const progress = Math.min(Math.max((start - rect.top) / (start - end), 0), 1);
-
-			// Map progress to word index
-			const revealCount = Math.floor(progress * totalWords);
-
-			words.forEach((word, i) => {
-				word.classList.toggle('is-visible', i < revealCount);
+			words.forEach((word) => {
+				const wordRect = word.getBoundingClientRect();
+				const xRatio = wordRect.left / containerWidth;
+				const threshold = center - (xRatio * lineOffset);
+				const wordCenter = wordRect.top + wordRect.height / 2;
+				const distance = threshold - wordCenter;
+				// 0 = justo en threshold, 1 = completamente revelada
+				const t = Math.min(Math.max(distance / fadeRange, 0), 1);
+				const opacity = 20 + t * 80;
+				word.style.color = `color-mix(in srgb, var(--secondary) ${Math.round(opacity)}%, transparent)`;
 			});
-
 		}
 
 		let ticking = false;

@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
 
 Sitemap: https://marcgallego.com/sitemap-index.xml

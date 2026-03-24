@@ -2,20 +2,21 @@ export const es = {
 	// ── Meta / SEO ──
 	meta: {
 		siteName: "Marc Gallego",
-		defaultTitle: "Marc Gallego | Desarrollador Full Stack",
+		defaultTitle: "Marc Gallego",
 		defaultDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida.",
 		defaultKeywords: "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles",
-		indexTitle: "Marc Gallego | Desarrollador Full Stack",
+		indexTitle: "Marc Gallego",
 		indexDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida.",
 		indexKeywords: "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles",
-		experienceTitle: "Experiencia | Marc Gallego — Ingeniero de Software Full Stack",
+		experienceTitle: "Experiencia | Marc Gallego",
 		experienceDescription: "Trayectoria profesional de Marc Gallego: +5 años como ingeniero de software Full Stack en Barcelona. Experiencia en Laravel, Django, React, Angular, DevOps y desarrollo de apps móviles.",
 		experienceKeywords: "experiencia Marc Gallego, CV desarrollador Barcelona, ingeniero software Full Stack, Laravel, Django, React, Angular, DevOps",
-		projectsTitle: "Proyectos | Marc Gallego — Desarrollador Full Stack Barcelona",
+		projectsTitle: "Proyectos | Marc Gallego",
 		projectsDescription: "Portfolio de proyectos de Marc Gallego: plataformas web, SaaS, apps móviles y soluciones digitales a medida desarrolladas en Barcelona.",
 		projectsKeywords: "proyectos web Marc Gallego, portfolio desarrollador Barcelona, SaaS, plataformas web, apps móviles, desarrollo a medida",
 		contactTitle: "Contacto | Marc Gallego",
 		contactDescription: "¿Tienes un proyecto en mente? Escríbeme y hablemos.",
+		contactKeywords: "contacto Marc Gallego, contratar desarrollador Barcelona, freelance Full Stack, presupuesto web, desarrollo a medida",
 	},
 
 	// ── Header / Nav ──
@@ -39,6 +40,8 @@ export const es = {
 		projectsLabel: "+60",
 		projectsDesc: "proyectos",
 		ctaLabel: "Trayectoria",
+		ctaLabelShort: "CV",
+		aboutTrigger: "Púlsame",
 		available: "Disponible para proyectos",
 		degree: "Graduado en Ingeniería informática",
 		linkedinAriaLabel: "LinkedIn de Marc Gallego",
@@ -52,13 +55,13 @@ export const es = {
 	// ── WhatWeDo ──
 	whatWeDo: {
 		label: "Qué es lo que hago",
-		text: "Mi camino comenzó con una pasión por construir soluciones digitales sólidas y dar forma técnica a las ideas. Me centro en transformar conceptos en productos funcionales, escalables y bien estructurados. Con una dedicación constante por mejorar y optimizar cada detalle, trabajo para entregar proyectos robustos, eficientes y preparados para crecer.",
+		text: "Transformo ideas en soluciones digitales, creando webs, apps y productos que nacen como una visión y se convierten en algo real. Para mí no se trata solo de desarrollar una solución, sino de entender el proyecto más allá del objetivo técnico. Esas cosas que a veces no se explican con palabras, pero se perciben cuando un proyecto se construye bien.",
 	},
 
 	// ── TechStack ──
 	techStack: {
 		heading: "Tecnologías",
-		descCorner: "Tecnologías del stack",
+		descCorner: "Estas son las tecnologías que utilizo en mi día a día. Siempre me gusta seguir explorando nuevas herramientas para poder elegir la mejor solución según las necesidades de cada proyecto.",
 		toggleShow: "Ver tecnologías",
 		toggleHide: "Ocultar tecnologías",
 	},
@@ -68,9 +71,9 @@ export const es = {
 		title: "Sobre mi",
 		titleDecorative: "SOBRE MI",
 		tagline: "Diseño creativo & desarrollo digital desde 2018",
-		bioMobile: "Nacido en Barcelona, fuera del código el mar es mi descontrol y mi paz. Me gusta ser creativo y aplicar mi gusto tanto a soluciones digitales como en mi día a día como fan de la moda y del arte.",
-		bioDesktop1: "Me apasiona la tecnología y su evolución constante. Disfruto aprendiendo y probando nuevas herramientas, siempre con criterio y pensando en qué aporta realmente valor al proyecto.\n\nSoy exigente con mi trabajo y cuido los detalles. No busco solo que algo funcione, sino que esté bien pensado y bien construido.\n\nTrabajo con transparencia porque creo que es la base de cualquier buena colaboración: claridad en lo que se hace, por qué se hace y hacia dónde vamos.",
-		bioDesktop2: "Más allá del desarrollo, podrás ver una clara referencia al mar, mi equilibrio. Es el lugar donde desconecto, ordeno ideas y vuelvo con claridad.\n\nTambién me mueve la moda y la creatividad contemporánea: me inspira cómo el arte y la identidad se mezclan y se expresan sin límites. Esa forma de entender la creatividad también define mi trabajo: no solo construyo soluciones, busco que tengan carácter.",
+		bioMobile: "Nacido en Barcelona, desde pequeño he tenido un amor por los ordenadores. La capacidad creativa que te permiten me hizo entrar en este mundo y a día de hoy me dedico a algo que disfruto. Fuera del código tengo dos grandes pasiones que son el mar y la moda. En el primero encuentro la calma y en la segunda, un espacio para experimentar y expresar mi creatividad.",
+		bioDesktop1: "Nacido en Barcelona, desde pequeño veía a mi padre arreglar ordenadores a amigos porque le gustaba y así empecé yo a pasarme horas desmontando y montándolos. \n\nCuando fui creciendo me fui adentrando en el mundo del software, la capacidad de creatividad que veía en programas de sistemas operativos y videojuegos era algo que me fascinaba. Así que poco a poco fui probando con el desarrollo de software hasta el día de hoy.",
+		bioDesktop2: "Más allá del desarrollo, podrás ver una clara referencia al mar que es mi equilibrio. El lugar donde desconecto, ordeno ideas y vuelvo con claridad. \n\nTambién soy un amante del arte y de la moda, me encanta la capacidad creativa de la gente y la diversidad que se crea en cuanto a estilos. Aplico esta creatividad y gusto en la forma de vestirme y diseñar como también cuando le doy mi toque a mis soluciones digitales.",
 		profileAlt: "Marc Gallego, desarrollador Full Stack en Barcelona",
 	},
 
@@ -84,9 +87,13 @@ export const es = {
 	partners: {
 		heading: "Partners",
 		badge: "desde 2024",
-		dokoDesc: "Estudio de diseño y desarrollo web",
+		dokoDesc: "Estudio de branding, diseño y desarrollo web",
 		dokoLogoAlt: "Logo Doko Studio",
-		dokoImgAlt: "Doko Studio — estudio de diseño y desarrollo",
+		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
+		studioLabel: "¿Cómo colaboras?",
+		studioText1: "Es un pequeño estudio que cuenta con perfiles especializados para cada fase de un proyecto: branding, diseño, desarrollo y puesta en producción. Pueden ofrecer una solución completa o integrarse en equipos existentes para cubrir necesidades concretas en cualquier etapa.",
+		studioText2: "Por mi parte, colaboro aportando mi experiencia y servicios, participando tanto de forma puntual como trabajando conjuntamente en proyectos de mayor envergadura.",
+		studioLink: "Saber más",
 	},
 
 	// ── FAQ ──
@@ -99,7 +106,7 @@ export const es = {
 			},
 			{
 				question: "¿Qué servicios ofreces como desarrollador?",
-				answer: "Ofrezco servicios para desarrollar un proyecto desde una idea o una fase inicial como también rediseños y mantenmientos de webs/apps ya funcionales.",
+				answer: "Ofrezco servicios para desarrollar un proyecto desde una idea o una fase inicial como también rediseños y mantenimientos de webs/apps ya funcionales.",
 			},
 			{
 				question: "¿Cómo es tu proceso de trabajo?",
@@ -118,22 +125,17 @@ export const es = {
 
 	// ── Projects ──
 	projects: {
-		pageTitle: "Trabajos destacados.",
+		pageTitle: "Destacados.",
 		dragHint: "Arrastra para explorar",
 		items: [
 			{ title: 'Viviq', description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.' },
 			{ title: 'Cor de suro', description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.' },
-			{ title: 'Lateua', description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo basadas en IA.' },
-			{ title: 'Loyic', description: 'Portal del empleado de la empresa para registrar registro horario, documentos, nóminas, etc.' },
+			{ title: 'Lateua', description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo apoyadas con modelos IA.' },
+			{ title: 'Loyic', description: 'Portal del empleado que permite gestionar todos los datos de usuarios internos de la empresa como registro horario, documentación, nóminas, encuestas internas, etc.' },
 			{ title: 'Pillositio', description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.' },
 			{ title: 'PlanIT', description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.' },
-			{ title: 'RTTH', description: 'Transformación de ondas sonoras en archivos de audio a imágenes para marcas y recursos para webs.' },
+			{ title: 'RTTH', description: 'Generación del territorio de la marca con un servicio que transforma las ondas de sonido de un archivo a imágenes como recursos de diseño con las ondas integradas.' },
 		],
-	},
-
-	// ── GradientSection ──
-	gradient: {
-		headline: "Haz realidad tu idea",
 	},
 
 	// ── Contact ──
@@ -172,7 +174,7 @@ export const es = {
 			languages: "Idiomas",
 			extracurricular: "Extracurricular",
 		},
-		summary: "Soy desarrollador de software con más de 5 años de experiencia creando soluciones web y móviles. A lo largo de mi carrera he tenido la suerte de trabajar en proyectos muy diversos y con diferentes tecnologías, lo que me ha dado una visión más amplia y completa del desarrollo de software. Me apasiona la programación y la tecnología, y disfruto mucho trabajando en equipo, manteniendo siempre buenas vibras y creciendo junto a mis compañeros de trabajo.",
+		summary: "Soy desarrollador de software con más de 5 años de experiencia creando soluciones web y móviles. A lo largo de mi carrera he tenido la suerte de poder trabajar en distintos proyectos con ambientes de trabajo increíbles que me han permitido crecer como persona y de manera profesional. Actualmente aplico y apuesto todo lo que sé en mi marca personal como freelance.",
 		jobs: [
 			{
 				company: "Doko Studio",
@@ -188,6 +190,7 @@ export const es = {
 					"Experiencia implementando pasarelas de pago tanto integradas como independientes.",
 					"Publicación de apps móviles en play store y app store.",
 					"Colaboración con diseñadores en Figma para la creación de interfaces web responsivas y usables.",
+					"Optimización de rendimiento de sitios webs.",
 				],
 				logoAlt: "Logo Doko Studio, estudio de diseño y desarrollo web",
 			},

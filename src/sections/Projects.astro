@@ -12,6 +12,16 @@ import viviq from '../assets/projects/viviq.png';
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 
+const isEn = lang === 'en';
+const breadcrumb = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [
+		{ "@type": "ListItem", "position": 1, "name": isEn ? "Home" : "Inicio", "item": isEn ? "https://marcgallego.com/en/" : "https://marcgallego.com/" },
+		{ "@type": "ListItem", "position": 2, "name": isEn ? "Projects" : "Proyectos", "item": isEn ? "https://marcgallego.com/en/projects/" : "https://marcgallego.com/proyectos/" }
+	]
+};
+
 const projectImages = [viviq, cordesuro, lateua, loyic, pillositio, planit, rtth];
 const projectColors = ['#00676A', '#8C4216', '#BD7D60', '#F1EBF1', '#F6F4EE', '#FA4D6E', '#7F7FE7'];
 
@@ -22,13 +32,16 @@ const projects = t.projects.items.map((item, i) => ({
 }));
 ---
 
+<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+
+<main class="min-h-screen bg-primary pt-14">
 <section class="projects-section" id="proyectos-destacados">
 	<!-- Header -->
 	<div class="projects-header px-4 md:px-10">
 		<h1 class="font-vogun font-light text-secondary projects-title">
 			{t.projects.pageTitle}
 		</h1>
-		<p class="font-nord font-light text-secondary/60 text-sm uppercase tracking-widest mt-2">
+		<p class="font-nord font-light text-secondary/60 text-sm mt-2">
 			{t.projects.dragHint}
 		</p>
 	</div>
@@ -68,7 +81,7 @@ const projects = t.projects.items.map((item, i) => ({
 	</div>
 
 	<!-- Info debajo: sincronizada por JS -->
-	<div class="projects-info-row px-4 md:px-10">
+	<div class="projects-info-row">
 		{projects.map((project, i) => (
 			<div class="project-info-item" data-info-index={i}>
 				<h2 class="project-card-title font-nord font-medium text-secondary">{project.title}</h2>
@@ -77,6 +90,7 @@ const projects = t.projects.items.map((item, i) => ({
 		))}
 	</div>
 </section>
+</main>
 
 <style lang="scss">
 .projects-section {
@@ -98,7 +112,6 @@ const projects = t.projects.items.map((item, i) => ({
 
 .projects-title {
 	font-size: clamp(48px, 5vw, 80px);
-	line-height: 1.1;
 }
 
 // ─── Images zone (drag + cursor) ───
@@ -177,11 +190,13 @@ const projects = t.projects.items.map((item, i) => ({
 .projects-info-row {
 	display: flex;
 	gap: 2.5rem;
-	overflow: hidden;
+	padding: 0 2.5rem;
 	pointer-events: none;
+	will-change: transform;
 
 	@media (max-width: 767px) {
 		gap: 2rem;
+		padding: 0 1rem;
 	}
 }
 
@@ -195,12 +210,10 @@ const projects = t.projects.items.map((item, i) => ({
 
 .project-card-title {
 	font-size: clamp(1.1rem, 2vw, 1.4rem);
-	line-height: 1.1;
 }
 
 .project-card-desc {
 	font-size: 0.875rem;
-	line-height: 1.6;
 }
 
 // ─── Custom cursor ───
@@ -247,7 +260,6 @@ const projects = t.projects.items.map((item, i) => ({
 
 	span {
 		font-size: 0.5rem;
-		letter-spacing: 0.12em;
 	}
 }
 </style>
@@ -295,6 +307,11 @@ const projects = t.projects.items.map((item, i) => ({
 			infoRow.insertBefore(clone, infoOriginals[0]);
 		});
 
+		// Sync helper: use translateX instead of scrollLeft for GPU compositing
+		function syncInfoRow() {
+			infoRow!.style.transform = `translateX(-${track!.scrollLeft}px)`;
+		}
+
 		// After cloning, read the true track padding from the first slot
 		// (which is now a clonesEnd[0], same offsetLeft as original padding)
 		// We need to wait for layout to settle before reading offsetLeft.
@@ -321,7 +338,7 @@ const projects = t.projects.items.map((item, i) => ({
 		requestAnimationFrame(() => {
 			const blockWidth = getBlockWidth();
 			track!.scrollLeft = blockWidth;
-			infoRow!.scrollLeft = blockWidth;
+			syncInfoRow();
 		});
 
 		// ─── Infinite loop teleport ───
@@ -337,21 +354,21 @@ const projects = t.projects.items.map((item, i) => ({
 			if (sl >= blockWidth * 2) {
 				isTeleporting = true;
 				track!.scrollLeft = sl - blockWidth;
-				infoRow!.scrollLeft = track!.scrollLeft;
+				syncInfoRow();
 				isTeleporting = false;
 			}
 			// Before originals → jump forward to originals
 			else if (sl < blockWidth) {
 				isTeleporting = true;
 				track!.scrollLeft = sl + blockWidth;
-				infoRow!.scrollLeft = track!.scrollLeft;
+				syncInfoRow();
 				isTeleporting = false;
 			}
 		}
 
 		// ─── Sync info row ───
 		track.addEventListener('scroll', () => {
-			if (!isTeleporting) infoRow!.scrollLeft = track!.scrollLeft;
+			if (!isTeleporting) syncInfoRow();
 			checkLoop();
 		}, { passive: true });
 

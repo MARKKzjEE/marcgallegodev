@@ -9,10 +9,19 @@ import FAQ from '../sections/FAQ.astro';
 import AboutSection from '../sections/AboutSection.astro';
 import MarqueeBands from '../sections/MarqueeBands.astro';
 import Footer from '../sections/Footer.astro';
+import AboutModal from '../components/AboutModal.astro';
+import { useTranslations } from '../i18n/index';
+
+const t = useTranslations('es');
 ---
 
-<Layout>
-	<Header />
+<Layout
+	title={t.meta.indexTitle}
+	description={t.meta.indexDescription}
+	keywords={t.meta.indexKeywords}
+>
+	<Header hasHero />
+	<AboutModal />
 	<main>
 		<Hero />
 		<TechStack />

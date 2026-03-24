@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../sections/Header.astro';
+---
+
+<Layout
+	title="404 — Marc Gallego"
+	description="Página no encontrada. Vuelve al inicio del portfolio de Marc Gallego."
+	keywords="404, página no encontrada, Marc Gallego"
+>
+	<Header />
+	<main class="notfound">
+		<p class="notfound__code font-nord">404</p>
+		<h1 class="notfound__title font-nord font-light text-secondary" data-404-title>Página no encontrada</h1>
+		<a href="/" class="notfound__link font-nord text-secondary" data-404-link>← Volver al inicio</a>
+	</main>
+</Layout>
+
+<style lang="scss">
+	.notfound {
+		min-height: calc(100vh - 56px);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		padding: 2rem;
+		text-align: center;
+	}
+
+	.notfound__code {
+		font-size: clamp(80px, 15vw, 160px);
+		font-weight: 900;
+		color: color-mix(in srgb, var(--secondary) 8%, transparent);
+	}
+
+	.notfound__title {
+		font-size: clamp(28px, 4vw, 52px);
+	}
+
+	.notfound__link {
+		font-size: 13px;
+		font-weight: 500;
+
+		opacity: 0.5;
+		transition: opacity 300ms;
+		&:hover { opacity: 1; }
+	}
+</style>
+
+<script>
+	const isEn = window.location.pathname.startsWith('/en');
+
+	const title = document.querySelector('[data-404-title]');
+	const link = document.querySelector<HTMLAnchorElement>('[data-404-link]');
+
+	if (isEn && title && link) {
+		title.textContent = 'Page not found';
+		link.textContent = '← Back to home';
+		link.href = '/en';
+	}
+</script>
