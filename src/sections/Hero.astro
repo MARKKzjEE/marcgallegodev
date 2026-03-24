@@ -70,7 +70,7 @@ const t = useTranslations(lang);
 
 		<!-- Banda superior: rol repetido -->
 		<div class="name-bar"></div>
-		<div class="info-band info-band--role font-nord" data-role-band>Full Stack Software Engineer</div>
+		<div class="info-band info-band--role font-monoblock font-normal" data-role-band>Full Stack Software Engineer</div>
 
 		<!-- Nombre -->
 		<div class="name-bar"></div>
@@ -83,13 +83,13 @@ const t = useTranslations(lang);
 
 		<!-- Banda inferior: stats -->
 		<div class="name-bar"></div>
-		<div class="info-band info-band--stats font-nord" data-stats-band>
+		<div class="info-band info-band--stats font-monoblock font-normal" data-stats-band>
 			<span class="stat-item">{lang === 'en' ? '+5 years exp.' : '+5 años exp.'}</span>
 			<span class="sep" data-sep></span>
 			<span class="stat-item">{lang === 'en' ? '+60 projects' : '+60 proyectos'}</span>
 			<span class="sep" data-sep></span>
-			<span class="stat-item">{lang === 'en' ? 'since 2018' : 'desde 2018'}</span>
-			<span class="sep" data-sep></span>
+			<span class="stat-item hidden md:inline">{lang === 'en' ? 'since 2018' : 'desde 2018'}</span>
+			<span class="sep hidden md:inline" data-sep></span>
 			<span class="stat-item">Barcelona</span>
 		</div>
 		<div class="name-bar"></div>
@@ -103,9 +103,12 @@ const t = useTranslations(lang);
 	const WORD_GAP       = 220;
 	const CURSOR_LINGER  = 900;
 
-	const hero = document.querySelector<HTMLElement>('[data-typewriter]');
-	if (hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+	function startTypewriter() {
+		const hero = document.querySelector<HTMLElement>('[data-typewriter]');
+		if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
 		const words = hero.querySelectorAll<HTMLElement>('.name-word');
+		words.forEach(w => w.style.visibility = 'visible');
 		let offset = 0;
 
 		words.forEach((word, wi) => {
@@ -129,6 +132,8 @@ const t = useTranslations(lang);
 		lastWord?.appendChild(cursor);
 		setTimeout(() => cursor.classList.add('is-done'), offset + CURSOR_LINGER);
 	}
+
+	window.addEventListener('splash:done', startTypewriter, { once: true });
 
 	// ─── Role band ───
 	function fillRoleBand() {
@@ -184,10 +189,6 @@ const t = useTranslations(lang);
 		});
 	}
 
-	fillRoleBand();
-	const roleBand = document.querySelector('[data-role-band]');
-	if (roleBand) new ResizeObserver(fillRoleBand).observe(roleBand);
-
 	// ─── Stats band ───
 	function fillStatSeps() {
 		const band = document.querySelector<HTMLElement>('[data-stats-band]');
@@ -208,6 +209,10 @@ const t = useTranslations(lang);
 			sep.textContent = '/'.repeat(Math.max(1, Math.floor(w / charW)));
 		});
 	}
+
+	fillRoleBand();
+	const roleBand = document.querySelector('[data-role-band]');
+	if (roleBand) new ResizeObserver(fillRoleBand).observe(roleBand);
 
 	fillStatSeps();
 	const statBand = document.querySelector('[data-stats-band]');
@@ -265,7 +270,7 @@ const t = useTranslations(lang);
 			}
 		}
 
-		runGlitch();
+		window.addEventListener('splash:done', () => runGlitch(), { once: true });
 	}
 </script>
 
@@ -298,7 +303,7 @@ const t = useTranslations(lang);
 	}
 
 	.name-content {
-		padding: 0.5rem 1rem;
+		padding: 1rem;
 		@media (min-width: 768px) { padding: 0.5rem 2.5rem; }
 	}
 
@@ -306,9 +311,9 @@ const t = useTranslations(lang);
 	.info-band {
 		overflow: hidden;
 		white-space: nowrap;
-		padding: 0.4rem 1rem;
+		padding: 0.5rem 1rem;
 		font-size: 0.7rem;
-		font-weight: 500;
+		opacity: 0.9;
 		color: var(--secondary);
 		@media (min-width: 768px) { padding: 0.4rem 2.5rem; font-size: 0.75rem; }
 	}
@@ -331,6 +336,7 @@ const t = useTranslations(lang);
 		min-width: 0;
 		overflow: hidden;
 		white-space: nowrap;
+		opacity: 0.6;
 	}
 
 	.info-band--stats {
@@ -350,11 +356,13 @@ const t = useTranslations(lang);
 			min-width: 0;
 			overflow: hidden;
 			white-space: nowrap;
+			opacity: 0.6;
 		}
 	}
 
 	.hero-name {
-		font-size: 11vw;
+		font-size: 17vw;
+		@media (min-width: 768px) { font-size: 11vw; }
 		line-height: 0.8;
 		letter-spacing: -0.05em;
 		width: 100%;
@@ -364,7 +372,7 @@ const t = useTranslations(lang);
 	}
 
 	.name-clip { overflow: hidden; }
-	.name-word { display: block; }
+	.name-word { display: block; visibility: hidden; }
 
 	// ─── Typewriter ───
 	:global(.char) {

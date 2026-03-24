@@ -15,7 +15,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 const { esHref, enHref } = getAlternatePath(pathname);
 ---
 
-<header class="site-header font-nord font-medium text-sm" data-site-header>
+<header class="site-header font-monoblock font-normal text-base" data-site-header>
 
 	<!-- ─── Desktop toolbar (2 filas × 6 cols) ─── -->
 	<div class="toolbar hidden md:block" aria-label="Cabecera">
@@ -53,7 +53,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 				<label id="theme-toggle" aria-label="Cambiar tema">
 					<input type="checkbox" class="sr-only" data-theme-checkbox>
 					<!-- Sol: visible en modo claro -->
-					<svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<svg class="theme-icon theme-icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 						<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						<path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						<path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -65,23 +65,23 @@ const { esHref, enHref } = getAlternatePath(pathname);
 						<path d="M19.0702 4.92969L17.6602 6.33969" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
 					<!-- Luna: visible en modo oscuro -->
-					<svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<svg class="theme-icon theme-icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 						<path d="M10.6211 4.12109C10.1056 5.26466 9.90371 6.53124 10.0469 7.78906C10.226 9.36174 10.9326 10.828 12.0518 11.9473C13.1711 13.0666 14.6372 13.773 16.21 13.9521C17.4675 14.0954 18.7335 13.8932 19.877 13.3779C19.6672 14.5781 19.187 15.7193 18.4648 16.7109C17.555 17.9602 16.3026 18.9189 14.8594 19.4717C13.4161 20.0244 11.8436 20.148 10.332 19.8262C8.82045 19.5043 7.43467 18.7509 6.3418 17.6582C5.24891 16.5654 4.49585 15.1795 4.17383 13.668C3.85184 12.1564 3.97475 10.5839 4.52734 9.14062C5.07992 7.69754 6.03817 6.44508 7.28711 5.53516C8.27893 4.81263 9.42057 4.33087 10.6211 4.12109Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
 				</label>
 			</div>
 
 			<!-- Info fila 1 — col 6, fila 1 -->
-			<div class="cell info-cell" style="grid-column:6; grid-row:1; gap:0.4rem;">
-				<svg width="9" height="9" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;">
+			<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="cell info-cell info-cell--link" style="grid-column:6; grid-row:1;">
+				<svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;">
 					<path d="M22 17C22 17.5304 21.7893 18.0391 21.4142 18.4142C21.0391 18.7893 20.5304 19 20 19H6.828C6.29761 19.0001 5.78899 19.2109 5.414 19.586L3.212 21.788C3.1127 21.8873 2.9862 21.9549 2.84849 21.9823C2.71077 22.0097 2.56803 21.9956 2.43831 21.9419C2.30858 21.8881 2.1977 21.7971 2.11969 21.6804C2.04167 21.5637 2.00002 21.4264 2 21.286V5C2 4.46957 2.21071 3.96086 2.58579 3.58579C2.96086 3.21071 3.46957 3 4 3H20C20.5304 3 21.0391 3.21071 21.4142 3.58579C21.7893 3.96086 22 4.46957 22 5V17Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
-				<span class="text-[10px]">{lang === 'en' ? "Let's talk on LinkedIn" : 'Hablemos por LinkedIn'}</span>
-			</div>
+				<span class="text-sm">{lang === 'en' ? "Let's talk on LinkedIn" : 'Hablemos por LinkedIn'}</span>
+			</a>
 			<!-- Info fila 2 — col 6, fila 2 -->
-			<div class="cell info-cell" style="grid-column:6; grid-row:2; gap:0.4rem;">
+			<div class="cell info-cell" style="grid-column:6; grid-row:2;">
 				<span class="status-dot" aria-hidden="true"></span>
-				<span class="text-[10px]">{lang === 'en' ? 'Available for projects' : 'Disponible para proyectos'}</span>
+				<span class="text-sm">{lang === 'en' ? 'Available for projects' : 'Disponible para proyectos'}</span>
 			</div>
 
 		</div>
@@ -91,7 +91,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 	<div class="mobile-bar md:hidden" aria-label="Cabecera móvil">
 		<!-- Logo M con borde -->
 		<a href={homePath} class="mobile-logo-cell" aria-label="Inicio">
-			<svg width="18" height="20" viewBox="0 0 521 557" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+			<svg width="22" height="24" viewBox="0 0 521 557" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 				<path d="M132.499 548.5V41.3049H196.552V548.5H324.554V41.3049H388.501V548.5H516.5V0.500017H4.5V548.5H132.499Z" fill="currentColor"/>
 			</svg>
 		</a>
@@ -102,7 +102,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 				<a href={enHref} class={`mobile-lang-item${lang === 'en' ? ' lang-active' : ''}`} aria-label="English">EN</a>
 			</div>
 			<button type="button" class="mobile-ctrl-cell mobile-theme-cell" aria-label="Cambiar tema" data-theme-mobile-btn>
-				<svg class="theme-icon theme-icon--sun" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<svg class="theme-icon theme-icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 					<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -113,7 +113,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 					<path d="M6.34018 17.6602L4.93018 19.0702" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M19.0702 4.92969L17.6602 6.33969" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
-				<svg class="theme-icon theme-icon--moon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<svg class="theme-icon theme-icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 					<path d="M10.6211 4.12109C10.1056 5.26466 9.90371 6.53124 10.0469 7.78906C10.226 9.36174 10.9326 10.828 12.0518 11.9473C13.1711 13.0666 14.6372 13.773 16.21 13.9521C17.4675 14.0954 18.7335 13.8932 19.877 13.3779C19.6672 14.5781 19.187 15.7193 18.4648 16.7109C17.555 17.9602 16.3026 18.9189 14.8594 19.4717C13.4161 20.0244 11.8436 20.148 10.332 19.8262C8.82045 19.5043 7.43467 18.7509 6.3418 17.6582C5.24891 16.5654 4.49585 15.1795 4.17383 13.668C3.85184 12.1564 3.97475 10.5839 4.52734 9.14062C5.07992 7.69754 6.03817 6.44508 7.28711 5.53516C8.27893 4.81263 9.42057 4.33087 10.6211 4.12109Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 			</button>
@@ -122,7 +122,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 				<span>{lang === 'en' ? 'Available' : 'Disponible'}</span>
 			</div>
 			<button type="button" class="mobile-ctrl-cell mobile-hamburger-cell" aria-label={t.header.mobileMenuOpen} aria-expanded="false" aria-controls="mobile-menu" data-hamburger>
-				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<path d="M4 5H20"/><path d="M4 12H20"/><path d="M4 19H20"/>
 				</svg>
 			</button>
@@ -134,7 +134,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 		<div class="mobile-overlay-bar">
 			<div class="mobile-overlay-spacer"></div>
 			<button type="button" class="mobile-close-btn" aria-label={t.header.mobileMenuClose} data-menu-close>
-				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<path d="M18 6L6 18"/><path d="M6 6L18 18"/>
 				</svg>
 			</button>
@@ -174,7 +174,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
   .toolbar-grid {
     display: grid;
     grid-template-columns: auto 1fr auto auto auto auto;
-    grid-template-rows: 28px 28px;
+    grid-template-rows: 36px 36px;
     width: 100%;
   }
 
@@ -208,14 +208,14 @@ const { esHref, enHref } = getAlternatePath(pathname);
       &::before {
         content: '';
         position: absolute;
-        left: calc(1.75rem - 19px);
+        left: calc(1.75rem - 16px);
         top: 50%;
         transform: translateY(-50%) translateX(-6px);
         opacity: 0;
-        width: 11px;
-        height: 11px;
+        width: 14px;
+        height: 14px;
         background-color: currentColor;
-        mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 18L15 12L9 6' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 18L15 12L9 6' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
         mask-size: contain;
         mask-repeat: no-repeat;
         mask-position: center;
@@ -234,7 +234,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
   .lang-cell {
     padding: 0;
     width: 3rem;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     cursor: pointer;
   }
 
@@ -286,8 +286,8 @@ const { esHref, enHref } = getAlternatePath(pathname);
 
   // ─── Status dot ───
   .status-dot {
-    width: 7px;
-    height: 7px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background-color: #22c55e;
     flex-shrink: 0;
@@ -301,18 +301,44 @@ const { esHref, enHref } = getAlternatePath(pathname);
   }
 
   // ─── Info cells ───
+  .info-cell--link {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--secondary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    > span, > svg {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:hover::before { transform: scaleX(1); }
+    &:hover > span,
+    &:hover > svg { color: var(--primary); }
+  }
+
   .info-cell {
     padding: 0 1.25rem;
     min-width: 160px;
     justify-content: flex-start;
-
+    gap: 10px;
   }
 
   // ─── Mobile bar ───
   .mobile-bar {
     display: flex;
     align-items: stretch;
-    height: 56px;
+    height: 72px;
     color: var(--secondary);
     border-bottom: 1px solid var(--secondary);
     @media (min-width: 768px) { display: none; }
@@ -374,10 +400,9 @@ const { esHref, enHref } = getAlternatePath(pathname);
     font-weight: 500;
     text-decoration: none;
     &:first-child { border-bottom: 1px solid var(--secondary); }
-    &.lang-active { font-weight: 700; }
   }
 
-  .mobile-available-cell { gap: 0.4rem; }
+  .mobile-available-cell { gap: 10px; }
 
   .mobile-overlay {
     position: fixed;
@@ -395,7 +420,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
   .mobile-overlay-bar {
     display: flex;
     align-items: stretch;
-    height: 56px;
+    height: 72px;
     flex-shrink: 0;
     border-bottom: 1px solid var(--secondary);
   }

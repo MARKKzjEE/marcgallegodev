@@ -99,8 +99,64 @@
 /* MONOBLOCK FONT — Only used weight: 400 */
 @font-face {
 	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-Thin.woff2") format("woff2");
+	font-weight: 100;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-ExtraLight.woff2") format("woff2");
+	font-weight: 200;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-Light.woff2") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Monoblock";
 	src: url("/fonts/Monoblock/Monoblock-Regular.woff2") format("woff2");
 	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-SemiBold.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-ExtraBold.woff2") format("woff2");
+	font-weight: 800;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Monoblock";
+	src: url("/fonts/Monoblock/Monoblock-Black.woff2") format("woff2");
+	font-weight: 900;
 	font-style: normal;
 	font-display: swap;
 }
@@ -149,6 +205,6 @@ html, body {
 	.font-cottor    { line-height: 1.5; letter-spacing: 0; }
 	.font-nord      { line-height: 1.4; letter-spacing: 0.08em; }
 	.font-vogun     { line-height: 1.1; letter-spacing: -0.02em; }
-	.font-monoblock { line-height: 1.4; letter-spacing: 0.1em; }
+	.font-monoblock { line-height: 1.4; letter-spacing: 0.05em; }
 	.font-pixelbots { line-height: 1.4; letter-spacing: 0.2em; }
 }
