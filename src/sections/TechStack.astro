@@ -20,9 +20,12 @@ const total = techs.length;
 
 <section id="tech" class="overflow-visible" aria-labelledby="tech-heading">
 
+	<!-- ─── Desktop frame ─── -->
+	<div class="tech-desktop-frame hidden xl:block">
+
 	<!-- ─── Desktop heading ─── -->
-	<div class="tech-header hidden xl:flex">
-		<div class="tech-header-spacer pl-10 border-t border-r border-secondary"></div>
+	<div class="tech-header flex">
+		<div class="tech-header-spacer pl-10 border-t border-secondary"></div>
 		<h2 id="tech-heading" class="tech-cell tech-cell--title font-nord text-secondary border-y border-r border-secondary font-medium px-10 py-5">
 			{t.techStack.heading}
 		</h2>
@@ -37,15 +40,43 @@ const total = techs.length;
 				<svg class="tech-toggle-eye-closed" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 256 256"><path d="M228,175a8,8,0,0,1-10.92-3l-19-33.2A123.23,123.23,0,0,1,162,155.46l5.87,35.22a8,8,0,0,1-6.58,9.21A8.4,8.4,0,0,1,160,200a8,8,0,0,1-7.88-6.69l-5.77-34.58a133.06,133.06,0,0,1-36.68,0l-5.77,34.58A8,8,0,0,1,96,200a8.4,8.4,0,0,1-1.32-.11,8,8,0,0,1-6.58-9.21L94,155.46a123.23,123.23,0,0,1-36.06-16.69L39,172A8,8,0,1,1,25.06,164l20-35a153.47,153.47,0,0,1-19.3-20A8,8,0,1,1,38.22,99c16.6,20.54,45.64,45,89.78,45s73.18-24.49,89.78-45A8,8,0,1,1,230.22,109a153.47,153.47,0,0,1-19.3,20l20,35A8,8,0,0,1,228,175Z"></path></svg>
 			</span>
 		</button>
-		<div class="tech-header-spacer pr-10 border-y border-l border-secondary"></div>
+		<div class="tech-header-spacer pr-10 border-t border-secondary"></div>
 	</div>
 	<!-- Desktop: "Mis" vertical -->
-	<div class="tech-vertical-wrap hidden xl:inline-flex">
-		<div class="tech-header-spacer pl-10 border-r border-b border-secondary"></div>
+	<div class="tech-vertical-wrap inline-flex">
+		<div class="tech-header-spacer pl-10"></div>
 		<div class="tech-cell tech-cell--vertical font-nord text-secondary font-medium py-10 px-5">
 			{lang === 'en' ? 'My' : 'Mis'}
 		</div>
 	</div>
+
+	<!-- Wheel: centrado -->
+	<div class="tech-wheel-wrap flex items-center justify-center pb-30" style="margin-top: calc((var(--title-size) - 40px) * -1)">
+		<div class="tech-wheel relative" data-tech-wheel>
+			{techs.map((tech, i) => (
+				<button
+					type="button"
+					class="tech-icon absolute top-1/2 left-1/2"
+					style={`--i: ${i}; --total: ${total};`}
+					data-tech={tech.name}
+					aria-label={tech.name}
+				>
+					<div class="tech-icon__logo">
+						<img class="tech-icon__svg tech-icon__svg--light" src={`/tech-icons/${tech.slug}-d.svg`} alt={tech.name} />
+						<img class="tech-icon__svg tech-icon__svg--dark" src={`/tech-icons/${tech.slug}-l.svg`} alt={tech.name} />
+					</div>
+					<div class="tech-icon__text">
+						<span class="text-mono-label">{tech.name}</span>
+					</div>
+				</button>
+			))}
+		</div>
+	</div>
+
+	<!-- Footer bar -->
+	<div class="tech-footer-bar"></div>
+
+	</div><!-- /tech-desktop-frame -->
 
 	<!-- ─── Mobile heading ─── -->
 	<div class="tech-header-mobile xl:hidden">
@@ -65,29 +96,6 @@ const total = techs.length;
 			<div class="tech-cell tech-cell--typewriter-mobile text-mono-label py-4 px-4 md:px-10" data-tech-typewriter-mobile data-phrases={JSON.stringify(t.techStack.typewriterPhrases)} aria-live="polite">
 				<span class="tech-typewriter-text" data-tech-typewriter-text-mobile></span>
 			</div>
-		</div>
-	</div>
-
-	<!-- Wheel: centrado -->
-	<div class="hidden xl:flex items-center justify-center pb-30" style="margin-top: calc((var(--title-size) - 40px) * -1)">
-		<div class="tech-wheel relative" data-tech-wheel>
-			{techs.map((tech, i) => (
-				<button
-					type="button"
-					class="tech-icon absolute top-1/2 left-1/2"
-					style={`--i: ${i}; --total: ${total};`}
-					data-tech={tech.name}
-					aria-label={tech.name}
-				>
-					<div class="tech-icon__logo">
-						<img class="tech-icon__svg tech-icon__svg--light" src={`/tech-icons/${tech.slug}-d.svg`} alt={tech.name} />
-						<img class="tech-icon__svg tech-icon__svg--dark" src={`/tech-icons/${tech.slug}-l.svg`} alt={tech.name} />
-					</div>
-					<div class="tech-icon__text">
-						<span class="text-mono-label">{tech.name}</span>
-					</div>
-				</button>
-			))}
 		</div>
 	</div>
 
@@ -170,6 +178,37 @@ const total = techs.length;
 		50% { opacity: 0; }
 	}
 
+	// ─── Desktop frame ──────────────────────────────
+	.tech-desktop-frame {
+		position: relative;
+		// Bordes laterales continuos
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 40px; // pl-10 / pr-10
+			border-color: var(--secondary);
+		}
+
+		&::before {
+			left: 0;
+			border-right: 1px solid var(--secondary);
+		}
+
+		&::after {
+			right: 0;
+			border-left: 1px solid var(--secondary);
+		}
+	}
+
+	.tech-footer-bar {
+		margin: 0 40px;
+		border-top: 1px solid var(--secondary);
+		height: 40px;
+	}
+
 	// ─── Desktop heading ────────────────────────────
 	.tech-header {
 		align-items: stretch;
@@ -190,6 +229,11 @@ const total = techs.length;
 
 	.tech-vertical-wrap {
 		align-items: stretch;
+	}
+
+	.tech-wheel-wrap {
+		padding-left: 40px;
+		padding-right: 40px;
 	}
 
 	// ─── Mobile heading ─────────────────────────────
