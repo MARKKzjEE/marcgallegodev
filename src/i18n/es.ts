@@ -64,6 +64,12 @@ export const es = {
 		descCorner: "Estas son las tecnologías que utilizo en mi día a día. Siempre me gusta seguir explorando nuevas herramientas para poder elegir la mejor solución según las necesidades de cada proyecto.",
 		toggleShow: "Ver tecnologías",
 		toggleHide: "Ocultar tecnologías",
+		typewriterPhrases: [
+			"Estas son mis tecnologías más usadas.",
+			"Interactúa con el icono para ver los nombres.",
+			"Siempre explorando nuevas herramientas.",
+			"La mejor herramienta depende del proyecto.",
+		],
 	},
 
 	// ── About ──

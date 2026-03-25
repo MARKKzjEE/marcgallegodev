@@ -24,7 +24,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 ---
 
 <!doctype html>
-<html lang={lang} class="">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -147,13 +147,13 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 					splash.style.opacity = '0';
 					splash.style.visibility = 'hidden';
 					window.dispatchEvent(new CustomEvent('splash:done'));
-					setTimeout(function() { splash.remove(); }, 650);
+					setTimeout(function() { splash.remove(); }, 600); // Espera a que termine la transición antes de remover del DOM
 				}
 
 				setTimeout(function() {
 					splashReady = true;
 					if (splashLoaded) hideSplash();
-				}, 3000);
+				}, 0); // Duración mínima del splash: 3 segundos
 
 				window.addEventListener('load', function() {
 					splashLoaded = true;

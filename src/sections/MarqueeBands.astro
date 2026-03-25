@@ -72,11 +72,6 @@ const linkedinItems = 6;
 		overflow: hidden;
 	}
 
-	.marquee-text {
-		color: white;
-		-webkit-text-stroke-color: black;
-	}
-
 	.marquee-band--call {
 		background-color: var(--secondary);
 	}
@@ -116,10 +111,11 @@ const linkedinItems = 6;
 	.marquee-text {
 		font-size: clamp(16px, 3.5vw, 20px);
 		font-weight: 500;
-
+		color: white;
 		white-space: nowrap;
 		paint-order: stroke fill;
 		-webkit-text-stroke: 4px black;
+		-webkit-text-stroke-color: black;
 	}
 
 	@keyframes marquee-scroll {

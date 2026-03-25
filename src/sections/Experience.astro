@@ -193,15 +193,10 @@ const person = {
 	}
 
 	.cv__download {
-		position: absolute;
-		right: 0;
-		top: 0;
-		height: 100%;
 		flex-shrink: 0;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: flex-end;
 		gap: 4px;
 		color: var(--secondary);
 		text-decoration: none;
@@ -209,44 +204,15 @@ const person = {
 		&:hover {
 			transform: scale(1.1);
 		}
-
-		@media (max-width: 767px) {
-			position: fixed;
-			right: 1.5rem;
-			bottom: 1.5rem;
-			top: auto;
-			height: auto;
-			background-color: color-mix(in srgb, var(--secondary) 10%, transparent);
-			backdrop-filter: blur(20px) saturate(180%);
-			-webkit-backdrop-filter: blur(20px) saturate(180%);
-			border: 1px solid color-mix(in srgb, var(--secondary) 20%, transparent);
-			color: var(--secondary);
-			width: 72px;
-			height: 72px;
-			border-radius: 50%;
-			justify-content: center;
-			gap: 4px;
-			z-index: 30;
-			box-shadow: 0 4px 24px color-mix(in srgb, var(--secondary) 10%, transparent);
-		}
 	}
 
 	.cv__download-icon {
 		width: 32px;
 		height: 32px;
-
-		@media (max-width: 767px) {
-			width: 26px;
-			height: 26px;
-		}
 	}
 
 	.cv__download-label {
 		font-size: 10px;
-
-		@media (max-width: 767px) {
-			display: none;
-		}
 	}
 
 	// ── Horizontal rule ──
@@ -288,8 +254,40 @@ const person = {
 	}
 
 	.cv__download--mobile {
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 100%;
+		justify-content: flex-end;
+
 		@media (min-width: 768px) {
-			display: none !important;
+			display: none;
+		}
+
+		@media (max-width: 767px) {
+			position: fixed;
+			right: 1.5rem;
+			bottom: 1.5rem;
+			top: auto;
+			height: 72px;
+			width: 72px;
+			background-color: color-mix(in srgb, var(--secondary) 10%, transparent);
+			backdrop-filter: blur(20px) saturate(180%);
+			-webkit-backdrop-filter: blur(20px) saturate(180%);
+			border: 1px solid color-mix(in srgb, var(--secondary) 20%, transparent);
+			border-radius: 50%;
+			justify-content: center;
+			z-index: 30;
+			box-shadow: 0 4px 24px color-mix(in srgb, var(--secondary) 10%, transparent);
+
+			.cv__download-icon {
+				width: 26px;
+				height: 26px;
+			}
+
+			.cv__download-label {
+				display: none;
+			}
 		}
 
 		.cv__download-label {
@@ -299,22 +297,8 @@ const person = {
 	}
 
 	.cv__download--inline {
-		position: static !important;
-		width: auto !important;
-		height: auto !important;
-		background: none !important;
-		border: none !important;
-		border-radius: 0 !important;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+		position: static;
 		gap: 10px;
-		color: var(--secondary) !important;
-		transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
-
-		&:hover {
-			transform: scale(1.1) !important;
-		}
 	}
 
 	.cv__heading {

@@ -135,6 +135,17 @@ const t = useTranslations(lang);
 
 	window.addEventListener('splash:done', startTypewriter, { once: true });
 
+	// ─── Helpers ───
+	function measureText(parent: HTMLElement, text: string): number {
+		const probe = document.createElement('span');
+		probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font-size:inherit;font-family:inherit;font-weight:inherit;';
+		probe.textContent = text;
+		parent.appendChild(probe);
+		const w = probe.getBoundingClientRect().width;
+		parent.removeChild(probe);
+		return w;
+	}
+
 	// ─── Role band ───
 	function fillRoleBand() {
 		const band = document.querySelector<HTMLElement>('[data-role-band]');
@@ -144,14 +155,8 @@ const t = useTranslations(lang);
 		const roleText = band.dataset.role;
 		if (!roleText) return;
 
-		const probe = document.createElement('span');
-		probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font-size:inherit;font-family:inherit;font-weight:inherit;';
-		probe.textContent = roleText;
-		band.appendChild(probe);
-		const textW = probe.getBoundingClientRect().width;
-		probe.textContent = '/';
-		const charW = probe.getBoundingClientRect().width;
-		band.removeChild(probe);
+		const textW = measureText(band, roleText);
+		const charW = measureText(band, '/');
 		if (textW <= 0 || charW <= 0) return;
 
 		const cs = getComputedStyle(band);
@@ -196,12 +201,7 @@ const t = useTranslations(lang);
 		const seps = [...band.querySelectorAll<HTMLElement>('[data-sep]')];
 		if (!seps.length) return;
 
-		const probe = document.createElement('span');
-		probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font-size:inherit;font-family:inherit;font-weight:inherit;';
-		probe.textContent = '/';
-		band.appendChild(probe);
-		const charW = probe.getBoundingClientRect().width;
-		band.removeChild(probe);
+		const charW = measureText(band, '/');
 		if (charW <= 0) return;
 
 		seps.forEach(sep => {

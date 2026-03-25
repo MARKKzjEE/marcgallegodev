@@ -95,6 +95,11 @@ const { esHref, enHref } = getAlternatePath(pathname);
 				<path d="M132.499 548.5V41.3049H196.552V548.5H324.554V41.3049H388.501V548.5H516.5V0.500017H4.5V548.5H132.499Z" fill="currentColor"/>
 			</svg>
 		</a>
+		<!-- Disponible -->
+		<div class="mobile-ctrl-cell mobile-available-cell">
+			<span class="status-dot" aria-hidden="true"></span>
+			<span>{lang === 'en' ? 'Available' : 'Disponible'}</span>
+		</div>
 		<!-- Controles derecha: ES | EN | tema | hamburguesa -->
 		<div class="mobile-controls-bar">
 			<div class="mobile-lang-stack">
@@ -117,10 +122,6 @@ const { esHref, enHref } = getAlternatePath(pathname);
 					<path d="M10.6211 4.12109C10.1056 5.26466 9.90371 6.53124 10.0469 7.78906C10.226 9.36174 10.9326 10.828 12.0518 11.9473C13.1711 13.0666 14.6372 13.773 16.21 13.9521C17.4675 14.0954 18.7335 13.8932 19.877 13.3779C19.6672 14.5781 19.187 15.7193 18.4648 16.7109C17.555 17.9602 16.3026 18.9189 14.8594 19.4717C13.4161 20.0244 11.8436 20.148 10.332 19.8262C8.82045 19.5043 7.43467 18.7509 6.3418 17.6582C5.24891 16.5654 4.49585 15.1795 4.17383 13.668C3.85184 12.1564 3.97475 10.5839 4.52734 9.14062C5.07992 7.69754 6.03817 6.44508 7.28711 5.53516C8.27893 4.81263 9.42057 4.33087 10.6211 4.12109Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 			</button>
-			<div class="mobile-ctrl-cell mobile-available-cell">
-				<span class="status-dot" aria-hidden="true"></span>
-				<span>{lang === 'en' ? 'Available' : 'Disponible'}</span>
-			</div>
 			<button type="button" class="mobile-ctrl-cell mobile-hamburger-cell" aria-label={t.header.mobileMenuOpen} aria-expanded="false" aria-controls="mobile-menu" data-hamburger>
 				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<path d="M4 5H20"/><path d="M4 12H20"/><path d="M4 19H20"/>
@@ -189,9 +190,6 @@ const { esHref, enHref } = getAlternatePath(pathname);
     white-space: nowrap;
 
     &[style*="grid-column:1"] { border-left: none; }
-    &[style*="grid-row:1"]    { border-bottom: 1px solid var(--secondary); }
-    &[style*="grid-row:2"]    { border-bottom: 1px solid var(--secondary); }
-    &[style*="grid-row:1/3"]  { border-bottom: 1px solid var(--secondary); }
   }
 
   // ─── Nav ───
@@ -259,8 +257,8 @@ const { esHref, enHref } = getAlternatePath(pathname);
   :global(.dark) .theme-icon--moon { display: block; }
   :global(.dark) .theme-icon--sun  { display: none; }
 
-  // ─── Efecto cortina (lang + theme desktop) ───
-  .lang-cell, .theme-cell {
+  // ─── Efecto cortina (lang, theme, info-link) ───
+  .lang-cell, .theme-cell, .info-cell--link {
     position: relative;
     overflow: hidden;
 
@@ -275,14 +273,15 @@ const { esHref, enHref } = getAlternatePath(pathname);
       pointer-events: none;
     }
 
-    > span, > label {
+    > span, > label, > svg {
       position: relative;
       z-index: 1;
     }
 
     &:hover::before { transform: scaleX(1); }
     &:hover > span,
-    &:hover > label { color: var(--primary); }
+    &:hover > label,
+    &:hover > svg { color: var(--primary); }
   }
 
   // ─── Status dot ───
@@ -302,31 +301,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
   }
 
   // ─── Info cells ───
-  .info-cell--link {
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: var(--secondary);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
-      pointer-events: none;
-    }
-
-    > span, > svg {
-      position: relative;
-      z-index: 1;
-    }
-
-    &:hover::before { transform: scaleX(1); }
-    &:hover > span,
-    &:hover > svg { color: var(--primary); }
-  }
+  .info-cell--link { cursor: pointer; }
 
   .info-cell {
     padding: 0 1.25rem;
@@ -378,7 +353,6 @@ const { esHref, enHref } = getAlternatePath(pathname);
     font-weight: 500;
     white-space: nowrap;
     text-decoration: none;
-
   }
 
   .mobile-lang-stack {
@@ -402,7 +376,11 @@ const { esHref, enHref } = getAlternatePath(pathname);
     &:first-child { border-bottom: 1px solid var(--secondary); }
   }
 
-  .mobile-available-cell { gap: 10px; }
+  .mobile-available-cell {
+    gap: 10px;
+    border-left: none;
+    cursor: default;
+  }
 
   .mobile-overlay {
     position: fixed;
@@ -485,21 +463,24 @@ const { esHref, enHref } = getAlternatePath(pathname);
 	const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
 	const closeBtn = document.querySelector<HTMLButtonElement>('[data-menu-close]');
 
-	function openMenu() {
-		menu!.classList.add('is-open');
-		menu!.removeAttribute('aria-hidden');
-		hamburger!.setAttribute('aria-expanded', 'true');
-		document.body.style.overflow = 'hidden';
-	}
-
-	function closeMenu() {
-		menu!.classList.remove('is-open');
-		menu!.setAttribute('aria-hidden', 'true');
-		hamburger!.setAttribute('aria-expanded', 'false');
-		document.body.style.overflow = '';
-	}
-
 	if (hamburger && menu && closeBtn) {
+		const _menu = menu;
+		const _hamburger = hamburger;
+
+		function openMenu() {
+			_menu.classList.add('is-open');
+			_menu.removeAttribute('aria-hidden');
+			_hamburger.setAttribute('aria-expanded', 'true');
+			document.body.style.overflow = 'hidden';
+		}
+
+		function closeMenu() {
+			_menu.classList.remove('is-open');
+			_menu.setAttribute('aria-hidden', 'true');
+			_hamburger.setAttribute('aria-expanded', 'false');
+			document.body.style.overflow = '';
+		}
+
 		hamburger.addEventListener('click', openMenu);
 		closeBtn.addEventListener('click', closeMenu);
 
@@ -514,7 +495,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 		});
 
 		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape' && menu!.classList.contains('is-open')) closeMenu();
+			if (e.key === 'Escape' && _menu.classList.contains('is-open')) closeMenu();
 		});
 	}
 
