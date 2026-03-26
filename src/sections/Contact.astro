@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import contactGradient from '../assets/gradients/contact-gradient.jpg';
 import { getLang, useTranslations } from '../i18n/index';
 
 const lang = getLang(Astro.url);
@@ -48,20 +46,8 @@ const breadcrumb = {
 		</form>
 	</div>
 
-	<!-- Derecha: imagen full height -->
-	<div class="contact-photo">
-		<Image
-			src={contactGradient}
-			alt=""
-			widths={[400, 800]}
-			sizes="(max-width: 768px) 100vw, 50vw"
-			format="webp"
-			quality={85}
-			loading="lazy"
-			aria-hidden="true"
-			class="contact-photo__img"
-		/>
-	</div>
+	<!-- Derecha: gradient interactivo -->
+	<div class="contact-photo" id="contact-gradient" aria-hidden="true"></div>
 
 </section>
 </main>
@@ -141,18 +127,10 @@ const breadcrumb = {
 		background-color: color-mix(in srgb, var(--secondary) 50%, transparent);
 	}
 
-	// ── Foto full height ──
+	// ── Gradient full height ──
 	.contact-photo {
 		overflow: hidden;
 		height: 100%;
-	}
-
-	.contact-photo__img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		object-position: center center;
-		display: block;
 	}
 
 	// ── Mobile ──
@@ -224,4 +202,61 @@ const breadcrumb = {
 			btn.disabled = false;
 		}
 	});
+</script>
+
+<script src="/unicorn/unicornStudio.umd.js" is:inline></script>
+<script is:inline>
+	(function() {
+		var contactScene = null;
+
+		function getGradientFile() {
+			return document.documentElement.classList.contains('dark')
+				? '/unicorn/mouse-tracking-gradient.json'
+				: '/unicorn/mouse-tracking-gradient-light.json';
+		}
+
+		function loadContactScene() {
+			if (contactScene) {
+				contactScene.destroy();
+				contactScene = null;
+			}
+			if (typeof UnicornStudio === 'undefined') return;
+			UnicornStudio.addScene({
+				elementId: 'contact-gradient',
+				fps: 60,
+				scale: 1,
+				dpi: window.devicePixelRatio || 1,
+				filePath: getGradientFile(),
+				interactivity: { mouse: { disableMobile: false } }
+			}).then(function(scene) {
+				contactScene = scene;
+			});
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			loadContactScene();
+
+			var observer = new MutationObserver(function(mutations) {
+				mutations.forEach(function(mutation) {
+					if (mutation.attributeName === 'class') {
+						loadContactScene();
+					}
+				});
+			});
+			observer.observe(document.documentElement, { attributes: true });
+
+			var gradientEl = document.getElementById('contact-gradient');
+			if (gradientEl) {
+				gradientEl.addEventListener('touchmove', function(e) {
+					var touch = e.touches[0];
+					var mouseEvent = new MouseEvent('mousemove', {
+						clientX: touch.clientX,
+						clientY: touch.clientY,
+						bubbles: true,
+					});
+					gradientEl.dispatchEvent(mouseEvent);
+				}, { passive: true });
+			}
+		});
+	})();
 </script>
