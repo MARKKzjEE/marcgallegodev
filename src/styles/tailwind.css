@@ -231,8 +231,16 @@ html, body {
 	.font-nord      { line-height: 1; letter-spacing: -0.05em; }
 	.font-monoblock { line-height: 1.4; letter-spacing: 0.05em; }
 
-	/* Texto mono auxiliar — labels, typewriter, card names */
 	.text-mono-label {
+		font-family: var(--font-monoblock);
+		font-size: clamp(12px, 1.2vw, 16px);
+		font-weight: 400;
+		letter-spacing: 0.05em;
+		line-height: 1.4;
+		color: var(--secondary);
+	}
+
+	.text-mono-label-soft {
 		font-family: var(--font-monoblock);
 		font-size: clamp(12px, 1.2vw, 16px);
 		font-weight: 400;

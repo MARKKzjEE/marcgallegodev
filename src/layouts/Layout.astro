@@ -41,9 +41,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 		<!-- Preload fuentes críticas above-the-fold -->
 		<link rel="preload" href="/fonts/NORD/NORD-Black.woff2" as="font" type="font/woff2" crossorigin />
 		<link rel="preload" href="/fonts/NORD/NORD-Bold.woff2" as="font" type="font/woff2" crossorigin />
-		<link rel="preload" href="/fonts/Vogun-Medium.woff2" as="font" type="font/woff2" crossorigin />
-		<!-- Preload poster del vídeo hero -->
-		<link rel="preload" href="/assets/bg-background-loop-poster.webp" as="image" />
+		<link rel="preload" href="/fonts/Monoblock/Monoblock-Regular.woff2" as="font" type="font/woff2" crossorigin />
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
@@ -129,7 +127,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 		<!-- ─── Splash screen (solo home) ─── -->
 		{isHome && (
 			<div id="splash" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background-color:var(--primary);transition:opacity 600ms cubic-bezier(0.22,1,0.36,1),visibility 600ms;">
-				<span style="display:flex;align-items:center;gap:2rem;color:var(--secondary);">
+				<span style="display:flex;align-items:center;gap:clamp(1rem,3vw,2rem);color:var(--secondary);">
 					<span style="font-family:'NORD',system-ui,sans-serif;font-weight:700;font-size:clamp(1rem,3vw,1.5rem);letter-spacing:0.15em;text-transform:uppercase;">MARC GALLEGO</span>
 					<span style="width:1px;height:2em;background-color:var(--secondary);flex-shrink:0;"></span>
 					<span style="font-family:'Monoblock',system-ui,sans-serif;letter-spacing:0.5em;font-weight:400;font-size:clamp(0.7em,1.5vw,0.85rem);">portfolio</span>
@@ -153,7 +151,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 				setTimeout(function() {
 					splashReady = true;
 					if (splashLoaded) hideSplash();
-				}, 0); // Duración mínima del splash: 3 segundos
+				}, 0); // TODO: temporal para estilar splash
 
 				window.addEventListener('load', function() {
 					splashLoaded = true;

@@ -15,7 +15,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 const { esHref, enHref } = getAlternatePath(pathname);
 ---
 
-<header class="site-header font-monoblock font-normal text-base" data-site-header>
+<header class="site-header font-monoblock font-normal text-base border-t border-secondary" data-site-header>
 
 	<!-- ─── Desktop toolbar (2 filas × 6 cols) ─── -->
 	<div class="toolbar hidden md:block" aria-label="Cabecera">
@@ -400,6 +400,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
     align-items: stretch;
     height: 72px;
     flex-shrink: 0;
+    border-top: 1px solid var(--secondary);
     border-bottom: 1px solid var(--secondary);
   }
 
@@ -415,7 +416,6 @@ const { esHref, enHref } = getAlternatePath(pathname);
     padding: 0 1rem;
     background: none;
     border: none;
-    border-left: 1px solid var(--secondary);
     cursor: pointer;
     color: var(--secondary);
     height: 100%;

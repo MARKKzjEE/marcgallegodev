@@ -49,19 +49,6 @@ const t = useTranslations(lang);
 			});
 			observer.observe(document.documentElement, { attributes: true });
 
-			// Touch → mousemove sintético para mobile
-			var gradientEl = document.getElementById('hero-gradient');
-			if (gradientEl) {
-				gradientEl.addEventListener('touchmove', function(e) {
-					var touch = e.touches[0];
-					var mouseEvent = new MouseEvent('mousemove', {
-						clientX: touch.clientX,
-						clientY: touch.clientY,
-						bubbles: true,
-					});
-					gradientEl.dispatchEvent(mouseEvent);
-				}, { passive: true });
-			}
 		});
 	</script>
 
@@ -70,7 +57,7 @@ const t = useTranslations(lang);
 
 		<!-- Banda superior: rol repetido -->
 		<div class="name-bar"></div>
-		<div class="info-band info-band--role font-monoblock font-normal" data-role-band>Full Stack Software Engineer</div>
+		<div class="info-band info-band--role text-mono-label" data-role-band>Full Stack Software Engineer</div>
 
 		<!-- Nombre -->
 		<div class="name-bar"></div>
@@ -83,7 +70,7 @@ const t = useTranslations(lang);
 
 		<!-- Banda inferior: stats -->
 		<div class="name-bar"></div>
-		<div class="info-band info-band--stats font-monoblock font-normal" data-stats-band>
+		<div class="info-band info-band--stats text-mono-label" data-stats-band>
 			<span class="stat-item">{lang === 'en' ? '+5 years exp.' : '+5 años exp.'}</span>
 			<span class="sep" data-sep></span>
 			<span class="stat-item">{lang === 'en' ? '+60 projects' : '+60 proyectos'}</span>
@@ -314,10 +301,7 @@ const t = useTranslations(lang);
 		overflow: hidden;
 		white-space: nowrap;
 		padding: 0.5rem 1rem;
-		font-size: 0.7rem;
-		opacity: 0.9;
-		color: var(--secondary);
-		@media (min-width: 768px) { padding: 0.4rem 2.5rem; font-size: 0.75rem; }
+		@media (min-width: 768px) { padding: 0.4rem 2.5rem; }
 	}
 
 	.info-band--role {

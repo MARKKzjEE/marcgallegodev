@@ -245,18 +245,6 @@ const breadcrumb = {
 			});
 			observer.observe(document.documentElement, { attributes: true });
 
-			var gradientEl = document.getElementById('contact-gradient');
-			if (gradientEl) {
-				gradientEl.addEventListener('touchmove', function(e) {
-					var touch = e.touches[0];
-					var mouseEvent = new MouseEvent('mousemove', {
-						clientX: touch.clientX,
-						clientY: touch.clientY,
-						bubbles: true,
-					});
-					gradientEl.dispatchEvent(mouseEvent);
-				}, { passive: true });
-			}
 		});
 	})();
 </script>
