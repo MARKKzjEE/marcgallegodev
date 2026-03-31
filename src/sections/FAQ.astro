@@ -10,7 +10,7 @@ const faqs = t.faq.items;
 	<div class="container mx-auto px-4 md:px-10">
 		<div class="flex flex-col gap-8">
 
-			<h2 id="faq-heading" class="font-nord font-bold text-secondary">{t.faq.heading}</h2>
+			<h2 id="faq-heading" class="font-nord font-normal text-secondary faq-title">{t.faq.heading}</h2>
 
 			<div class="faq-list">
 				{faqs.map((faq) => (
@@ -21,7 +21,7 @@ const faqs = t.faq.items;
 							aria-expanded="false"
 							data-faq-trigger
 						>
-							<span class="font-nord font-bold text-secondary faq-question">{faq.question}</span>
+							<span class="font-monoblock font-medium text-secondary faq-question">{faq.question}</span>
 							<span class="faq-icon shrink-0 text-secondary" aria-hidden="true">
 								<svg class="faq-icon-plus" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
 								<svg class="faq-icon-minus" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
@@ -39,8 +39,9 @@ const faqs = t.faq.items;
 </section>
 
 <style lang="scss">
-	#faq-heading {
-		font-size: clamp(44px, 8vw, 96px);
+	.faq-title {
+		font-size: clamp(35px, 8vw, 80px);
+		line-height: 1;
 	}
 
 	.faq-list {

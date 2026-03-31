@@ -26,7 +26,7 @@ const total = techs.length;
 	<!-- ─── Desktop heading ─── -->
 	<div class="tech-header flex">
 		<div class="tech-header-spacer pl-10 border-t border-secondary"></div>
-		<h2 id="tech-heading" class="tech-cell tech-cell--title font-nord text-secondary border-y border-r border-secondary font-medium px-10 py-5">
+		<h2 id="tech-heading" class="tech-cell tech-cell--title font-nord text-secondary border-y border-r border-secondary font-normal px-10 py-5">
 			{t.techStack.heading}
 		</h2>
 		<div class="tech-cell tech-cell--typewriter text-mono-label-soft border-y border-r border-secondary" data-tech-typewriter data-phrases={JSON.stringify(t.techStack.typewriterPhrases)} aria-live="polite">
@@ -45,7 +45,7 @@ const total = techs.length;
 	<!-- Desktop: "Mis" vertical -->
 	<div class="tech-vertical-wrap inline-flex">
 		<div class="tech-header-spacer pl-10"></div>
-		<div class="tech-cell tech-cell--vertical font-nord text-secondary font-medium py-10 px-5">
+		<div class="tech-cell tech-cell--vertical font-nord text-secondary font-normal py-10 px-5">
 			{lang === 'en' ? 'My' : 'Mis'}
 		</div>
 	</div>
@@ -81,7 +81,7 @@ const total = techs.length;
 	<!-- ─── Mobile heading ─── -->
 	<div class="tech-header-mobile xl:hidden">
 		<div class="tech-header-mobile__top">
-			<h2 class="tech-cell tech-cell--title font-nord text-secondary font-medium py-4 px-4 md:px-10" aria-label={t.techStack.heading}>
+			<h2 class="tech-cell tech-cell--title font-nord text-secondary font-normal py-4 px-4 md:px-10" aria-label={t.techStack.heading}>
 				{t.techStack.heading}
 			</h2>
 			<button type="button" class="tech-cell tech-cell--eye-mobile tech-toggle-names px-4 md:px-10" data-toggle-names-mobile aria-pressed="false" aria-label={t.techStack.toggleShow}>
@@ -90,7 +90,7 @@ const total = techs.length;
 			</button>
 		</div>
 		<div class="tech-header-mobile__bottom">
-			<div class="tech-cell tech-cell--vertical font-nord text-secondary font-medium py-4 px-4 md:py-10">
+			<div class="tech-cell tech-cell--vertical font-nord text-secondary font-normal py-4 px-4 md:py-10">
 				{lang === 'en' ? 'My' : 'Mis'}
 			</div>
 			<div class="tech-cell tech-cell--typewriter-mobile text-mono-label-soft py-4 px-4 md:px-10" data-tech-typewriter-mobile data-phrases={JSON.stringify(t.techStack.typewriterPhrases)} aria-live="polite">

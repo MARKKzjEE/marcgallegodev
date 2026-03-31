@@ -227,7 +227,7 @@ html, body {
 	}
 
 	/* Tipografía base por fuente */
-	.font-cottor    { line-height: 1.5; letter-spacing: 0; }
+	.font-cottor    { line-height: 1.5; letter-spacing: 1px; }
 	.font-nord      { line-height: 1; letter-spacing: -0.05em; }
 	.font-monoblock { line-height: 1.4; letter-spacing: 0.05em; }
 

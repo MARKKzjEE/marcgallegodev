@@ -92,6 +92,7 @@ export const es = {
 	// ── Partners ──
 	partners: {
 		heading: "Partners",
+		subtitle: "Colaboraciones con estudios y profesionales",
 		badge: "desde 2024",
 		dokoDesc: "Estudio de branding, diseño y desarrollo web",
 		dokoLogoAlt: "Logo Doko Studio",
@@ -131,8 +132,14 @@ export const es = {
 
 	// ── Projects ──
 	projects: {
-		pageTitle: "Destacados.",
-		dragHint: "Arrastra para explorar",
+		carousel: {
+			title: "Proyectos destacados",
+			subtitle: "Arrastra para explorar",
+		},
+		grid: {
+			title: "Trabajos seleccionados",
+			subtitle: "Una selección de trabajos en los que he participado",
+		},
 		items: [
 			{ title: 'Viviq', description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.' },
 			{ title: 'Cor de suro', description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.' },

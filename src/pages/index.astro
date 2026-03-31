@@ -8,6 +8,7 @@ import Partners from '../sections/Partners.astro';
 import FAQ from '../sections/FAQ.astro';
 import AboutSection from '../sections/AboutSection.astro';
 import MarqueeBands from '../sections/MarqueeBands.astro';
+import Projects from '../sections/Projects.astro';
 import Footer from '../sections/Footer.astro';
 import AboutModal from '../components/AboutModal.astro';
 import { useTranslations } from '../i18n/index';
@@ -25,6 +26,9 @@ const t = useTranslations('es');
 		<Hero />
 		<WhatWeDo />
 		<TechStack />
+		<Projects indices={[1, 4, 0, 2]} />
+		<Partners />
+		<FAQ />
 	</main>
 	<Footer />
 </Layout>

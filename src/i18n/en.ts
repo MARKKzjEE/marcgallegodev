@@ -94,6 +94,7 @@ export const en: Translations = {
 	// ── Partners ──
 	partners: {
 		heading: "Partners",
+		subtitle: "Collaborations with studios and professionals",
 		badge: "since 2024",
 		dokoDesc: "Branding, web design and development studio",
 		dokoLogoAlt: "Doko Studio logo",
@@ -133,8 +134,14 @@ export const en: Translations = {
 
 	// ── Projects ──
 	projects: {
-		pageTitle: "Featured.",
-		dragHint: "Drag to explore",
+		carousel: {
+			title: "Featured projects",
+			subtitle: "Drag to explore",
+		},
+		grid: {
+			title: "Selected work",
+			subtitle: "A selection of work I've been part of",
+		},
 		items: [
 			{ title: 'Viviq', description: 'Real estate platform with a CMS adaptable to each client.' },
 			{ title: 'Cor de suro', description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.' },
