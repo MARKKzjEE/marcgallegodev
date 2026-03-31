@@ -24,7 +24,7 @@ const projects = indices
 	: allProjects;
 ---
 
-<section class="projects-section border-t border-secondary pt-16" id="proyectos-destacados">
+<section class="projects-section border-t border-secondary pt-16 md:pt-30" id="proyectos-destacados">
 	<!-- Header -->
 	<div class="projects-header px-4 md:px-10">
 		<h2 class="font-nord font-normal text-secondary projects-title">
@@ -35,11 +35,11 @@ const projects = indices
 		</p>
 	</div>
 
-	<!-- Zona de imágenes: drag + cursor custom -->
-	<div class="projects-images-wrapper" data-projects-track>
+	<!-- Zona de drag + cursor custom -->
+	<div class="projects-wrapper" data-projects-track>
 		<div class="projects-track" data-track>
 			{projects.map((project, i) => (
-				<div class="project-image-slot" data-index={i}>
+				<div class="project-slot" data-index={i}>
 					<div class="project-card-image" style={`background-color: ${project.color};`}>
 						<Image
 							src={project.image}
@@ -52,6 +52,10 @@ const projects = indices
 							draggable={false}
 							class="project-img"
 						/>
+					</div>
+					<div class="project-info">
+						<h2 class="project-card-title font-monoblock font-medium text-secondary">{project.title}</h2>
+						<p class="project-card-desc font-cottor font-light text-secondary/80">{project.description}</p>
 					</div>
 				</div>
 			))}
@@ -67,16 +71,6 @@ const projects = indices
 				</svg>
 			</div>
 		</div>
-	</div>
-
-	<!-- Info debajo: sincronizada por JS -->
-	<div class="projects-info-row">
-		{projects.map((project, i) => (
-			<div class="project-info-item" data-info-index={i}>
-				<h2 class="project-card-title font-monoblock font-medium text-secondary">{project.title}</h2>
-				<p class="project-card-desc font-cottor font-light text-secondary/80">{project.description}</p>
-			</div>
-		))}
 	</div>
 
 	<!-- Pagination dots -->
@@ -104,14 +98,14 @@ const projects = indices
 	line-height: 1;
 }
 
-// ─── Images zone (drag + cursor) ───
+// ─── Drag wrapper ───
 
-.projects-images-wrapper {
+.projects-wrapper {
 	position: relative;
 	width: 100%;
 	cursor: none;
-	overflow: hidden;
-	margin-bottom: 1.25rem;
+	overflow-x: clip;
+	overflow-y: visible;
 
 	&:hover .projects-cursor {
 		opacity: 1;
@@ -132,13 +126,11 @@ const projects = indices
 	will-change: transform;
 }
 
-.project-image-slot {
-	// 2 cards visible + peek of 3rd
+.project-slot {
 	flex: 0 0 calc(45% - 2.5rem);
-	scroll-snap-align: start;
 
 	@media (max-width: 767px) {
-		flex: 0 0 calc(75% - 1rem);
+		flex: 0 0 calc(85% - 1rem);
 	}
 }
 
@@ -158,30 +150,14 @@ const projects = indices
 	transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.project-image-slot:hover .project-img {
+.project-slot:hover .project-img {
 	transform: scale(1.05);
 }
 
-// ─── Info row (no drag zone) ───
+// ─── Info (inside each slot) ───
 
-.projects-info-row {
+.project-info {
 	display: flex;
-	gap: 2.5rem;
-	padding: 0 2.5rem;
-	will-change: transform;
-
-	@media (max-width: 767px) {
-		gap: 1rem;
-		padding: 0 1rem;
-	}
-}
-
-.project-info-item {
-	flex: 0 0 calc(45% - 2.5rem);
-	display: flex;
-	@media (max-width: 767px) {
-		flex: 0 0 calc(75% - 1rem);
-	}
 	flex-direction: column;
 	gap: 0.2rem;
 	padding-top: 1rem;
@@ -202,7 +178,13 @@ const projects = indices
 	align-items: center;
 	justify-content: center;
 	gap: 0.5rem;
-	padding: 4rem 0 0 0;
+	padding: 1.5rem 0 0 0;
+	height: calc(1.5rem + 10px);
+
+	@media (min-width: 768px) {
+		padding: 4rem 0 0 0;
+		height: calc(4rem + 14px);
+	}
 }
 
 .projects-dot {
@@ -218,16 +200,31 @@ const projects = indices
 		height 400ms cubic-bezier(0.22, 1, 0.36, 1),
 		opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
 
+	@media (max-width: 767px) {
+		width: 6px;
+		height: 6px;
+	}
+
 	&:hover {
 		opacity: 0.6;
 		width: 10px;
 		height: 10px;
+
+		@media (max-width: 767px) {
+			width: 8px;
+			height: 8px;
+		}
 	}
 
 	&.is-active {
 		width: 14px;
 		height: 14px;
 		opacity: 1;
+
+		@media (max-width: 767px) {
+			width: 10px;
+			height: 10px;
+		}
 	}
 }
 
@@ -257,12 +254,12 @@ const projects = indices
 }
 
 .projects-cursor-inner {
-	width: 80px;
-	height: 80px;
+	width: 64px;
+	height: 64px;
 
 	@media (max-width: 767px) {
-		width: 56px;
-		height: 56px;
+		width: 48px;
+		height: 48px;
 	}
 	border-radius: 50%;
 	background: var(--secondary);
@@ -283,15 +280,14 @@ const projects = indices
 	const wrapper = document.querySelector<HTMLElement>('[data-projects-track]');
 	const track = wrapper?.querySelector<HTMLElement>('[data-track]');
 	const cursor = wrapper?.querySelector<HTMLElement>('[data-cursor]');
-	const infoRow = document.querySelector<HTMLElement>('.projects-info-row');
 	const dots = Array.from(document.querySelectorAll<HTMLElement>('[data-dot-index]'));
 
-	if (wrapper && track && cursor && infoRow) {
+	if (wrapper && track && cursor) {
 
-		const originalSlots = Array.from(track.querySelectorAll<HTMLElement>('.project-image-slot'));
+		const originalSlots = Array.from(track.querySelectorAll<HTMLElement>('.project-slot'));
 		const n = originalSlots.length;
 
-		// ─── Position state (replaces scrollLeft) ───
+		// ─── Position state ───
 		let currentX = 0;
 		let targetSnapX = 0;
 		let isSnapping = false;
@@ -299,19 +295,18 @@ const projects = indices
 
 		function applyTranslate() {
 			track!.style.transform = `translateX(${-currentX}px)`;
-			infoRow!.style.transform = `translateX(${-currentX}px)`;
 		}
 
 		// ─── Slot geometry ───
 		function getSlotPositions(): number[] {
-			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-image-slot'));
+			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-slot'));
 			if (!allSlots.length) return [];
 			const padding = allSlots[0].offsetLeft;
 			return allSlots.map(slot => slot.offsetLeft - padding);
 		}
 
 		function getBlockWidth(): number {
-			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-image-slot'));
+			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-slot'));
 			if (allSlots.length < n + 1) return 0;
 			return allSlots[2 * n].offsetLeft - allSlots[n].offsetLeft;
 		}
@@ -330,18 +325,6 @@ const projects = indices
 		});
 		clonesEnd.forEach(clone => track.insertBefore(clone, originalSlots[0]));
 
-		const infoOriginals = Array.from(infoRow.querySelectorAll<HTMLElement>('.project-info-item[data-info-index]'));
-		infoOriginals.forEach(item => {
-			const clone = item.cloneNode(true) as HTMLElement;
-			clone.setAttribute('aria-hidden', 'true');
-			infoRow.appendChild(clone);
-		});
-		infoOriginals.forEach(item => {
-			const clone = item.cloneNode(true) as HTMLElement;
-			clone.setAttribute('aria-hidden', 'true');
-			infoRow.insertBefore(clone, infoOriginals[0]);
-		});
-
 		// Init position at originals block
 		requestAnimationFrame(() => {
 			currentX = getBlockWidth();
@@ -355,9 +338,11 @@ const projects = indices
 			if (currentX >= blockWidth * 2) {
 				currentX -= blockWidth;
 				applyTranslate();
+				updateDots();
 			} else if (currentX < blockWidth) {
 				currentX += blockWidth;
 				applyTranslate();
+				updateDots();
 			}
 		}
 
@@ -365,17 +350,17 @@ const projects = indices
 		let activeDot = 0;
 
 		function updateDots() {
-			const blockWidth = getBlockWidth();
-			if (blockWidth === 0) return;
-			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-image-slot'));
+			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-slot'));
+			if (!allSlots.length) return;
+			const padding = allSlots[0].offsetLeft;
 			let closest = 0;
 			let minDist = Infinity;
-			for (let i = n; i < 2 * n; i++) {
-				const pos = allSlots[i].offsetLeft - allSlots[0].offsetLeft;
+			for (let i = 0; i < allSlots.length; i++) {
+				const pos = allSlots[i].offsetLeft - padding;
 				const dist = Math.abs(currentX - pos);
 				if (dist < minDist) {
 					minDist = dist;
-					closest = i - n;
+					closest = i % n;
 				}
 			}
 			if (closest !== activeDot) {
@@ -386,9 +371,24 @@ const projects = indices
 		}
 
 		// ─── Snap animation ───
+		let snapStartX = 0;
+		let snapProgress = 0;
+		const SNAP_DURATION = 500; // ms
+		let snapStartTime = 0;
+
+		function easeOut(t: number): number {
+			return 1 - Math.pow(1 - t, 3);
+		}
+
 		function animateSnap() {
-			const diff = targetSnapX - currentX;
-			if (Math.abs(diff) < 0.5) {
+			const elapsed = performance.now() - snapStartTime;
+			snapProgress = Math.min(elapsed / SNAP_DURATION, 1);
+
+			currentX = snapStartX + (targetSnapX - snapStartX) * easeOut(snapProgress);
+			applyTranslate();
+			updateDots();
+
+			if (snapProgress >= 1) {
 				currentX = targetSnapX;
 				isSnapping = false;
 				snapRaf = null;
@@ -397,14 +397,25 @@ const projects = indices
 				updateDots();
 				return;
 			}
-			currentX += diff * 0.12;
-			applyTranslate();
-			updateDots();
 			snapRaf = requestAnimationFrame(animateSnap);
 		}
 
 		function snapTo(target: number) {
+			// Find closest instance (direct, +block, -block)
+			const blockWidth = getBlockWidth();
+			if (blockWidth > 0) {
+				const candidates = [target, target + blockWidth, target - blockWidth];
+				let best = target;
+				let bestDist = Infinity;
+				for (const c of candidates) {
+					const d = Math.abs(currentX - c);
+					if (d < bestDist) { bestDist = d; best = c; }
+				}
+				target = best;
+			}
 			targetSnapX = target;
+			snapStartX = currentX;
+			snapStartTime = performance.now();
 			isSnapping = true;
 			if (!snapRaf) snapRaf = requestAnimationFrame(animateSnap);
 		}
@@ -412,8 +423,7 @@ const projects = indices
 		// ─── Dot click → snap to project ───
 		dots.forEach((dot, i) => {
 			dot.addEventListener('click', () => {
-				const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-image-slot'));
-				// Target is the i-th original slot (originals start at index n)
+				const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-slot'));
 				const targetSlot = allSlots[n + i];
 				if (!targetSlot) return;
 				const pos = targetSlot.offsetLeft - allSlots[0].offsetLeft;
@@ -422,21 +432,29 @@ const projects = indices
 		});
 
 		// ─── Snap helper ───
+		let dragStartIdx = 0;
+
+		function getClosestSlotIdx(): number {
+			const positions = getSlotPositions();
+			if (!positions.length) return 0;
+			let closest = 0;
+			let minDist = Infinity;
+			for (let i = 0; i < positions.length; i++) {
+				const dist = Math.abs(currentX - positions[i]);
+				if (dist < minDist) { minDist = dist; closest = i; }
+			}
+			return closest;
+		}
+
 		function getSnapTarget(direction: number): number {
 			const positions = getSlotPositions();
 			if (!positions.length) return currentX;
 
-			const raw = positions.findIndex((pos, i) => {
-				const next = positions[i + 1] ?? Infinity;
-				return currentX >= pos - 2 && currentX < next - 2;
-			});
-			const currentIdx = raw === -1 ? positions.length - 1 : raw;
-
 			const targetIdx = direction > 0
-				? Math.min(currentIdx + 1, positions.length - 1)
+				? Math.min(dragStartIdx + 1, positions.length - 1)
 				: direction < 0
-					? Math.max(currentIdx - 1, 0)
-					: currentIdx;
+					? Math.max(dragStartIdx - 1, 0)
+					: dragStartIdx;
 
 			return positions[targetIdx];
 		}
@@ -482,6 +500,7 @@ const projects = indices
 			startPos = currentX;
 			lastX = e.clientX;
 			lastDx = 0;
+			dragStartIdx = getClosestSlotIdx();
 		});
 
 		window.addEventListener('mousemove', (e) => {
@@ -503,11 +522,13 @@ const projects = indices
 
 		// ─── Drag (touch) ───
 		let touchStartX = 0;
+		let touchStartY = 0;
 		let touchStartPos = 0;
 		let touchLastX = 0;
 		let touchLastDx = 0;
+		let touchLocked: 'horizontal' | 'vertical' | null = null;
 		const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
-		let hideCursorTimeout: ReturnType<typeof setTimeout> | null = null;
+		let hideCursorTimeout: ReturnType<typeof setTimeout> | null = null; // used in touchend
 
 		function showCursorAt(x: number, y: number) {
 			const rect = wrapper!.getBoundingClientRect();
@@ -526,17 +547,31 @@ const projects = indices
 			if (isSnapping && snapRaf) { cancelAnimationFrame(snapRaf); snapRaf = null; isSnapping = false; }
 			const touch = e.touches[0];
 			touchStartX = touch.clientX;
+			touchStartY = touch.clientY;
 			touchStartPos = currentX;
 			touchLastX = touch.clientX;
 			touchLastDx = 0;
-			if (isMobile()) {
-				if (hideCursorTimeout) clearTimeout(hideCursorTimeout);
-				showCursorAt(touch.clientX, touch.clientY);
-			}
+			touchLocked = null;
+			dragStartIdx = getClosestSlotIdx();
 		}, { passive: true });
 
 		wrapper.addEventListener('touchmove', (e) => {
 			const touch = e.touches[0];
+			const dx = Math.abs(touch.clientX - touchStartX);
+			const dy = Math.abs(touch.clientY - touchStartY);
+
+			// Lock direction on first significant move
+			if (!touchLocked && (dx > 8 || dy > 8)) {
+				touchLocked = dx > dy ? 'horizontal' : 'vertical';
+			}
+
+			// If vertical, let browser handle scroll
+			if (touchLocked === 'vertical') {
+				hideCursor();
+				return;
+			}
+
+			// Horizontal drag
 			touchLastDx = touch.clientX - touchLastX;
 			touchLastX = touch.clientX;
 			currentX = touchStartPos - (touch.clientX - touchStartX);
@@ -547,6 +582,11 @@ const projects = indices
 		}, { passive: true });
 
 		wrapper.addEventListener('touchend', () => {
+			if (touchLocked === 'vertical' || !touchLocked) {
+				touchLocked = null;
+				return;
+			}
+			touchLocked = null;
 			const dir = touchLastDx > 2 ? -1 : touchLastDx < -2 ? 1 : 0;
 			snapTo(getSnapTarget(dir));
 			if (isMobile()) hideCursorTimeout = setTimeout(hideCursor, 400);

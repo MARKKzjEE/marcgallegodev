@@ -18,7 +18,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 <header class="site-header font-monoblock font-normal text-base border-t border-secondary" data-site-header>
 
 	<!-- ─── Desktop toolbar (2 filas × 6 cols) ─── -->
-	<div class="toolbar hidden md:block" aria-label="Cabecera">
+	<div class="toolbar hidden lg:block" aria-label="Cabecera">
 		<div class="toolbar-grid">
 
 			<!-- Logo M — col 1, filas 1-2 -->
@@ -88,7 +88,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 	</div>
 
 	<!-- ─── Mobile bar ─── -->
-	<div class="mobile-bar md:hidden" aria-label="Cabecera móvil">
+	<div class="mobile-bar lg:hidden" aria-label="Cabecera móvil">
 		<!-- Logo M con borde -->
 		<a href={homePath} class="mobile-logo-cell" aria-label="Inicio">
 			<svg width="22" height="24" viewBox="0 0 521 557" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -197,6 +197,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
     display: flex;
     align-items: stretch;
     padding: 0;
+    border-left: none;
 
     .nav-link {
       display: flex;
@@ -317,7 +318,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
     height: 72px;
     color: var(--secondary);
     border-bottom: 1px solid var(--secondary);
-    @media (min-width: 768px) { display: none; }
+    @media (min-width: 1024px) { display: none; }
   }
 
   .mobile-logo-cell {
@@ -434,7 +435,30 @@ const { esHref, enHref } = getAlternatePath(pathname);
     font-size: clamp(28px, 7vw, 44px);
     font-weight: 300;
     color: var(--secondary);
-    &.is-active { opacity: 0.5; }
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -32px;
+      top: 45%;
+      transform: translateY(-50%) translateX(-6px);
+      width: 24px;
+      height: 24px;
+      background-color: currentColor;
+      mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 18L15 12L9 6' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      opacity: 0;
+      transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &.is-active::before {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
   }
 </style>
 
@@ -504,7 +528,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 	if (header) {
 		let lastY = window.scrollY;
 		window.addEventListener('scroll', () => {
-			if (window.innerWidth >= 768) return;
+			if (window.innerWidth >= 1024) return;
 			if (menu?.classList.contains('is-open')) return;
 			const currentY = window.scrollY;
 			if (currentY < 10) {

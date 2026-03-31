@@ -97,9 +97,9 @@ export const es = {
 		dokoDesc: "Estudio de branding, diseño y desarrollo web",
 		dokoLogoAlt: "Logo Doko Studio",
 		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
-		studioLabel: "¿Cómo colaboras?",
-		studioText1: "Es un pequeño estudio que cuenta con perfiles especializados para cada fase de un proyecto: branding, diseño, desarrollo y puesta en producción. Pueden ofrecer una solución completa o integrarse en equipos existentes para cubrir necesidades concretas en cualquier etapa.",
-		studioText2: "Por mi parte, colaboro aportando mi experiencia y servicios, participando tanto de forma puntual como trabajando conjuntamente en proyectos de mayor envergadura.",
+		studioLabel: "¿Cómo colaboro?",
+		studioText1: "Por mi parte, colaboro aportando mi experiencia y servicios, participando tanto de forma puntual como trabajando conjuntamente en proyectos de mayor envergadura.",
+		studioText2: "Ellos son un pequeño estudio que cuenta con perfiles especializados para cada fase de un proyecto: branding, diseño, desarrollo y puesta en producción. Pueden ofrecer una solución completa o integrarse en equipos existentes para cubrir necesidades concretas en cualquier etapa.",
 		studioLink: "Saber más",
 	},
 
@@ -153,7 +153,7 @@ export const es = {
 
 	// ── Contact ──
 	contact: {
-		title: "Hablemos.",
+		title: "Hablemos",
 		subtitle: "¿Tienes un proyecto en mente o simplemente quieres saludar?",
 		writeLabel: "Escríbeme un mensaje",
 		namePlaceholder: "Nombre",
@@ -176,7 +176,7 @@ export const es = {
 
 	// ── Experience page ──
 	experience: {
-		pageTitle: "Mi trayectoria profesional.",
+		pageTitle: "Mi trayectoria profesional",
 		downloadLabel: "Descargar PDF",
 		downloadAriaLabel: "Descargar CV en PDF",
 		cvFile: "/cv/CV_MarcGallego_es.pdf",

@@ -43,15 +43,15 @@ const person = {
 <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
 <script is:inline type="application/ld+json" set:html={JSON.stringify(person)} />
 
-<main class="min-h-screen bg-primary pt-14">
-	<div class="cv container mx-auto px-4 md:px-10 py-16 md:py-30">
+<main class="min-h-screen bg-primary pt-18">
+	<div class="cv px-4 md:px-10 py-16">
 
 		<!-- Título -->
 		<div class="cv__name-row">
-			<h1 class="cv__name font-vogun font-light text-secondary">{exp.pageTitle}</h1>
+			<h1 class="cv__name font-nord font-normal text-secondary">{exp.pageTitle}</h1>
 			<a href={exp.cvFile} download class="cv__download cv__download--mobile" aria-label={exp.downloadAriaLabel}>
 				<svg class="cv__download-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
-				<span class="cv__download-label font-nord">PDF</span>
+				<span class="cv__download-label font-monoblock">PDF</span>
 			</a>
 		</div>
 
@@ -67,7 +67,7 @@ const person = {
 			<div class="cv__summary-download">
 				<a href={exp.cvFile} download class="cv__download cv__download--inline" aria-label={exp.downloadAriaLabel}>
 					<svg class="cv__download-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
-					<span class="cv__download-label font-nord">{exp.downloadLabel}</span>
+					<span class="cv__download-label font-monoblock">{exp.downloadLabel}</span>
 				</a>
 			</div>
 		</section>
@@ -85,17 +85,15 @@ const person = {
 					</div>
 					<div class="cv__entry-body">
 						<div class="cv__entry-header">
-							<div>
-								<h3 class="cv__entry-title">{job.company}</h3>
-								<p class="cv__entry-subtitle">{job.role}</p>
-								<div class="cv__tags">
-									{job.tags.map(tag => <span class="cv__tag">{tag}</span>)}
-								</div>
-							</div>
-							<div class="cv__entry-meta">
-								<span class="cv__entry-date">{job.period}</span>
-								<span class="cv__entry-location">{job.location}</span>
-							</div>
+							<h3 class="cv__entry-title">{job.company}</h3>
+							<p class="cv__entry-subtitle">{job.role}</p>
+						</div>
+						<div class="cv__entry-meta">
+							<span class="cv__entry-date">{job.period}</span>
+							<span class="cv__entry-location">{job.location}</span>
+						</div>
+						<div class="cv__tags">
+							{job.tags.map(tag => <span class="cv__tag">{tag}</span>)}
 						</div>
 						<ul class="cv__list">
 							{job.bullets.map(b => <li>{b}</li>)}
@@ -117,14 +115,12 @@ const person = {
 					</div>
 					<div class="cv__entry-body">
 						<div class="cv__entry-header">
-							<div>
-								<h3 class="cv__entry-title">{edu.title}</h3>
-								<p class="cv__entry-subtitle">{edu.subtitle}</p>
-							</div>
-							<div class="cv__entry-meta">
-								<span class="cv__entry-date">{edu.period}</span>
-								<span class="cv__entry-location">{edu.location}</span>
-							</div>
+							<h3 class="cv__entry-title">{edu.title}</h3>
+							<p class="cv__entry-subtitle">{edu.subtitle}</p>
+						</div>
+						<div class="cv__entry-meta">
+							<span class="cv__entry-date">{edu.period}</span>
+							<span class="cv__entry-location">{edu.location}</span>
 						</div>
 					</div>
 				</div>
@@ -154,14 +150,12 @@ const person = {
 					</div>
 					<div class="cv__entry-body">
 						<div class="cv__entry-header">
-							<div>
-								<h3 class="cv__entry-title">{item.company}</h3>
-								<p class="cv__entry-subtitle">{item.role}</p>
-							</div>
-							<div class="cv__entry-meta">
-								<span class="cv__entry-date">{item.period}</span>
-								<span class="cv__entry-location">{item.location}</span>
-							</div>
+							<h3 class="cv__entry-title">{item.company}</h3>
+							<p class="cv__entry-subtitle">{item.role}</p>
+						</div>
+						<div class="cv__entry-meta">
+							<span class="cv__entry-date">{item.period}</span>
+							<span class="cv__entry-location">{item.location}</span>
 						</div>
 						<ul class="cv__list">
 							{item.bullets.map(b => <li>{b}</li>)}
@@ -184,12 +178,13 @@ const person = {
 		position: relative;
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		margin-bottom: 24px;
+		justify-content: space-between;
+		margin-bottom: 2rem;
 	}
 
 	.cv__name {
-		font-size: clamp(48px, 5vw, 80px);
+		font-size: clamp(35px, 8vw, 80px);
+		line-height: 1;
 	}
 
 	.cv__download {
@@ -212,7 +207,7 @@ const person = {
 	}
 
 	.cv__download-label {
-		font-size: 10px;
+		font-size: clamp(11px, 1.1vw, 14px);
 	}
 
 	// ── Horizontal rule ──
@@ -302,9 +297,10 @@ const person = {
 	}
 
 	.cv__heading {
-		font-family: var(--font-nord);
-		font-weight: 700;
-		font-size: 14px;
+		font-family: var(--font-monoblock);
+		font-weight: 500;
+		font-size: clamp(14px, 1.4vw, 18px);
+		letter-spacing: 0.05em;
 		color: var(--secondary);
 		margin-bottom: 20px;
 	}
@@ -312,9 +308,10 @@ const person = {
 	// ── Body text ──
 	.cv__body {
 		font-family: var(--font-cottor);
-		font-size: 16px;
+		font-size: 0.875rem;
 		font-weight: 300;
 		color: var(--secondary);
+		opacity: 0.8;
 	}
 
 	// ── Entry (job / education) ──
@@ -343,7 +340,7 @@ const person = {
 		width: 64px;
 		height: 64px;
 		border-radius: 4px;
-		border: 1px solid color-mix(in srgb, var(--secondary) 25%, transparent);
+		border: 1px solid var(--quaternary);
 		flex-shrink: 0;
 		object-fit: contain;
 
@@ -364,25 +361,48 @@ const person = {
 	.cv__entry-body {
 		flex: 1;
 		min-width: 0;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 0 16px;
+
+		@media (max-width: 600px) {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.cv__entry-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: baseline;
-		gap: 16px;
 		margin-bottom: 8px;
+	}
+
+	.cv__entry-meta {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		grid-row: 1;
+		grid-column: 2;
 
 		@media (max-width: 600px) {
-			flex-direction: column;
-			gap: 10px;
+			grid-column: 1;
+			grid-row: auto;
+			order: 10;
+			align-items: flex-end;
+			margin-top: 12px;
 		}
+	}
+
+	.cv__tags {
+		grid-column: 1 / -1;
+	}
+
+	.cv__list {
+		grid-column: 1 / -1;
 	}
 
 	.cv__entry-title {
 		font-family: var(--font-cottor);
-		font-weight: 600;
-		font-size: 20px;
+		font-weight: 500;
+		font-size: clamp(13px, 1.3vw, 16px);
+		letter-spacing: 0.05em;
 		margin-bottom: 4px;
 		color: var(--secondary);
 	}
@@ -390,7 +410,8 @@ const person = {
 	.cv__entry-subtitle {
 		font-family: var(--font-monoblock);
 		font-weight: 400;
-		font-size: 12px;
+		font-size: clamp(11px, 1.1vw, 14px);
+		letter-spacing: 0.05em;
 		color: var(--secondary);
 		opacity: 0.8;
 	}
@@ -401,42 +422,34 @@ const person = {
 		flex-wrap: wrap;
 		gap: 6px;
 		margin-top: 8px;
+		margin-bottom: 16px;
 	}
 
 	.cv__tag {
-		font-family: var(--font-nord);
-		font-weight: 500;
+		font-family: var(--font-monoblock);
+		font-weight: 400;
 		font-size: 10px;
+		letter-spacing: 0.05em;
 		padding: 3px 10px;
 		border-radius: 4px;
-		background-color: color-mix(in srgb, var(--secondary) 10%, transparent);
+		background-color: var(--terciary);
 		color: var(--secondary);
-		border: 1px solid color-mix(in srgb, var(--secondary) 20%, transparent);
-	}
-
-	.cv__entry-meta {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		flex-shrink: 0;
-
-		@media (max-width: 600px) {
-			align-items: flex-start;
-		}
+		border: 1px solid var(--quaternary);
 	}
 
 	.cv__entry-date {
-		font-family: var(--font-nord);
-		font-weight: 500;
-		font-size: 13px;
+		font-family: var(--font-monoblock);
+		font-weight: 400;
+		font-size: clamp(11px, 1.1vw, 14px);
+		letter-spacing: 0.05em;
 		color: var(--secondary);
 	}
 
 	.cv__entry-location {
-		font-family: var(--font-cottor);
+		font-family: var(--font-monoblock);
 		font-weight: 400;
-		font-size: 14px;
-		font-style: italic;
+		font-size: clamp(11px, 1.1vw, 14px);
+		letter-spacing: 0.05em;
 		color: var(--secondary);
 		opacity: 0.7;
 	}
@@ -449,9 +462,10 @@ const person = {
 
 		li {
 			font-family: var(--font-cottor);
-			font-size: 15px;
+			font-size: 0.875rem;
 			font-weight: 300;
 			color: var(--secondary);
+			opacity: 0.8;
 			padding: 1px 0;
 		}
 	}

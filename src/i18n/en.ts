@@ -99,9 +99,9 @@ export const en: Translations = {
 		dokoDesc: "Branding, web design and development studio",
 		dokoLogoAlt: "Doko Studio logo",
 		dokoImgAlt: "Doko Studio — web design and development studio",
-		studioLabel: "How do you collaborate?",
-		studioText1: "It's a small studio with specialised profiles for every phase of a project: branding, design, development and deployment. They can deliver a full solution or integrate into existing teams to cover specific needs at any stage.",
-		studioText2: "On my side, I contribute my experience and services, participating on a project basis or working jointly on larger-scale projects.",
+		studioLabel: "How do I collaborate?",
+		studioText1: "On my side, I contribute my experience and services, participating on a project basis or working jointly on larger-scale projects.",
+		studioText2: "They are a small studio with specialised profiles for every phase of a project: branding, design, development and deployment. They can deliver a full solution or integrate into existing teams to cover specific needs at any stage.",
 		studioLink: "Learn more",
 	},
 
@@ -155,7 +155,7 @@ export const en: Translations = {
 
 	// ── Contact ──
 	contact: {
-		title: "Let's talk.",
+		title: "Let's talk",
 		subtitle: "Have a project in mind or just want to say hi?",
 		writeLabel: "Send me a message",
 		namePlaceholder: "Name",
@@ -178,7 +178,7 @@ export const en: Translations = {
 
 	// ── Experience page ──
 	experience: {
-		pageTitle: "My professional journey.",
+		pageTitle: "My professional journey",
 		downloadLabel: "Download PDF",
 		downloadAriaLabel: "Download CV as PDF",
 		cvFile: "/cv/CV_MarcGallego_en.pdf",

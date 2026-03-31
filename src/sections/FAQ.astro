@@ -28,7 +28,7 @@ const faqs = t.faq.items;
 							</span>
 						</button>
 						<div class="faq-body" data-faq-body>
-							<p class="font-cottor font-light text-secondary/80 text-[15px]">{faq.answer}</p>
+							<p class="font-cottor font-light text-secondary/80 text-sm">{faq.answer}</p>
 						</div>
 					</div>
 				))}
@@ -52,8 +52,8 @@ const faqs = t.faq.items;
 
 	.faq-card {
 		border-radius: 12px;
-		background-color: var(--quaternary);
-		border: 1px solid color-mix(in srgb, var(--secondary) 8%, transparent);
+		background-color: var(--terciary);
+		border: 1px solid var(--quaternary);
 		overflow: hidden;
 	}
 
@@ -66,6 +66,8 @@ const faqs = t.faq.items;
 		padding: 1.5rem;
 		cursor: pointer;
 		text-align: left;
+		background: none;
+		border: none;
 	}
 
 	.faq-question {

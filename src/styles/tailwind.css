@@ -202,16 +202,16 @@
 :root {
 	--primary: #ffffff;
 	--secondary: #1D1D1F;
-	--terciary: #f5f5f7;
-	--quaternary: #ebebeb;
+	--terciary: color-mix(in srgb, var(--secondary) 5%, transparent);
+	--quaternary: color-mix(in srgb, var(--secondary) 8%, transparent);
 	--secondary-soft: color-mix(in srgb, var(--secondary) 80%, transparent);
 }
 
 html.dark {
 	--primary: #000000;
 	--secondary: #FFFFFF;
-	--terciary: #121212;
-	--quaternary: #1d1d1d;
+	--terciary: color-mix(in srgb, var(--secondary) 8%, transparent);
+	--quaternary: color-mix(in srgb, var(--secondary) 13%, transparent);
 }
 
 /* Prevenir scroll lateral */

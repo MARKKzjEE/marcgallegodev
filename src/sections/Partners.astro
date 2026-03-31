@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import dokostudio from '../assets/clients/dokostudio.png';
+import dokostudio from '../assets/projects/dokostudio.png';
 import { getLang, useTranslations } from '../i18n';
 
 const lang = getLang(Astro.url);
@@ -29,14 +29,14 @@ const t = useTranslations(lang);
 				</div>
 			</div>
 
-			<div class="studio-card" data-reveal data-reveal-radius="32px">
-				<span class="studio-label font-monoblock font-normal text-secondary uppercase">{t.partners.studioLabel}</span>
+			<div class="studio-card" data-reveal data-reveal-radius="20px">
+				<span class="studio-label font-monoblock font-medium text-secondary uppercase">{t.partners.studioLabel}</span>
 				<p class="font-cottor font-light text-secondary/80 text-sm mt-4">{t.partners.studioText1}</p>
 				<p class="font-cottor font-light text-secondary/80 text-sm mt-3">{t.partners.studioText2}</p>
-				<a href="https://doko.studio/" target="_blank" rel="noopener noreferrer" class="studio-link mt-8 font-cottor font-normal inline-flex items-center gap-1" data-reveal-trigger>{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+				<a href="https://doko.studio/" target="_blank" rel="noopener noreferrer" class="studio-link mt-8 font-cottor font-normal text-secondary inline-flex items-center gap-1" data-reveal-trigger>{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
 				<!-- Reveal layer -->
 				<div class="studio-card__reveal reveal-layer" aria-hidden="true">
-					<span class="studio-label font-monoblock font-normal text-secondary uppercase">{t.partners.studioLabel}</span>
+					<span class="studio-label font-monoblock font-medium text-secondary uppercase">{t.partners.studioLabel}</span>
 					<p class="font-cottor font-light text-sm mt-4">{t.partners.studioText1}</p>
 					<p class="font-cottor font-light text-sm mt-3">{t.partners.studioText2}</p>
 					<span class="studio-link mt-8 font-cottor font-normal inline-flex items-center gap-1">{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
@@ -70,10 +70,10 @@ const t = useTranslations(lang);
         overflow: hidden;
         border-radius: 10px;
         background-color: var(--terciary);
-        border: 1px solid color-mix(in srgb, var(--secondary) 8%, transparent);
+        border: 1px solid var(--quaternary);
 
         .right span {
-            border-color: color-mix(in srgb, var(--secondary) 10%, transparent);
+            border-color: var(--quaternary);
         }
     }
 
@@ -130,16 +130,15 @@ const t = useTranslations(lang);
     }
 
     .studio-card {
-        --reveal-extend: 20px;
+        --reveal-extend: 40px;
         position: relative;
-        overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: 1.5rem;
         border-radius: 10px;
         background-color: var(--terciary);
-        border: 1px solid color-mix(in srgb, var(--secondary) 8%, transparent);
+        border: 1px solid var(--quaternary);
 
         @media (max-width: 767px) {
             padding: 1rem;
@@ -148,6 +147,7 @@ const t = useTranslations(lang);
 
     .studio-card__reveal {
         background: var(--secondary);
+        border-radius: 10px;
         padding: calc(1.5rem + var(--reveal-extend, 0px));
         display: flex;
         flex-direction: column;

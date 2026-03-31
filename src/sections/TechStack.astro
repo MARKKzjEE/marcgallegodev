@@ -333,7 +333,7 @@ const total = techs.length;
 		align-items: center;
 		justify-content: center;
 		border-radius: 10px;
-		border: 1px solid rgba(0, 0, 0, 0.05);
+		border: 1px solid var(--quaternary);
 		background-color: var(--terciary);
 		cursor: pointer;
 		overflow: hidden;
@@ -425,11 +425,6 @@ const total = techs.length;
 
 		.tech-icon__svg--light { display: none; }
 		.tech-icon__svg--dark { display: block; }
-
-		.tech-icon {
-			background-color: var(--terciary);
-			border-color: var(--quaternary);
-		}
 	}
 
 	// ─── Keyframes ──────────────────────────────────
@@ -491,7 +486,7 @@ const total = techs.length;
 		aspect-ratio: 1;
 		border-radius: 12px;
 		background-color: var(--terciary);
-		border: 1px solid color-mix(in srgb, var(--secondary) 8%, transparent);
+		border: 1px solid var(--quaternary);
 		flex-shrink: 0;
 		padding: 16px;
 
