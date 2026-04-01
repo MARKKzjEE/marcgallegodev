@@ -32,18 +32,21 @@ const breadcrumb = {
 		<div class="contact-form-wrap">
 			<form class="contact-form" data-contact-form action="https://formspree.io/f/xjgaoedy" method="POST">
 			<div class="contact-field">
-				<input id="contact-name" name="name" type="text" placeholder={t.contact.namePlaceholder} class="contact-input font-cottor" required />
+				<label for="contact-name" class="sr-only">{t.contact.namePlaceholder}</label>
+				<input id="contact-name" name="name" type="text" placeholder={t.contact.namePlaceholder} class="contact-input font-cottor" required autocomplete="name" />
 			</div>
 			<div class="contact-field">
-				<input id="contact-email" name="email" type="email" placeholder={t.contact.emailPlaceholder} class="contact-input font-cottor" required />
+				<label for="contact-email" class="sr-only">{t.contact.emailPlaceholder}</label>
+				<input id="contact-email" name="email" type="email" placeholder={t.contact.emailPlaceholder} class="contact-input font-cottor" required autocomplete="email" />
 			</div>
 			<div class="contact-field">
+				<label for="contact-message" class="sr-only">{t.contact.messagePlaceholder}</label>
 				<textarea id="contact-message" name="message" placeholder={t.contact.messagePlaceholder} class="contact-input contact-textarea font-cottor" rows="5" required></textarea>
 			</div>
 			<button type="submit" class="contact-submit font-nord font-medium text-[12px]" data-submit-btn>
 				{t.contact.submitLabel}
 			</button>
-			<p class="contact-feedback font-cottor font-light text-sm" data-contact-feedback aria-live="polite"></p>
+			<p class="contact-feedback text-cottor-body" data-contact-feedback aria-live="polite"></p>
 		</form>
 		</div>
 

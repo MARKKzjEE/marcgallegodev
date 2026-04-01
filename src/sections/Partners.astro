@@ -21,7 +21,7 @@ const t = useTranslations(lang);
 				<div class="card-info">
 					<div class="left min-w-0">
 						<h4 class="project-card-title font-monoblock font-medium text-secondary">Doko Studio</h4>
-						<p class="project-card-desc font-cottor font-light text-secondary/80">{t.partners.dokoDesc}</p>
+						<p class="project-card-desc text-cottor-body">{t.partners.dokoDesc}</p>
 					</div>
 					<div class="right hidden md:block">
 						<span class="text-mono-label-soft bg-quaternary p-4 rounded-full border text-center whitespace-nowrap">{t.partners.badge}</span>
@@ -31,14 +31,14 @@ const t = useTranslations(lang);
 
 			<div class="studio-card" data-reveal data-reveal-radius="20px">
 				<span class="studio-label font-monoblock font-medium text-secondary uppercase">{t.partners.studioLabel}</span>
-				<p class="font-cottor font-light text-secondary/80 text-sm mt-4">{t.partners.studioText1}</p>
-				<p class="font-cottor font-light text-secondary/80 text-sm mt-3">{t.partners.studioText2}</p>
+				<p class="text-cottor-body mt-4">{t.partners.studioText1}</p>
+				<p class="text-cottor-body mt-3">{t.partners.studioText2}</p>
 				<a href="https://doko.studio/" target="_blank" rel="noopener noreferrer" class="studio-link mt-8 font-cottor font-normal text-secondary inline-flex items-center gap-1" data-reveal-trigger>{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
 				<!-- Reveal layer -->
 				<div class="studio-card__reveal reveal-layer" aria-hidden="true">
 					<span class="studio-label font-monoblock font-medium text-secondary uppercase">{t.partners.studioLabel}</span>
-					<p class="font-cottor font-light text-sm mt-4">{t.partners.studioText1}</p>
-					<p class="font-cottor font-light text-sm mt-3">{t.partners.studioText2}</p>
+					<p class="text-cottor-body mt-4">{t.partners.studioText1}</p>
+					<p class="text-cottor-body mt-3">{t.partners.studioText2}</p>
 					<span class="studio-link mt-8 font-cottor font-normal inline-flex items-center gap-1">{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
 				</div>
 			</div>
@@ -121,7 +121,8 @@ const t = useTranslations(lang);
         }
     }
 
-    .project-card-title {
+    .project-card-title,
+    .studio-label {
         font-size: clamp(1.1rem, 2vw, 1.4rem);
     }
 

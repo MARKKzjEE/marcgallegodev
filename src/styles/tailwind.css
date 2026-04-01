@@ -228,12 +228,12 @@ html, body {
 
 	/* Tipografía base por fuente */
 	.font-cottor    { line-height: 1.5; letter-spacing: 1px; }
-	.font-nord      { line-height: 1; letter-spacing: -0.05em; }
+	.font-nord      { line-height: 1; letter-spacing: -0.05em; margin-left: -0.1em; }
 	.font-monoblock { line-height: 1.4; letter-spacing: 0.05em; }
 
 	.text-mono-label {
 		font-family: var(--font-monoblock);
-		font-size: clamp(12px, 1.2vw, 16px);
+		font-size: clamp(14px, 1.2vw, 16px);
 		font-weight: 400;
 		letter-spacing: 0.05em;
 		line-height: 1.4;
@@ -242,10 +242,20 @@ html, body {
 
 	.text-mono-label-soft {
 		font-family: var(--font-monoblock);
-		font-size: clamp(12px, 1.2vw, 16px);
+		font-size: clamp(14px, 1.2vw, 16px);
 		font-weight: 400;
 		letter-spacing: 0.05em;
 		line-height: 1.4;
 		color: var(--secondary-soft);
+	}
+
+	.text-cottor-body {
+		font-family: var(--font-cottor);
+		font-size: clamp(13px, 1vw, 15px);
+		font-weight: 300;
+		line-height: 1.5;
+		letter-spacing: 1px;
+		color: var(--secondary);
+		opacity: 0.8;
 	}
 }

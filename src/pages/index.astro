@@ -10,7 +10,6 @@ import AboutSection from '../sections/AboutSection.astro';
 import MarqueeBands from '../sections/MarqueeBands.astro';
 import Projects from '../sections/Projects.astro';
 import Footer from '../sections/Footer.astro';
-import AboutModal from '../components/AboutModal.astro';
 import { useTranslations } from '../i18n/index';
 
 const t = useTranslations('es');
@@ -20,6 +19,7 @@ const t = useTranslations('es');
 	title={t.meta.indexTitle}
 	description={t.meta.indexDescription}
 	keywords={t.meta.indexKeywords}
+	lang="es"
 >
 	<Header />
 	<main>
@@ -28,6 +28,7 @@ const t = useTranslations('es');
 		<TechStack />
 		<Projects indices={[1, 4, 0, 2]} />
 		<Partners />
+		<AboutSection />
 		<FAQ />
 	</main>
 	<Footer />

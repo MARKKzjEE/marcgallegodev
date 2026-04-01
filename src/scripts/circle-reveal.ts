@@ -10,7 +10,7 @@
  * The reveal layer uses CSS vars: --r (radius), --cx / --cy (position).
  */
 export function initCircleReveal() {
-	if (window.matchMedia('(hover: none)').matches) return;
+	if (window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer: coarse)').matches) return;
 
 	document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((wrapper) => {
 		if (wrapper.dataset.revealInit) return;

@@ -308,8 +308,10 @@ const person = {
 	// ── Body text ──
 	.cv__body {
 		font-family: var(--font-cottor);
-		font-size: 0.875rem;
+		font-size: clamp(13px, 1vw, 15px);
 		font-weight: 300;
+		line-height: 1.5;
+		letter-spacing: 1px;
 		color: var(--secondary);
 		opacity: 0.8;
 	}
@@ -464,6 +466,8 @@ const person = {
 			font-family: var(--font-cottor);
 			font-size: 0.875rem;
 			font-weight: 300;
+			line-height: 1.5;
+			letter-spacing: 1px;
 			color: var(--secondary);
 			opacity: 0.8;
 			padding: 1px 0;

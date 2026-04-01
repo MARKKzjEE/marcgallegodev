@@ -39,7 +39,7 @@ const projects = indices
 	<div class="projects-wrapper" data-projects-track>
 		<div class="projects-track" data-track>
 			{projects.map((project, i) => (
-				<div class="project-slot" data-index={i}>
+				<article class="project-slot" data-index={i}>
 					<div class="project-card-image" style={`background-color: ${project.color};`}>
 						<Image
 							src={project.image}
@@ -55,9 +55,9 @@ const projects = indices
 					</div>
 					<div class="project-info">
 						<h2 class="project-card-title font-monoblock font-medium text-secondary">{project.title}</h2>
-						<p class="project-card-desc font-cottor font-light text-secondary/80">{project.description}</p>
+						<p class="project-card-desc text-cottor-body">{project.description}</p>
 					</div>
-				</div>
+				</article>
 			))}
 		</div>
 
@@ -74,7 +74,7 @@ const projects = indices
 	</div>
 
 	<!-- Pagination dots -->
-	<div class="projects-dots" data-projects-dots>
+	<div class="projects-dots" data-projects-dots aria-live="polite" aria-label="Navegación de proyectos">
 		{projects.map((_, i) => (
 			<button type="button" class:list={['projects-dot', { 'is-active': i === 0 }]} data-dot-index={i} aria-label={`Proyecto ${i + 1}`} />
 		))}
@@ -167,9 +167,7 @@ const projects = indices
 	font-size: clamp(1.1rem, 2vw, 1.4rem);
 }
 
-.project-card-desc {
-	font-size: 0.875rem;
-}
+.project-card-desc {}
 
 // ─── Pagination dots ───
 
