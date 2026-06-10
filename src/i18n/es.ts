@@ -45,13 +45,13 @@ export const es = {
 	// ── TechStack ──
 	techStack: {
 		heading: "Tecnologías",
-		toggleShow: "Ver tecnologías",
-		typewriterPhrases: [
-			"Estas son mis tecnologías más usadas.",
-			"Interactúa con el icono para ver los nombres.",
-			"Siempre explorando nuevas herramientas.",
-			"La mejor herramienta depende del proyecto.",
-		],
+		filters: {
+			all: "Todos",
+			frontend: "Frontend",
+			backend: "Backend",
+			devops: "DevOps",
+			seo: "SEO",
+		},
 	},
 
 	// ── About ──

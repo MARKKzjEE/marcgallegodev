@@ -4,7 +4,6 @@ import { getLang, useTranslations } from '../i18n/index';
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 const words = t.whatIDo.text.split(' ');
-const paragraphsWithIndex = [words.map((word: string, i: number) => ({ word, index: i }))];
 ---
 
 <section id="what-i-do" class="what-i-do py-16 md:py-30" aria-labelledby="what-i-do-heading">
@@ -16,13 +15,11 @@ const paragraphsWithIndex = [words.map((word: string, i: number) => ({ word, ind
 
 			<!-- Texto con reveal por palabra -->
 			<div class="what-i-do__content" data-scroll-reveal>
-				{paragraphsWithIndex.map((words) => (
-					<p class="what-i-do__text font-cottor font-light mb-8">
-						{words.map(({ word, index }) => (
-							<span class="reveal-word" style={`--word-index: ${index}`}>{word} </span>
-						))}
-					</p>
-				))}
+				<p class="what-i-do__text font-cottor font-light mb-8">
+					{words.map((word: string) => (
+						<span class="reveal-word">{word} </span>
+					))}
+				</p>
 			</div>
 
 		</div>

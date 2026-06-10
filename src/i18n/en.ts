@@ -47,13 +47,13 @@ export const en: Translations = {
 	// ── TechStack ──
 	techStack: {
 		heading: "Stack",
-		toggleShow: "Show technologies",
-		typewriterPhrases: [
-			"These are my most used technologies.",
-			"Interact with the icon to see the names.",
-			"Always exploring new tools.",
-			"The best tool depends on the project.",
-		],
+		filters: {
+			all: "All",
+			frontend: "Frontend",
+			backend: "Backend",
+			devops: "DevOps",
+			seo: "SEO",
+		},
 	},
 
 	// ── About ──

@@ -4,137 +4,89 @@ import { getLang, useTranslations } from '../i18n/index';
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 
+// Iconos en /public/tech-icons/ con convención {slug}-d.svg (claro) y {slug}-l.svg (oscuro).
 const techs = [
-	{ name: "Laravel", slug: "laravel" },
-	{ name: "Django", slug: "django" },
-	{ name: "NodeJS", slug: "nodejs" },
-	{ name: "Tailwind", slug: "tailwindcss" },
-	{ name: "Docker", slug: "docker" },
-	{ name: "CI/CD", slug: "github" },
-	{ name: "SEO", slug: "google" },
-	{ name: "Astro", slug: "astro" },
+	// Backend
+	{ name: "Laravel",    slug: "laravel",     cat: "backend" },
+	{ name: "Django",     slug: "django",      cat: "backend" },
+	{ name: "NodeJS",     slug: "nodejs",      cat: "backend" },
+	{ name: "PHP",        slug: "php",         cat: "backend" },
+	{ name: "Python",     slug: "python",      cat: "backend" },
+	{ name: "SQL",        slug: "database",    cat: "backend" },
+	// Frontend
+	{ name: "JavaScript", slug: "javascript",  cat: "frontend" },
+	{ name: "TypeScript", slug: "typescript",  cat: "frontend" },
+	{ name: "React",      slug: "react",       cat: "frontend" },
+	{ name: "Angular",    slug: "angular",     cat: "frontend" },
+	{ name: "Vue",        slug: "vue",         cat: "frontend" },
+	{ name: "CSS",        slug: "css",         cat: "frontend" },
+	{ name: "Tailwind",   slug: "tailwindcss", cat: "frontend" },
+	{ name: "Astro",      slug: "astro",       cat: "frontend" },
+	// DevOps
+	{ name: "Docker",     slug: "docker",      cat: "devops" },
+	{ name: "CI/CD",      slug: "github",      cat: "devops" },
+	{ name: "Git",        slug: "git",         cat: "devops" },
+	// SEO
+	{ name: "SEO",        slug: "google",      cat: "seo" },
 ];
 
-const total = techs.length;
+// Tabs de filtrado (clave → label vía i18n)
+const filters = [
+	{ key: "all",      label: t.techStack.filters.all },
+	{ key: "frontend", label: t.techStack.filters.frontend },
+	{ key: "backend",  label: t.techStack.filters.backend },
+	{ key: "devops",   label: t.techStack.filters.devops },
+	{ key: "seo",      label: t.techStack.filters.seo },
+];
 ---
 
-<section id="tech" class="overflow-visible" aria-labelledby="tech-heading">
+<section id="tech" class="tech py-16 md:py-30" aria-labelledby="tech-heading">
 
-	<!-- ─── Desktop frame ─── -->
-	<div class="tech-desktop-frame hidden xl:block">
-
-	<!-- ─── Desktop heading ─── -->
-	<div class="tech-header flex">
-		<div class="tech-header-spacer pl-10 border-t border-secondary"></div>
-		<h2 id="tech-heading" class="tech-cell tech-cell--title font-nord text-secondary border-y border-r border-secondary font-normal px-10 py-5">
-			{t.techStack.heading}
-		</h2>
-		<div class="tech-cell tech-cell--typewriter text-mono-label-soft border-y border-r border-secondary" data-tech-typewriter data-phrases={JSON.stringify(t.techStack.typewriterPhrases)} aria-live="polite">
-			<span class="tech-typewriter-text" data-tech-typewriter-text></span>
-		</div>
-		<button type="button" class="tech-cell tech-cell--eye tech-toggle-names border-y border-secondary" data-toggle-names data-reveal data-reveal-radius="32px" aria-pressed="false" aria-label={t.techStack.toggleShow}>
-			<svg class="tech-toggle-eye" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 256 256"><path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path></svg>
-			<svg class="tech-toggle-eye-closed" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 256 256"><path d="M228,175a8,8,0,0,1-10.92-3l-19-33.2A123.23,123.23,0,0,1,162,155.46l5.87,35.22a8,8,0,0,1-6.58,9.21A8.4,8.4,0,0,1,160,200a8,8,0,0,1-7.88-6.69l-5.77-34.58a133.06,133.06,0,0,1-36.68,0l-5.77,34.58A8,8,0,0,1,96,200a8.4,8.4,0,0,1-1.32-.11,8,8,0,0,1-6.58-9.21L94,155.46a123.23,123.23,0,0,1-36.06-16.69L39,172A8,8,0,1,1,25.06,164l20-35a153.47,153.47,0,0,1-19.3-20A8,8,0,1,1,38.22,99c16.6,20.54,45.64,45,89.78,45s73.18-24.49,89.78-45A8,8,0,1,1,230.22,109a153.47,153.47,0,0,1-19.3,20l20,35A8,8,0,0,1,228,175Z"></path></svg>
-			<span class="tech-toggle-reveal reveal-layer" aria-hidden="true">
-				<svg class="tech-toggle-eye" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 256 256"><path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path></svg>
-				<svg class="tech-toggle-eye-closed" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 256 256"><path d="M228,175a8,8,0,0,1-10.92-3l-19-33.2A123.23,123.23,0,0,1,162,155.46l5.87,35.22a8,8,0,0,1-6.58,9.21A8.4,8.4,0,0,1,160,200a8,8,0,0,1-7.88-6.69l-5.77-34.58a133.06,133.06,0,0,1-36.68,0l-5.77,34.58A8,8,0,0,1,96,200a8.4,8.4,0,0,1-1.32-.11,8,8,0,0,1-6.58-9.21L94,155.46a123.23,123.23,0,0,1-36.06-16.69L39,172A8,8,0,1,1,25.06,164l20-35a153.47,153.47,0,0,1-19.3-20A8,8,0,1,1,38.22,99c16.6,20.54,45.64,45,89.78,45s73.18-24.49,89.78-45A8,8,0,1,1,230.22,109a153.47,153.47,0,0,1-19.3,20l20,35A8,8,0,0,1,228,175Z"></path></svg>
-			</span>
-		</button>
-		<div class="tech-header-spacer pr-10 border-t border-secondary"></div>
-	</div>
-	<!-- Desktop: "Mis" vertical -->
-	<div class="tech-vertical-wrap inline-flex">
-		<div class="tech-header-spacer pl-10"></div>
-		<div class="tech-cell tech-cell--vertical font-nord text-secondary font-normal py-10 px-5">
-			{lang === 'en' ? 'My' : 'Mis'}
-		</div>
+	<!-- Título -->
+	<div class="tech-head px-4 md:px-10">
+		<h2 id="tech-heading" class="tech-title font-nord font-normal text-secondary">{t.techStack.heading}</h2>
 	</div>
 
-	<!-- Wheel: centrado -->
-	<div class="tech-wheel-wrap flex items-center justify-center pb-30" style="margin-top: calc((var(--title-size) - 40px) * -1)">
-		<div class="tech-wheel relative" data-tech-wheel>
+	<!-- Tabs en celdas, fila fija pegada encima del carrusel -->
+	<div class="tech-tabs" role="tablist" aria-label={t.techStack.heading}>
+		{filters.map((f, i) => (
+			<button
+				type="button"
+				class:list={['tech-tab text-mono-label', { 'is-active': i === 0 }]}
+				role="tab"
+				aria-selected={i === 0 ? 'true' : 'false'}
+				data-tech-filter={f.key}
+			>{f.label}</button>
+		))}
+	</div>
+
+	<!-- Carrusel horizontal: drag + cursor custom (scroll nativo de fondo) -->
+	<div class="tech-carousel-wrap" data-tech-carousel>
+		<div class="tech-carousel" data-tech-track role="list">
 			{techs.map((tech, i) => (
-				<button
-					type="button"
-					class="tech-icon absolute top-1/2 left-1/2"
-					style={`--i: ${i}; --total: ${total};`}
-					data-tech={tech.name}
-					aria-label={tech.name}
-				>
-					<div class="tech-icon__logo">
-						<img class="tech-icon__svg tech-icon__svg--light" src={`/tech-icons/${tech.slug}-d.svg`} alt={tech.name} />
-						<img class="tech-icon__svg tech-icon__svg--dark" src={`/tech-icons/${tech.slug}-l.svg`} alt={tech.name} />
+				<article class="tech-cell" role="listitem" data-cat={tech.cat}>
+					<!-- Cabecera: número + nombre -->
+					<header class="tech-cell__head">
+						<span class="tech-cell__no text-mono-label">{String(i + 1).padStart(2, '0')}</span>
+						<span class="tech-cell__name text-mono-label">{tech.name}</span>
+					</header>
+					<!-- Icono -->
+					<div class="tech-cell__media">
+						<img class="tech-icon__svg tech-icon__svg--light" src={`/tech-icons/${tech.slug}-d.svg`} alt={tech.name} loading="lazy" draggable={false} />
+						<img class="tech-icon__svg tech-icon__svg--dark" src={`/tech-icons/${tech.slug}-l.svg`} alt={tech.name} loading="lazy" draggable={false} />
 					</div>
-					<div class="tech-icon__text">
-						<span class="text-mono-label-soft">{tech.name}</span>
-					</div>
-				</button>
+				</article>
 			))}
 		</div>
-	</div>
 
-	<!-- Footer bar -->
-	<div class="tech-footer-bar"></div>
-
-	</div><!-- /tech-desktop-frame -->
-
-	<!-- ─── Mobile heading ─── -->
-	<div class="tech-header-mobile xl:hidden">
-		<div class="tech-header-mobile__top">
-			<h2 class="tech-cell tech-cell--title font-nord text-secondary font-normal py-4 px-4 md:px-10" aria-hidden="true">
-				{t.techStack.heading}
-			</h2>
-			<button type="button" class="tech-cell tech-cell--eye-mobile tech-toggle-names px-4 md:px-10" data-toggle-names-mobile data-reveal data-reveal-radius="28px" aria-pressed="false" aria-label={t.techStack.toggleShow}>
-				<svg class="tech-toggle-eye" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path></svg>
-				<svg class="tech-toggle-eye-closed" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M228,175a8,8,0,0,1-10.92-3l-19-33.2A123.23,123.23,0,0,1,162,155.46l5.87,35.22a8,8,0,0,1-6.58,9.21A8.4,8.4,0,0,1,160,200a8,8,0,0,1-7.88-6.69l-5.77-34.58a133.06,133.06,0,0,1-36.68,0l-5.77,34.58A8,8,0,0,1,96,200a8.4,8.4,0,0,1-1.32-.11,8,8,0,0,1-6.58-9.21L94,155.46a123.23,123.23,0,0,1-36.06-16.69L39,172A8,8,0,1,1,25.06,164l20-35a153.47,153.47,0,0,1-19.3-20A8,8,0,1,1,38.22,99c16.6,20.54,45.64,45,89.78,45s73.18-24.49,89.78-45A8,8,0,1,1,230.22,109a153.47,153.47,0,0,1-19.3,20l20,35A8,8,0,0,1,228,175Z"></path></svg>
-				<span class="tech-toggle-reveal reveal-layer" aria-hidden="true">
-					<svg class="tech-toggle-eye" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path></svg>
-					<svg class="tech-toggle-eye-closed" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 256 256"><path d="M228,175a8,8,0,0,1-10.92-3l-19-33.2A123.23,123.23,0,0,1,162,155.46l5.87,35.22a8,8,0,0,1-6.58,9.21A8.4,8.4,0,0,1,160,200a8,8,0,0,1-7.88-6.69l-5.77-34.58a133.06,133.06,0,0,1-36.68,0l-5.77,34.58A8,8,0,0,1,96,200a8.4,8.4,0,0,1-1.32-.11,8,8,0,0,1-6.58-9.21L94,155.46a123.23,123.23,0,0,1-36.06-16.69L39,172A8,8,0,1,1,25.06,164l20-35a153.47,153.47,0,0,1-19.3-20A8,8,0,1,1,38.22,99c16.6,20.54,45.64,45,89.78,45s73.18-24.49,89.78-45A8,8,0,1,1,230.22,109a153.47,153.47,0,0,1-19.3,20l20,35A8,8,0,0,1,228,175Z"></path></svg>
-				</span>
-			</button>
-		</div>
-		<div class="tech-header-mobile__bottom">
-			<div class="tech-cell tech-cell--vertical font-nord text-secondary font-normal py-4 px-4 md:py-10">
-				{lang === 'en' ? 'My' : 'Mis'}
-			</div>
-			<div class="tech-cell tech-cell--typewriter-mobile text-mono-label-soft py-4 px-4 md:px-10" data-tech-typewriter-mobile data-phrases={JSON.stringify(t.techStack.typewriterPhrases)} aria-live="polite">
-				<span class="tech-typewriter-text" data-tech-typewriter-text-mobile></span>
-			</div>
-		</div>
-	</div>
-
-	<!-- Mobile: marquee (2 filas, direcciones opuestas) -->
-	<div class="tech-marquee-wrap xl:hidden pt-8 pb-16 md:pt-15 md:pb-30">
-		<!-- Fila 1: primeros 4, izquierda → derecha -->
-		<div class="tech-marquee-row">
-			<div class="tech-marquee-track tech-marquee-track--fwd">
-				{[0, 1, 2].map(() => (
-					<div class="tech-marquee-group">
-						{techs.slice(0,4).map((tech) => (
-							<div class="tech-marquee-card" data-marquee-tech={tech.name}>
-								<img class="tech-icon__svg tech-icon__svg--light" src={`/tech-icons/${tech.slug}-d.svg`} alt={tech.name} />
-								<img class="tech-icon__svg tech-icon__svg--dark" src={`/tech-icons/${tech.slug}-l.svg`} alt={tech.name} />
-								<span class="text-mono-label-soft text-center">{tech.name}</span>
-							</div>
-						))}
-					</div>
-				))}
-			</div>
-		</div>
-		<!-- Fila 2: últimos 4, derecha → izquierda -->
-		<div class="tech-marquee-row">
-			<div class="tech-marquee-track tech-marquee-track--bwd">
-				{[0, 1, 2].map(() => (
-					<div class="tech-marquee-group">
-						{techs.slice(4).map((tech) => (
-							<div class="tech-marquee-card" data-marquee-tech={tech.name}>
-								<img class="tech-icon__svg tech-icon__svg--light" src={`/tech-icons/${tech.slug}-d.svg`} alt={tech.name} />
-								<img class="tech-icon__svg tech-icon__svg--dark" src={`/tech-icons/${tech.slug}-l.svg`} alt={tech.name} />
-								<span class="text-mono-label-soft text-center">{tech.name}</span>
-							</div>
-						))}
-					</div>
-				))}
+		<!-- Cursor custom (← →) -->
+		<div class="tech-cursor" data-tech-cursor aria-hidden="true">
+			<div class="tech-cursor__inner">
+				<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M18 8L22 12L18 16"/>
+					<path d="M6 8L2 12L6 16"/>
+					<line x1="2" y1="12" x2="22" y2="12"/>
+				</svg>
 			</div>
 		</div>
 	</div>
@@ -142,518 +94,311 @@ const total = techs.length;
 </section>
 
 <style lang="scss">
-	// ─── Variables ───────────────────────────────────
-	#tech {
-		--title-size: clamp(35px, 8vw, 80px);
+	.tech-head {
+		margin-bottom: 2.5rem;
 	}
 
-	// ─── Shared ─────────────────────────────────────
-	.tech-cell {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.tech-cell--title {
-		flex-shrink: 0;
-		justify-content: flex-start;
-		font-size: var(--title-size);
+	.tech-title {
+		font-size: clamp(35px, 8vw, 80px);
 		line-height: 1;
 	}
 
-	.tech-cell--vertical {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		font-size: var(--title-size);
-		line-height: 1;
-		writing-mode: vertical-rl;
-		transform: rotate(180deg);
-		border-left: 1px solid var(--secondary);
-		border-top: 1px solid var(--secondary);
-	}
-
-	.tech-typewriter-text {
-		&::after {
-			content: '';
-			display: inline-block;
-			width: 1px;
-			height: 1.1em;
-			background: var(--secondary);
-			vertical-align: middle;
-			margin-left: 2px;
-			animation: tech-cursor-blink 500ms step-end infinite;
-		}
-	}
-
-	@keyframes tech-cursor-blink {
-		50% { opacity: 0; }
-	}
-
-	// ─── Desktop frame ──────────────────────────────
-	.tech-desktop-frame {
-		position: relative;
-		// Bordes laterales continuos
-		&::before,
-		&::after {
-			content: '';
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			width: 40px; // pl-10 / pr-10
-			border-color: var(--secondary);
-		}
-
-		&::before {
-			left: 0;
-			border-right: 1px solid var(--secondary);
-		}
-
-		&::after {
-			right: 0;
-			border-left: 1px solid var(--secondary);
-		}
-	}
-
-	.tech-footer-bar {
-		margin: 0 40px;
-		border-top: 1px solid var(--secondary);
-		height: 40px;
-	}
-
-	// ─── Desktop heading ────────────────────────────
-	.tech-header {
-		align-items: stretch;
-	}
-
-	.tech-cell--eye {
-		padding: 0 2rem;
-		background: none;
-		cursor: pointer;
-	}
-
-	.tech-cell--typewriter {
-		flex: 1;
-		min-width: 0;
-		padding: 0 1.5rem;
-		overflow: hidden;
-	}
-
-	.tech-vertical-wrap {
-		align-items: stretch;
-	}
-
-	.tech-wheel-wrap {
-		padding-left: 40px;
-		padding-right: 40px;
-	}
-
-	// ─── Mobile heading ─────────────────────────────
-	.tech-header-mobile {
-		border-top: 1px solid var(--secondary);
-	}
-
-	.tech-header-mobile__top {
+	// ─── Tabs en celdas (fila fija, no scrollea con el carrusel) ───
+	// Pegada justo encima de la fila de cabeceras del carrusel.
+	.tech-tabs {
 		display: flex;
-		align-items: stretch;
-		border-bottom: 1px solid var(--secondary);
+		width: fit-content;
+		// Borde superior solo bajo las celdas de tabs (no hasta el final)
+		border-top: 1px solid var(--secondary);
 	}
 
-	.tech-header-mobile__top .tech-cell--title {
-		flex: 1;
-	}
-
-	button.tech-cell--eye-mobile {
-		flex-shrink: 0;
-		border-left: 1px solid var(--secondary);
+	.tech-tab {
+		flex: 0 0 auto;
 		background: none;
-		cursor: pointer;
-		position: relative;
-		overflow: hidden;
-	}
-
-	.tech-header-mobile__bottom {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		grid-template-rows: 1fr;
-
-		@media (min-width: 768px) {
-			grid-template-rows: 1fr 1fr;
-		}
-	}
-
-	.tech-header-mobile__bottom .tech-cell--vertical {
-		grid-row: 1 / -1;
-	}
-
-	.tech-cell--typewriter-mobile {
-		grid-row: 1;
-		min-width: 0;
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-		border-bottom: 1px solid var(--secondary);
-	}
-
-	// ─── Toggle ojo (mostrar/ocultar nombres) ───────
-	.tech-toggle-names {
-		--reveal-extend: 30px;
-		position: relative;
+		border: none;
+		border-right: 1px solid var(--secondary);
+		padding: 0.75rem 1.25rem;
 		cursor: pointer;
 		color: var(--secondary);
-		background: none;
+		white-space: nowrap;
+		opacity: 0.4;
+		transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1);
 
-		.tech-toggle-eye-closed { display: none; }
+		&:hover { opacity: 0.7; }
+		&.is-active { opacity: 1; }
+	}
 
-		&[aria-pressed="true"] {
-			.tech-toggle-eye { display: none; }
-			.tech-toggle-eye-closed { display: block; }
+	// ─── Carrusel: wrapper con cursor custom ───
+	.tech-carousel-wrap {
+		position: relative;
+
+		// Cursor nativo oculto solo si hay scroll (lo sustituye el custom)
+		@media (hover: hover) and (pointer: fine) {
+			&.is-scrollable { cursor: none; }
 		}
 	}
 
-	.tech-toggle-reveal {
+	.tech-carousel {
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: var(--secondary);
-		color: var(--primary);
-		padding: var(--reveal-extend);
+		overflow-x: auto;
+		// Marco superior/inferior que cierra la fila (estética catálogo)
+		border-top: 1px solid var(--secondary);
+		border-bottom: 1px solid var(--secondary);
+
+		// Scrollbar oculta (la navegación es por drag)
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+		&::-webkit-scrollbar { display: none; }
+
+		// Mientras se arrastra, sin selección de texto/imágenes
+		&.is-dragging {
+			cursor: none;
+			user-select: none;
+		}
 	}
 
-	// ─── Wheel (contenedor circular) ────────────────
-	.tech-wheel {
-		--radius: 300px;
-		--icon-size: 140px;
-		width: calc(var(--radius) * 2 + var(--icon-size));
-		height: calc(var(--radius) * 2 + var(--icon-size));
-	}
-
-	// ─── Icon card ──────────────────────────────────
-	.tech-icon {
-		--angle: calc(360deg / var(--total) * var(--i));
-		--_svg: 64px;
-		width: var(--icon-size);
-		height: var(--icon-size);
+	// ─── Celda ───
+	// Ancho fijo en variable (~4.5 celdas visibles → la 5ª queda cortada).
+	.tech-cell {
+		--cell-w: clamp(200px, 22vw, 300px);
+		flex: 0 0 auto;
+		width: var(--cell-w);
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		border-radius: 10px;
-		border: 1px solid var(--quaternary);
-		background-color: var(--terciary);
-		cursor: pointer;
+		border-right: 1px solid var(--secondary);
 		overflow: hidden;
-		outline: none;
-		&:focus-visible {
-			outline: 2px solid var(--secondary);
-			outline-offset: 2px;
-		}
-		// Transform gestionado 100% por JS
-		opacity: 0;
-		transform: translate(-50%, -50%);
 
-		// Shine: barrido de luz al activar
-		&::before {
-			content: "";
-			position: absolute;
-			top: 0;
-			left: -100%;
-			width: 100%;
-			height: 100%;
-			background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
-			pointer-events: none;
+		// Animación de contraer/expandir (transform → sin reflow del flex).
+		transform-origin: center;
+		transition:
+			transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 240ms cubic-bezier(0.22, 1, 0.36, 1);
+
+		@media (max-width: 767px) {
+			--cell-w: 64vw;
 		}
 
-		:global(.dark) &::before {
-			background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+		// Contenido con ancho fijo (no se reajusta durante la animación)
+		.tech-cell__head,
+		.tech-cell__media {
+			width: var(--cell-w);
 		}
 
-		&.is-placed {
-			opacity: 1;
-			z-index: 1;
+		// Fase 1 — contraída (salida) o estado inicial antes de expandir (entrada)
+		&.is-collapsed {
+			transform: scale(0.85);
+			opacity: 0;
+		}
 
-			// Hover: solo estilos visuales, transform lo pone el JS
-			&.is-active {
-				z-index: 10;
-				&::before { animation: shine 0.8s ease 0.4s forwards; }
-				.tech-icon__text { opacity: 1; }
-				.tech-icon__logo { transform: translateY(-8px); }
-				.tech-icon__svg { --_svg: 50px; }
-			}
+		// Fase 2 — fuera del flujo (instantáneo, sin animar ancho)
+		&.is-gone {
+			display: none;
 		}
 	}
 
-	// Mostrar nombres (toggle global)
-	.tech-wheel.show-names .tech-icon.is-placed {
-		.tech-icon__text { opacity: 1; }
-		.tech-icon__logo { transform: translateY(-8px); }
-		.tech-icon__svg { --_svg: 56px; }
+	.tech-cell__head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1rem 1.25rem;
+		border-bottom: 1px solid var(--secondary);
 	}
 
-	// ─── Icon: partes internas ──────────────────────
-	.tech-icon__logo {
+	.tech-cell__no {
+		opacity: 0.5;
+	}
+
+	// ─── Media (icono centrado con aire) ───
+	.tech-cell__media {
+		flex: 1;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-		z-index: 1;
+		aspect-ratio: 3 / 4;
+		padding: 2.5rem;
 	}
 
 	.tech-icon__svg {
-		width: var(--_svg);
-		height: var(--_svg);
+		width: clamp(56px, 7vw, 90px);
+		height: clamp(56px, 7vw, 90px);
 		object-fit: contain;
-		transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
-					height 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
 		&--dark { display: none; }
 	}
 
-	.tech-icon__text {
-		position: absolute;
-		bottom: 10px;
-		left: 0;
-		right: 0;
-		display: flex;
-		justify-content: center;
-		text-align: center;
-		opacity: 0;
-		transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-		z-index: 1;
-	}
-
-	// ─── Dark mode overrides ────────────────────────
 	:global(.dark) {
-		.tech-toggle-reveal {
-			background: var(--secondary);
-			color: var(--primary);
-		}
-
 		.tech-icon__svg--light { display: none; }
 		.tech-icon__svg--dark { display: block; }
 	}
 
-	// ─── Keyframes ──────────────────────────────────
-	@keyframes shine {
-		to { left: 100%; }
+	// ─── Cursor custom (← →) ───
+	.tech-cursor {
+		position: absolute;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.6);
+		transition:
+			opacity 400ms cubic-bezier(0.16, 1, 0.3, 1),
+			transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+		z-index: 10;
+		will-change: left, top;
+
+		// Solo en dispositivos con puntero fino (desktop)
+		@media (hover: none), (pointer: coarse) { display: none; }
 	}
 
-	// ─── Marquee mobile ─────────────────────────────
-	.tech-marquee-wrap {
-		flex-direction: column;
-		gap: 16px;
-		overflow: hidden;
-
-		@media (min-width: 768px) {
-			gap: 40px;
-		}
-
-		@media (max-width: 1279px) {
-			display: flex;
-		}
+	.tech-carousel-wrap.is-scrollable:hover .tech-cursor {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
 	}
 
-	.tech-marquee-row {
-		overflow: hidden;
-	}
-
-	.tech-marquee-track {
+	.tech-cursor__inner {
+		width: 64px;
+		height: 64px;
+		border-radius: 50%;
+		background: var(--secondary);
+		color: var(--primary);
 		display: flex;
-		width: max-content;
-
-		&--fwd {
-			animation: marquee-fwd 20s linear infinite;
-		}
-
-		&--bwd {
-			animation: marquee-bwd 20s linear infinite;
-		}
-	}
-
-	.tech-marquee-group {
-		display: flex;
-		gap: 16px;
-		flex-shrink: 0;
-		padding-right: 16px;
-
-		@media (min-width: 768px) {
-			gap: 40px;
-			padding-right: 40px;
-		}
-	}
-
-	.tech-marquee-card {
-		display: flex;
-		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		gap: 10px;
-		width: 26vw;
-		aspect-ratio: 1;
-		border-radius: 12px;
-		background-color: var(--terciary);
-		border: 1px solid var(--quaternary);
-		flex-shrink: 0;
-		padding: 16px;
-
-		@media (min-width: 768px) {
-			width: 18vw;
-			padding: 40px;
-		}
-
-		img {
-			flex: 1;
-			min-height: 0;
-			width: 100%;
-			object-fit: contain;
-			transition: flex 400ms cubic-bezier(0.16, 1, 0.3, 1);
-		}
-
-		span {
-			flex-shrink: 0;
-			max-height: 0;
-			overflow: hidden;
-			opacity: 0;
-			transition: max-height 400ms cubic-bezier(0.16, 1, 0.3, 1),
-						opacity 400ms cubic-bezier(0.16, 1, 0.3, 1);
-		}
-	}
-
-	// Nombres visibles cuando el wrapper tiene show-names
-	.tech-marquee-wrap.show-names .tech-marquee-card:not(.is-hidden) span {
-		max-height: 24px;
-		opacity: 1;
-	}
-
-	.tech-marquee-wrap.show-names .tech-marquee-card:not(.is-hidden) img {
-		flex: 0.8;
-	}
-
-	// Nombre visible en hover (solo desktop)
-	@media (hover: hover) {
-		.tech-marquee-card:hover span {
-			max-height: 24px;
-			opacity: 1;
-		}
-
-		.tech-marquee-card:hover img {
-			flex: 0.8;
-		}
-	}
-
-	// Nombre visible en tap individual
-	.tech-marquee-card.is-tapped span {
-		max-height: 24px;
-		opacity: 1;
-	}
-
-	.tech-marquee-card.is-tapped img {
-		flex: 0.8;
-	}
-
-	@keyframes marquee-fwd {
-		from { transform: translateX(0); }
-		to { transform: translateX(-33.3333%); }
-	}
-
-	@keyframes marquee-bwd {
-		from { transform: translateX(-33.3333%); }
-		to { transform: translateX(0); }
-	}
-
-	// ─── Accesibilidad ──────────────────────────────
-	@media (prefers-reduced-motion: reduce) {
-		.tech-icon,
-		.tech-icon__logo,
-		.tech-icon__svg,
-		.tech-icon__text {
-			transition: none;
-		}
-		.tech-marquee-track {
-			animation: none;
-		}
 	}
 </style>
 
 <script>
-	import { initTechWheel } from "../scripts/tech-wheel";
-	import '../scripts/circle-reveal.ts';
-	initTechWheel();
-
-	// ─── Ojo mobile ───
-	const mobileBtn = document.querySelector<HTMLButtonElement>('[data-toggle-names-mobile]');
-	const marqueeWrap = document.querySelector<HTMLElement>('.tech-marquee-wrap');
-
-	const allCards = document.querySelectorAll<HTMLElement>('.tech-marquee-card');
-
-	mobileBtn?.addEventListener('click', () => {
-		const isActive = marqueeWrap?.classList.toggle('show-names');
-		mobileBtn.setAttribute('aria-pressed', String(isActive));
-		// Reset todos los taps individuales para que el ojo mande
-		allCards.forEach(c => {
-			c.classList.remove('is-tapped');
-			c.classList.remove('is-hidden');
+	const wrap = document.querySelector<HTMLElement>('[data-tech-carousel]');
+	const track = document.querySelector<HTMLElement>('[data-tech-track]');
+	const cursor = document.querySelector<HTMLElement>('[data-tech-cursor]');
+	if (wrap && track && cursor) {
+		// ── Cursor custom con lerp ──
+		let cx = 0, cy = 0, tx = 0, ty = 0, raf: number | null = null;
+		function tick() {
+			cx += (tx - cx) * 0.18;
+			cy += (ty - cy) * 0.18;
+			cursor!.style.left = `${cx}px`;
+			cursor!.style.top = `${cy}px`;
+			if (Math.abs(cx - tx) > 0.3 || Math.abs(cy - ty) > 0.3) {
+				raf = requestAnimationFrame(tick);
+			} else { raf = null; }
+		}
+		wrap.addEventListener('mousemove', (e) => {
+			const rect = wrap.getBoundingClientRect();
+			tx = e.clientX - rect.left;
+			ty = e.clientY - rect.top;
+			if (!raf) raf = requestAnimationFrame(tick);
 		});
-	});
 
-	// ─── Tap individual en marquee cards (toggle todos los clones del mismo tech) ───
-	allCards.forEach((card) => {
-		card.addEventListener('click', () => {
-			const techName = card.dataset.marqueeTech;
-			if (!techName) return;
-			const siblings = document.querySelectorAll<HTMLElement>(`.tech-marquee-card[data-marquee-tech="${techName}"]`);
-			const showAll = marqueeWrap?.classList.contains('show-names');
-			if (showAll) {
-				const hide = !card.classList.contains('is-hidden');
-				siblings.forEach(s => s.classList.toggle('is-hidden', hide));
-			} else {
-				const show = !card.classList.contains('is-tapped');
-				siblings.forEach(s => s.classList.toggle('is-tapped', show));
-			}
+		// ── Solo activar drag/cursor si el carrusel se puede scrollear ──
+		const wrapEl = wrap, trackEl2 = track;
+		function updateScrollable() {
+			const scrollable = trackEl2.scrollWidth - trackEl2.clientWidth > 1;
+			wrapEl.classList.toggle('is-scrollable', scrollable);
+		}
+		updateScrollable();
+		window.addEventListener('resize', updateScrollable, { passive: true });
+
+		// ── Drag para scrollear ──
+		let isDown = false, startX = 0, startScroll = 0, moved = false;
+
+		track.addEventListener('mousedown', (e) => {
+			if (!wrapEl.classList.contains('is-scrollable')) return; // sin scroll, sin drag
+			isDown = true;
+			moved = false;
+			startX = e.pageX;
+			startScroll = track.scrollLeft;
+			track.classList.add('is-dragging');
 		});
-	});
+		window.addEventListener('mousemove', (e) => {
+			if (!isDown) return;
+			const dx = e.pageX - startX;
+			if (Math.abs(dx) > 3) moved = true;
+			track.scrollLeft = startScroll - dx;
+		});
+		window.addEventListener('mouseup', () => {
+			if (!isDown) return;
+			isDown = false;
+			track.classList.remove('is-dragging');
+		});
+		// Evita que un drag dispare clics/navegación accidental
+		track.addEventListener('click', (e) => {
+			if (moved) { e.preventDefault(); e.stopPropagation(); }
+		}, true);
 
-	// ─── Typewriter loop ───
-	if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-		const TYPE_MS = 50;
-		const HOLD_MS = 2000;
-		const DELETE_MS = 30;
-		const PAUSE_MS = 500;
+		// ── Filtrado por categoría (coreografía contraer → filtrar → expandir) ──
+		const trackEl = track; // referencia no-nula para usar dentro de funciones
+		const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-tech-filter]'));
+		const cells = Array.from(trackEl.querySelectorAll<HTMLElement>('.tech-cell'));
+		const OUT_MS = 240; // debe coincidir con la transición de opacity de salida
+		let filtering = false;
+		let currentCat = 'all';
 
-		function sleep(ms: number) {
-			return new Promise(r => setTimeout(r, ms));
+		const STEP = 35;        // ms de desfase entre celdas (stagger)
+		const MAX_STAGGER = 5;  // tope de celdas que escalonan → desfase total acotado
+
+		// El delay se acota: las celdas más allá de MAX_STAGGER comparten el último delay,
+		// así el tiempo total no escala con 18 celdas (evita el parón en blanco).
+		const stagger = (i: number) => Math.min(i, MAX_STAGGER) * STEP;
+		const total = (n: number) => OUT_MS + Math.min(Math.max(0, n - 1), MAX_STAGGER) * STEP;
+
+		function applyFilter(cat: string) {
+			if (filtering || cat === currentCat) return;
+			filtering = true;
+			currentCat = cat;
+
+			const matches = (cell: HTMLElement) => cat === 'all' || cell.dataset.cat === cat;
+
+			// Fase 1: recogida escalonada de izquierda a derecha
+			const visible = cells.filter((c) => !c.classList.contains('is-gone'));
+			visible.forEach((cell, i) => {
+				cell.style.transitionDelay = `${stagger(i)}ms`;
+				cell.classList.add('is-collapsed');
+			});
+
+			setTimeout(() => {
+				// Fase 2: reordenar visibilidad (instantáneo, todo invisible)
+				cells.forEach((cell) => {
+					cell.style.transitionDelay = '';
+					if (matches(cell)) {
+						cell.classList.remove('is-gone');
+						cell.classList.add('is-collapsed');
+					} else {
+						cell.classList.add('is-gone');
+					}
+				});
+
+				trackEl.scrollLeft = 0;
+
+				// Fase 3: expansión escalonada de izquierda a derecha
+				const entering = cells.filter(matches);
+				requestAnimationFrame(() => {
+					requestAnimationFrame(() => {
+						entering.forEach((cell, i) => {
+							cell.style.transitionDelay = `${stagger(i)}ms`;
+							cell.classList.remove('is-collapsed');
+						});
+						// Libera el guard tras la última entrada
+						setTimeout(() => {
+							entering.forEach((cell) => { cell.style.transitionDelay = ''; });
+							filtering = false;
+							updateScrollable(); // recalcula si sigue habiendo scroll
+						}, total(entering.length));
+					});
+				});
+			}, total(visible.length));
 		}
 
-		function initTypewriter(wrapperSelector: string, textSelector: string) {
-			const wrapper = document.querySelector<HTMLElement>(wrapperSelector);
-			const textEl = document.querySelector<HTMLElement>(textSelector);
-			if (!wrapper || !textEl) return;
-
-			const phrases: string[] = JSON.parse(wrapper.dataset.phrases || '[]');
-			if (!phrases.length) return;
-
-			async function loop() {
-				let index = 0;
-				while (true) {
-					const text = phrases[index];
-					for (let i = 0; i <= text.length; i++) {
-						textEl!.textContent = text.slice(0, i);
-						await sleep(TYPE_MS);
-					}
-					await sleep(HOLD_MS);
-					for (let i = text.length; i >= 0; i--) {
-						textEl!.textContent = text.slice(0, i);
-						await sleep(DELETE_MS);
-					}
-					await sleep(PAUSE_MS);
-					index = (index + 1) % phrases.length;
-				}
-			}
-
-			loop();
-		}
-
-		initTypewriter('[data-tech-typewriter]', '[data-tech-typewriter-text]');
-		initTypewriter('[data-tech-typewriter-mobile]', '[data-tech-typewriter-text-mobile]');
+		tabs.forEach((tab) => {
+			tab.addEventListener('click', () => {
+				const cat = tab.dataset.techFilter || 'all';
+				tabs.forEach((t) => {
+					const active = t === tab;
+					t.classList.toggle('is-active', active);
+					t.setAttribute('aria-selected', String(active));
+				});
+				applyFilter(cat);
+			});
+		});
 	}
 </script>

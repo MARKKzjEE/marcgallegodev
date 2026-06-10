@@ -66,7 +66,7 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 		<div class="hp-index" aria-hidden="true">
 			<ul class="hp-index__list">
 				{items.map((item) => (
-					<li class="hp-index__item text-mono-lg">{item.no} : {item.title}</li>
+					<li class="hp-index__item text-mono-lg">{item.no}: {item.title}</li>
 				))}
 			</ul>
 		</div>
@@ -149,7 +149,7 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 		gap: 0.1rem;
 	}
 
-	// Tipografía heredada de .text-mono-label (estilo del Hero).
+	// Tipografía heredada de .text-mono-lg (escala mono grande).
 	.hp-index__item {
 		white-space: nowrap;
 	}
@@ -251,7 +251,7 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 	// ─── CTA "más resultados" (celda inferior izquierda) ───
 	// Usa el circle-reveal compartido: capa base + .reveal-layer (colores invertidos).
 	// --reveal-extend hace que el círculo no se corte con el borde del contenedor.
-	// Tipografía heredada de .text-mono-label (estilo del Hero).
+	// Tipografía heredada de .text-mono-lg (escala mono grande).
 	.hp-more {
 		--reveal-extend: 30px;
 		position: relative;
