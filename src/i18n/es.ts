@@ -53,6 +53,7 @@ export const es = {
 			seo: "SEO",
 		},
 		// Pie de la sección (bajo el carrusel). {count} = nº de tecnologías.
+		// footMeta solo en tablet/desktop; en móvil se oculta.
 		footMeta: "STACK / {count} herramientas · desde 2018",
 		footNote: "Ver mi trayectoria",
 	},
@@ -71,9 +72,9 @@ export const es = {
 			"{age} años",
 			"Barcelona",
 			"Creativo",
-			"Código",
-			"Freelance",
-			"Compromiso",
+			"Confianza",
+			"Transparencia",
+			"Valor",
 			"Cercanía",
 		],
 	},

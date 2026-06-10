@@ -18,7 +18,7 @@ const breadcrumb = {
 <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
 
 <main class="bg-primary pt-18">
-<section id="contact" class="contact-section border-t border-secondary">
+<section id="contact" class="contact-section">
 
 	<!-- Título -->
 	<div class="contact-header px-4 md:px-10">
@@ -75,12 +75,12 @@ const breadcrumb = {
 		height: calc(100svh - 72px);
 		display: flex;
 		flex-direction: column;
-		padding-top: 1.5rem;
+		// Mismo espacio header→título que Trayectoria y Proyectos (pt-16 = 4rem).
+		padding-top: 4rem;
 		padding-bottom: 1.5rem;
 		gap: 1rem;
 
 		@media (min-width: 768px) {
-			padding-top: 2.5rem;
 			padding-bottom: 2.5rem;
 			gap: 2rem;
 		}

@@ -11,6 +11,10 @@ const statementLines = t.partners.statement.split(' / ');
 // Indentación (%) por línea → escalada irregular tipo editorial (como la ref).
 // "Branding" (4ª línea) sobresale más que "Diseño &" (3ª).
 const indents = [0, 22, 40, 60, 12];
+// Móvil: offset (vw) desde el centro, ALTERNANDO lado → zigzag.
+// Negativo = izquierda · positivo = derecha. Valores contenidos para que las
+// líneas largas no se salgan por los laterales (van junto a max-width: 72vw).
+const mobileShifts = [-5, 6, -4, 7, -4];
 ---
 
 <section id="partners" class="partners py-16 md:py-30" aria-labelledby="partners-heading">
@@ -29,7 +33,7 @@ const indents = [0, 22, 40, 60, 12];
 			{statementLines.map((line: string, i: number) => {
 				const parts = line.split('&');
 				return (
-					<span class="partners-statement__line" style={`--indent:${indents[i] ?? 0}`}>
+					<span class="partners-statement__line" style={`--indent:${indents[i] ?? 0};--shift:${mobileShifts[i] ?? 0}`}>
 						{parts.map((part: string, p: number) => (
 							<>
 								{part}{p < parts.length - 1 && <span class="partners-amp">&amp;</span>}
@@ -104,6 +108,8 @@ const indents = [0, 22, 40, 60, 12];
 		@media (max-width: 767px) {
 			align-items: center;
 			text-align: center;
+			// Red de seguridad: el zigzag nunca provoca scroll lateral.
+			overflow-x: clip;
 		}
 	}
 
@@ -112,10 +118,14 @@ const indents = [0, 22, 40, 60, 12];
 		// Tablet/desktop: escalonado desde la izquierda (offset empuja a la derecha)
 		margin-left: calc(var(--indent, 0) * 1%);
 
-		// Móvil: offset desde el centro (translateX) para que el bloque quede centrado
+		// Móvil: offset desde el centro alternando lado (izq/der) → zigzag.
+		// En vw (relativo al viewport), no al ancho de la línea → predecible.
 		@media (max-width: 767px) {
 			margin-left: 0;
-			transform: translateX(calc(var(--indent, 0) * 0.25%));
+			transform: translateX(calc(var(--shift, 0) * 1vw));
+			// Deja holgura a los lados para que el desplazamiento no se salga.
+			max-width: 72vw;
+			margin-inline: auto;
 		}
 	}
 

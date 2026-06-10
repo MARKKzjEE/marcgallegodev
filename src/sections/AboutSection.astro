@@ -99,13 +99,17 @@ const CORNER_COUNT = 6;
 		// Ocultas en móvil (no hay espacio a los lados)
 		@media (max-width: 1023px) { display: none; }
 	}
-	// Posiciones: 3 a la izquierda, 3 a la derecha (escalonadas en altura)
-	.about-corner--1 { top: 4rem;   left: 2.5rem; }
-	.about-corner--2 { top: 42%;    left: 2.5rem; }
-	.about-corner--3 { bottom: 4rem; left: 2.5rem; }
-	.about-corner--4 { top: 4rem;   right: 2.5rem; text-align: right; }
-	.about-corner--5 { top: 42%;    right: 2.5rem; text-align: right; }
-	.about-corner--6 { bottom: 4rem; right: 2.5rem; text-align: right; }
+	// Posiciones: 3 a la izquierda, 3 a la derecha.
+	// Las 4 esquinas respetan el padding de la sección en desktop (6rem / 2.5rem).
+	.about-corner--1 { top: 6rem;    left: 2.5rem; }
+	.about-corner--3 { bottom: 6rem; left: 2.5rem; }
+	.about-corner--4 { top: 6rem;    right: 2.5rem; text-align: right; }
+	.about-corner--6 { bottom: 6rem; right: 2.5rem; text-align: right; }
+
+	// Las del medio: el JS fija `top` al centro vertical real de la foto;
+	// translateY(-50%) las centra sobre ese punto.
+	.about-corner--2 { left: 2.5rem;  transform: translateY(-50%); }
+	.about-corner--5 { right: 2.5rem; text-align: right; transform: translateY(-50%); }
 
 	// ─── Columna central ───
 	.about-column {
@@ -174,6 +178,29 @@ const CORNER_COUNT = 6;
 </style>
 
 <script>
+	// Centra verticalmente las frases laterales del medio (--2, --5) en el centro
+	// real de la foto (su posición depende del layout, no es un % fijo de la sección).
+	{
+		const section = document.querySelector<HTMLElement>('#about');
+		const photo = document.querySelector<HTMLElement>('.about-photo');
+		const mids = document.querySelectorAll<HTMLElement>('.about-corner--2, .about-corner--5');
+		if (section && photo && mids.length) {
+			const alignMids = () => {
+				const sRect = section.getBoundingClientRect();
+				const pRect = photo.getBoundingClientRect();
+				// Centro de la foto relativo al top de la sección.
+				const centerY = pRect.top - sRect.top + pRect.height / 2;
+				mids.forEach(el => { el.style.top = `${centerY}px`; });
+			};
+			alignMids();
+			window.addEventListener('resize', alignMids, { passive: true });
+			// Recalcula cuando carguen las imágenes (cambian la altura del layout).
+			photo.querySelectorAll('img').forEach(img => {
+				if (!img.complete) img.addEventListener('load', alignMids, { once: true });
+			});
+		}
+	}
+
 	// Zoom in/out sutil con el scroll (sin desplazamiento, para no cortar la foto).
 	// La imagen "respira": escala 1 al entrar/salir del viewport y zoom máximo
 	// cuando está centrada. object-fit: cover + escala ≥1 → nunca se ve el fondo.

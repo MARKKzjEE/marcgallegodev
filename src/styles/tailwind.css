@@ -202,6 +202,15 @@
 	font-display: swap;
 }
 
+/* REENIE BEANIE — manuscrita de bolígrafo, para la sección FAQ-nota. TODO: convertir a woff2. */
+@font-face {
+	font-family: "Reenie Beanie";
+	src: url("/fonts/Reenie_Beanie/ReenieBeanie-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
 @theme {
 	--font-vogun: "Vogun", system-ui, -apple-system, sans-serif;
 	--font-nord: "NORD", system-ui, -apple-system, sans-serif;
@@ -209,6 +218,7 @@
 	--font-pixelbots: "PixelBots", system-ui, -apple-system, sans-serif;
 	--font-monoblock: "Monoblock", system-ui, -apple-system, sans-serif;
 	--font-corinthia: "Corinthia", cursive;
+	--font-reenie: "Reenie Beanie", cursive;
 
 	--color-primary: var(--primary);
 	--color-secondary: var(--secondary);

@@ -55,6 +55,7 @@ export const en: Translations = {
 			seo: "SEO",
 		},
 		// Section foot (below the carousel). {count} = number of technologies.
+		// footMeta only on tablet/desktop; hidden on mobile.
 		footMeta: "STACK / {count} tools · since 2018",
 		footNote: "See my experience",
 	},
@@ -73,9 +74,9 @@ export const en: Translations = {
 			"{age} years",
 			"Barcelona",
 			"Creative",
-			"Code",
-			"Freelance",
-			"Commitment",
+			"Trust",
+			"Transparency",
+			"Value",
 			"Closeness",
 		],
 	},

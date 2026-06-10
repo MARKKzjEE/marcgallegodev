@@ -305,7 +305,8 @@ const filters = [
 	}
 
 	.tech-foot__meta {
-		opacity: 0.55;
+		// Solo tablet/desktop; en móvil se oculta.
+		@media (max-width: 767px) { display: none; }
 	}
 
 	// Nota con circle-reveal (clon de colores invertidos)
@@ -315,6 +316,8 @@ const filters = [
 		color: var(--secondary);
 		text-decoration: none;
 		white-space: nowrap;
+		// Se mantiene a la derecha aunque la meta esté oculta (móvil).
+		margin-left: auto;
 	}
 
 	.tech-foot__reveal {
