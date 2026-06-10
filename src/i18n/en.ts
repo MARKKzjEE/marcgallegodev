@@ -115,12 +115,15 @@ export const en: Translations = {
 
 	// ── Projects ──
 	projects: {
+		// Unified projects title (home + catalog /projects)
+		title: "Projects",
+		// Home gallery CTA towards the full catalog
+		moreResults: "more results",
 		carousel: {
 			title: "Featured projects",
 			subtitle: "Drag to explore",
 		},
 		grid: {
-			title: "Selected work",
 			// Catalog foot. {range} is replaced by the real numbering (e.g. 031–039).
 			foot: "CAT. No. {range} · EDITION 01",
 			// Catalog placeholder cells (decorative)

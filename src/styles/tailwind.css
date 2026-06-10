@@ -249,6 +249,16 @@ html, body {
 		color: var(--secondary-soft);
 	}
 
+	/* Variante grande del label mono (índices, CTAs destacados) */
+	.text-mono-lg {
+		font-family: var(--font-monoblock);
+		font-size: clamp(16px, 1.5vw, 22px);
+		font-weight: 400;
+		letter-spacing: 0.05em;
+		line-height: 1.5;
+		color: var(--secondary);
+	}
+
 	.text-cottor-body {
 		font-family: var(--font-cottor);
 		font-size: clamp(13px, 1vw, 15px);

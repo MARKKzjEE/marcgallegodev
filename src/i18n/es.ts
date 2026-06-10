@@ -113,12 +113,15 @@ export const es = {
 
 	// ── Projects ──
 	projects: {
+		// Título único de proyectos (home + catálogo /proyectos)
+		title: "Proyectos",
+		// CTA de la galería de la home hacia el catálogo completo
+		moreResults: "más resultados",
 		carousel: {
 			title: "Proyectos destacados",
 			subtitle: "Arrastra para explorar",
 		},
 		grid: {
-			title: "Trabajos seleccionados",
 			// Pie del catálogo. {range} se sustituye por la numeración real (ej. 031–039).
 			foot: "CAT. No. {range} · EDICIÓN 01",
 			// Celdas placeholder del catálogo (decorativas)
