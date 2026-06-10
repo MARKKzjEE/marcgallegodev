@@ -15,9 +15,18 @@ const { title = "Marc Gallego | Ingeniero de Software Full Stack en Barcelona", 
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://marcgallego.com').href;
 
+// ┌─────────────────────────────────────────────────────────┐
+// │  SPLASH DE CARGA — interruptor único                      │
+// │  true  = splash activado (solo en home)                   │
+// │  false = desactivado (la web entra directa)               │
+// └─────────────────────────────────────────────────────────┘
+const SPLASH_ENABLED = false;
+
 // hreflang alternate URLs
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isHome = pathname === '/' || pathname === '/en';
+// Solo se muestra el splash si está activado Y estamos en home
+const showSplash = SPLASH_ENABLED && isHome;
 const { esHref, enHref } = getAlternatePath(pathname);
 const esURL = new URL(esHref, 'https://marcgallego.com').href;
 const enURL = new URL(enHref, 'https://marcgallego.com').href;
@@ -125,7 +134,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 	</head>
 	<body>
 		<!-- ─── Splash screen (solo home) ─── -->
-		{isHome && (
+		{showSplash && (
 			<div id="splash">
 				<span class="splash-inner">
 					<span class="splash-word splash-word--name" data-splash-word>
@@ -152,8 +161,8 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 				</span>
 			</div>
 		)}
-		<script is:inline define:vars={{ isHome }}>
-			if (isHome) {
+		<script is:inline define:vars={{ showSplash }}>
+			if (showSplash) {
 				var splashReady = false;
 				var splashLoaded = false;
 				var splashDone = false;
@@ -222,7 +231,14 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 					if (splashReady) hideSplash();
 				});
 			} else {
-				window.dispatchEvent(new CustomEvent('splash:done'));
+				// Sin splash: disparamos splash:done cuando el DOM esté listo,
+				// para que los listeners (typewriter del Hero, etc.) ya estén registrados.
+				function fireDone() { window.dispatchEvent(new CustomEvent('splash:done')); }
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', fireDone, { once: true });
+				} else {
+					fireDone();
+				}
 			}
 		</script>
 		<slot />

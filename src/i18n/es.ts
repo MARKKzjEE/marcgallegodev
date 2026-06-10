@@ -138,16 +138,60 @@ export const es = {
 		},
 		grid: {
 			title: "Trabajos seleccionados",
-			subtitle: "Una selección de trabajos en los que he participado",
+			// Pie del catálogo. {range} se sustituye por la numeración real (ej. 031–039).
+			foot: "CAT. No. {range} · EDICIÓN 01",
+			// Celdas placeholder del catálogo (decorativas)
+			placeholders: [
+				{ type: "En desarrollo", tagline: "Algo nuevo cociéndose." },
+				{ type: "Próximamente", tagline: "Reservado para el próximo." },
+			],
 		},
+		// NOTA: `description` se usa en el carrusel del home y en el alt de las imágenes.
+		// `type` y `tagline` alimentan la ficha del catálogo (/proyectos).
+		// → Placeholders: REVISAR Y CUADRAR (tipo de proyecto y frase corta de catálogo).
 		items: [
-			{ title: 'Viviq', description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.' },
-			{ title: 'Cor de suro', description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.' },
-			{ title: 'Lateua', description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo apoyadas con modelos IA.' },
-			{ title: 'Loyic', description: 'Portal del empleado que permite gestionar todos los datos de usuarios internos de la empresa como registro horario, documentación, nóminas, encuestas internas, etc.' },
-			{ title: 'Pillositio', description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.' },
-			{ title: 'PlanIT', description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.' },
-			{ title: 'RTTH', description: 'Generación del territorio de la marca con un servicio que transforma las ondas de sonido de un archivo a imágenes como recursos de diseño con las ondas integradas.' },
+			{
+				title: 'Viviq',
+				description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.',
+				type: 'Plataforma web',
+				tagline: 'CMS inmobiliario adaptable a cada cliente.',
+			},
+			{
+				title: 'Cor de suro',
+				description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.',
+				type: 'Web · Narrativa visual',
+				tagline: 'Narrativa visual artesanal y sostenible.',
+			},
+			{
+				title: 'Lateua',
+				description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo apoyadas con modelos IA.',
+				type: 'SaaS · Marketplace',
+				tagline: 'Marketplace de interiorismo con IA.',
+			},
+			{
+				title: 'Loyic',
+				description: 'Portal del empleado que permite gestionar todos los datos de usuarios internos de la empresa como registro horario, documentación, nóminas, encuestas internas, etc.',
+				type: 'Portal interno',
+				tagline: 'Portal del empleado todo-en-uno.',
+			},
+			{
+				title: 'Pillositio',
+				description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.',
+				type: 'App + Plataforma web',
+				tagline: 'App para bares, restaurantes y clientes.',
+			},
+			{
+				title: 'PlanIT',
+				description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.',
+				type: 'Startup · App social',
+				tagline: 'Conectar personas a través de planes.',
+			},
+			{
+				title: 'RTTH',
+				description: 'Generación del territorio de la marca con un servicio que transforma las ondas de sonido de un archivo a imágenes como recursos de diseño con las ondas integradas.',
+				type: 'Branding · Herramienta',
+				tagline: 'Del sonido a recursos de diseño.',
+			},
 		],
 	},
 

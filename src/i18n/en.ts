@@ -140,16 +140,60 @@ export const en: Translations = {
 		},
 		grid: {
 			title: "Selected work",
-			subtitle: "A selection of work I've been part of",
+			// Catalog foot. {range} is replaced by the real numbering (e.g. 031–039).
+			foot: "CAT. No. {range} · EDITION 01",
+			// Catalog placeholder cells (decorative)
+			placeholders: [
+				{ type: "In progress", tagline: "Something new in the works." },
+				{ type: "Coming soon", tagline: "Reserved for what's next." },
+			],
 		},
+		// NOTE: `description` is used in the home carousel and image alt text.
+		// `type` and `tagline` feed the catalog sheet (/en/projects).
+		// → Placeholders: REVIEW (project type, short catalog line).
 		items: [
-			{ title: 'Viviq', description: 'Real estate platform with a CMS adaptable to each client.' },
-			{ title: 'Cor de suro', description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.' },
-			{ title: 'Lateua', description: 'SaaS with marketplace for product management and AI-powered interior design solutions.' },
-			{ title: 'Loyic', description: 'Employee portal for managing all internal company user data including time tracking, documentation, payroll, internal surveys, and more.' },
-			{ title: 'Pillositio', description: 'App and web platform for bars and restaurants with services for businesses and customers.' },
-			{ title: 'PlanIT', description: 'My side project that evolved into a startup connecting people around any kind of plan or activity.' },
-			{ title: 'RTTH', description: 'Brand territory built through a service that transforms sound waves from audio files into design assets with integrated waveforms.' },
+			{
+				title: 'Viviq',
+				description: 'Real estate platform with a CMS adaptable to each client.',
+				type: 'Web platform',
+				tagline: 'Adaptable real-estate CMS per client.',
+			},
+			{
+				title: 'Cor de suro',
+				description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.',
+				type: 'Web · Visual narrative',
+				tagline: 'Craft-driven, sustainable visual narrative.',
+			},
+			{
+				title: 'Lateua',
+				description: 'SaaS with marketplace for product management and AI-powered interior design solutions.',
+				type: 'SaaS · Marketplace',
+				tagline: 'AI-powered interior design marketplace.',
+			},
+			{
+				title: 'Loyic',
+				description: 'Employee portal for managing all internal company user data including time tracking, documentation, payroll, internal surveys, and more.',
+				type: 'Internal portal',
+				tagline: 'All-in-one employee portal.',
+			},
+			{
+				title: 'Pillositio',
+				description: 'App and web platform for bars and restaurants with services for businesses and customers.',
+				type: 'App + Web platform',
+				tagline: 'App for bars, restaurants and guests.',
+			},
+			{
+				title: 'PlanIT',
+				description: 'My side project that evolved into a startup connecting people around any kind of plan or activity.',
+				type: 'Startup · Social app',
+				tagline: 'Connecting people through plans.',
+			},
+			{
+				title: 'RTTH',
+				description: 'Brand territory built through a service that transforms sound waves from audio files into design assets with integrated waveforms.',
+				type: 'Branding · Tool',
+				tagline: 'From sound waves to design assets.',
+			},
 		],
 	},
 
