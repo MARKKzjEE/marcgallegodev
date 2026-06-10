@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../sections/Header.astro';
-import Projects from '../sections/Projects.astro';
+import ProjectsGrid from '../sections/ProjectsGrid.astro';
 import Footer from '../sections/Footer.astro';
 import { useTranslations } from '../i18n/index';
 
@@ -12,8 +12,9 @@ const t = useTranslations('es');
 	title={t.meta.projectsTitle}
 	description={t.meta.projectsDescription}
 	keywords={t.meta.projectsKeywords}
+	lang="es"
 >
 	<Header />
-	<Projects />
+	<ProjectsGrid />
 	<Footer />
 </Layout>

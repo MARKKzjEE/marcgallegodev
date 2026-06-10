@@ -7,12 +7,12 @@ const words = t.whatWeDo.text.split(' ');
 const paragraphsWithIndex = [words.map((word: string, i: number) => ({ word, index: i }))];
 ---
 
-<section id="what-we-do" class="what-we-do pt-16 md:pt-30" aria-labelledby="what-we-do-heading">
+<section id="what-we-do" class="what-we-do py-16 md:py-30" aria-labelledby="what-we-do-heading">
 	<div class="px-4 md:px-10">
 		<div class="grid md:grid-cols-[320px_1fr] gap-8 md:gap-16 items-start">
 
 			<!-- Label izquierda -->
-			<h2 id="what-we-do-heading" class="what-we-do__label font-nord text-secondary">{t.whatWeDo.label}</h2>
+			<h2 id="what-we-do-heading" class="what-we-do__label text-mono-label-soft">{t.whatWeDo.label}</h2>
 
 			<!-- Texto con reveal por palabra -->
 			<div class="what-we-do__content" data-scroll-reveal>
@@ -31,11 +31,16 @@ const paragraphsWithIndex = [words.map((word: string, i: number) => ({ word, ind
 
 <style lang="scss">
 	.what-we-do__text {
-		font-size: clamp(32px, 5vw, 60px);
+		font-size: clamp(30px, 5vw, 60px);
+		line-height: 1.4;
 	}
 
 	.what-we-do__label {
-		font-size: clamp(12px, 1.2vw, 18px);
+		padding-top: 0.6em;
+
+		@media (min-width: 768px) {
+			padding-top: 1.2em;
+		}
 	}
 
 	.reveal-word {
@@ -45,6 +50,7 @@ const paragraphsWithIndex = [words.map((word: string, i: number) => ({ word, ind
 
 <script>
 	function initScrollReveal() {
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 		const container = document.querySelector<HTMLElement>('[data-scroll-reveal]');
 		if (!container) return;
 
@@ -66,8 +72,8 @@ const paragraphsWithIndex = [words.map((word: string, i: number) => ({ word, ind
 				const wordCenter = wordRect.top + wordRect.height / 2;
 				const distance = threshold - wordCenter;
 				// 0 = justo en threshold, 1 = completamente revelada
-				const t = Math.min(Math.max(distance / fadeRange, 0), 1);
-				const opacity = 20 + t * 80;
+				const progress = Math.min(Math.max(distance / fadeRange, 0), 1);
+				const opacity = 20 + progress * 80;
 				word.style.color = `color-mix(in srgb, var(--secondary) ${Math.round(opacity)}%, transparent)`;
 			});
 		}

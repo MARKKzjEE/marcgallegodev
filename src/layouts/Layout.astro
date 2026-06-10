@@ -9,21 +9,22 @@ interface Props {
 	lang?: Lang;
 }
 
-const defaultDescription = "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida.";
+const defaultDescription = "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance en Barcelona. Desarrollo web, aplicaciones móviles y soluciones digitales a medida.";
 const defaultKeywords = "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles";
-const { title = "Marc Gallego | Desarrollador Full Stack", description = defaultDescription, keywords = defaultKeywords, lang = 'es' } = Astro.props;
+const { title = "Marc Gallego | Ingeniero de Software Full Stack en Barcelona", description = defaultDescription, keywords = defaultKeywords, lang = 'es' } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://marcgallego.com').href;
 
 // hreflang alternate URLs
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isHome = pathname === '/' || pathname === '/en';
 const { esHref, enHref } = getAlternatePath(pathname);
 const esURL = new URL(esHref, 'https://marcgallego.com').href;
 const enURL = new URL(enHref, 'https://marcgallego.com').href;
 ---
 
 <!doctype html>
-<html lang={lang} class="">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -40,9 +41,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 		<!-- Preload fuentes críticas above-the-fold -->
 		<link rel="preload" href="/fonts/NORD/NORD-Black.woff2" as="font" type="font/woff2" crossorigin />
 		<link rel="preload" href="/fonts/NORD/NORD-Bold.woff2" as="font" type="font/woff2" crossorigin />
-		<link rel="preload" href="/fonts/Vogun-Medium.woff2" as="font" type="font/woff2" crossorigin />
-		<!-- Preload poster del vídeo hero -->
-		<link rel="preload" href="/assets/bg-background-loop-poster.webp" as="image" />
+		<link rel="preload" href="/fonts/Monoblock/Monoblock-Regular.woff2" as="font" type="font/woff2" crossorigin />
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
@@ -125,6 +124,43 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 		</script>
 	</head>
 	<body>
+		<!-- ─── Splash screen (solo home) ─── -->
+		{isHome && (
+			<div id="splash" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background-color:var(--primary);transition:opacity 600ms cubic-bezier(0.22,1,0.36,1),visibility 600ms;">
+				<span style="display:flex;align-items:center;gap:clamp(1rem,3vw,2rem);color:var(--secondary);">
+					<span style="font-family:'NORD',system-ui,sans-serif;font-weight:700;font-size:clamp(1rem,3vw,1.5rem);letter-spacing:0.15em;text-transform:uppercase;">MARC GALLEGO</span>
+					<span style="width:1px;height:2em;background-color:var(--secondary);flex-shrink:0;"></span>
+					<span style="font-family:'Monoblock',system-ui,sans-serif;letter-spacing:0.5em;font-weight:400;font-size:clamp(0.7em,1.5vw,0.85rem);">portfolio</span>
+				</span>
+			</div>
+		)}
+		<script is:inline define:vars={{ isHome }}>
+			if (isHome) {
+				var splashReady = false;
+				var splashLoaded = false;
+
+				function hideSplash() {
+					var splash = document.getElementById('splash');
+					if (!splash) return;
+					splash.style.opacity = '0';
+					splash.style.visibility = 'hidden';
+					window.dispatchEvent(new CustomEvent('splash:done'));
+					setTimeout(function() { splash.remove(); }, 600); // Espera a que termine la transición antes de remover del DOM
+				}
+
+				setTimeout(function() {
+					splashReady = true;
+					if (splashLoaded) hideSplash();
+				}, 1800);
+
+				window.addEventListener('load', function() {
+					splashLoaded = true;
+					if (splashReady) hideSplash();
+				});
+			} else {
+				window.dispatchEvent(new CustomEvent('splash:done'));
+			}
+		</script>
 		<slot />
 	</body>
 </html>
@@ -153,16 +189,3 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 	}
 </style>
 
-<script>
-	// Sync the toggle with the theme applied on initial load
-	const root = document.documentElement;
-	const toggle = document.querySelector<HTMLInputElement>('#theme-toggle input[type="checkbox"]');
-	if (toggle) {
-		toggle.checked = !root.classList.contains("dark");
-		toggle.addEventListener("change", () => {
-			const isDark = !toggle.checked;
-			root.classList.toggle("dark", isDark);
-			localStorage.setItem("theme", isDark ? "dark" : "light");
-		});
-	}
-</script>

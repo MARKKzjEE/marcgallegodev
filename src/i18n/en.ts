@@ -4,20 +4,20 @@ export const en: Translations = {
 	// ── Meta / SEO ──
 	meta: {
 		siteName: "Marc Gallego",
-		defaultTitle: "Marc Gallego",
-		defaultDescription: "Portfolio of Marc Gallego, Software Engineer and Full Stack freelance developer. Web development, apps and custom digital solutions.",
+		defaultTitle: "Marc Gallego | Full Stack Software Engineer in Barcelona",
+		defaultDescription: "Portfolio of Marc Gallego, Software Engineer and Full Stack freelance developer in Barcelona. Web development, mobile apps and custom digital solutions.",
 		defaultKeywords: "Marc Gallego, Full Stack developer, Software Engineer, Barcelona, freelance developer, web development, mobile apps",
-		indexTitle: "Marc Gallego",
-		indexDescription: "Portfolio of Marc Gallego, Software Engineer and Full Stack freelance developer. Web development, apps and custom digital solutions.",
+		indexTitle: "Marc Gallego | Full Stack Software Engineer in Barcelona",
+		indexDescription: "Portfolio of Marc Gallego, Software Engineer and Full Stack freelance developer in Barcelona. Web development, mobile apps and custom digital solutions.",
 		indexKeywords: "Marc Gallego, Full Stack developer, Software Engineer, Barcelona, freelance developer, web development, mobile apps",
-		experienceTitle: "Experience | Marc Gallego",
-		experienceDescription: "Professional background of Marc Gallego: 5+ years as a Full Stack Software Engineer in Barcelona. Experience in Laravel, Django, React, Angular, DevOps and mobile app development.",
+		experienceTitle: "Professional experience | Marc Gallego — Full Stack Developer",
+		experienceDescription: "Professional background of Marc Gallego: 5+ years as a Full Stack Software Engineer in Barcelona. Laravel, Django, React, Angular, DevOps and mobile apps.",
 		experienceKeywords: "Marc Gallego experience, developer CV Barcelona, Full Stack software engineer, Laravel, Django, React, Angular, DevOps",
-		projectsTitle: "Projects | Marc Gallego",
-		projectsDescription: "Project portfolio of Marc Gallego: web platforms, SaaS, mobile apps and custom digital solutions developed in Barcelona.",
+		projectsTitle: "Projects | Marc Gallego — Web development and custom apps",
+		projectsDescription: "Project portfolio of Marc Gallego: web platforms, SaaS, mobile apps and custom digital solutions. Built with Laravel, React, Django and more in Barcelona.",
 		projectsKeywords: "Marc Gallego web projects, developer portfolio Barcelona, SaaS, web platforms, mobile apps, custom development",
-		contactTitle: "Contact | Marc Gallego",
-		contactDescription: "Have a project in mind? Write to me and let's talk.",
+		contactTitle: "Contact | Marc Gallego — Freelance developer in Barcelona",
+		contactDescription: "Have a project in mind? Get in touch with Marc Gallego, Full Stack freelance developer in Barcelona. Web development, mobile apps and custom digital solutions.",
 		contactKeywords: "contact Marc Gallego, hire developer Barcelona, Full Stack freelance, web quote, custom development",
 	},
 
@@ -62,20 +62,26 @@ export const en: Translations = {
 
 	// ── TechStack ──
 	techStack: {
-		heading: "My Stack",
+		heading: "Stack",
 		descCorner: "These are the technologies I use in my daily work. I always enjoy exploring new tools to choose the best solution for the needs of each project.",
 		toggleShow: "Show technologies",
 		toggleHide: "Hide technologies",
+		typewriterPhrases: [
+			"These are my most used technologies.",
+			"Interact with the icon to see the names.",
+			"Always exploring new tools.",
+			"The best tool depends on the project.",
+		],
 	},
 
 	// ── About ──
 	about: {
 		title: "About me",
 		titleDecorative: "ABOUT ME",
-		tagline: "Creative design & digital development since 2018",
+		tagline: "Creative and technical design by Marc Gallego",
 		bioMobile: "Born in Barcelona, from a young age I had a love for computers and software. The creative capacity they allow drew me into this world and today I do something I genuinely enjoy. Outside of code, I have two great passions: the sea and fashion. In one I find calm and my chaos, and with the other I get to experiment and be creative.",
-		bioDesktop1: "Born in Barcelona, from a young age I watched my father fix computers for friends because he enjoyed it — and that's how I started spending hours taking them apart and putting them back together. \n\nAs I grew up I found myself drawn into the world of software. The creative capacity I saw in operating systems and video games fascinated me. So little by little I started exploring software development, and here I am today.",
-		bioDesktop2: "Beyond development, you'll notice a clear reference to the sea — my balance. The place where I disconnect, organise ideas and come back with clarity. \n\nI'm also a lover of art and fashion. I'm drawn to people's creative capacity and the diversity of styles that emerge. I apply that creativity and taste to the way I dress and design, as well as the personal touch I bring to my digital solutions.",
+		bioDesktop1: "Born in Barcelona, from a young age I watched my father fix computers for friends because he enjoyed it, and that's how I started spending hours taking them apart and putting them back together. \n\nAs I grew up I found myself drawn into the world of software. The creative capacity I saw in operating systems and video games fascinated me. So little by little I started exploring software development, and here I am today.",
+		bioDesktop2: "Beyond development, my passion is the sea where I find my balance. The place where I disconnect, organise ideas and come back with clarity. \n\nI'm also a lover of art and fashion. I'm drawn to people's capacity for expression and the diversity of styles that emerge. I apply that creativity and taste to the way I dress and design, as well as the personal touch I bring to my digital solutions.",
 		profileAlt: "Marc Gallego, Full Stack developer in Barcelona",
 	},
 
@@ -88,13 +94,14 @@ export const en: Translations = {
 	// ── Partners ──
 	partners: {
 		heading: "Partners",
+		subtitle: "Collaborations with studios and professionals",
 		badge: "since 2024",
 		dokoDesc: "Branding, web design and development studio",
 		dokoLogoAlt: "Doko Studio logo",
 		dokoImgAlt: "Doko Studio — web design and development studio",
-		studioLabel: "How do you collaborate?",
-		studioText1: "It's a small studio with specialised profiles for every phase of a project: branding, design, development and deployment. They can deliver a full solution or integrate into existing teams to cover specific needs at any stage.",
-		studioText2: "On my side, I contribute my experience and services, participating on a project basis or working jointly on larger-scale projects.",
+		studioLabel: "How do I collaborate?",
+		studioText1: "On my side, I contribute my experience and services, participating on a project basis or working jointly on larger-scale projects.",
+		studioText2: "They are a small studio with specialised profiles for every phase of a project: branding, design, development and deployment. They can deliver a full solution or integrate into existing teams to cover specific needs at any stage.",
 		studioLink: "Learn more",
 	},
 
@@ -127,8 +134,14 @@ export const en: Translations = {
 
 	// ── Projects ──
 	projects: {
-		pageTitle: "Featured.",
-		dragHint: "Drag to explore",
+		carousel: {
+			title: "Featured projects",
+			subtitle: "Drag to explore",
+		},
+		grid: {
+			title: "Selected work",
+			subtitle: "A selection of work I've been part of",
+		},
 		items: [
 			{ title: 'Viviq', description: 'Real estate platform with a CMS adaptable to each client.' },
 			{ title: 'Cor de suro', description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.' },
@@ -142,7 +155,7 @@ export const en: Translations = {
 
 	// ── Contact ──
 	contact: {
-		title: "Let's talk.",
+		title: "Let's talk",
 		subtitle: "Have a project in mind or just want to say hi?",
 		writeLabel: "Send me a message",
 		namePlaceholder: "Name",
@@ -165,7 +178,7 @@ export const en: Translations = {
 
 	// ── Experience page ──
 	experience: {
-		pageTitle: "My professional journey.",
+		pageTitle: "My professional journey",
 		downloadLabel: "Download PDF",
 		downloadAriaLabel: "Download CV as PDF",
 		cvFile: "/cv/CV_MarcGallego_en.pdf",
@@ -213,7 +226,7 @@ export const en: Translations = {
 			},
 			{
 				company: "Loyic",
-				role: "Full Stack Developer / Team Lead",
+				role: "Full Stack Lead Developer",
 				period: "Mar 2023 — Mar 2024",
 				location: "Barcelona, Spain",
 				tags: ["HTML", "CSS", "Javascript", "SQL", "BI"],

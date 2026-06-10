@@ -1,16 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import dokostudio from '../assets/clients/dokostudio.png';
+import dokostudio from '../assets/projects/dokostudio.png';
 import { getLang, useTranslations } from '../i18n';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section id="partners" class="pt-16 md:pt-30" aria-labelledby="partners-heading">
-	<div class="container mx-auto px-4 md:px-10">
+<section id="partners" class="py-16 md:py-30" aria-labelledby="partners-heading">
+	<div class="px-4 md:px-10">
 
-		<h2 id="partners-heading" class="font-nord font-bold text-secondary mb-8">{t.partners.heading}</h2>
+		<h2 id="partners-heading" class="font-nord font-normal text-secondary partners-title mb-2">{t.partners.heading}</h2>
+		<p class="text-mono-label-soft mb-8">{t.partners.subtitle}</p>
 
 		<div class="partners-grid">
 			<div class="partners-card">
@@ -19,26 +20,26 @@ const t = useTranslations(lang);
 				</div>
 				<div class="card-info">
 					<div class="left min-w-0">
-						<h4 class="font-nord font-bold text-secondary" style="font-size: clamp(16px, 4vw, 24px)">Doko Studio</h4>
-						<p class="font-monoblock font-normal text-secondary/90 text-sm mt-1">{t.partners.dokoDesc}</p>
+						<h4 class="project-card-title font-monoblock font-medium text-secondary">Doko Studio</h4>
+						<p class="project-card-desc text-cottor-body">{t.partners.dokoDesc}</p>
 					</div>
 					<div class="right hidden md:block">
-						<span class="font-nord text-secondary text-xs bg-quaternary p-4 rounded-full border text-center whitespace-nowrap">{t.partners.badge}</span>
+						<span class="text-mono-label-soft bg-quaternary p-4 rounded-full border text-center whitespace-nowrap">{t.partners.badge}</span>
 					</div>
 				</div>
 			</div>
 
-			<div class="studio-card" data-reveal data-reveal-radius="32px">
-				<span class="studio-label font-nord font-bold text-secondary text-sm uppercase">{t.partners.studioLabel}</span>
-				<p class="font-cottor font-normal text-secondary text-sm mt-4">{t.partners.studioText1}</p>
-				<p class="font-cottor font-normal text-secondary text-sm mt-3">{t.partners.studioText2}</p>
-				<a href="https://doko.studio/" target="_blank" rel="noopener noreferrer" class="studio-link mt-8 font-nord font-medium text-xs text-secondary inline-flex items-center gap-1" data-reveal-trigger>{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+			<div class="studio-card" data-reveal data-reveal-radius="20px">
+				<span class="studio-label font-monoblock font-medium text-secondary uppercase">{t.partners.studioLabel}</span>
+				<p class="text-cottor-body mt-4">{t.partners.studioText1}</p>
+				<p class="text-cottor-body mt-3">{t.partners.studioText2}</p>
+				<a href="https://doko.studio/" target="_blank" rel="noopener noreferrer" class="studio-link mt-8 font-cottor font-normal text-secondary inline-flex items-center gap-1" data-reveal-trigger>{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
 				<!-- Reveal layer -->
 				<div class="studio-card__reveal reveal-layer" aria-hidden="true">
-					<span class="studio-label font-nord font-bold text-sm uppercase">{t.partners.studioLabel}</span>
-					<p class="font-cottor font-normal text-sm mt-4">{t.partners.studioText1}</p>
-					<p class="font-cottor font-normal text-sm mt-3">{t.partners.studioText2}</p>
-					<span class="studio-link mt-8 font-nord font-medium text-xs inline-flex items-center gap-1">{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+					<span class="studio-label font-monoblock font-medium text-secondary uppercase">{t.partners.studioLabel}</span>
+					<p class="text-cottor-body mt-4">{t.partners.studioText1}</p>
+					<p class="text-cottor-body mt-3">{t.partners.studioText2}</p>
+					<span class="studio-link mt-8 font-cottor font-normal inline-flex items-center gap-1">{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
 				</div>
 			</div>
 		</div>
@@ -47,10 +48,9 @@ const t = useTranslations(lang);
 </section>
 
 <style lang="scss">
-    #partners {
-        h2 {
-            font-size: clamp(44px, 8vw, 96px);
-        }
+    .partners-title {
+        font-size: clamp(35px, 8vw, 80px);
+        line-height: 1;
     }
 
     .partners-grid {
@@ -70,10 +70,10 @@ const t = useTranslations(lang);
         overflow: hidden;
         border-radius: 10px;
         background-color: var(--terciary);
-        border: 1px solid color-mix(in srgb, var(--secondary) 8%, transparent);
+        border: 1px solid var(--quaternary);
 
         .right span {
-            border-color: color-mix(in srgb, var(--secondary) 10%, transparent);
+            border-color: var(--quaternary);
         }
     }
 
@@ -113,19 +113,33 @@ const t = useTranslations(lang);
         @media (max-width: 767px) {
             padding: 1rem;
         }
+
+        .left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+    }
+
+    .project-card-title,
+    .studio-label {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+    }
+
+    .project-card-desc {
+        font-size: 0.875rem;
     }
 
     .studio-card {
-        --reveal-extend: 20px;
+        --reveal-extend: 40px;
         position: relative;
-        overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: 1.5rem;
         border-radius: 10px;
         background-color: var(--terciary);
-        border: 1px solid color-mix(in srgb, var(--secondary) 8%, transparent);
+        border: 1px solid var(--quaternary);
 
         @media (max-width: 767px) {
             padding: 1rem;
@@ -134,11 +148,15 @@ const t = useTranslations(lang);
 
     .studio-card__reveal {
         background: var(--secondary);
-        color: var(--primary);
+        border-radius: 10px;
         padding: calc(1.5rem + var(--reveal-extend, 0px));
         display: flex;
         flex-direction: column;
         justify-content: center;
+
+        &, * {
+            color: var(--primary) !important;
+        }
 
         @media (max-width: 767px) {
             padding: calc(1rem + var(--reveal-extend, 0px));

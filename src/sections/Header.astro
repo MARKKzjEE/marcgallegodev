@@ -1,11 +1,6 @@
 ---
 import { getLang, useTranslations, getLocalePath, getAlternatePath } from '../i18n/index';
 
-interface Props {
-	hasHero?: boolean;
-}
-
-const { hasHero = false } = Astro.props;
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 
@@ -16,24 +11,28 @@ const navItems = [
 ];
 
 const homePath = lang === 'en' ? '/en' : '/';
-const isHome = Astro.url.pathname === homePath || Astro.url.pathname === '/en/';
-
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 const { esHref, enHref } = getAlternatePath(pathname);
-
 ---
 
-<header class={`site-header fixed inset-x-0 top-0 z-40 no-transition${!hasHero ? ' is-past-hero' : ''}`} data-site-header>
+<header class="site-header font-monoblock font-normal text-base border-t border-secondary" data-site-header>
 
-	<!-- ─── Desktop ─── -->
-	<div class="px-10 font-nord font-medium hidden md:flex items-center justify-between h-14">
-		<div class="text-sm">
-			{!isHome && (
-				<a href={homePath} class="nav-link">{lang === 'en' ? 'Home' : 'Inicio'}</a>
-			)}
-		</div>
-		<div class="flex items-center gap-6 text-sm">
-			<nav class="flex items-center gap-6" aria-label="Navegación principal">
+	<!-- ─── Desktop toolbar (2 filas × 6 cols) ─── -->
+	<div class="toolbar hidden lg:block" aria-label="Cabecera">
+		<div class="toolbar-grid">
+
+			<!-- Logo M — col 1, filas 1-2 -->
+			<a href={homePath} class="cell" style="grid-column:1; grid-row:1/3;" aria-label="Inicio">
+				<svg width="22" height="24" viewBox="0 0 521 557" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<path d="M132.499 548.5V41.3049H196.552V548.5H324.554V41.3049H388.501V548.5H516.5V0.500017H4.5V548.5H132.499Z" fill="currentColor"/>
+				</svg>
+			</a>
+
+			<!-- Espacio vacío — col 2, filas 1-2 -->
+			<div class="cell" style="grid-column:2; grid-row:1/3;"></div>
+
+			<!-- Nav — col 3, filas 1-2 -->
+			<nav class="cell nav-group" style="grid-column:3; grid-row:1/3;" aria-label="Navegación principal">
 				{navItems.map((item) => {
 					const isActive = Astro.url.pathname.startsWith(item.href);
 					return (
@@ -43,68 +42,105 @@ const { esHref, enHref } = getAlternatePath(pathname);
 					);
 				})}
 			</nav>
-			<div class="header-divider w-px"></div>
-			<div class="flex items-center gap-1 text-sm" aria-label="Selector de idioma">
-				<a href={esHref} class={`lang-btn${lang === 'es' ? ' lang-active' : ''}`}>ES</a>
-				<span class="divider-slash opacity-75">/</span>
-				<a href={enHref} class={`lang-btn${lang === 'en' ? ' lang-active' : ''}`}>EN</a>
-			</div>
-			<div class="toggle-switch">
-				<label class="switch-label" id="theme-toggle">
-					<input type="checkbox" class="checkbox" aria-label="Cambiar entre modo claro y oscuro">
-					<span class="slider"></span>
+
+			<!-- ES — col 4, fila 1 -->
+			<a href={esHref} class={`cell lang-cell${lang === 'es' ? ' lang-active' : ''}`} style="grid-column:4; grid-row:1;" aria-label="Español"><span>ES</span></a>
+			<!-- EN — col 4, fila 2 -->
+			<a href={enHref} class={`cell lang-cell${lang === 'en' ? ' lang-active' : ''}`} style="grid-column:4; grid-row:2;" aria-label="English"><span>EN</span></a>
+
+			<!-- Toggle tema — col 5, filas 1-2 -->
+			<div class="cell theme-cell" style="grid-column:5; grid-row:1/3;">
+				<label id="theme-toggle" aria-label="Cambiar tema">
+					<input type="checkbox" class="sr-only" data-theme-checkbox>
+					<!-- Sol: visible en modo claro -->
+					<svg class="theme-icon theme-icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M4.93018 4.92969L6.34018 6.33969" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M17.6602 17.6602L19.0702 19.0702" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M6.34018 17.6602L4.93018 19.0702" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M19.0702 4.92969L17.6602 6.33969" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+					<!-- Luna: visible en modo oscuro -->
+					<svg class="theme-icon theme-icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<path d="M10.6211 4.12109C10.1056 5.26466 9.90371 6.53124 10.0469 7.78906C10.226 9.36174 10.9326 10.828 12.0518 11.9473C13.1711 13.0666 14.6372 13.773 16.21 13.9521C17.4675 14.0954 18.7335 13.8932 19.877 13.3779C19.6672 14.5781 19.187 15.7193 18.4648 16.7109C17.555 17.9602 16.3026 18.9189 14.8594 19.4717C13.4161 20.0244 11.8436 20.148 10.332 19.8262C8.82045 19.5043 7.43467 18.7509 6.3418 17.6582C5.24891 16.5654 4.49585 15.1795 4.17383 13.668C3.85184 12.1564 3.97475 10.5839 4.52734 9.14062C5.07992 7.69754 6.03817 6.44508 7.28711 5.53516C8.27893 4.81263 9.42057 4.33087 10.6211 4.12109Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
 				</label>
 			</div>
+
+			<!-- Info fila 1 — col 6, fila 1 -->
+			<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="cell info-cell info-cell--link" style="grid-column:6; grid-row:1;">
+				<svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;">
+					<path d="M22 17C22 17.5304 21.7893 18.0391 21.4142 18.4142C21.0391 18.7893 20.5304 19 20 19H6.828C6.29761 19.0001 5.78899 19.2109 5.414 19.586L3.212 21.788C3.1127 21.8873 2.9862 21.9549 2.84849 21.9823C2.71077 22.0097 2.56803 21.9956 2.43831 21.9419C2.30858 21.8881 2.1977 21.7971 2.11969 21.6804C2.04167 21.5637 2.00002 21.4264 2 21.286V5C2 4.46957 2.21071 3.96086 2.58579 3.58579C2.96086 3.21071 3.46957 3 4 3H20C20.5304 3 21.0391 3.21071 21.4142 3.58579C21.7893 3.96086 22 4.46957 22 5V17Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+				<span class="text-sm">{lang === 'en' ? "Let's talk on LinkedIn" : 'Hablemos por LinkedIn'}</span>
+			</a>
+			<!-- Info fila 2 — col 6, fila 2 -->
+			<div class="cell info-cell" style="grid-column:6; grid-row:2;">
+				<span class="status-dot" aria-hidden="true"></span>
+				<span class="text-sm">{lang === 'en' ? 'Available for projects' : 'Disponible para proyectos'}</span>
+			</div>
+
 		</div>
 	</div>
 
 	<!-- ─── Mobile bar ─── -->
-	<div class="mobile-bar px-4 font-nord font-medium flex md:hidden items-center justify-between h-14">
-		{!isHome ? (
-			<a href={homePath} class="nav-link text-sm">{lang === 'en' ? 'Home' : 'Inicio'}</a>
-		) : (
-			<span></span>
-		)}
-		<button
-			type="button"
-			class="hamburger-btn"
-			aria-label={t.header.mobileMenuOpen}
-			aria-expanded="false"
-			aria-controls="mobile-menu"
-			data-hamburger
-		>
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-				<path d="M4 5h16"/>
-				<path d="M4 12h16"/>
-				<path d="M4 19h16"/>
+	<div class="mobile-bar lg:hidden" aria-label="Cabecera móvil">
+		<!-- Logo M con borde -->
+		<a href={homePath} class="mobile-logo-cell" aria-label="Inicio">
+			<svg width="22" height="24" viewBox="0 0 521 557" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<path d="M132.499 548.5V41.3049H196.552V548.5H324.554V41.3049H388.501V548.5H516.5V0.500017H4.5V548.5H132.499Z" fill="currentColor"/>
 			</svg>
-		</button>
+		</a>
+		<!-- Disponible -->
+		<div class="mobile-ctrl-cell mobile-available-cell">
+			<span class="status-dot" aria-hidden="true"></span>
+			<span>{lang === 'en' ? 'Available' : 'Disponible'}</span>
+		</div>
+		<!-- Controles derecha: ES | EN | tema | hamburguesa -->
+		<div class="mobile-controls-bar">
+			<div class="mobile-lang-stack">
+				<a href={esHref} class={`mobile-lang-item${lang === 'es' ? ' lang-active' : ''}`} aria-label="Español">ES</a>
+				<a href={enHref} class={`mobile-lang-item${lang === 'en' ? ' lang-active' : ''}`} aria-label="English">EN</a>
+			</div>
+			<button type="button" class="mobile-ctrl-cell mobile-theme-cell" aria-label="Cambiar tema" data-theme-mobile-btn>
+				<svg class="theme-icon theme-icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M4.93018 4.92969L6.34018 6.33969" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M17.6602 17.6602L19.0702 19.0702" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M6.34018 17.6602L4.93018 19.0702" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M19.0702 4.92969L17.6602 6.33969" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+				<svg class="theme-icon theme-icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<path d="M10.6211 4.12109C10.1056 5.26466 9.90371 6.53124 10.0469 7.78906C10.226 9.36174 10.9326 10.828 12.0518 11.9473C13.1711 13.0666 14.6372 13.773 16.21 13.9521C17.4675 14.0954 18.7335 13.8932 19.877 13.3779C19.6672 14.5781 19.187 15.7193 18.4648 16.7109C17.555 17.9602 16.3026 18.9189 14.8594 19.4717C13.4161 20.0244 11.8436 20.148 10.332 19.8262C8.82045 19.5043 7.43467 18.7509 6.3418 17.6582C5.24891 16.5654 4.49585 15.1795 4.17383 13.668C3.85184 12.1564 3.97475 10.5839 4.52734 9.14062C5.07992 7.69754 6.03817 6.44508 7.28711 5.53516C8.27893 4.81263 9.42057 4.33087 10.6211 4.12109Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</button>
+			<button type="button" class="mobile-ctrl-cell mobile-hamburger-cell" aria-label={t.header.mobileMenuOpen} aria-expanded="false" aria-controls="mobile-menu" data-hamburger>
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M4 5H20"/><path d="M4 12H20"/><path d="M4 19H20"/>
+				</svg>
+			</button>
+		</div>
 	</div>
 
 	<!-- ─── Mobile overlay ─── -->
-	<div
-		id="mobile-menu"
-		class="mobile-overlay font-nord"
-		aria-hidden="true"
-		data-mobile-menu
-	>
-		<!-- Close button -->
-		<button
-			type="button"
-			class="mobile-close-btn"
-			aria-label={t.header.mobileMenuClose}
-			data-menu-close
-		>
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-				<path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-			</svg>
-		</button>
-
-		<!-- Nav links -->
+	<div id="mobile-menu" class="mobile-overlay" aria-hidden="true" data-mobile-menu>
+		<div class="mobile-overlay-bar">
+			<div class="mobile-overlay-spacer"></div>
+			<button type="button" class="mobile-close-btn" aria-label={t.header.mobileMenuClose} data-menu-close>
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M18 6L6 18"/><path d="M6 6L18 18"/>
+				</svg>
+			</button>
+		</div>
 		<nav class="mobile-nav" aria-label="Navegación móvil">
-			{!isHome && (
-				<a href={homePath} class="mobile-nav-link">{lang === 'en' ? 'Home' : 'Inicio'}</a>
-			)}
 			{navItems.map((item) => {
 				const isActive = Astro.url.pathname.startsWith(item.href);
 				return (
@@ -114,170 +150,276 @@ const { esHref, enHref } = getAlternatePath(pathname);
 				);
 			})}
 		</nav>
-
-		<!-- Bottom controls -->
-		<div class="mobile-controls">
-			<div class="flex items-center gap-2 text-base" aria-label="Selector de idioma">
-				<a href={esHref} class={`lang-btn${lang === 'es' ? ' lang-active' : ''}`}>ES</a>
-				<span class="divider-slash opacity-75">/</span>
-				<a href={enHref} class={`lang-btn${lang === 'en' ? ' lang-active' : ''}`}>EN</a>
-			</div>
-			<button type="button" class="theme-text-btn" data-theme-mobile aria-label="Cambiar tema">
-				<span data-theme-label>Modo noche</span>
-			</button>
-		</div>
 	</div>
 
 </header>
 
 <style lang="scss">
   .site-header {
-    transition: background-color 300ms ease, border-color 300ms ease;
-    border-bottom: 1px solid transparent;
-
-    &.no-transition,
-    &.no-transition *  {
-      transition: none !important;
-    }
-
-    // ─── Sobre el hero: transparente, texto blanco ───
-    .nav-link { color: #fff; }
-    .lang-btn { color: #fff; }
-    .divider-slash { color: #fff; }
-    .header-divider { background-color: #fff; height: 32px; transition: height 300ms ease, background-color 300ms ease; }
-    .switch-label {
-      background-color: #fff;
-      border-color: #fff;
-      .slider::before {
-        box-shadow: inset 8px -4px 0px 0px #1D1D1F;
-        background-color: #fff;
-      }
-      .checkbox:checked ~ .slider::before {
-        box-shadow: none;
-        background-color: #1D1D1F;
-      }
-    }
-
-    // ─── Pasado el hero: fondo sólido, tokens semánticos ───
-    &.is-past-hero {
-      background-color: var(--primary);
-      border-bottom-color: var(--secondary);
-
-      .nav-link { color: var(--secondary); }
-      .lang-btn { color: var(--secondary); }
-      .divider-slash { color: var(--secondary); }
-      .header-divider { background-color: var(--secondary); height: 56px; }
-      .switch-label {
-        background-color: var(--secondary);
-        border-color: var(--secondary);
-        .slider::before {
-          box-shadow: inset 8px -4px 0px 0px var(--primary);
-          background-color: var(--secondary);
-        }
-        .checkbox:checked ~ .slider::before {
-          box-shadow: none;
-          background-color: var(--primary);
-        }
-      }
-    }
-
-    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 40;
+    background-color: var(--primary);
+    color: var(--secondary);
+    transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
 
     &.is-hidden {
       transform: translateY(-100%);
       pointer-events: none;
     }
+  }
 
-    // ─── Mobile bar (dentro de site-header para heredar estados) ───
-    .mobile-bar {
-      .nav-link { color: #fff; }
-      .hamburger-btn {
-        color: #fff;
-        background: none;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        padding: 4px;
-        outline: none;
-        transition: opacity 200ms;
-        &:hover { opacity: 0.7; }
+  .toolbar { width: 100%; }
+
+  .toolbar-grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto auto;
+    grid-template-rows: 36px 36px;
+    width: 100%;
+  }
+
+  .cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.25rem;
+    color: var(--secondary);
+    border-left: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    white-space: nowrap;
+
+    &[style*="grid-column:1"] { border-left: none; }
+  }
+
+  // ─── Nav ───
+  .nav-group {
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    border-left: none;
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 0 1.75rem;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: calc(1.75rem - 16px);
+        top: 50%;
+        transform: translateY(-50%) translateX(-6px);
+        opacity: 0;
+        width: 14px;
+        height: 14px;
+        background-color: currentColor;
+        mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 18L15 12L9 6' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
       }
-    }
 
-    &.is-past-hero {
-      .mobile-bar {
-        .nav-link { color: var(--secondary); }
-        .hamburger-btn { color: var(--secondary); }
+      &:hover::before, &.is-active::before {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
       }
     }
   }
 
-  .nav-link {
-    position: relative;
-    padding-bottom: 0.25rem;
-    transition: color 300ms ease;
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset-inline: 0;
-      bottom: -0.25rem;
-      height: 1px;
-      background: currentColor;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    &:hover::after,
-    &.is-active::after { transform: scaleX(1); }
+  // ─── Lang cells ───
+  .lang-cell {
+    padding: 0;
+    width: 3rem;
+    font-size: 0.875rem;
+    cursor: pointer;
   }
 
-  .lang-btn {
-    opacity: 0.6;
-    transition: opacity 300ms, color 300ms ease;
+  // ─── Theme ───
+  .theme-cell {
+    padding: 0;
     cursor: pointer;
 
-    &:hover { opacity: 0.75; }
-
-    &.lang-active { opacity: 1; }
+    label {
+      align-self: stretch;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1rem;
+      cursor: pointer;
+    }
   }
 
-  // ─── Mobile overlay ───
+  .theme-icon--moon { display: none; }
+  :global(.dark) .theme-icon--moon { display: block; }
+  :global(.dark) .theme-icon--sun  { display: none; }
+
+  // ─── Efecto cortina (lang, theme, info-link) ───
+  .lang-cell, .theme-cell, .info-cell--link {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--secondary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    > span, > label, > svg {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:hover::before { transform: scaleX(1); }
+    &:hover > span,
+    &:hover > label,
+    &:hover > svg { color: var(--primary); }
+  }
+
+  // ─── Status dot ───
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    flex-shrink: 0;
+    animation: status-pulse 2s ease-in-out infinite;
+    @media (prefers-reduced-motion: reduce) { animation: none; }
+  }
+
+  @keyframes status-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+  }
+
+  // ─── Info cells ───
+  .info-cell--link { cursor: pointer; }
+
+  .info-cell {
+    padding: 0 1.25rem;
+    min-width: 160px;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  // ─── Mobile bar ───
+  .mobile-bar {
+    display: flex;
+    align-items: stretch;
+    height: 72px;
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    @media (min-width: 1024px) { display: none; }
+  }
+
+  .mobile-logo-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.25rem;
+    border-right: 1px solid var(--secondary);
+    color: var(--secondary);
+    flex-shrink: 0;
+  }
+
+  .mobile-controls-bar {
+    display: flex;
+    align-items: stretch;
+    margin-left: auto;
+  }
+
+  .mobile-ctrl-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    border-left: 1px solid var(--secondary);
+    color: var(--secondary);
+    background: none;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .mobile-lang-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+    border-left: 1px solid var(--secondary);
+  }
+
+  .mobile-lang-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 0 1rem;
+    color: var(--secondary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    &:first-child { border-bottom: 1px solid var(--secondary); }
+  }
+
+  .mobile-available-cell {
+    gap: 10px;
+    border-left: none;
+    cursor: default;
+  }
+
   .mobile-overlay {
     position: fixed;
     inset: 0;
     background-color: var(--primary);
     display: flex;
     flex-direction: column;
-    padding: 2rem;
-    // Cortina: clip-path de arriba hacia abajo
     clip-path: inset(0 0 100% 0);
     transition: clip-path 800ms cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
     z-index: 50;
+    &.is-open { clip-path: inset(0 0 0% 0); pointer-events: all; }
+  }
 
-    &.is-open {
-      clip-path: inset(0 0 0% 0);
-      pointer-events: all;
-    }
+  .mobile-overlay-bar {
+    display: flex;
+    align-items: stretch;
+    height: 72px;
+    flex-shrink: 0;
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+  }
+
+  .mobile-overlay-spacer {
+    flex: 1;
+    border-right: 1px solid var(--secondary);
   }
 
   .mobile-close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
     background: none;
     border: none;
     cursor: pointer;
     color: var(--secondary);
-    padding: 4px;
-    outline: none;
-    display: flex;
-    align-items: center;
-    transition: opacity 200ms;
-    &:hover { opacity: 0.6; }
+    height: 100%;
   }
 
   .mobile-nav {
@@ -294,111 +436,51 @@ const { esHref, enHref } = getAlternatePath(pathname);
     font-weight: 300;
     color: var(--secondary);
     position: relative;
-    width: fit-content;
-    text-align: center;
-    transition: opacity 200ms;
 
-    &::after {
+    &::before {
       content: '';
       position: absolute;
-      inset-inline: 0;
-      bottom: -4px;
-      height: 2px;
-      background: currentColor;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+      left: -32px;
+      top: 45%;
+      transform: translateY(-50%) translateX(-6px);
+      width: 24px;
+      height: 24px;
+      background-color: currentColor;
+      mask-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 18L15 12L9 6' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      opacity: 0;
+      transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    &:hover { opacity: 0.7; }
-    &:hover::after,
-    &.is-active::after { transform: scaleX(1); }
-  }
-
-  .mobile-controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 0.5rem;
-
-    .lang-btn { color: var(--secondary); }
-    .divider-slash { color: var(--secondary); }
-  }
-
-  .theme-text-btn {
-    background-color: var(--secondary);
-    color: var(--primary);
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 0.75rem;
-    font-weight: 500;
-
-    padding: 8px 16px;
-    text-align: center;
-    border-radius: 8px;
-    transition: opacity 200ms;
-    span {
-      display: inline-block;
-      width: 100px;
-    }
-  }
-
-  .toggle-switch {
-    position: relative;
-    width: 50px;
-    height: 28px;
-  }
-
-  .switch-label {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 2px solid;
-    border-radius: 16px;
-    cursor: pointer;
-    transition: background-color 300ms ease, border-color 300ms ease;
-
-    .checkbox { position: absolute; display: none; }
-
-    .slider {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 16px;
-      transition: 0.3s;
-
-      &::before {
-        content: "";
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        transition: 0.3s;
-      }
-    }
-
-    .checkbox:checked ~ .slider::before {
-      transform: translateX(22px);
+    &.is-active::before {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
     }
   }
 </style>
 
 <script>
-	import { initHeaderScroll } from "../scripts/header-scroll";
-	initHeaderScroll();
-
-	// Remove no-transition class after first paint to enable animations
-	const headerEl = document.querySelector<HTMLElement>('[data-site-header]');
-	if (headerEl) {
-		requestAnimationFrame(() => {
-			requestAnimationFrame(() => {
-				headerEl.classList.remove('no-transition');
-			});
+	// ─── Theme toggle (desktop) ───
+	const checkbox = document.querySelector<HTMLInputElement>('[data-theme-checkbox]');
+	if (checkbox) {
+		checkbox.checked = document.documentElement.classList.contains('dark');
+		checkbox.addEventListener('change', () => {
+			const dark = checkbox.checked;
+			document.documentElement.classList.toggle('dark', dark);
+			localStorage.setItem('theme', dark ? 'dark' : 'light');
 		});
 	}
+
+	// ─── Theme toggle (mobile btn) ───
+	document.querySelector<HTMLButtonElement>('[data-theme-mobile-btn]')?.addEventListener('click', () => {
+		if (checkbox) {
+			checkbox.checked = !checkbox.checked;
+			checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+		}
+	});
 
 	// ─── Mobile menu ───
 	const hamburger = document.querySelector<HTMLButtonElement>('[data-hamburger]');
@@ -406,26 +488,26 @@ const { esHref, enHref } = getAlternatePath(pathname);
 	const closeBtn = document.querySelector<HTMLButtonElement>('[data-menu-close]');
 
 	if (hamburger && menu && closeBtn) {
+		const _menu = menu;
+		const _hamburger = hamburger;
+
 		function openMenu() {
-			menu!.classList.add('is-open');
-			menu!.removeAttribute('aria-hidden');
-			hamburger!.setAttribute('aria-expanded', 'true');
+			_menu.classList.add('is-open');
+			_menu.removeAttribute('aria-hidden');
+			_hamburger.setAttribute('aria-expanded', 'true');
 			document.body.style.overflow = 'hidden';
-			closeBtn!.focus();
 		}
 
 		function closeMenu() {
-			menu!.classList.remove('is-open');
-			menu!.setAttribute('aria-hidden', 'true');
-			hamburger!.setAttribute('aria-expanded', 'false');
+			_menu.classList.remove('is-open');
+			_menu.setAttribute('aria-hidden', 'true');
+			_hamburger.setAttribute('aria-expanded', 'false');
 			document.body.style.overflow = '';
-			hamburger!.focus();
 		}
 
 		hamburger.addEventListener('click', openMenu);
 		closeBtn.addEventListener('click', closeMenu);
 
-		// Close on nav link click — espera a que termine la animación antes de navegar
 		menu.querySelectorAll<HTMLAnchorElement>('.mobile-nav-link').forEach(link => {
 			link.addEventListener('click', (e) => {
 				const href = link.getAttribute('href');
@@ -436,31 +518,27 @@ const { esHref, enHref } = getAlternatePath(pathname);
 			});
 		});
 
-		// Close on Escape
 		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape' && menu!.classList.contains('is-open')) {
-				closeMenu();
-			}
+			if (e.key === 'Escape' && _menu.classList.contains('is-open')) closeMenu();
 		});
+	}
 
-		// Mobile theme button
-		const themeBtn = menu.querySelector<HTMLButtonElement>('[data-theme-mobile]');
-		const themeLabel = menu.querySelector<HTMLElement>('[data-theme-label]');
-		const desktopToggle = document.querySelector<HTMLInputElement>('#theme-toggle .checkbox');
-
-		function updateThemeLabel() {
-			if (!themeLabel) return;
-			const isDark = document.documentElement.classList.contains('dark');
-			themeLabel.textContent = isDark ? 'Modo día' : 'Modo noche';
-		}
-
-		if (themeBtn && desktopToggle) {
-			updateThemeLabel();
-			themeBtn.addEventListener('click', () => {
-				desktopToggle.checked = !desktopToggle.checked;
-				desktopToggle.dispatchEvent(new Event('change', { bubbles: true }));
-				updateThemeLabel();
-			});
-		}
+	// ─── Mobile scroll hide/show ───
+	const header = document.querySelector<HTMLElement>('[data-site-header]');
+	if (header) {
+		let lastY = window.scrollY;
+		window.addEventListener('scroll', () => {
+			if (window.innerWidth >= 1024) return;
+			if (menu?.classList.contains('is-open')) return;
+			const currentY = window.scrollY;
+			if (currentY < 10) {
+				header.classList.remove('is-hidden');
+			} else if (currentY > lastY) {
+				header.classList.add('is-hidden');
+			} else {
+				header.classList.remove('is-hidden');
+			}
+			lastY = currentY;
+		}, { passive: true });
 	}
 </script>

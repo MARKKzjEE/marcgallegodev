@@ -1,0 +1,142 @@
+---
+import { Image } from 'astro:assets';
+import { getLang, useTranslations } from '../i18n/index';
+import { projectImages, projectColors } from '../data/projects';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+
+const isEn = lang === 'en';
+const breadcrumb = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [
+		{ "@type": "ListItem", "position": 1, "name": isEn ? "Home" : "Inicio", "item": isEn ? "https://marcgallego.com/en/" : "https://marcgallego.com/" },
+		{ "@type": "ListItem", "position": 2, "name": isEn ? "Projects" : "Proyectos", "item": isEn ? "https://marcgallego.com/en/projects/" : "https://marcgallego.com/proyectos/" }
+	]
+};
+
+const projects = t.projects.items.map((item, i) => ({
+	...item,
+	image: projectImages[i],
+	color: projectColors[i],
+}));
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+
+<main class="min-h-screen bg-primary pt-18">
+<section class="projects-grid-section border-t border-secondary py-16" id="proyectos">
+	<!-- Header -->
+	<div class="projects-grid-header px-4 md:px-10">
+		<h1 class="font-nord font-normal text-secondary projects-grid-title">
+			{t.projects.grid.title}
+		</h1>
+		<p class="text-mono-label-soft mt-2">
+			{t.projects.grid.subtitle}
+		</p>
+	</div>
+
+	<!-- Grid -->
+	<div class="projects-grid px-4 md:px-10">
+		{projects.map((project) => (
+			<article class:list={['project-grid-item', { 'is-full': project.title === 'RTTH' }]}>
+				<div class="project-grid-image" style={`background-color: ${project.color};`}>
+					<Image
+						src={project.image}
+						alt={`${project.title} — ${project.description}`}
+						widths={[600, 900, 1400]}
+						sizes="(max-width: 768px) 100vw, 50vw"
+						format="webp"
+						quality={90}
+						loading="lazy"
+						draggable={false}
+						class="project-grid-img"
+					/>
+				</div>
+				<div class="project-grid-info">
+					<h2 class="project-grid-name font-monoblock font-medium text-secondary">{project.title}</h2>
+					<p class="project-grid-desc text-cottor-body">{project.description}</p>
+				</div>
+			</article>
+		))}
+	</div>
+</section>
+</main>
+
+<style lang="scss">
+.projects-grid-section {
+	overflow: hidden;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.projects-grid-header {
+	margin-bottom: 2rem;
+}
+
+.projects-grid-title {
+	font-size: clamp(35px, 8vw, 80px);
+	line-height: 1;
+}
+
+.projects-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2.5rem;
+
+	@media (min-width: 768px) {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2.5rem;
+	}
+}
+
+.project-grid-item {
+	display: flex;
+	flex-direction: column;
+
+	&.is-full {
+		@media (min-width: 768px) {
+			grid-column: 1 / -1;
+
+			.project-grid-image {
+				aspect-ratio: 21 / 9;
+			}
+		}
+	}
+}
+
+.project-grid-image {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	overflow: hidden;
+}
+
+.project-grid-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	-webkit-user-drag: none;
+	pointer-events: none;
+	transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+	.project-grid-item:hover & {
+		transform: scale(1.05);
+	}
+}
+
+.project-grid-info {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	padding-top: 1rem;
+}
+
+.project-grid-name {
+	font-size: clamp(1.1rem, 2vw, 1.4rem);
+}
+
+.project-grid-desc {}
+</style>

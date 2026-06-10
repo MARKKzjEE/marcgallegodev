@@ -1,62 +1,51 @@
 ---
 import { Image } from 'astro:assets';
 import { getLang, useTranslations } from '../i18n/index';
-import cordesuro from '../assets/projects/cordesuro.png';
-import lateua from '../assets/projects/lateua.png';
-import loyic from '../assets/projects/loyic.png';
-import pillositio from '../assets/projects/pillositio.png';
-import planit from '../assets/projects/planit.png';
-import rtth from '../assets/projects/rtth.png';
-import viviq from '../assets/projects/viviq.png';
+import { projectImages, projectColors } from '../data/projects';
+
+interface Props {
+	/** Indices of projects to show (e.g. [0, 2, 4, 6]). Omit to show all. */
+	indices?: number[];
+}
+
+const { indices } = Astro.props;
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 
-const isEn = lang === 'en';
-const breadcrumb = {
-	"@context": "https://schema.org",
-	"@type": "BreadcrumbList",
-	"itemListElement": [
-		{ "@type": "ListItem", "position": 1, "name": isEn ? "Home" : "Inicio", "item": isEn ? "https://marcgallego.com/en/" : "https://marcgallego.com/" },
-		{ "@type": "ListItem", "position": 2, "name": isEn ? "Projects" : "Proyectos", "item": isEn ? "https://marcgallego.com/en/projects/" : "https://marcgallego.com/proyectos/" }
-	]
-};
-
-const projectImages = [viviq, cordesuro, lateua, loyic, pillositio, planit, rtth];
-const projectColors = ['#00676A', '#8C4216', '#BD7D60', '#F1EBF1', '#F6F4EE', '#FA4D6E', '#7F7FE7'];
-
-const projects = t.projects.items.map((item, i) => ({
+const allProjects = t.projects.items.map((item, i) => ({
 	...item,
 	image: projectImages[i],
 	color: projectColors[i],
 }));
+
+const projects = indices
+	? indices.map(i => allProjects[i]).filter(Boolean)
+	: allProjects;
 ---
 
-<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
-
-<main class="min-h-screen bg-primary pt-14">
-<section class="projects-section" id="proyectos-destacados">
+<section class="projects-section border-t border-secondary pt-16 md:pt-30" id="proyectos-destacados">
 	<!-- Header -->
 	<div class="projects-header px-4 md:px-10">
-		<h1 class="font-vogun font-light text-secondary projects-title">
-			{t.projects.pageTitle}
-		</h1>
-		<p class="font-nord font-light text-secondary/60 text-sm mt-2">
-			{t.projects.dragHint}
+		<h2 class="font-nord font-normal text-secondary projects-title">
+			{t.projects.carousel.title}
+		</h2>
+		<p class="text-mono-label-soft mt-2">
+			{t.projects.carousel.subtitle}
 		</p>
 	</div>
 
-	<!-- Zona de imágenes: drag + cursor custom -->
-	<div class="projects-images-wrapper" data-projects-track>
+	<!-- Zona de drag + cursor custom -->
+	<div class="projects-wrapper" data-projects-track>
 		<div class="projects-track" data-track>
 			{projects.map((project, i) => (
-				<div class="project-image-slot" data-index={i}>
+				<article class="project-slot" data-index={i}>
 					<div class="project-card-image" style={`background-color: ${project.color};`}>
 						<Image
 							src={project.image}
 							alt={`${project.title} — ${project.description}`}
-							widths={[600, 900]}
-							sizes="(max-width: 768px) 90vw, 40vw"
+							widths={[600, 900, 1400]}
+							sizes="(max-width: 768px) 85vw, 45vw"
 							format="webp"
 							quality={90}
 							loading="lazy"
@@ -64,7 +53,11 @@ const projects = t.projects.items.map((item, i) => ({
 							class="project-img"
 						/>
 					</div>
-				</div>
+					<div class="project-info">
+						<h2 class="project-card-title font-monoblock font-medium text-secondary">{project.title}</h2>
+						<p class="project-card-desc text-cottor-body">{project.description}</p>
+					</div>
+				</article>
 			))}
 		</div>
 
@@ -80,30 +73,20 @@ const projects = t.projects.items.map((item, i) => ({
 		</div>
 	</div>
 
-	<!-- Info debajo: sincronizada por JS -->
-	<div class="projects-info-row">
-		{projects.map((project, i) => (
-			<div class="project-info-item" data-info-index={i}>
-				<h2 class="project-card-title font-nord font-medium text-secondary">{project.title}</h2>
-				<p class="project-card-desc font-cottor font-light text-secondary/80">{project.description}</p>
-			</div>
+	<!-- Pagination dots -->
+	<div class="projects-dots" data-projects-dots aria-live="polite" aria-label="Navegación de proyectos">
+		{projects.map((_, i) => (
+			<button type="button" class:list={['projects-dot', { 'is-active': i === 0 }]} data-dot-index={i} aria-label={`Proyecto ${i + 1}`} />
 		))}
 	</div>
 </section>
-</main>
 
 <style lang="scss">
 .projects-section {
-	padding: 6rem 0;
 	overflow: hidden;
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	height: calc(100vh - 56px);
-
-	@media (max-width: 767px) {
-		padding: 4rem 0;
-	}
 }
 
 .projects-header {
@@ -111,18 +94,18 @@ const projects = t.projects.items.map((item, i) => ({
 }
 
 .projects-title {
-	font-size: clamp(48px, 5vw, 80px);
+	font-size: clamp(35px, 8vw, 80px);
+	line-height: 1;
 }
 
-// ─── Images zone (drag + cursor) ───
+// ─── Drag wrapper ───
 
-.projects-images-wrapper {
+.projects-wrapper {
 	position: relative;
 	width: 100%;
 	cursor: none;
-	flex: 1;
-	min-height: 0;
-	margin-bottom: 1.25rem;
+	overflow-x: clip;
+	overflow-y: visible;
 
 	&:hover .projects-cursor {
 		opacity: 1;
@@ -136,38 +119,24 @@ const projects = t.projects.items.map((item, i) => ({
 	padding: 0 2.5rem;
 
 	@media (max-width: 767px) {
-		gap: 2rem;
+		gap: 1rem;
 		padding: 0 1rem;
 	}
-	overflow-x: scroll;
-	scrollbar-width: none;
-	-webkit-overflow-scrolling: touch;
 	user-select: none;
-	height: 100%;
-
-	&::-webkit-scrollbar {
-		display: none;
-	}
-
-	&.is-snapping {
-		scroll-snap-type: x mandatory;
-		scroll-padding-left: 2.5rem;
-
-		@media (max-width: 767px) {
-			scroll-padding-left: 1rem;
-		}
-	}
+	will-change: transform;
 }
 
-.project-image-slot {
-	flex: 0 0 clamp(300px, 40vw, 580px);
-	scroll-snap-align: start;
-	height: 100%;
+.project-slot {
+	flex: 0 0 calc(45% - 2.5rem);
+
+	@media (max-width: 767px) {
+		flex: 0 0 calc(85% - 1rem);
+	}
 }
 
 .project-card-image {
 	width: 100%;
-	height: 100%;
+	aspect-ratio: 4 / 3;
 	overflow: hidden;
 }
 
@@ -181,30 +150,16 @@ const projects = t.projects.items.map((item, i) => ({
 	transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.project-image-slot:hover .project-img {
+.project-slot:hover .project-img {
 	transform: scale(1.05);
 }
 
-// ─── Info row (no drag zone) ───
+// ─── Info (inside each slot) ───
 
-.projects-info-row {
-	display: flex;
-	gap: 2.5rem;
-	padding: 0 2.5rem;
-	pointer-events: none;
-	will-change: transform;
-
-	@media (max-width: 767px) {
-		gap: 2rem;
-		padding: 0 1rem;
-	}
-}
-
-.project-info-item {
-	flex: 0 0 clamp(300px, 40vw, 580px);
+.project-info {
 	display: flex;
 	flex-direction: column;
-	gap: 0.35rem;
+	gap: 0.2rem;
 	padding-top: 1rem;
 }
 
@@ -212,8 +167,63 @@ const projects = t.projects.items.map((item, i) => ({
 	font-size: clamp(1.1rem, 2vw, 1.4rem);
 }
 
-.project-card-desc {
-	font-size: 0.875rem;
+.project-card-desc {}
+
+// ─── Pagination dots ───
+
+.projects-dots {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 1.5rem 0 0 0;
+	height: calc(1.5rem + 10px);
+
+	@media (min-width: 768px) {
+		padding: 4rem 0 0 0;
+		height: calc(4rem + 14px);
+	}
+}
+
+.projects-dot {
+	width: 8px;
+	height: 8px;
+	padding: 0;
+	border: none;
+	background: var(--secondary);
+	opacity: 0.25;
+	cursor: pointer;
+	transition:
+		width 400ms cubic-bezier(0.22, 1, 0.36, 1),
+		height 400ms cubic-bezier(0.22, 1, 0.36, 1),
+		opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
+
+	@media (max-width: 767px) {
+		width: 6px;
+		height: 6px;
+	}
+
+	&:hover {
+		opacity: 0.6;
+		width: 10px;
+		height: 10px;
+
+		@media (max-width: 767px) {
+			width: 8px;
+			height: 8px;
+		}
+	}
+
+	&.is-active {
+		width: 14px;
+		height: 14px;
+		opacity: 1;
+
+		@media (max-width: 767px) {
+			width: 10px;
+			height: 10px;
+		}
+	}
 }
 
 // ─── Custom cursor ───
@@ -242,12 +252,12 @@ const projects = t.projects.items.map((item, i) => ({
 }
 
 .projects-cursor-inner {
-	width: 80px;
-	height: 80px;
+	width: 64px;
+	height: 64px;
 
 	@media (max-width: 767px) {
-		width: 56px;
-		height: 56px;
+		width: 48px;
+		height: 48px;
 	}
 	border-radius: 50%;
 	background: var(--secondary);
@@ -268,25 +278,44 @@ const projects = t.projects.items.map((item, i) => ({
 	const wrapper = document.querySelector<HTMLElement>('[data-projects-track]');
 	const track = wrapper?.querySelector<HTMLElement>('[data-track]');
 	const cursor = wrapper?.querySelector<HTMLElement>('[data-cursor]');
-	const infoRow = document.querySelector<HTMLElement>('.projects-info-row');
+	const dots = Array.from(document.querySelectorAll<HTMLElement>('[data-dot-index]'));
 
-	if (wrapper && track && cursor && infoRow) {
+	if (wrapper && track && cursor) {
 
-		// ─── Infinite loop: clone slots ───
-		// Structure: [clones-end | originals | clones-start]
-		// We start scrolled at the "originals" block.
-
-		const originalSlots = Array.from(track.querySelectorAll<HTMLElement>('.project-image-slot'));
+		const originalSlots = Array.from(track.querySelectorAll<HTMLElement>('.project-slot'));
 		const n = originalSlots.length;
 
-		// Clone into track (clones-start appended after originals)
+		// ─── Position state ───
+		let currentX = 0;
+		let targetSnapX = 0;
+		let isSnapping = false;
+		let snapRaf: number | null = null;
+
+		function applyTranslate() {
+			track!.style.transform = `translateX(${-currentX}px)`;
+		}
+
+		// ─── Slot geometry ───
+		function getSlotPositions(): number[] {
+			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-slot'));
+			if (!allSlots.length) return [];
+			const padding = allSlots[0].offsetLeft;
+			return allSlots.map(slot => slot.offsetLeft - padding);
+		}
+
+		function getBlockWidth(): number {
+			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-slot'));
+			if (allSlots.length < n + 1) return 0;
+			return allSlots[2 * n].offsetLeft - allSlots[n].offsetLeft;
+		}
+
+		// ─── Infinite loop: clone slots ───
 		originalSlots.forEach(slot => {
 			const clone = slot.cloneNode(true) as HTMLElement;
 			clone.setAttribute('aria-hidden', 'true');
 			track.appendChild(clone);
 		});
 
-		// Clone before originals (clones-end prepended)
 		const clonesEnd = originalSlots.map(slot => {
 			const clone = slot.cloneNode(true) as HTMLElement;
 			clone.setAttribute('aria-hidden', 'true');
@@ -294,98 +323,154 @@ const projects = t.projects.items.map((item, i) => ({
 		});
 		clonesEnd.forEach(clone => track.insertBefore(clone, originalSlots[0]));
 
-		// Clone info row items
-		const infoOriginals = Array.from(infoRow.querySelectorAll<HTMLElement>('.project-info-item[data-info-index]'));
-		infoOriginals.forEach(item => {
-			const clone = item.cloneNode(true) as HTMLElement;
-			clone.setAttribute('aria-hidden', 'true');
-			infoRow.appendChild(clone);
-		});
-		infoOriginals.forEach(item => {
-			const clone = item.cloneNode(true) as HTMLElement;
-			clone.setAttribute('aria-hidden', 'true');
-			infoRow.insertBefore(clone, infoOriginals[0]);
-		});
-
-		// Sync helper: use translateX instead of scrollLeft for GPU compositing
-		function syncInfoRow() {
-			infoRow!.style.transform = `translateX(-${track!.scrollLeft}px)`;
-		}
-
-		// After cloning, read the true track padding from the first slot
-		// (which is now a clonesEnd[0], same offsetLeft as original padding)
-		// We need to wait for layout to settle before reading offsetLeft.
-
-		// ─── Snap positions ───
-		// Returns positions of all slots (including clones) relative to scrollLeft=0
-		function getSlotPositions(): number[] {
-			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-image-slot'));
-			if (!allSlots.length) return [];
-			const padding = allSlots[0].offsetLeft;
-			return allSlots.map(slot => slot.offsetLeft - padding);
-		}
-
-		// Total width of one set of originals (used for loop teleport)
-		function getBlockWidth(): number {
-			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-image-slot'));
-			if (allSlots.length < n + 1) return 0;
-			// The first original is at index n (after n clones-end)
-			// The first clone-start is at index 2n
-			return allSlots[2 * n].offsetLeft - allSlots[n].offsetLeft;
-		}
-
-		// Jump to originals block on init (skip the clones-end prefix)
+		// Init position at originals block
 		requestAnimationFrame(() => {
-			const blockWidth = getBlockWidth();
-			track!.scrollLeft = blockWidth;
-			syncInfoRow();
+			currentX = getBlockWidth();
+			applyTranslate();
 		});
 
-		// ─── Infinite loop teleport ───
-		let isTeleporting = false;
-
+		// ─── Loop teleport ───
 		function checkLoop() {
-			if (isTeleporting) return;
 			const blockWidth = getBlockWidth();
 			if (blockWidth === 0) return;
-			const sl = track!.scrollLeft;
-
-			// Past clones-start → jump back to originals
-			if (sl >= blockWidth * 2) {
-				isTeleporting = true;
-				track!.scrollLeft = sl - blockWidth;
-				syncInfoRow();
-				isTeleporting = false;
-			}
-			// Before originals → jump forward to originals
-			else if (sl < blockWidth) {
-				isTeleporting = true;
-				track!.scrollLeft = sl + blockWidth;
-				syncInfoRow();
-				isTeleporting = false;
+			if (currentX >= blockWidth * 2) {
+				currentX -= blockWidth;
+				applyTranslate();
+				updateDots();
+			} else if (currentX < blockWidth) {
+				currentX += blockWidth;
+				applyTranslate();
+				updateDots();
 			}
 		}
 
-		// ─── Sync info row ───
-		track.addEventListener('scroll', () => {
-			if (!isTeleporting) syncInfoRow();
-			checkLoop();
-		}, { passive: true });
+		// ─── Active dot ───
+		let activeDot = 0;
+
+		function updateDots() {
+			const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-slot'));
+			if (!allSlots.length) return;
+			const padding = allSlots[0].offsetLeft;
+			let closest = 0;
+			let minDist = Infinity;
+			for (let i = 0; i < allSlots.length; i++) {
+				const pos = allSlots[i].offsetLeft - padding;
+				const dist = Math.abs(currentX - pos);
+				if (dist < minDist) {
+					minDist = dist;
+					closest = i % n;
+				}
+			}
+			if (closest !== activeDot) {
+				dots[activeDot]?.classList.remove('is-active');
+				dots[closest]?.classList.add('is-active');
+				activeDot = closest;
+			}
+		}
+
+		// ─── Snap animation ───
+		let snapStartX = 0;
+		let snapProgress = 0;
+		const SNAP_DURATION = 500; // ms
+		let snapStartTime = 0;
+
+		function easeOut(t: number): number {
+			return 1 - Math.pow(1 - t, 3);
+		}
+
+		function animateSnap() {
+			const elapsed = performance.now() - snapStartTime;
+			snapProgress = Math.min(elapsed / SNAP_DURATION, 1);
+
+			currentX = snapStartX + (targetSnapX - snapStartX) * easeOut(snapProgress);
+			applyTranslate();
+			updateDots();
+
+			if (snapProgress >= 1) {
+				currentX = targetSnapX;
+				isSnapping = false;
+				snapRaf = null;
+				applyTranslate();
+				checkLoop();
+				updateDots();
+				return;
+			}
+			snapRaf = requestAnimationFrame(animateSnap);
+		}
+
+		function snapTo(target: number) {
+			// Find closest instance (direct, +block, -block)
+			const blockWidth = getBlockWidth();
+			if (blockWidth > 0) {
+				const candidates = [target, target + blockWidth, target - blockWidth];
+				let best = target;
+				let bestDist = Infinity;
+				for (const c of candidates) {
+					const d = Math.abs(currentX - c);
+					if (d < bestDist) { bestDist = d; best = c; }
+				}
+				target = best;
+			}
+			targetSnapX = target;
+			snapStartX = currentX;
+			snapStartTime = performance.now();
+			isSnapping = true;
+			if (!snapRaf) snapRaf = requestAnimationFrame(animateSnap);
+		}
+
+		// ─── Dot click → snap to project ───
+		dots.forEach((dot, i) => {
+			dot.addEventListener('click', () => {
+				const allSlots = Array.from(track!.querySelectorAll<HTMLElement>('.project-slot'));
+				const targetSlot = allSlots[n + i];
+				if (!targetSlot) return;
+				const pos = targetSlot.offsetLeft - allSlots[0].offsetLeft;
+				snapTo(pos);
+			});
+		});
+
+		// ─── Snap helper ───
+		let dragStartIdx = 0;
+
+		function getClosestSlotIdx(): number {
+			const positions = getSlotPositions();
+			if (!positions.length) return 0;
+			let closest = 0;
+			let minDist = Infinity;
+			for (let i = 0; i < positions.length; i++) {
+				const dist = Math.abs(currentX - positions[i]);
+				if (dist < minDist) { minDist = dist; closest = i; }
+			}
+			return closest;
+		}
+
+		function getSnapTarget(direction: number): number {
+			const positions = getSlotPositions();
+			if (!positions.length) return currentX;
+
+			const targetIdx = direction > 0
+				? Math.min(dragStartIdx + 1, positions.length - 1)
+				: direction < 0
+					? Math.max(dragStartIdx - 1, 0)
+					: dragStartIdx;
+
+			return positions[targetIdx];
+		}
 
 		// ─── Custom cursor with lerp ───
 		let cursorX = 0;
 		let cursorY = 0;
-		let targetX = 0;
-		let targetY = 0;
+		let targetCursorX = 0;
+		let targetCursorY = 0;
 		let rafCursor: number | null = null;
 
 		function tickCursor() {
-			cursorX += (targetX - cursorX) * 0.14;
-			cursorY += (targetY - cursorY) * 0.14;
+			cursorX += (targetCursorX - cursorX) * 0.14;
+			cursorY += (targetCursorY - cursorY) * 0.14;
 			cursor!.style.left = `${cursorX}px`;
 			cursor!.style.top = `${cursorY}px`;
 
-			if (Math.abs(cursorX - targetX) > 0.3 || Math.abs(cursorY - targetY) > 0.3) {
+			if (Math.abs(cursorX - targetCursorX) > 0.3 || Math.abs(cursorY - targetCursorY) > 0.3) {
 				rafCursor = requestAnimationFrame(tickCursor);
 			} else {
 				rafCursor = null;
@@ -394,65 +479,54 @@ const projects = t.projects.items.map((item, i) => ({
 
 		wrapper.addEventListener('mousemove', (e) => {
 			const rect = wrapper.getBoundingClientRect();
-			targetX = e.clientX - rect.left;
-			targetY = e.clientY - rect.top;
+			targetCursorX = e.clientX - rect.left;
+			targetCursorY = e.clientY - rect.top;
 			if (!rafCursor) rafCursor = requestAnimationFrame(tickCursor);
 		});
 
-		// ─── Snap helper ───
-		function getSnapTarget(direction: number): number {
-			const positions = getSlotPositions();
-			if (!positions.length) return track!.scrollLeft;
-			const current = track!.scrollLeft;
-
-			const raw = positions.findIndex((pos, i) => {
-				const next = positions[i + 1] ?? Infinity;
-				return current >= pos - 2 && current < next - 2;
-			});
-			const currentIdx = raw === -1 ? positions.length - 1 : raw;
-
-			const targetIdx = direction > 0
-				? Math.min(currentIdx + 1, positions.length - 1)
-				: direction < 0
-					? Math.max(currentIdx - 1, 0)
-					: currentIdx;
-
-			return positions[targetIdx];
-		}
-
-		// ─── Drag ───
+		// ─── Drag (mouse) ───
 		let isDragging = false;
 		let startX = 0;
-		let startScroll = 0;
+		let startPos = 0;
 		let lastX = 0;
 		let lastDx = 0;
 
-		track.addEventListener('mousedown', (e) => {
+		wrapper.addEventListener('mousedown', (e) => {
+			if (isSnapping && snapRaf) { cancelAnimationFrame(snapRaf); snapRaf = null; isSnapping = false; }
 			isDragging = true;
 			startX = e.clientX;
-			startScroll = track.scrollLeft;
+			startPos = currentX;
 			lastX = e.clientX;
 			lastDx = 0;
+			dragStartIdx = getClosestSlotIdx();
 		});
 
 		window.addEventListener('mousemove', (e) => {
 			if (!isDragging) return;
 			lastDx = e.clientX - lastX;
 			lastX = e.clientX;
-			track.scrollLeft = startScroll - (e.clientX - startX);
+			currentX = startPos - (e.clientX - startX);
+			checkLoop();
+			applyTranslate();
+			updateDots();
 		});
 
 		window.addEventListener('mouseup', () => {
 			if (!isDragging) return;
 			isDragging = false;
 			const dir = lastDx > 2 ? -1 : lastDx < -2 ? 1 : 0;
-			const target = getSnapTarget(dir);
-			track.scrollTo({ left: target, behavior: 'smooth' });
+			snapTo(getSnapTarget(dir));
 		});
 
-		// ─── Touch: mostrar cursor en touchstart, ocultar al arrastrar ───
+		// ─── Drag (touch) ───
+		let touchStartX = 0;
+		let touchStartY = 0;
+		let touchStartPos = 0;
+		let touchLastX = 0;
+		let touchLastDx = 0;
+		let touchLocked: 'horizontal' | 'vertical' | null = null;
 		const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
-		let hideCursorTimeout: ReturnType<typeof setTimeout> | null = null;
+		let hideCursorTimeout: ReturnType<typeof setTimeout> | null = null; // used in touchend
 
 		function showCursorAt(x: number, y: number) {
 			const rect = wrapper!.getBoundingClientRect();
@@ -468,21 +542,52 @@ const projects = t.projects.items.map((item, i) => ({
 		}
 
 		wrapper.addEventListener('touchstart', (e) => {
-			if (!isMobile()) return;
-			if (hideCursorTimeout) clearTimeout(hideCursorTimeout);
+			if (isSnapping && snapRaf) { cancelAnimationFrame(snapRaf); snapRaf = null; isSnapping = false; }
 			const touch = e.touches[0];
-			showCursorAt(touch.clientX, touch.clientY);
+			touchStartX = touch.clientX;
+			touchStartY = touch.clientY;
+			touchStartPos = currentX;
+			touchLastX = touch.clientX;
+			touchLastDx = 0;
+			touchLocked = null;
+			dragStartIdx = getClosestSlotIdx();
 		}, { passive: true });
 
 		wrapper.addEventListener('touchmove', (e) => {
-			if (!isMobile()) return;
 			const touch = e.touches[0];
-			showCursorAt(touch.clientX, touch.clientY);
+			const dx = Math.abs(touch.clientX - touchStartX);
+			const dy = Math.abs(touch.clientY - touchStartY);
+
+			// Lock direction on first significant move
+			if (!touchLocked && (dx > 8 || dy > 8)) {
+				touchLocked = dx > dy ? 'horizontal' : 'vertical';
+			}
+
+			// If vertical, let browser handle scroll
+			if (touchLocked === 'vertical') {
+				hideCursor();
+				return;
+			}
+
+			// Horizontal drag
+			touchLastDx = touch.clientX - touchLastX;
+			touchLastX = touch.clientX;
+			currentX = touchStartPos - (touch.clientX - touchStartX);
+			checkLoop();
+			applyTranslate();
+			updateDots();
+			if (isMobile()) showCursorAt(touch.clientX, touch.clientY);
 		}, { passive: true });
 
 		wrapper.addEventListener('touchend', () => {
-			if (!isMobile()) return;
-			hideCursorTimeout = setTimeout(hideCursor, 400);
+			if (touchLocked === 'vertical' || !touchLocked) {
+				touchLocked = null;
+				return;
+			}
+			touchLocked = null;
+			const dir = touchLastDx > 2 ? -1 : touchLastDx < -2 ? 1 : 0;
+			snapTo(getSnapTarget(dir));
+			if (isMobile()) hideCursorTimeout = setTimeout(hideCursor, 400);
 		}, { passive: true });
 	}
 </script>

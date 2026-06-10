@@ -2,20 +2,20 @@ export const es = {
 	// ── Meta / SEO ──
 	meta: {
 		siteName: "Marc Gallego",
-		defaultTitle: "Marc Gallego",
-		defaultDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida.",
+		defaultTitle: "Marc Gallego | Ingeniero de Software Full Stack en Barcelona",
+		defaultDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance en Barcelona. Desarrollo web, aplicaciones móviles y soluciones digitales a medida.",
 		defaultKeywords: "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles",
-		indexTitle: "Marc Gallego",
-		indexDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance. Desarrollo web, aplicaciones y soluciones digitales a medida.",
+		indexTitle: "Marc Gallego | Ingeniero de Software Full Stack en Barcelona",
+		indexDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance en Barcelona. Desarrollo web, aplicaciones móviles y soluciones digitales a medida.",
 		indexKeywords: "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles",
-		experienceTitle: "Experiencia | Marc Gallego",
-		experienceDescription: "Trayectoria profesional de Marc Gallego: +5 años como ingeniero de software Full Stack en Barcelona. Experiencia en Laravel, Django, React, Angular, DevOps y desarrollo de apps móviles.",
+		experienceTitle: "Experiencia profesional | Marc Gallego — Full Stack Developer",
+		experienceDescription: "Trayectoria profesional de Marc Gallego: +5 años como ingeniero de software Full Stack en Barcelona. Laravel, Django, React, Angular, DevOps y apps móviles.",
 		experienceKeywords: "experiencia Marc Gallego, CV desarrollador Barcelona, ingeniero software Full Stack, Laravel, Django, React, Angular, DevOps",
-		projectsTitle: "Proyectos | Marc Gallego",
-		projectsDescription: "Portfolio de proyectos de Marc Gallego: plataformas web, SaaS, apps móviles y soluciones digitales a medida desarrolladas en Barcelona.",
+		projectsTitle: "Proyectos | Marc Gallego — Desarrollo web y apps a medida",
+		projectsDescription: "Portfolio de proyectos de Marc Gallego: plataformas web, SaaS, apps móviles y soluciones digitales a medida. Desarrollados con Laravel, React, Django y más en Barcelona.",
 		projectsKeywords: "proyectos web Marc Gallego, portfolio desarrollador Barcelona, SaaS, plataformas web, apps móviles, desarrollo a medida",
-		contactTitle: "Contacto | Marc Gallego",
-		contactDescription: "¿Tienes un proyecto en mente? Escríbeme y hablemos.",
+		contactTitle: "Contacto | Marc Gallego — Desarrollador freelance Barcelona",
+		contactDescription: "¿Tienes un proyecto en mente? Contacta con Marc Gallego, desarrollador Full Stack freelance en Barcelona. Desarrollo web, apps móviles y soluciones digitales a medida.",
 		contactKeywords: "contacto Marc Gallego, contratar desarrollador Barcelona, freelance Full Stack, presupuesto web, desarrollo a medida",
 	},
 
@@ -64,16 +64,22 @@ export const es = {
 		descCorner: "Estas son las tecnologías que utilizo en mi día a día. Siempre me gusta seguir explorando nuevas herramientas para poder elegir la mejor solución según las necesidades de cada proyecto.",
 		toggleShow: "Ver tecnologías",
 		toggleHide: "Ocultar tecnologías",
+		typewriterPhrases: [
+			"Estas son mis tecnologías más usadas.",
+			"Interactúa con el icono para ver los nombres.",
+			"Siempre explorando nuevas herramientas.",
+			"La mejor herramienta depende del proyecto.",
+		],
 	},
 
 	// ── About ──
 	about: {
 		title: "Sobre mi",
 		titleDecorative: "SOBRE MI",
-		tagline: "Diseño creativo & desarrollo digital desde 2018",
+		tagline: "Diseño creativo y técnico por Marc Gallego",
 		bioMobile: "Nacido en Barcelona, desde pequeño he tenido un amor por los ordenadores. La capacidad creativa que te permiten me hizo entrar en este mundo y a día de hoy me dedico a algo que disfruto. Fuera del código tengo dos grandes pasiones que son el mar y la moda. En el primero encuentro la calma y en la segunda, un espacio para experimentar y expresar mi creatividad.",
 		bioDesktop1: "Nacido en Barcelona, desde pequeño veía a mi padre arreglar ordenadores a amigos porque le gustaba y así empecé yo a pasarme horas desmontando y montándolos. \n\nCuando fui creciendo me fui adentrando en el mundo del software, la capacidad de creatividad que veía en programas de sistemas operativos y videojuegos era algo que me fascinaba. Así que poco a poco fui probando con el desarrollo de software hasta el día de hoy.",
-		bioDesktop2: "Más allá del desarrollo, podrás ver una clara referencia al mar que es mi equilibrio. El lugar donde desconecto, ordeno ideas y vuelvo con claridad. \n\nTambién soy un amante del arte y de la moda, me encanta la capacidad creativa de la gente y la diversidad que se crea en cuanto a estilos. Aplico esta creatividad y gusto en la forma de vestirme y diseñar como también cuando le doy mi toque a mis soluciones digitales.",
+		bioDesktop2: "Más allá del desarrollo, mi pasión es el mar donde encuentro mi equilibrio. El lugar donde desconecto, ordeno ideas y vuelvo con claridad. \n\nTambién soy un amante del arte y de la moda, me encanta la capacidad de expresión de la gente y la diversidad que se crea en cuanto a estilos. Aplico esta creatividad y gusto en la forma de vestirme y diseñar, como también cuando le doy mi toque a mis soluciones digitales.",
 		profileAlt: "Marc Gallego, desarrollador Full Stack en Barcelona",
 	},
 
@@ -86,13 +92,14 @@ export const es = {
 	// ── Partners ──
 	partners: {
 		heading: "Partners",
+		subtitle: "Colaboraciones con estudios y profesionales",
 		badge: "desde 2024",
 		dokoDesc: "Estudio de branding, diseño y desarrollo web",
 		dokoLogoAlt: "Logo Doko Studio",
 		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
-		studioLabel: "¿Cómo colaboras?",
-		studioText1: "Es un pequeño estudio que cuenta con perfiles especializados para cada fase de un proyecto: branding, diseño, desarrollo y puesta en producción. Pueden ofrecer una solución completa o integrarse en equipos existentes para cubrir necesidades concretas en cualquier etapa.",
-		studioText2: "Por mi parte, colaboro aportando mi experiencia y servicios, participando tanto de forma puntual como trabajando conjuntamente en proyectos de mayor envergadura.",
+		studioLabel: "¿Cómo colaboro?",
+		studioText1: "Por mi parte, colaboro aportando mi experiencia y servicios, participando tanto de forma puntual como trabajando conjuntamente en proyectos de mayor envergadura.",
+		studioText2: "Ellos son un pequeño estudio que cuenta con perfiles especializados para cada fase de un proyecto: branding, diseño, desarrollo y puesta en producción. Pueden ofrecer una solución completa o integrarse en equipos existentes para cubrir necesidades concretas en cualquier etapa.",
 		studioLink: "Saber más",
 	},
 
@@ -125,8 +132,14 @@ export const es = {
 
 	// ── Projects ──
 	projects: {
-		pageTitle: "Destacados.",
-		dragHint: "Arrastra para explorar",
+		carousel: {
+			title: "Proyectos destacados",
+			subtitle: "Arrastra para explorar",
+		},
+		grid: {
+			title: "Trabajos seleccionados",
+			subtitle: "Una selección de trabajos en los que he participado",
+		},
 		items: [
 			{ title: 'Viviq', description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.' },
 			{ title: 'Cor de suro', description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.' },
@@ -140,7 +153,7 @@ export const es = {
 
 	// ── Contact ──
 	contact: {
-		title: "Hablemos.",
+		title: "Hablemos",
 		subtitle: "¿Tienes un proyecto en mente o simplemente quieres saludar?",
 		writeLabel: "Escríbeme un mensaje",
 		namePlaceholder: "Nombre",
@@ -163,7 +176,7 @@ export const es = {
 
 	// ── Experience page ──
 	experience: {
-		pageTitle: "Mi trayectoria profesional.",
+		pageTitle: "Mi trayectoria profesional",
 		downloadLabel: "Descargar PDF",
 		downloadAriaLabel: "Descargar CV en PDF",
 		cvFile: "/cv/CV_MarcGallego_es.pdf",
@@ -211,7 +224,7 @@ export const es = {
 			},
 			{
 				company: "Loyic",
-				role: "Desarrollador Full Stack / Líder de Equipo",
+				role: "Desarrollador Full Stack Lead",
 				period: "Mar 2023 — Mar 2024",
 				location: "Barcelona, España",
 				tags: ["HTML", "CSS", "Javascript", "SQL", "BI"],
