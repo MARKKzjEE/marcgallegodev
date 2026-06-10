@@ -210,11 +210,15 @@ const person = {
 		font-size: clamp(11px, 1.1vw, 14px);
 	}
 
-	// ── Horizontal rule ──
+	// ── Horizontal rule (a sangre: compensa el padding lateral del .cv) ──
 	.cv__rule {
 		border: none;
 		border-top: 1px solid var(--secondary);
-		margin: 0;
+		margin: 0 -1rem; // = -px-4
+
+		@media (min-width: 768px) {
+			margin: 0 -2.5rem; // = -md:px-10
+		}
 	}
 
 	// ── Section ──
