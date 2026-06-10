@@ -52,6 +52,9 @@ export const es = {
 			devops: "DevOps",
 			seo: "SEO",
 		},
+		// Pie de la sección (bajo el carrusel). {count} = nº de tecnologías.
+		footMeta: "STACK / {count} herramientas · desde 2018",
+		footNote: "Ver mi trayectoria",
 	},
 
 	// ── About ──
@@ -74,13 +77,15 @@ export const es = {
 	// ── Partners ──
 	partners: {
 		heading: "Partners",
-		subtitle: "Colaboraciones con estudios y profesionales",
-		badge: "desde 2024",
-		dokoDesc: "Estudio de branding, diseño y desarrollo web",
+		// Metadatos en [ corchetes ] (esquinas + centro)
+		metaName: "Doko Studio",
+		metaCenter: "Colaboraciones",
+		metaSince: "desde 2024",
+		// Statement grande (font-nord). El " / " separa los fragmentos que van en líneas.
+		statement: "Estudio creativo / Desarrollo web / Diseño & / Branding / nacido en Valencia.",
 		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
-		studioLabel: "¿Cómo colaboro?",
-		studioText1: "Por mi parte, colaboro aportando mi experiencia y servicios, participando tanto de forma puntual como trabajando conjuntamente en proyectos de mayor envergadura.",
-		studioText2: "Ellos son un pequeño estudio que cuenta con perfiles especializados para cada fase de un proyecto: branding, diseño, desarrollo y puesta en producción. Pueden ofrecer una solución completa o integrarse en equipos existentes para cubrir necesidades concretas en cualquier etapa.",
+		studioText1: "Colaboro con Doko aportando mi experiencia y servicios, tanto de forma puntual como en proyectos de mayor envergadura.",
+		studioText2: "Cuando un proyecto necesita más —branding, diseño, desarrollo y puesta en producción— lo construyo de la mano de su equipo.",
 		studioLink: "Saber más",
 	},
 

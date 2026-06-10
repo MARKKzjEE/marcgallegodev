@@ -54,6 +54,9 @@ export const en: Translations = {
 			devops: "DevOps",
 			seo: "SEO",
 		},
+		// Section foot (below the carousel). {count} = number of technologies.
+		footMeta: "STACK / {count} tools · since 2018",
+		footNote: "See my experience",
 	},
 
 	// ── About ──
@@ -76,13 +79,15 @@ export const en: Translations = {
 	// ── Partners ──
 	partners: {
 		heading: "Partners",
-		subtitle: "Collaborations with studios and professionals",
-		badge: "since 2024",
-		dokoDesc: "Branding, web design and development studio",
+		// Metadata in [ brackets ] (corners + center)
+		metaName: "Doko Studio",
+		metaCenter: "Partners",
+		metaSince: "since 2024",
+		// Large statement (font-nord). " / " separates the fragments shown on lines.
+		statement: "Creative studio / Web development / Design & / Branding / born in Valencia.",
 		dokoImgAlt: "Doko Studio — web design and development studio",
-		studioLabel: "How do I collaborate?",
-		studioText1: "On my side, I contribute my experience and services, participating on a project basis or working jointly on larger-scale projects.",
-		studioText2: "They are a small studio with specialised profiles for every phase of a project: branding, design, development and deployment. They can deliver a full solution or integrate into existing teams to cover specific needs at any stage.",
+		studioText1: "I collaborate with Doko bringing my experience and services, on a project basis or on larger-scale work.",
+		studioText2: "When a project needs more —branding, design, development and deployment— I build it together with their team.",
 		studioLink: "Learn more",
 	},
 

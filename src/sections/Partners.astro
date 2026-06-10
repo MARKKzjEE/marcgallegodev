@@ -5,42 +5,56 @@ import { getLang, useTranslations } from '../i18n';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
+
+// Statement grande: cada fragmento separado por " / " va en su línea.
+const statementLines = t.partners.statement.split(' / ');
+// Indentación (%) por línea → escalada irregular tipo editorial (como la ref).
+// "Branding" (4ª línea) sobresale más que "Diseño &" (3ª).
+const indents = [0, 22, 40, 60, 12];
 ---
 
-<section id="partners" class="py-16 md:py-30" aria-labelledby="partners-heading">
-	<div class="px-4 md:px-10">
+<section id="partners" class="partners py-16 md:py-30" aria-labelledby="partners-heading">
+	<div class="partners-inner px-4 md:px-10">
 
-		<h2 id="partners-heading" class="font-nord font-normal text-secondary partners-title mb-2">{t.partners.heading}</h2>
-		<p class="text-mono-label-soft mb-8">{t.partners.subtitle}</p>
+		<!-- Metadatos en [ corchetes ] (esquinas superiores) -->
+		<div class="partners-meta">
+			<span class="text-mono-label-soft">[ {t.partners.metaName} ]</span>
+			<span class="text-mono-label-soft partners-meta__center">[ {t.partners.metaCenter} ]</span>
+			<span class="text-mono-label-soft">[ {t.partners.metaSince} ]</span>
+		</div>
 
-		<div class="partners-grid">
-			<div class="partners-card">
-				<div class="card-image">
-					<Image src={dokostudio} alt={t.partners.dokoImgAlt} loading="lazy" quality={85} widths={[400, 800]} sizes="(min-width: 768px) 66vw, 100vw" format="webp" />
-				</div>
-				<div class="card-info">
-					<div class="left min-w-0">
-						<h4 class="project-card-title font-monoblock font-medium text-secondary">Doko Studio</h4>
-						<p class="project-card-desc text-cottor-body">{t.partners.dokoDesc}</p>
-					</div>
-					<div class="right hidden md:block">
-						<span class="text-mono-label-soft bg-quaternary p-4 rounded-full border text-center whitespace-nowrap">{t.partners.badge}</span>
-					</div>
-				</div>
+		<!-- Statement grande (font-nord), escalonado por línea.
+		     El '&' se renderiza en script (Playfair italic); la 1ª línea lleva un '/' script al final. -->
+		<h2 id="partners-heading" class="partners-statement font-nord font-normal text-secondary">
+			{statementLines.map((line: string, i: number) => {
+				const parts = line.split('&');
+				return (
+					<span class="partners-statement__line" style={`--indent:${indents[i] ?? 0}`}>
+						{parts.map((part: string, p: number) => (
+							<>
+								{part}{p < parts.length - 1 && <span class="partners-amp">&amp;</span>}
+							</>
+						))}
+						{i === 0 && <span class="partners-amp partners-amp--slash">/</span>}
+					</span>
+				);
+			})}
+		</h2>
+
+		<!-- Pie: bio mono (centro, con corchetes de recorte) + imagen Doko (der) -->
+		<div class="partners-bottom">
+			<div class="partners-bio">
+				<p class="text-mono-label-soft">{t.partners.studioText1}</p>
+				<p class="text-mono-label-soft">{t.partners.studioText2}</p>
+				<!-- Marcas de recorte en las esquinas -->
+				<span class="partners-bio__crop partners-bio__crop--tl" aria-hidden="true"></span>
+				<span class="partners-bio__crop partners-bio__crop--tr" aria-hidden="true"></span>
+				<span class="partners-bio__crop partners-bio__crop--bl" aria-hidden="true"></span>
+				<span class="partners-bio__crop partners-bio__crop--br" aria-hidden="true"></span>
 			</div>
 
-			<div class="studio-card" data-reveal data-reveal-radius="20px">
-				<span class="studio-label font-monoblock font-medium text-secondary uppercase">{t.partners.studioLabel}</span>
-				<p class="text-cottor-body mt-4">{t.partners.studioText1}</p>
-				<p class="text-cottor-body mt-3">{t.partners.studioText2}</p>
-				<a href="https://doko.studio/" target="_blank" rel="noopener noreferrer" class="studio-link mt-8 font-cottor font-normal text-secondary inline-flex items-center gap-1" data-reveal-trigger>{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-				<!-- Reveal layer -->
-				<div class="studio-card__reveal reveal-layer" aria-hidden="true">
-					<span class="studio-label font-monoblock font-medium text-secondary uppercase">{t.partners.studioLabel}</span>
-					<p class="text-cottor-body mt-4">{t.partners.studioText1}</p>
-					<p class="text-cottor-body mt-3">{t.partners.studioText2}</p>
-					<span class="studio-link mt-8 font-cottor font-normal inline-flex items-center gap-1">{t.partners.studioLink}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
-				</div>
+			<div class="partners-image">
+				<Image src={dokostudio} alt={t.partners.dokoImgAlt} loading="lazy" quality={85} widths={[400, 800]} sizes="(min-width: 768px) 40vw, 80vw" format="webp" />
 			</div>
 		</div>
 
@@ -48,123 +62,159 @@ const t = useTranslations(lang);
 </section>
 
 <style lang="scss">
-    .partners-title {
-        font-size: clamp(35px, 8vw, 80px);
-        line-height: 1;
-    }
+	.partners-inner {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
 
-    .partners-grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 2rem;
-        align-items: stretch;
+	// ─── Metadatos [ ] (esquinas + centro absoluto) ───
+	.partners-meta {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+	}
 
-        @media (max-width: 767px) {
-            grid-template-columns: 1fr;
-        }
-    }
+	.partners-meta__center {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
 
-    .partners-card {
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        border-radius: 10px;
-        background-color: var(--terciary);
-        border: 1px solid var(--quaternary);
+		// En móvil no cabe centrado: se oculta para no solaparse
+		@media (max-width: 767px) {
+			display: none;
+		}
+	}
 
-        .right span {
-            border-color: var(--quaternary);
-        }
-    }
+	// ─── Statement grande (font-nord) ───
+	.partners-statement {
+		display: flex;
+		flex-direction: column;
+		font-size: clamp(34px, 6.5vw, 90px);
+		line-height: 1.02;
+		letter-spacing: -0.02em;
+		text-transform: uppercase;
 
-    .card-image {
-        width: 100%;
-        height: 400px;
-        overflow: hidden;
-        background-color: #6130EB;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        filter: brightness(0.9);
+		// Móvil: bloque centrado en pantalla (las líneas mantienen su escalonado)
+		@media (max-width: 767px) {
+			align-items: center;
+			text-align: center;
+		}
+	}
 
-        @media (max-width: 767px) {
-            height: 300px;
-        }
+	.partners-statement__line {
+		display: block;
+		// Tablet/desktop: escalonado desde la izquierda (offset empuja a la derecha)
+		margin-left: calc(var(--indent, 0) * 1%);
 
-        img {
-            max-width: 60%;
-            height: auto;
-            object-fit: contain;
-            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-    }
+		// Móvil: offset desde el centro (translateX) para que el bloque quede centrado
+		@media (max-width: 767px) {
+			margin-left: 0;
+			transform: translateX(calc(var(--indent, 0) * 0.25%));
+		}
+	}
 
-    .partners-card:hover .card-image img {
-        transform: scale(1.08);
-    }
+	// Acento caligráfico (& y /) en Corinthia (script)
+	.partners-amp {
+		font-family: var(--font-corinthia);
+		font-weight: 400;
+		text-transform: none;
+		// Corinthia es muy fina: se agranda para equilibrar con el NORD
+		font-size: 1.5em;
+		line-height: 0;
+		padding: 0 0.05em;
+	}
 
-    .card-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 1.5rem;
+	.partners-amp--slash {
+		margin-left: 0.05em;
+	}
 
-        @media (max-width: 767px) {
-            padding: 1rem;
-        }
+	// ─── Pie: bio + imagen, dos cajas del MISMO tamaño (ratio 4:3) ───
+	// Caja común: --box-w de ancho, alto derivado a 4:3 con aspect-ratio.
+	.partners-bottom {
+		--box-w: clamp(280px, 34vw, 440px);
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;   // ambas cajas centradas (apilado)
+		align-items: stretch;
+		gap: 2.5rem;
+		margin-top: 3rem;
 
-        .left {
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-        }
-    }
+		// xl: imagen a la derecha; la bio se centra en el viewport (absolute)
+		@media (min-width: 1280px) {
+			justify-content: flex-end;
+			min-height: calc(var(--box-w) * 3 / 4); // reserva el alto de una caja
+		}
+	}
 
-    .project-card-title,
-    .studio-label {
-        font-size: clamp(1.1rem, 2vw, 1.4rem);
-    }
+	// Bio: caja con texto centrado + corchetes pegados a sus bordes
+	.partners-bio {
+		position: relative;
+		flex: 0 0 auto;
+		width: var(--box-w);
+		// Al menos la altura 4:3 (matchea la imagen), pero crece si el texto no cabe.
+		min-height: calc(var(--box-w) * 3 / 4);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 1rem;
+		padding: 2rem;
 
-    .project-card-desc {
-        font-size: 0.875rem;
-    }
+		// xl: centrada en el ancho del viewport
+		@media (min-width: 1280px) {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
 
-    .studio-card {
-        --reveal-extend: 40px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 1.5rem;
-        border-radius: 10px;
-        background-color: var(--terciary);
-        border: 1px solid var(--quaternary);
+		@media (max-width: 767px) {
+			width: 100%;
+			min-height: 0;        // en móvil manda el texto (sin forzar alto)
+			padding: 1.5rem;      // espacio entre corchetes y texto
+		}
+	}
 
-        @media (max-width: 767px) {
-            padding: 1rem;
-        }
-    }
+	// Marcas de recorte ⌐ ¬ en las esquinas de la bio
+	.partners-bio__crop {
+		position: absolute;
+		width: 12px;
+		height: 12px;
+		border: 1px solid color-mix(in srgb, var(--secondary) 45%, transparent);
+	}
+	.partners-bio__crop--tl { top: 0; left: 0;  border-right: none; border-bottom: none; }
+	.partners-bio__crop--tr { top: 0; right: 0; border-left: none;  border-bottom: none; }
+	.partners-bio__crop--bl { bottom: 0; left: 0;  border-right: none; border-top: none; }
+	.partners-bio__crop--br { bottom: 0; right: 0; border-left: none;  border-top: none; }
 
-    .studio-card__reveal {
-        background: var(--secondary);
-        border-radius: 10px;
-        padding: calc(1.5rem + var(--reveal-extend, 0px));
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+	// ─── Imagen Doko: misma caja (--box-w × 4:3) ───
+	.partners-image {
+		flex: 0 0 auto;
+		width: var(--box-w);
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+		background-color: #6130EB;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-        &, * {
-            color: var(--primary) !important;
-        }
+		// Móvil: tope de ancho para que no ocupe toda la pantalla
+		@media (max-width: 767px) {
+			width: 100%;
+			max-width: 320px;
+			align-self: center;
+		}
 
-        @media (max-width: 767px) {
-            padding: calc(1rem + var(--reveal-extend, 0px));
-        }
-    }
+		img {
+			max-width: 60%;
+			height: auto;
+			object-fit: contain;
+			transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		&:hover img { transform: scale(1.08); }
+	}
 </style>
-
-<script>
-	import '../scripts/circle-reveal.ts';
-</script>
 

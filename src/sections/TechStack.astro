@@ -1,8 +1,11 @@
 ---
-import { getLang, useTranslations } from '../i18n/index';
+import { getLang, useTranslations, getLocalePath } from '../i18n/index';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
+
+// Pie de sección: enlace a trayectoria + metadato con nº de tecnologías.
+const experiencePath = getLocalePath(lang, '/experience');
 
 // Iconos en /public/tech-icons/ con convención {slug}-d.svg (claro) y {slug}-l.svg (oscuro).
 const techs = [
@@ -91,6 +94,15 @@ const filters = [
 		</div>
 	</div>
 
+	<!-- Pie de sección (fijo, no scrollea con el carrusel) -->
+	<div class="tech-foot px-4 md:px-10">
+		<span class="tech-foot__meta text-mono-label">{t.techStack.footMeta.replace('{count}', String(techs.length))}</span>
+		<a href={experiencePath} class="tech-foot__note text-mono-label uppercase" data-reveal data-reveal-radius="24px">
+			<span class="tech-foot__base">--{t.techStack.footNote}</span>
+			<span class="tech-foot__reveal reveal-layer" aria-hidden="true">--{t.techStack.footNote}:</span>
+		</a>
+	</div>
+
 </section>
 
 <style lang="scss">
@@ -121,11 +133,17 @@ const filters = [
 		cursor: pointer;
 		color: var(--secondary);
 		white-space: nowrap;
-		opacity: 0.4;
-		transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1);
+		transition:
+			background-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+			color 300ms cubic-bezier(0.22, 1, 0.36, 1);
 
-		&:hover { opacity: 0.7; }
-		&.is-active { opacity: 1; }
+		&:hover { background-color: var(--terciary); }
+
+		// Activo: colores del tema invertidos (sólido)
+		&.is-active {
+			background-color: var(--secondary);
+			color: var(--primary);
+		}
 	}
 
 	// ─── Carrusel: wrapper con cursor custom ───
@@ -217,12 +235,24 @@ const filters = [
 		justify-content: center;
 		aspect-ratio: 3 / 4;
 		padding: 2.5rem;
+
+		// Móvil: celda menos alta + menos padding
+		@media (max-width: 767px) {
+			aspect-ratio: 1 / 1;
+			padding: 1.5rem;
+		}
 	}
 
 	.tech-icon__svg {
 		width: clamp(56px, 7vw, 90px);
 		height: clamp(56px, 7vw, 90px);
 		object-fit: contain;
+
+		// Móvil: iconos más grandes
+		@media (max-width: 767px) {
+			width: 80px;
+			height: 80px;
+		}
 
 		&--dark { display: none; }
 	}
@@ -264,6 +294,37 @@ const filters = [
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	// ─── Pie de sección ───
+	.tech-foot {
+		margin-top: 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1.5rem;
+		flex-wrap: wrap;
+	}
+
+	.tech-foot__meta {
+		opacity: 0.55;
+	}
+
+	// Nota con circle-reveal (clon de colores invertidos)
+	.tech-foot__note {
+		--reveal-extend: 24px;
+		position: relative;
+		color: var(--secondary);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.tech-foot__reveal {
+		display: block;
+		padding: var(--reveal-extend);
+		background: var(--secondary);
+		color: var(--primary);
+		white-space: nowrap;
 	}
 </style>
 
@@ -401,4 +462,7 @@ const filters = [
 			});
 		});
 	}
+
+	// Circle-reveal para la nota del pie
+	import '../scripts/circle-reveal.ts';
 </script>
