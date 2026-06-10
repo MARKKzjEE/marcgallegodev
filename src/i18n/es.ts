@@ -198,8 +198,6 @@ export const es = {
 	// ── Contact ──
 	contact: {
 		title: "Hablemos",
-		subtitle: "¿Tienes un proyecto en mente o simplemente quieres saludar?",
-		writeLabel: "Escríbeme un mensaje",
 		namePlaceholder: "Nombre",
 		emailPlaceholder: "Email",
 		messagePlaceholder: "Mensaje",

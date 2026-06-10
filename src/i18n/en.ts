@@ -200,8 +200,6 @@ export const en: Translations = {
 	// ── Contact ──
 	contact: {
 		title: "Let's talk",
-		subtitle: "Have a project in mind or just want to say hi?",
-		writeLabel: "Send me a message",
 		namePlaceholder: "Name",
 		emailPlaceholder: "Email",
 		messagePlaceholder: "Message",
