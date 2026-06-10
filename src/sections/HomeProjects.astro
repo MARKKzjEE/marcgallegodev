@@ -6,7 +6,7 @@ import { projectImages } from '../data/projects';
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 
-// CTA hacia el catálogo completo (celda inferior izquierda, solo tablet/desktop).
+// CTA "--MÁS RESULTADOS:" hacia el catálogo completo (en ambos bloques de resultados).
 const projectsPath = getLocalePath(lang, '/projects');
 
 // Numeración coherente con el catálogo de /proyectos (empieza en 31).
@@ -62,17 +62,33 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 		<!-- Título -->
 		<h2 id="hp-heading" class="hp-title font-nord font-normal text-secondary">{t.projects.title}</h2>
 
-		<!-- Índice (desktop: arriba-derecha · móvil: al final tras el collage) -->
-		<div class="hp-index" aria-hidden="true">
-			<ul class="hp-index__list">
-				{items.map((item) => (
-					<li class="hp-index__item text-mono-lg">{item.no}: {item.title}</li>
-				))}
-			</ul>
-		</div>
-
 		<!-- Collage: grid escalonado, columnas según breakpoint -->
 		<div class="hp-collage">
+
+			<!-- ── Solo tablet/desktop: índice (celda última fila 1) ── -->
+			<!-- Índice de títulos: última celda de la 1ª fila del collage. -->
+			<div class="hp-index" aria-hidden="true">
+				<ul class="hp-index__list">
+					{items.map((item) => (
+						<li class="hp-index__item text-mono-lg">{item.title}</li>
+					))}
+				</ul>
+			</div>
+
+			<!-- ── Solo tablet/desktop: resultados (primera celda última fila) ── -->
+			<!-- header --RESULTADOS: · lista IMG-0XX (solo números) · CTA --MÁS RESULTADOS: (reveal). -->
+			<div class="hp-results">
+				<span class="hp-results__label text-mono-lg uppercase">--{t.projects.resultsLabel}:</span>
+				<ul class="hp-results__list" aria-hidden="true">
+					{items.map((item) => (
+						<li class="hp-results__item text-mono-lg">IMG-{item.no}</li>
+					))}
+				</ul>
+				<a href={projectsPath} class="hp-more text-mono-lg uppercase" data-reveal data-reveal-radius="28px">
+					<span class="hp-more__base">--{t.projects.moreResults}:</span>
+					<span class="hp-more__reveal reveal-layer" aria-hidden="true">--{t.projects.moreResults}:</span>
+				</a>
+			</div>
 
 			<!-- Capas de puntos (una por breakpoint; el CSS muestra la que toca) -->
 			<div class="hp-dots hp-dots--desktop" aria-hidden="true">
@@ -105,7 +121,17 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 				</figure>
 			))}
 
-			<!-- CTA al catálogo completo (celda inferior izquierda, solo tablet/desktop) -->
+		</div>
+
+		<!-- ── Solo móvil: bloque único FUERA del collage, abajo a la derecha ── -->
+		<!-- header --RESULTADOS: · lista IMG-0XX: Título · CTA --MÁS RESULTADOS: (reveal). -->
+		<div class="hp-results-mobile">
+			<span class="hp-results__label text-mono-lg uppercase">--{t.projects.resultsLabel}:</span>
+			<ul class="hp-results__list" aria-hidden="true">
+				{items.map((item) => (
+					<li class="hp-results__item text-mono-lg">IMG-{item.no}: {item.title}</li>
+				))}
+			</ul>
 			<a href={projectsPath} class="hp-more text-mono-lg uppercase" data-reveal data-reveal-radius="28px">
 				<span class="hp-more__base">--{t.projects.moreResults}:</span>
 				<span class="hp-more__reveal reveal-layer" aria-hidden="true">--{t.projects.moreResults}:</span>
@@ -116,28 +142,33 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 </section>
 
 <style lang="scss">
-	// Desktop/tablet: grid 2 columnas → título (izq) + índice (der) en fila 1,
-	// collage abarcando ambas columnas en fila 2.
+	// Una columna apilada: título · collage · (móvil) bloque de resultados.
+	// Tablet/desktop: índice y resultados viven DENTRO del collage, en celdas
+	// concretas de su grid. Móvil: .hp-results-mobile va fuera, al final.
 	.hp-inner {
 		display: grid;
-		grid-template-columns: 1fr auto;
-		column-gap: 2rem;
+		grid-template-columns: 1fr;
 		row-gap: 3rem;
 		align-items: start;
 	}
 
 	.hp-title {
-		grid-column: 1;
-		grid-row: 1;
 		font-size: clamp(35px, 8vw, 80px);
 		line-height: 1;
 	}
 
-	// ─── Índice de numeración (fila 1, columna derecha) ───
+	// ─── Índice de títulos (última celda de la 1ª fila del collage) ───
 	.hp-index {
-		grid-column: 2;
+		grid-column: var(--cols);   // última columna
 		grid-row: 1;
+		align-self: start;
+		justify-self: start;
+		z-index: 4;          // el texto por encima de los puntos (z-index: 3)
+		padding: 0.75rem;
 		text-align: left;
+
+		// Móvil: lo cubre .hp-results-mobile (número + título).
+		@media (max-width: 767px) { display: none; }
 	}
 
 	.hp-index__list {
@@ -152,27 +183,6 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 	// Tipografía heredada de .text-mono-lg (escala mono grande).
 	.hp-index__item {
 		white-space: nowrap;
-	}
-
-	// El collage ocupa ambas columnas, debajo de título e índice.
-	.hp-collage {
-		grid-column: 1 / -1;
-	}
-
-	// Móvil: una sola columna apilada → título (1) · collage (2) · índice (3).
-	// El índice baja al final, pegado a la derecha, texto alineado por la izquierda.
-	@media (max-width: 767px) {
-		.hp-inner {
-			grid-template-columns: 1fr;
-		}
-		.hp-title   { grid-column: 1; grid-row: 1; }
-		.hp-collage { grid-column: 1; grid-row: 2; }
-		.hp-index {
-			grid-column: 1;
-			grid-row: 3;
-			display: flex;
-			justify-content: flex-end;
-		}
 	}
 
 	// ─── Collage: grid escalonado, celdas verticales (~3:4) ───
@@ -248,41 +258,88 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 		}
 	}
 
-	// ─── CTA "más resultados" (celda inferior izquierda) ───
-	// Usa el circle-reveal compartido: capa base + .reveal-layer (colores invertidos).
-	// --reveal-extend hace que el círculo no se corte con el borde del contenedor.
-	// Tipografía heredada de .text-mono-lg (escala mono grande).
-	.hp-more {
-		--reveal-extend: 30px;
-		position: relative;
+	// ─── Bloque de resultados (tablet/desktop: primera celda de la última fila) ───
+	// header --RESULTADOS: · lista IMG-0XX (solo números) · CTA --MÁS RESULTADOS: (reveal).
+	// En esa celda no hay card (el collage está escalonado), así que no tapa nada.
+	.hp-results {
 		grid-column: 1;
 		grid-row: 3;
 		align-self: end;
 		justify-self: start;
+		z-index: 4;          // el texto por encima de los puntos (z-index: 3)
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.1rem;
 		padding: 0.75rem;
+
+		// Móvil: lo sustituye .hp-results-mobile (fuera del collage).
+		@media (max-width: 767px) { display: none; }
+	}
+
+	// ─── Bloque de resultados móvil (fuera del collage, abajo a la derecha) ───
+	// Mismo contenido pero con título: IMG-0XX: Nombre. Oculto en tablet/desktop.
+	.hp-results-mobile {
+		display: none;
+
+		@media (max-width: 767px) {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;   // texto alineado por la izquierda…
+			justify-self: end;         // …pero el bloque pegado a la derecha
+			gap: 0.1rem;
+		}
+	}
+
+	.hp-results__label {
+		text-decoration: none;
+	}
+
+	.hp-results__list {
+		list-style: none;
+		margin: 0.4rem 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+	}
+
+	.hp-results__item {
+		white-space: nowrap;
+	}
+
+	// CTA "más resultados" con circle-reveal compartido: capa base + .reveal-layer.
+	// --reveal-extend evita que el círculo se corte con el borde del contenedor.
+	.hp-more {
+		--reveal-extend: 30px;
+		position: relative;
+		padding: 0;
 		text-decoration: none;
 		white-space: nowrap;
-
-		// Solo tablet/desktop
-		@media (max-width: 767px) { display: none; }
 	}
 
 	// Capa reveal: clon con colores invertidos. El padding compensa el extend
 	// para que el texto siga alineado con la capa base.
 	.hp-more__reveal {
 		display: block;
-		padding: calc(0.75rem + var(--reveal-extend, 0px));
+		padding: var(--reveal-extend, 0px);
 		background: var(--secondary);
 		color: var(--primary);
 		white-space: nowrap;
+
+		// Móvil (táctil): no hay reveal; se oculta la capa para que no asome.
+		@media (max-width: 767px) { display: none; }
 	}
 
+	// Cabecera con peso: mismo tamaño que el label de WhatIDo (.text-mono-label).
+	// Se come algo de imagen a propósito; la card mantiene su ratio de celda.
 	.hp-card__head {
 		flex-shrink: 0;
 		background-color: var(--terciary);
-		padding: 0.4rem 0.6rem;
-		font-size: clamp(10px, 0.8vw, 13px);
-		letter-spacing: 0.08em;
+		padding: 0.55rem 0.7rem;
+		font-size: clamp(14px, 1.2vw, 16px);
+		letter-spacing: 0.05em;
+		line-height: 1.4;
 		color: var(--secondary);
 		text-align: center;
 	}

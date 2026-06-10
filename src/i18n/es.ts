@@ -62,19 +62,19 @@ export const es = {
 		title: "Sobre mi",
 		profileAlt: "Marc Gallego, desarrollador Full Stack en Barcelona",
 		// Frase decorativa repetida en los extremos (2 líneas)
-		cornerPhrase: ["BUSCANDO PATRONES DONDE", "NO LOS HAY"],
+		cornerPhrase: ["SOLO DISFRUTA DONDE", "ESTÁS AHORA"],
 		// Palabras NORD apiladas en la columna central (que me definen).
 		// Primeras 4 → arriba de la foto · últimas 4 → debajo.
-		// Orden intercalado por longitud (larga/corta alternadas) → irregularidad al scroll.
+		// "{age}" se reemplaza con la edad calculada en el componente.
 		statements: [
-			"Perfeccionista",
-			"Mar",
-			"Cercano",
-			"Moda",
-			"Velocidad",
-			"Visión",
+			"Sobre mí",
+			"{age} años",
+			"Barcelona",
 			"Creativo",
 			"Código",
+			"Freelance",
+			"Compromiso",
+			"Cercanía",
 		],
 	},
 
@@ -128,6 +128,8 @@ export const es = {
 	projects: {
 		// Título único de proyectos (home + catálogo /proyectos)
 		title: "Proyectos",
+		// Cabecera del bloque de resultados (galería home)
+		resultsLabel: "resultados",
 		// CTA de la galería de la home hacia el catálogo completo
 		moreResults: "más resultados",
 		carousel: {

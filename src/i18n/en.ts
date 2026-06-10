@@ -64,19 +64,19 @@ export const en: Translations = {
 		title: "About me",
 		profileAlt: "Marc Gallego, Full Stack developer in Barcelona",
 		// Decorative phrase repeated at the edges (2 lines)
-		cornerPhrase: ["TRYING TO FIND PATTERNS WHERE THERE", "ARE NO PATTERNS"],
+		cornerPhrase: ["JUST ENJOY WHERE", "YOU ARE NOW"],
 		// NORD words stacked in the center column (that define me).
 		// First 4 → above the photo · last 4 → below.
-		// Order interleaved by length (long/short alternating) → scroll irregularity.
+		// "{age}" is replaced with the computed age in the component.
 		statements: [
-			"Perfectionist",
-			"Sea",
-			"Close",
-			"Fashion",
-			"Speed",
-			"Vision",
+			"About me",
+			"{age} years",
+			"Barcelona",
 			"Creative",
 			"Code",
+			"Freelance",
+			"Commitment",
+			"Closeness",
 		],
 	},
 
@@ -130,6 +130,8 @@ export const en: Translations = {
 	projects: {
 		// Unified projects title (home + catalog /projects)
 		title: "Projects",
+		// Results block header (home gallery)
+		resultsLabel: "results",
 		// Home gallery CTA towards the full catalog
 		moreResults: "more results",
 		carousel: {

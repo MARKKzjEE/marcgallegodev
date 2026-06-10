@@ -7,7 +7,17 @@ import { getLang, useTranslations } from '../i18n/index';
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 
-const statements = t.about.statements;
+// Edad calculada desde la fecha de nacimiento (se actualiza sola cada año).
+const BIRTH_DATE = new Date(1997, 4, 31); // 31 mayo 1997 (mes 0-indexado)
+const now = new Date();
+let age = now.getFullYear() - BIRTH_DATE.getFullYear();
+const hadBirthday =
+	now.getMonth() > BIRTH_DATE.getMonth() ||
+	(now.getMonth() === BIRTH_DATE.getMonth() && now.getDate() >= BIRTH_DATE.getDate());
+if (!hadBirthday) age -= 1;
+
+// "{age}" se sustituye por la edad real en la palabra correspondiente.
+const statements = t.about.statements.map((s: string) => s.replace('{age}', String(age)));
 // Reparto: mitad antes de la foto, mitad después.
 const mid = Math.ceil(statements.length / 2);
 const statementsTop = statements.slice(0, mid);
@@ -115,7 +125,8 @@ const CORNER_COUNT = 6;
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
-		font-size: clamp(28px, 5vw, 52px);
+		// Mismo tamaño que los títulos de sección estándar.
+		font-size: clamp(35px, 8vw, 80px);
 		line-height: 1.05;
 		letter-spacing: -0.02em;
 		text-transform: uppercase;
@@ -136,8 +147,11 @@ const CORNER_COUNT = 6;
 		object-fit: cover;
 		object-position: center;
 		will-change: transform;
-		// scale base por si el JS no corre (reduced-motion): la imagen ya cubre
-		transform: scale(1.18);
+		// Reposo / reduced-motion: escala 1 → la imagen cubre exacto el marco
+		// (object-fit: cover), sin recorte extra. El JS sube/baja el zoom desde aquí.
+		transform: scale(1);
+		// Suaviza los saltos del scroll por rueda (el rAF actualiza cada frame).
+		transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	// Variante por tema (control propio, sin depender de Tailwind)
@@ -160,23 +174,24 @@ const CORNER_COUNT = 6;
 </style>
 
 <script>
-	// Parallax sutil: la imagen (siempre algo más grande que el marco) se
-	// desplaza verticalmente dentro de él. El scale fijo evita que se vea
-	// el fondo del contenedor en ningún momento del scroll.
+	// Zoom in/out sutil con el scroll (sin desplazamiento, para no cortar la foto).
+	// La imagen "respira": escala 1 al entrar/salir del viewport y zoom máximo
+	// cuando está centrada. object-fit: cover + escala ≥1 → nunca se ve el fondo.
 	if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 		const wrap = document.querySelector<HTMLElement>('[data-parallax-wrap]');
 		if (wrap) {
 			const imgs = wrap.querySelectorAll<HTMLImageElement>('img');
-			const SHIFT = 10; // % de desplazamiento máximo dentro del marco
+			const ZOOM = 0.12; // zoom máximo extra cuando la foto está centrada
 			const update = () => {
 				const rect = wrap.getBoundingClientRect();
 				const vh = window.innerHeight;
 				// Progreso de la foto cruzando el viewport: 0 al entrar, 1 al salir.
 				const progress = (vh - rect.top) / (vh + rect.height);
 				const clamped = Math.max(0, Math.min(1, progress));
-				// -SHIFT..+SHIFT según el scroll; scale fijo 1.18 → siempre cubre
-				const shift = (clamped - 0.5) * 2 * SHIFT;
-				imgs.forEach(img => { img.style.transform = `scale(1.18) translateY(${shift}%)`; });
+				// Curva en campana: 0 en los extremos, 1 en el centro (pico de zoom).
+				const bell = 1 - Math.abs(clamped - 0.5) * 2;
+				const scale = 1 + bell * ZOOM;
+				imgs.forEach(img => { img.style.transform = `scale(${scale})`; });
 			};
 			let ticking = false;
 			window.addEventListener('scroll', () => {
