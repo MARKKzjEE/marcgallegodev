@@ -62,12 +62,22 @@ export const en: Translations = {
 	// ── About ──
 	about: {
 		title: "About me",
-		titleDecorative: "ABOUT ME",
-		tagline: "Creative and technical design by Marc Gallego",
-		bioMobile: "Born in Barcelona, from a young age I had a love for computers and software. The creative capacity they allow drew me into this world and today I do something I genuinely enjoy. Outside of code, I have two great passions: the sea and fashion. In one I find calm and my chaos, and with the other I get to experiment and be creative.",
-		bioDesktop1: "Born in Barcelona, from a young age I watched my father fix computers for friends because he enjoyed it, and that's how I started spending hours taking them apart and putting them back together. \n\nAs I grew up I found myself drawn into the world of software. The creative capacity I saw in operating systems and video games fascinated me. So little by little I started exploring software development, and here I am today.",
-		bioDesktop2: "Beyond development, my passion is the sea where I find my balance. The place where I disconnect, organise ideas and come back with clarity. \n\nI'm also a lover of art and fashion. I'm drawn to people's capacity for expression and the diversity of styles that emerge. I apply that creativity and taste to the way I dress and design, as well as the personal touch I bring to my digital solutions.",
 		profileAlt: "Marc Gallego, Full Stack developer in Barcelona",
+		// Decorative phrase repeated at the edges (2 lines)
+		cornerPhrase: ["TRYING TO FIND PATTERNS WHERE THERE", "ARE NO PATTERNS"],
+		// NORD words stacked in the center column (that define me).
+		// First 4 → above the photo · last 4 → below.
+		// Order interleaved by length (long/short alternating) → scroll irregularity.
+		statements: [
+			"Perfectionist",
+			"Sea",
+			"Close",
+			"Fashion",
+			"Speed",
+			"Vision",
+			"Creative",
+			"Code",
+		],
 	},
 
 	// ── MarqueeBands ──
@@ -78,7 +88,6 @@ export const en: Translations = {
 
 	// ── Partners ──
 	partners: {
-		heading: "Partners",
 		// Metadata in [ brackets ] (corners + center)
 		metaName: "Doko Studio",
 		metaCenter: "Partners",
@@ -88,7 +97,6 @@ export const en: Translations = {
 		dokoImgAlt: "Doko Studio — web design and development studio",
 		studioText1: "I collaborate with Doko bringing my experience and services, on a project basis or on larger-scale work.",
 		studioText2: "When a project needs more —branding, design, development and deployment— I build it together with their team.",
-		studioLink: "Learn more",
 	},
 
 	// ── FAQ ──

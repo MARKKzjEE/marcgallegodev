@@ -60,12 +60,22 @@ export const es = {
 	// ── About ──
 	about: {
 		title: "Sobre mi",
-		titleDecorative: "SOBRE MI",
-		tagline: "Diseño creativo y técnico por Marc Gallego",
-		bioMobile: "Nacido en Barcelona, desde pequeño he tenido un amor por los ordenadores. La capacidad creativa que te permiten me hizo entrar en este mundo y a día de hoy me dedico a algo que disfruto. Fuera del código tengo dos grandes pasiones que son el mar y la moda. En el primero encuentro la calma y en la segunda, un espacio para experimentar y expresar mi creatividad.",
-		bioDesktop1: "Nacido en Barcelona, desde pequeño veía a mi padre arreglar ordenadores a amigos porque le gustaba y así empecé yo a pasarme horas desmontando y montándolos. \n\nCuando fui creciendo me fui adentrando en el mundo del software, la capacidad de creatividad que veía en programas de sistemas operativos y videojuegos era algo que me fascinaba. Así que poco a poco fui probando con el desarrollo de software hasta el día de hoy.",
-		bioDesktop2: "Más allá del desarrollo, mi pasión es el mar donde encuentro mi equilibrio. El lugar donde desconecto, ordeno ideas y vuelvo con claridad. \n\nTambién soy un amante del arte y de la moda, me encanta la capacidad de expresión de la gente y la diversidad que se crea en cuanto a estilos. Aplico esta creatividad y gusto en la forma de vestirme y diseñar, como también cuando le doy mi toque a mis soluciones digitales.",
 		profileAlt: "Marc Gallego, desarrollador Full Stack en Barcelona",
+		// Frase decorativa repetida en los extremos (2 líneas)
+		cornerPhrase: ["BUSCANDO PATRONES DONDE", "NO LOS HAY"],
+		// Palabras NORD apiladas en la columna central (que me definen).
+		// Primeras 4 → arriba de la foto · últimas 4 → debajo.
+		// Orden intercalado por longitud (larga/corta alternadas) → irregularidad al scroll.
+		statements: [
+			"Perfeccionista",
+			"Mar",
+			"Cercano",
+			"Moda",
+			"Velocidad",
+			"Visión",
+			"Creativo",
+			"Código",
+		],
 	},
 
 	// ── MarqueeBands ──
@@ -76,7 +86,6 @@ export const es = {
 
 	// ── Partners ──
 	partners: {
-		heading: "Partners",
 		// Metadatos en [ corchetes ] (esquinas + centro)
 		metaName: "Doko Studio",
 		metaCenter: "Colaboraciones",
@@ -86,7 +95,6 @@ export const es = {
 		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
 		studioText1: "Colaboro con Doko aportando mi experiencia y servicios, tanto de forma puntual como en proyectos de mayor envergadura.",
 		studioText2: "Cuando un proyecto necesita más —branding, diseño, desarrollo y puesta en producción— lo construyo de la mano de su equipo.",
-		studioLink: "Saber más",
 	},
 
 	// ── FAQ ──

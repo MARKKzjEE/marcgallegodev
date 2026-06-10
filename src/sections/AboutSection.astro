@@ -6,179 +6,178 @@ import { getLang, useTranslations } from '../i18n/index';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
+
+const statements = t.about.statements;
+// Reparto: mitad antes de la foto, mitad después.
+const mid = Math.ceil(statements.length / 2);
+const statementsTop = statements.slice(0, mid);
+const statementsBottom = statements.slice(mid);
+
+// Frase decorativa repetida en los extremos (traducida por idioma, 2 líneas).
+const cornerPhrase = t.about.cornerPhrase;
+const CORNER_COUNT = 6;
 ---
 
-<section id="about" class="about-section border-t border-secondary">
+<section id="about" class="about" aria-labelledby="about-heading">
 
-	<!-- ─── Desktop ─── -->
-	<div class="about-frame hidden md:block">
-
-		<!-- Fila título -->
-		<div class="about-row about-row--header">
-			<div class="about-cell about-cell--title border-b border-secondary px-10 py-5">
-				<h2 class="about-title font-nord font-normal text-secondary">{t.about.title}</h2>
-			</div>
-			<div class="about-cell about-cell--sidebar-header border-b border-secondary"></div>
-		</div>
-
-		<!-- Fila contenido -->
-		<div class="about-row about-row--content">
-			<div class="about-cell about-cell--body px-10 py-8">
-				<div class="about-cols">
-					<div class="about-col">
-						<p class="text-cottor-body leading-8" set:html={t.about.bioDesktop1.replace(/\n\n/g, '<br><br>')} />
-					</div>
-					<div class="about-col">
-						<p class="text-cottor-body leading-8" set:html={t.about.bioDesktop2.replace(/\n\n/g, '<br><br>')} />
-					</div>
-				</div>
-				<div data-parallax-wrap class="about-image rounded-lg overflow-hidden">
-					<Image src={profileDark} alt={t.about.profileAlt} widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={92} loading="lazy" class="about-profile-img h-full w-full object-cover object-center dark:hidden" />
-					<Image src={profileLight} alt={t.about.profileAlt} widths={[600, 900]} sizes="(max-width: 1400px) 600px, 900px" format="webp" quality={92} loading="lazy" class="about-profile-img hidden h-full w-full object-cover object-center dark:block" />
-				</div>
-			</div>
-			<div class="about-cell about-cell--sidebar border-l border-secondary">
-				<p class="font-monoblock font-medium text-secondary text-[10px] [writing-mode:vertical-rl] rotate-180 whitespace-nowrap uppercase">{t.about.tagline} <span class="inline-block rotate-90">™</span></p>
-			</div>
-		</div>
-
-		<!-- Borde inferior -->
-		<div class="border-b border-secondary"></div>
-
+	<!-- Frase repetida en los extremos (decorativa, idéntica en ambos idiomas) -->
+	<div class="about-corners" aria-hidden="true">
+		{Array.from({ length: CORNER_COUNT }).map((_, i: number) => (
+			<span class={`about-corner about-corner--${i + 1} text-mono-label-soft`}>
+				{cornerPhrase[0]}<br />{cornerPhrase[1]}
+			</span>
+		))}
 	</div>
 
-	<!-- ─── Mobile ─── -->
-	<div class="about-mobile md:hidden">
-		<div class="px-4 py-4 border-b border-secondary">
-			<h2 class="about-title font-nord font-normal text-secondary">{t.about.title}</h2>
+	<h2 id="about-heading" class="sr-only">{t.about.title}</h2>
+
+	<!-- Columna central: placeholder · statements · foto · statements · placeholder -->
+	<div class="about-column">
+
+		<!-- Placeholder superior (solo borde) -->
+		<div class="about-placeholder" aria-hidden="true"></div>
+
+		<!-- Primer bloque de statements -->
+		<div class="about-statements font-nord font-normal text-secondary">
+			{statementsTop.map((s: string) => <span class="about-statement">{s}</span>)}
 		</div>
-		<div class="px-4 py-6">
-			<div class="about-photo rounded-lg overflow-hidden">
-				<Image src={profileDark} alt={t.about.profileAlt} widths={[600]} sizes="100vw" format="webp" quality={92} loading="lazy" class="w-full object-cover object-center dark:hidden" />
-				<Image src={profileLight} alt={t.about.profileAlt} widths={[600]} sizes="100vw" format="webp" quality={92} loading="lazy" class="hidden w-full object-cover object-center dark:block" />
-			</div>
-			<p class="text-cottor-body mt-6 leading-6">
-				{t.about.bioMobile}
-			</p>
+
+		<!-- Foto central (variante por tema controlada con CSS propio) -->
+		<div class="about-photo" data-parallax-wrap>
+			<Image src={profileDark} alt={t.about.profileAlt} widths={[600, 900]} sizes="(max-width: 768px) 90vw, 480px" format="webp" quality={92} loading="lazy" class="about-photo__img about-photo__img--light" />
+			<Image src={profileLight} alt={t.about.profileAlt} widths={[600, 900]} sizes="(max-width: 768px) 90vw, 480px" format="webp" quality={92} loading="lazy" class="about-photo__img about-photo__img--dark" />
 		</div>
-		<div class="border-b border-secondary"></div>
+
+		<!-- Segundo bloque de statements -->
+		<div class="about-statements font-nord font-normal text-secondary">
+			{statementsBottom.map((s: string) => <span class="about-statement">{s}</span>)}
+		</div>
+
+		<!-- Placeholder inferior (solo borde) -->
+		<div class="about-placeholder" aria-hidden="true"></div>
+
 	</div>
 
 </section>
 
 <style lang="scss">
-	.about-section {
+	.about {
 		position: relative;
 		width: 100%;
-		background-color: var(--primary);
+		// Fondo grisáceo sutil (shade del tema)
+		background-color: color-mix(in srgb, var(--secondary) 5%, var(--primary));
+		overflow: hidden;
+		padding: 4rem 1rem;
+
+		@media (min-width: 768px) {
+			padding: 6rem 2.5rem;
+		}
 	}
 
-	.about-title {
-		font-size: clamp(35px, 8vw, 80px);
-		line-height: 1;
+	// En dark el shade necesita más mezcla para distinguirse del negro
+	:global(.dark) .about {
+		background-color: color-mix(in srgb, var(--secondary) 10%, var(--primary));
 	}
 
-	// ── Desktop frame (celdas con bordes) ──
-	.about-row {
+	// ─── Frases en los extremos ───
+	.about-corner {
+		position: absolute;
+		white-space: nowrap;   // cada línea (separada por <br>) entera, sin partirse
+		line-height: 1.4;
+		z-index: 1;
+
+		// Ocultas en móvil (no hay espacio a los lados)
+		@media (max-width: 1023px) { display: none; }
+	}
+	// Posiciones: 3 a la izquierda, 3 a la derecha (escalonadas en altura)
+	.about-corner--1 { top: 4rem;   left: 2.5rem; }
+	.about-corner--2 { top: 42%;    left: 2.5rem; }
+	.about-corner--3 { bottom: 4rem; left: 2.5rem; }
+	.about-corner--4 { top: 4rem;   right: 2.5rem; text-align: right; }
+	.about-corner--5 { top: 42%;    right: 2.5rem; text-align: right; }
+	.about-corner--6 { bottom: 4rem; right: 2.5rem; text-align: right; }
+
+	// ─── Columna central ───
+	.about-column {
+		position: relative;
+		z-index: 2;
+		max-width: 480px;
+		margin-inline: auto;
 		display: flex;
-	}
-
-	.about-cell--title {
-		flex: 1;
-	}
-
-	.about-cell--sidebar-header {
-		width: 40px;
-		flex-shrink: 0;
-	}
-
-	.about-cell--body {
-		flex: 1;
-		display: flex;
-		gap: 2rem;
-		align-items: stretch;
-	}
-
-	.about-cell--sidebar {
-		width: 40px;
-		flex-shrink: 0;
-		display: flex;
+		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		gap: 2rem;
+	}
+
+	// ─── Statements NORD apilados ───
+	.about-statements {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		font-size: clamp(28px, 5vw, 52px);
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		text-transform: uppercase;
+	}
+
+	.about-statement { display: block; }
+
+	// ─── Foto central ───
+	.about-photo {
+		width: 100%;
+		aspect-ratio: 4 / 5;
 		overflow: hidden;
 	}
 
-	// ── Texto bio más grande que el body estándar ──
-	.about-cols .text-cottor-body {
-		font-size: clamp(14px, 1.2vw, 17px);
-		text-align: justify;
-		hyphens: auto;
-		-webkit-hyphens: auto;
-		word-break: break-word;
-	}
-
-	// ── Columnas de texto ──
-	.about-cols {
-		flex: 2;
-		display: flex;
-		gap: 2rem;
-	}
-
-	.about-col {
-		flex: 1;
-		display: flex;
-		align-items: flex-start;
-	}
-
-	.about-col:last-child {
-		align-items: flex-end;
-	}
-
-	.about-image {
-		flex: 1;
-		max-height: 600px;
-		min-height: 400px;
-
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-	}
-
-	// ── Mobile ──
-	.about-photo {
+	.about-photo__img {
 		width: 100%;
-		min-height: 500px;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		will-change: transform;
+		// scale base por si el JS no corre (reduced-motion): la imagen ya cubre
+		transform: scale(1.18);
+	}
 
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
+	// Variante por tema (control propio, sin depender de Tailwind)
+	.about-photo__img--dark { display: none; }
+	:global(.dark) {
+		.about-photo__img--light { display: none; }
+		.about-photo__img--dark { display: block; }
+	}
+
+	// ─── Placeholders (solo borde) ───
+	.about-placeholder {
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		border: 1px solid var(--secondary);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.about-photo__img { transition: none; }
 	}
 </style>
 
 <script>
+	// Parallax sutil: la imagen (siempre algo más grande que el marco) se
+	// desplaza verticalmente dentro de él. El scale fijo evita que se vea
+	// el fondo del contenedor en ningún momento del scroll.
 	if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-		const section = document.getElementById('about');
-		const wrap = section?.querySelector<HTMLElement>('[data-parallax-wrap]');
+		const wrap = document.querySelector<HTMLElement>('[data-parallax-wrap]');
 		if (wrap) {
 			const imgs = wrap.querySelectorAll<HTMLImageElement>('img');
-			imgs.forEach(img => {
-				img.style.willChange = 'transform';
-				img.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
-			});
-
+			const SHIFT = 10; // % de desplazamiento máximo dentro del marco
 			const update = () => {
 				const rect = wrap.getBoundingClientRect();
 				const vh = window.innerHeight;
-				const progress = 1 - (rect.bottom / (vh + rect.height));
+				// Progreso de la foto cruzando el viewport: 0 al entrar, 1 al salir.
+				const progress = (vh - rect.top) / (vh + rect.height);
 				const clamped = Math.max(0, Math.min(1, progress));
-				const scale = 1.0 + 0.15 * Math.abs(clamped * 2 - 1);
-				imgs.forEach(img => { img.style.transform = `scale(${scale})`; });
+				// -SHIFT..+SHIFT según el scroll; scale fijo 1.18 → siempre cubre
+				const shift = (clamped - 0.5) * 2 * SHIFT;
+				imgs.forEach(img => { img.style.transform = `scale(1.18) translateY(${shift}%)`; });
 			};
-
 			let ticking = false;
 			window.addEventListener('scroll', () => {
 				if (!ticking) { ticking = true; requestAnimationFrame(() => { update(); ticking = false; }); }
