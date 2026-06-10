@@ -126,11 +126,29 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 	<body>
 		<!-- ─── Splash screen (solo home) ─── -->
 		{isHome && (
-			<div id="splash" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background-color:var(--primary);transition:opacity 600ms cubic-bezier(0.22,1,0.36,1),visibility 600ms;">
-				<span style="display:flex;align-items:center;gap:clamp(1rem,3vw,2rem);color:var(--secondary);">
-					<span style="font-family:'NORD',system-ui,sans-serif;font-weight:700;font-size:clamp(1rem,3vw,1.5rem);letter-spacing:0.15em;text-transform:uppercase;">MARC GALLEGO</span>
-					<span style="width:1px;height:2em;background-color:var(--secondary);flex-shrink:0;"></span>
-					<span style="font-family:'Monoblock',system-ui,sans-serif;letter-spacing:0.5em;font-weight:400;font-size:clamp(0.7em,1.5vw,0.85rem);">portfolio</span>
+			<div id="splash">
+				<span class="splash-inner">
+					<span class="splash-word splash-word--name" data-splash-word>
+						<span class="splash-text">MARC GALLEGO</span>
+						<span class="deco deco--underline" aria-hidden="true"></span>
+						<span class="deco deco--strike" aria-hidden="true"></span>
+						<span class="deco deco--bracket" aria-hidden="true"><i class="bk bk--l">[</i><i class="bk bk--r">]</i></span>
+						<svg class="deco deco--circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true">
+							<path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" />
+						</svg>
+					</span>
+
+					<span class="splash-sep"></span>
+
+					<span class="splash-word splash-word--role" data-splash-word>
+						<span class="splash-text">portfolio</span>
+						<span class="deco deco--underline" aria-hidden="true"></span>
+						<span class="deco deco--strike" aria-hidden="true"></span>
+						<span class="deco deco--bracket" aria-hidden="true"><i class="bk bk--l">«</i><i class="bk bk--r">»</i></span>
+						<svg class="deco deco--circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true">
+							<path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" />
+						</svg>
+					</span>
 				</span>
 			</div>
 		)}
@@ -138,20 +156,66 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 			if (isHome) {
 				var splashReady = false;
 				var splashLoaded = false;
+				var splashDone = false;
+
+				// ─── Decoraciones coreografiadas (secuencia encadenada) ───
+				var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+				// Cada paso: { word: índice de palabra (0=name, 1=role), deco }
+				var SEQUENCE = [
+					{ word: 0, deco: 'underline' },  // subrayar MARC GALLEGO
+					{ word: 1, deco: 'circle' },     // círculo en portfolio
+					{ word: 1, deco: 'strike' },     // tachar portfolio
+				];
+
+				var START_MS = 400;   // respiro inicial (todo limpio)
+				var DRAW_MS  = 360;    // trazado
+				var HOLD_MS  = 320;    // mantener visible
+				var ERASE_MS = 220;    // borrado
+
+				function runDecoLoop() {
+					if (reduceMotion) return;
+					var words = Array.prototype.slice.call(document.querySelectorAll('[data-splash-word]'));
+					if (words.length < 2) return;
+
+					var i = 0;
+					function step() {
+						if (splashDone || i >= SEQUENCE.length) return;
+						var s = SEQUENCE[i];
+						var word = words[s.word];
+						word.setAttribute('data-deco', s.deco);
+
+						setTimeout(function () {
+							if (splashDone) return;
+							word.setAttribute('data-deco-erase', '');
+							setTimeout(function () {
+								if (splashDone) return;
+								word.removeAttribute('data-deco');
+								word.removeAttribute('data-deco-erase');
+								i++;
+								step();
+							}, ERASE_MS);
+						}, DRAW_MS + HOLD_MS);
+					}
+
+					setTimeout(step, START_MS);
+				}
 
 				function hideSplash() {
 					var splash = document.getElementById('splash');
 					if (!splash) return;
-					splash.style.opacity = '0';
-					splash.style.visibility = 'hidden';
+					splashDone = true;
+					splash.classList.add('is-hidden');
 					window.dispatchEvent(new CustomEvent('splash:done'));
 					setTimeout(function() { splash.remove(); }, 600); // Espera a que termine la transición antes de remover del DOM
 				}
 
+				runDecoLoop();
+
 				setTimeout(function() {
 					splashReady = true;
 					if (splashLoaded) hideSplash();
-				}, 1800);
+				}, 3000);
 
 				window.addEventListener('load', function() {
 					splashLoaded = true;
@@ -167,6 +231,146 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 
 <style is:global>
 	@import "../styles/tailwind.css";
+
+	/* ─── Splash screen ─── */
+	#splash {
+		position: fixed;
+		inset: 0;
+		z-index: 9999;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: var(--primary);
+		transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1), visibility 600ms;
+	}
+
+	#splash.is-hidden {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.splash-inner {
+		display: flex;
+		align-items: center;
+		gap: clamp(1rem, 3vw, 2rem);
+		color: var(--secondary);
+	}
+
+	.splash-sep {
+		width: 1px;
+		height: 2em;
+		background-color: var(--secondary);
+		flex-shrink: 0;
+	}
+
+	/* Cada palabra es el lienzo de sus decoraciones */
+	.splash-word {
+		position: relative;
+		display: inline-block;
+		white-space: nowrap;
+	}
+
+	.splash-text { position: relative; z-index: 1; display: inline-block; }
+
+	.splash-word--name .splash-text {
+		font-family: "NORD", system-ui, sans-serif;
+		font-weight: 700;
+		font-size: clamp(1rem, 3vw, 1.5rem);
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+	}
+
+	.splash-word--role .splash-text {
+		font-family: "Monoblock", system-ui, sans-serif;
+		font-weight: 400;
+		font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+		letter-spacing: 0.5em;
+	}
+
+	/* Base de toda decoración */
+	.deco {
+		position: absolute;
+		pointer-events: none;
+		opacity: 0;
+		z-index: 2;
+	}
+
+	/* ── Underline / Strike: línea real que se traza con scaleX ── */
+	.deco--underline,
+	.deco--strike {
+		left: -0.1em;
+		right: -0.1em;
+		width: auto;
+		height: 1px;
+		background-color: var(--secondary);
+		transform: scaleX(0);
+		transform-origin: left center;
+		transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 120ms ease;
+	}
+	.deco--underline { bottom: -0.18em; }
+	.deco--strike    { top: 50%; }
+
+	/* ── Círculo a mano alzada (SVG envolviendo la caja) ── */
+	.deco--circle {
+		left: -0.35em;
+		right: -0.35em;
+		top: -45%;
+		bottom: -45%;
+		width: auto;
+		height: auto;
+		overflow: visible;
+		fill: none;
+	}
+	.deco--circle path {
+		fill: none;
+		stroke: var(--secondary);
+		stroke-width: 2;
+		stroke-linecap: round;
+		vector-effect: non-scaling-stroke;
+		stroke-dasharray: 620;
+		stroke-dashoffset: 620;
+		transition: stroke-dashoffset 480ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	/* ── Corchetes / comillas ── */
+	.deco--bracket {
+		inset: 0;
+		display: block;
+	}
+	.deco--bracket .bk {
+		position: absolute;
+		top: 50%;
+		font-family: "Monoblock", system-ui, sans-serif;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 1.5em;
+		line-height: 1;
+		color: var(--secondary);
+		transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.deco--bracket .bk--l { left: 0;  transform: translate(0.2em, -50%); }
+	.deco--bracket .bk--r { right: 0; transform: translate(-0.2em, -50%); }
+
+	/* ── Estados activados por data-deco ── */
+	.splash-word[data-deco="underline"] .deco--underline,
+	.splash-word[data-deco="strike"]    .deco--strike { opacity: 1; transform: scaleX(1); }
+
+	.splash-word[data-deco="circle"]  .deco--circle { opacity: 1; }
+	.splash-word[data-deco="circle"]  .deco--circle path { stroke-dashoffset: 0; }
+
+	.splash-word[data-deco="bracket"] .deco--bracket { opacity: 1; }
+	.splash-word[data-deco="bracket"] .deco--bracket .bk--l { transform: translate(-0.55em, -50%); }
+	.splash-word[data-deco="bracket"] .deco--bracket .bk--r { transform: translate(0.55em, -50%); }
+
+	/* ── Borrado: fade out rápido (sin re-animar el trazado) ── */
+	.splash-word[data-deco-erase] .deco {
+		opacity: 0;
+		transition: opacity 200ms ease;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		#splash .deco { display: none; }
+	}
 
 	/* Circle Reveal Effect */
 	.reveal-layer {
