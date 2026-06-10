@@ -59,7 +59,7 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 	<div class="catalog">
 		<div class="catalog-grid">
 			{cells.map((cell) => (
-				<article class:list={['catalog-cell', { 'is-empty': !cell.project }]}>
+				<article class="catalog-cell">
 					<!-- Número de catálogo -->
 					<div class="catalog-cell__no text-mono-label-soft">No.{cell.no}</div>
 

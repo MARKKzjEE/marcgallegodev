@@ -35,23 +35,7 @@ export const en: Translations = {
 
 	// ── Hero ──
 	hero: {
-		role: "Software Engineer",
-		rolePrefix: "Full Stack ",
-		yearsLabel: "+5",
-		yearsDesc: "yrs exp.",
-		projectsLabel: "+60",
-		projectsDesc: "projects",
-		ctaLabel: "Experience",
-		ctaLabelShort: "CV",
-		aboutTrigger: "Click me",
-		available: "Available for projects",
-		degree: "Graduated in Computer Engineering",
-		linkedinAriaLabel: "Marc Gallego on LinkedIn",
-		phoneAriaLabel: "Call Marc Gallego",
-		emailAriaLabel: "Contact Marc Gallego",
-		ctaAriaLabel: "View Marc Gallego's experience",
 		sectionAriaLabel: "Marc Gallego introduction",
-		videoTitle: "Sea background video",
 	},
 
 	// ── WhatWeDo ──
@@ -63,9 +47,7 @@ export const en: Translations = {
 	// ── TechStack ──
 	techStack: {
 		heading: "Stack",
-		descCorner: "These are the technologies I use in my daily work. I always enjoy exploring new tools to choose the best solution for the needs of each project.",
 		toggleShow: "Show technologies",
-		toggleHide: "Hide technologies",
 		typewriterPhrases: [
 			"These are my most used technologies.",
 			"Interact with the icon to see the names.",
@@ -97,7 +79,6 @@ export const en: Translations = {
 		subtitle: "Collaborations with studios and professionals",
 		badge: "since 2024",
 		dokoDesc: "Branding, web design and development studio",
-		dokoLogoAlt: "Doko Studio logo",
 		dokoImgAlt: "Doko Studio — web design and development studio",
 		studioLabel: "How do I collaborate?",
 		studioText1: "On my side, I contribute my experience and services, participating on a project basis or working jointly on larger-scale projects.",

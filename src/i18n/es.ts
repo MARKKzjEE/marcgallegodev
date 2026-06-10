@@ -33,23 +33,7 @@ export const es = {
 
 	// ── Hero ──
 	hero: {
-		role: "Software Engineer",
-		rolePrefix: "Full Stack ",
-		yearsLabel: "+5",
-		yearsDesc: "años exp.",
-		projectsLabel: "+60",
-		projectsDesc: "proyectos",
-		ctaLabel: "Trayectoria",
-		ctaLabelShort: "CV",
-		aboutTrigger: "Púlsame",
-		available: "Disponible para proyectos",
-		degree: "Graduado en Ingeniería informática",
-		linkedinAriaLabel: "LinkedIn de Marc Gallego",
-		phoneAriaLabel: "Llamar a Marc Gallego",
-		emailAriaLabel: "Contactar con Marc Gallego",
-		ctaAriaLabel: "Ver trayectoria de Marc Gallego",
 		sectionAriaLabel: "Presentación de Marc Gallego",
-		videoTitle: "Vídeo de fondo del mar",
 	},
 
 	// ── WhatWeDo ──
@@ -61,9 +45,7 @@ export const es = {
 	// ── TechStack ──
 	techStack: {
 		heading: "Tecnologías",
-		descCorner: "Estas son las tecnologías que utilizo en mi día a día. Siempre me gusta seguir explorando nuevas herramientas para poder elegir la mejor solución según las necesidades de cada proyecto.",
 		toggleShow: "Ver tecnologías",
-		toggleHide: "Ocultar tecnologías",
 		typewriterPhrases: [
 			"Estas son mis tecnologías más usadas.",
 			"Interactúa con el icono para ver los nombres.",
@@ -95,7 +77,6 @@ export const es = {
 		subtitle: "Colaboraciones con estudios y profesionales",
 		badge: "desde 2024",
 		dokoDesc: "Estudio de branding, diseño y desarrollo web",
-		dokoLogoAlt: "Logo Doko Studio",
 		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
 		studioLabel: "¿Cómo colaboro?",
 		studioText1: "Por mi parte, colaboro aportando mi experiencia y servicios, participando tanto de forma puntual como trabajando conjuntamente en proyectos de mayor envergadura.",
