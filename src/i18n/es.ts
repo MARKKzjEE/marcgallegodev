@@ -36,8 +36,8 @@ export const es = {
 		sectionAriaLabel: "Presentación de Marc Gallego",
 	},
 
-	// ── WhatWeDo ──
-	whatWeDo: {
+	// ── WhatIDo ──
+	whatIDo: {
 		label: "Qué es lo que hago",
 		text: "Transformo ideas en soluciones digitales, creando webs, apps y productos que nacen como una visión y se convierten en algo real. Para mí no se trata solo de desarrollar una solución, sino de entender el proyecto más allá del objetivo técnico. Esas cosas que a veces no se explican con palabras, pero se perciben cuando un proyecto se construye bien.",
 	},

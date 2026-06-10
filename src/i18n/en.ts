@@ -38,8 +38,8 @@ export const en: Translations = {
 		sectionAriaLabel: "Marc Gallego introduction",
 	},
 
-	// ── WhatWeDo ──
-	whatWeDo: {
+	// ── WhatIDo ──
+	whatIDo: {
 		label: "What I do",
 		text: "I transform ideas into digital solutions, creating websites, apps and products that start as a vision and become something real. For me, it's not just about building a solution, but about understanding the project beyond the technical goal. The kind of things that sometimes can't be explained with words, but can be felt when a project is built the right way.",
 	},

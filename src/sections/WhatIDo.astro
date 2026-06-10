@@ -3,21 +3,21 @@ import { getLang, useTranslations } from '../i18n/index';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
-const words = t.whatWeDo.text.split(' ');
+const words = t.whatIDo.text.split(' ');
 const paragraphsWithIndex = [words.map((word: string, i: number) => ({ word, index: i }))];
 ---
 
-<section id="what-we-do" class="what-we-do py-16 md:py-30" aria-labelledby="what-we-do-heading">
+<section id="what-i-do" class="what-i-do py-16 md:py-30" aria-labelledby="what-i-do-heading">
 	<div class="px-4 md:px-10">
 		<div class="grid md:grid-cols-[320px_1fr] gap-8 md:gap-16 items-start">
 
 			<!-- Label izquierda -->
-			<h2 id="what-we-do-heading" class="what-we-do__label text-mono-label-soft">{t.whatWeDo.label}</h2>
+			<h2 id="what-i-do-heading" class="what-i-do__label text-mono-label-soft">{t.whatIDo.label}</h2>
 
 			<!-- Texto con reveal por palabra -->
-			<div class="what-we-do__content" data-scroll-reveal>
+			<div class="what-i-do__content" data-scroll-reveal>
 				{paragraphsWithIndex.map((words) => (
-					<p class="what-we-do__text font-cottor font-light mb-8">
+					<p class="what-i-do__text font-cottor font-light mb-8">
 						{words.map(({ word, index }) => (
 							<span class="reveal-word" style={`--word-index: ${index}`}>{word} </span>
 						))}
@@ -30,12 +30,12 @@ const paragraphsWithIndex = [words.map((word: string, i: number) => ({ word, ind
 </section>
 
 <style lang="scss">
-	.what-we-do__text {
+	.what-i-do__text {
 		font-size: clamp(30px, 5vw, 60px);
 		line-height: 1.4;
 	}
 
-	.what-we-do__label {
+	.what-i-do__label {
 		padding-top: 0.6em;
 
 		@media (min-width: 768px) {
