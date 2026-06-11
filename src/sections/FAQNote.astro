@@ -61,10 +61,12 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 <style lang="scss">
 	// ─── Sección: la hoja va centrada sobre el fondo del tema ───
 	.faq-note {
-		// Tinta de bolígrafo (azul), papel claro fijo en ambos temas.
-		--ink: #1f3a93;
+		// Tinta de bolígrafo azul BIC (azul royal vivo) sobre papel claro.
+		--ink: #2b3fd4;
 		--ink-soft: color-mix(in srgb, var(--ink) 62%, transparent);
 		--paper: #f4f1e9;
+		// Overlay sobre el papel: transparente en claro, oscuro en dark.
+		--paper-overlay: transparent;
 
 		display: flex;
 		justify-content: center;
@@ -73,6 +75,13 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		@media (min-width: 768px) {
 			padding: 6rem 2.5rem;
 		}
+	}
+
+	// Dark: papel oscurecido (overlay) + tinta azul clara para contrastar.
+	:global(.dark) .faq-note {
+		--ink: #aeb6e8;
+		--ink-soft: color-mix(in srgb, var(--ink) 70%, transparent);
+		--paper-overlay: rgba(20, 22, 34, 0.82);
 	}
 
 	// ─── La hoja de papel (vertical, tipo folio) ───
@@ -92,6 +101,25 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		// Sombra suave + rotación mínima → hoja apoyada sobre la mesa.
 		box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.45);
 		transform: rotate(-0.8deg);
+
+		// Overlay sobre el papel (oscurece en dark, transparente en claro).
+		// Va por encima de la textura pero por debajo del contenido.
+		&::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			z-index: 0;
+			pointer-events: none;
+			background-color: var(--paper-overlay);
+		}
+	}
+
+	// El contenido de la hoja por encima del overlay.
+	.faq-note__head,
+	.faq-note__list,
+	.faq-note__sign {
+		position: relative;
+		z-index: 1;
 	}
 
 	// ─── Título manuscrito + subrayado ondulado ───
@@ -189,7 +217,7 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 	.faq-note__answer {
 		font-family: var(--font-reenie);
 		font-weight: 400;
-		font-size: clamp(19px, 2.3vw, 25px);
+		font-size: clamp(22px, 2.6vw, 29px);
 		line-height: 1.2;
 		color: var(--ink-soft);
 		margin: 0;
@@ -205,7 +233,7 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 	// ─── Firma al pie ───
 	.faq-note__sign {
 		font-family: var(--font-reenie);
-		font-size: clamp(16px, 2vw, 20px);
+		font-size: clamp(18px, 2.2vw, 23px);
 		color: var(--ink-soft);
 		text-align: right;
 		margin: 2.5rem 0 0;
@@ -252,7 +280,7 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		}
 
 		.faq-note__answer {
-			font-size: clamp(21px, 5.2vw, 25px);
+			font-size: clamp(23px, 5.6vw, 29px);
 			line-height: 1.25;
 			max-width: none;              // el texto se estira a todo el ancho
 		}

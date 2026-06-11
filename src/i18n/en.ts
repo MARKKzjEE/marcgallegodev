@@ -60,24 +60,21 @@ export const en: Translations = {
 		footNote: "See my experience",
 	},
 
-	// ── About ──
-	about: {
-		title: "About me",
+	// ── About (editorial section: big name + overlapping photo) ──
+	aboutCover: {
 		profileAlt: "Marc Gallego, Full Stack developer in Barcelona",
-		// Decorative phrase repeated at the edges (2 lines)
-		cornerPhrase: ["JUST ENJOY WHERE", "YOU ARE NOW"],
-		// NORD words stacked in the center column (that define me).
-		// First 4 → above the photo · last 4 → below.
-		// "{age}" is replaced with the computed age in the component.
-		statements: [
-			"About me",
-			"{age} years",
-			"Barcelona",
-			"Creative",
-			"Trust",
-			"Transparency",
-			"Value",
-			"Closeness",
+		location: "Barcelona",
+		ageLabel: "{age} years",   // {age} computed in the component
+		roleTop: "Fullstack",
+		firstName: "Marc",
+		lastName: "Gallego",
+		secondLastName: "Gines",
+		roleBottom: "Developer",
+		photoCredit: "By m",
+		// Summary paragraphs (each on its own line, separated by space).
+		summary: [
+			"A Computer Engineering graduate, I've always had a passion for computers and for building with technology.",
+			"Beyond code, two passions shape the way I see things. One is fashion, which broadens my sense of taste, colors, shapes and possibilities, and the other is the sea, where I disconnect and reorganize ideas.",
 		],
 	},
 
@@ -97,7 +94,7 @@ export const en: Translations = {
 		statement: "Creative studio / Web development / Design & / Branding / born in Valencia.",
 		dokoImgAlt: "Doko Studio — web design and development studio",
 		studioText1: "I collaborate with Doko bringing my experience and services, on a project basis or on larger-scale work.",
-		studioText2: "When a project needs more —branding, design, development and deployment— I build it together with their team.",
+		studioText2: "If your project needs more resources, we can cover every phase with specialized profiles. We could even join your project as a team.",
 	},
 
 	// ── FAQ ──
@@ -153,16 +150,16 @@ export const en: Translations = {
 		// → Placeholders: REVIEW (project type, short catalog line).
 		items: [
 			{
-				title: 'Viviq',
-				description: 'Real estate platform with a CMS adaptable to each client.',
-				type: 'Web platform',
-				tagline: 'Adaptable real-estate CMS per client.',
+				title: 'PlanIT',
+				description: 'My side project that evolved into a startup connecting people around any kind of plan or activity.',
+				type: 'Startup · Social app',
+				tagline: 'Connecting people through plans.',
 			},
 			{
-				title: 'Cor de suro',
-				description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.',
-				type: 'Web · Visual narrative',
-				tagline: 'Craft-driven, sustainable visual narrative.',
+				title: 'Loyic',
+				description: 'Employee portal for managing all internal company user data including time tracking, documentation, payroll, internal surveys, and more.',
+				type: 'Internal portal',
+				tagline: 'Employee portal',
 			},
 			{
 				title: 'Lateua',
@@ -171,28 +168,28 @@ export const en: Translations = {
 				tagline: 'AI-powered interior design marketplace.',
 			},
 			{
-				title: 'Loyic',
-				description: 'Employee portal for managing all internal company user data including time tracking, documentation, payroll, internal surveys, and more.',
-				type: 'Internal portal',
-				tagline: 'All-in-one employee portal.',
+				title: 'Cor de suro',
+				description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.',
+				type: 'Web · Visual narrative',
+				tagline: 'Craft-driven, sustainable visual narrative.',
 			},
 			{
-				title: 'Pillositio',
-				description: 'App and web platform for bars and restaurants with services for businesses and customers.',
-				type: 'App + Web platform',
-				tagline: 'App for bars, restaurants and guests.',
-			},
-			{
-				title: 'PlanIT',
-				description: 'My side project that evolved into a startup connecting people around any kind of plan or activity.',
-				type: 'Startup · Social app',
-				tagline: 'Connecting people through plans.',
+				title: 'Viviq',
+				description: 'Real estate platform with a CMS adaptable to each client.',
+				type: 'Web platform',
+				tagline: 'Adaptable real-estate CMS per client.',
 			},
 			{
 				title: 'RTTH',
 				description: 'Brand territory built through a service that transforms sound waves from audio files into design assets with integrated waveforms.',
 				type: 'Branding · Tool',
 				tagline: 'From sound waves to design assets.',
+			},
+			{
+				title: 'Pillositio',
+				description: 'App and web platform for bars and restaurants with services for businesses and customers.',
+				type: 'App + Web platform',
+				tagline: 'App for bars, restaurants and guests.',
 			},
 		],
 	},
@@ -209,7 +206,7 @@ export const en: Translations = {
 	// ── Footer ──
 	footer: {
 		headline: "Let's work together.",
-		headlineReveal: "Let's work together",
+		headlineReveal: "Let's work together.",
 		copyright: "All rights reserved.",
 		scrollTop: "Back to top",
 		linkedinLabel: "LinkedIn",

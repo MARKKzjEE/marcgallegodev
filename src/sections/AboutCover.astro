@@ -1,0 +1,229 @@
+---
+import { Image } from 'astro:assets';
+import profileLight from '../assets/me/hero-profile-light.png';
+import profileDark from '../assets/me/hero-profile-dark.png';
+import { getLang, useTranslations } from '../i18n/index';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+const c = t.aboutCover;
+
+// Edad calculada desde la fecha de nacimiento (se actualiza sola cada año).
+const BIRTH_DATE = new Date(1997, 4, 31); // 31 mayo 1997 (mes 0-indexado)
+const now = new Date();
+let age = now.getFullYear() - BIRTH_DATE.getFullYear();
+const hadBirthday =
+	now.getMonth() > BIRTH_DATE.getMonth() ||
+	(now.getMonth() === BIRTH_DATE.getMonth() && now.getDate() >= BIRTH_DATE.getDate());
+if (!hadBirthday) age -= 1;
+const ageLabel = c.ageLabel.replace('{age}', String(age));
+---
+
+<!--
+  About Cover: versión editorial tipo portada de revista. Nombre grande escalonado
+  (NORD) con la foto superpuesta por encima (collage), metadatos en las esquinas
+  superiores y, abajo, crédito "By me" + párrafo resumen.
+-->
+<section id="about" class="cover" aria-labelledby="cover-heading">
+	<div class="cover-inner max-w-6xl mx-auto px-4 md:px-10">
+
+		<!-- Metadatos superiores -->
+		<div class="cover-meta">
+			<span class="cover-meta__item text-mono-label">{c.location}</span>
+			<span class="cover-meta__item text-mono-label">{ageLabel}</span>
+		</div>
+
+		<!-- Nombre escalonado con la foto superpuesta -->
+		<div class="cover-stage">
+			<h2 id="cover-heading" class="cover-name font-nord text-secondary">
+				<span class="cover-name__role cover-name__role--top">{c.roleTop}</span>
+				<span class="cover-name__line cover-name__line--1">{c.firstName}</span>
+				<span class="cover-name__line cover-name__line--2">{c.lastName}</span>
+				<span class="cover-name__line cover-name__line--3">{c.secondLastName}</span>
+				<span class="cover-name__role cover-name__role--bottom">{c.roleBottom}</span>
+			</h2>
+
+			<!-- Foto superpuesta (variante por tema) -->
+			<div class="cover-photo" aria-hidden="false">
+				<Image src={profileDark} alt={c.profileAlt} widths={[500, 800]} sizes="(max-width: 768px) 60vw, 360px" format="webp" quality={92} loading="lazy" class="cover-photo__img cover-photo__img--light" />
+				<Image src={profileLight} alt={c.profileAlt} widths={[500, 800]} sizes="(max-width: 768px) 60vw, 360px" format="webp" quality={92} loading="lazy" class="cover-photo__img cover-photo__img--dark" />
+			</div>
+		</div>
+
+		<!-- Pie: crédito + resumen (párrafos separados por aire) -->
+		<div class="cover-foot">
+			<span class="cover-credit text-mono-label">[ {c.photoCredit} ]</span>
+			<div class="cover-summary text-mono-label">
+				{c.summary.map((p: string) => <p>{p}</p>)}
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<style lang="scss">
+	.cover {
+		position: relative;
+		width: 100%;
+		background-color: color-mix(in srgb, var(--secondary) 5%, var(--primary));
+		overflow: hidden;
+		padding: 4rem 0;
+
+		@media (min-width: 768px) {
+			padding: 6rem 0;
+		}
+
+		// Granulado (grain) sobre el fondo, como el del gradient del Hero.
+		// Ruido fractal SVG en un pseudo-elemento, sutil y por debajo del contenido.
+		&::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			z-index: 0;
+			pointer-events: none;
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+			// blend normal → el grano se pinta crudo y SÍ se aprecia sobre el gris.
+			opacity: 0.5;
+			mix-blend-mode: normal;
+		}
+	}
+
+	:global(.dark) .cover {
+		background-color: color-mix(in srgb, var(--secondary) 10%, var(--primary));
+
+		// En oscuro el grain se nota más; lo bajamos para no pasarnos.
+		&::before { opacity: 0.08; }
+	}
+
+	.cover-inner {
+		// Ancho contenido con utilidad estándar de Tailwind (max-w-6xl = 72rem) + mx-auto.
+		position: relative;
+		z-index: 1;   // por encima de la capa de grain (.cover::before)
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	// ─── Metadatos superiores ───
+	.cover-meta {
+		display: flex;
+		justify-content: space-between;
+		text-transform: uppercase;
+	}
+
+	// ─── Escenario: nombre + foto superpuesta ───
+	.cover-stage {
+		position: relative;
+		display: flex;
+		justify-content: center;
+	}
+
+	.cover-name {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-transform: uppercase;
+		// Todas las líneas (roles + nombre) al MISMO tamaño grande.
+		font-size: clamp(48px, 12vw, 150px);
+		font-weight: 400;
+		// Compacto: las líneas casi se tocan (entran/salen por detrás de la foto).
+		line-height: 0.78;
+		letter-spacing: -0.02em;
+		text-align: center;
+		width: 100%;
+	}
+
+	// Líneas del nombre: centradas, con un escalonado SUTIL (pequeño offset
+	// alternando lado) para que no queden perfectamente alineadas pero tampoco
+	// se vayan a los extremos.
+	.cover-name__line { display: block; align-self: center; }
+	.cover-name__line--1 { transform: translateX(-5%); }   // MARC (un poco izq)
+	.cover-name__line--2 { transform: translateX(4%); }    // GALLEGO (un poco der)
+	.cover-name__line--3 { transform: translateX(7%); }   // GINES (casi centrado)
+
+	// Roles (FULLSTACK / DEVELOPER): mismo tamaño grande pero en CottorwayPro
+	// Thin → contraste tipográfico con el NORD del nombre (como la referencia).
+	// Centrados, sobresalen arriba y abajo, cruzados por detrás de la foto.
+	.cover-name__role {
+		display: block;
+		align-self: center;
+		font-family: var(--font-cottor);
+		font-weight: 100;
+		letter-spacing: 0;
+	}
+
+	// ─── Foto superpuesta (por encima del nombre, centrada) ───
+	.cover-photo {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 2;
+		width: clamp(180px, 28vw, 340px);
+		aspect-ratio: 3 / 4;
+		overflow: hidden;
+	}
+
+	.cover-photo__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		display: block;
+	}
+
+	// Variante por tema (control propio, sin Tailwind)
+	.cover-photo__img--dark { display: none; }
+	:global(.dark) {
+		.cover-photo__img--light { display: none; }
+		.cover-photo__img--dark { display: block; }
+	}
+
+	// ─── Pie: crédito + resumen ───
+	.cover-foot {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+		max-width: 620px;
+		margin-inline: auto;
+		text-align: center;
+	}
+
+	.cover-credit {
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.cover-summary {
+		display: flex;
+		flex-direction: column;
+		gap: 1.2em;   // aire entre párrafos
+		line-height: 1.6;
+		color: var(--secondary-soft);
+		text-transform: none;
+
+		p { margin: 0; }
+	}
+
+	// ─── Móvil: foto estrecha + nombre que asoma por los lados ───
+	@media (max-width: 767px) {
+		.cover-inner { gap: 2rem; }
+		// Nombre un punto mayor para acompañar a la foto.
+		.cover-name { font-size: clamp(60px, 17vw, 110px); }
+		// Foto más ESTRECHA y alta: deja sitio lateral para que MARC/GINES asomen.
+		.cover-photo {
+			width: clamp(180px, 48vw, 260px);
+			aspect-ratio: 3 / 4.4;
+		}
+		// MARC (1) a la izquierda y GINES (3) a la derecha → sobresalen de la foto.
+		.cover-name__line--1 { transform: translateX(-24%); }
+		.cover-name__line--3 { transform: translateX(24%); }
+		// GALLEGO (2) centrado (es ancho, ya asoma por ambos lados).
+		.cover-name__line--2 { transform: translateX(0); }
+		// Más aire entre el bloque nombre+foto y los metadatos (arriba) / [ BY M ] (abajo).
+		.cover-stage { margin-block: 2rem; }
+	}
+</style>

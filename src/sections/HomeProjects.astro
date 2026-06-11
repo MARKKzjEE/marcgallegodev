@@ -32,16 +32,23 @@ const layout: { d: [number, number]; t: [number, number] }[] = [
 	{ d: [5, 3], t: [4, 3] },
 ];
 
-const items = layout.map((pos, i) => ({
-	title: t.projects.items[i].title,
-	description: t.projects.items[i].description,
-	image: projectImages[i],
-	no: String(START_NO + i).padStart(3, '0'),
-	// columnas/filas por breakpoint
-	cd: pos.d[0], rd: pos.d[1],
-	ct: pos.t[0], rt: pos.t[1],
-	cm: (i % 2) + 1, rm: Math.floor(i / 2) + 1, // móvil: 2 cols secuencial
-}));
+// Qué proyecto va en cada celda del collage. Se muestra 031-035 y 037 (se
+// salta el 036/RTTH en la home; sí aparece en el catálogo de /proyectos).
+const projectIndices = [0, 1, 2, 3, 4, 6];
+
+const items = layout.map((pos, cell) => {
+	const i = projectIndices[cell];
+	return {
+		title: t.projects.items[i].title,
+		description: t.projects.items[i].description,
+		image: projectImages[i],
+		no: String(START_NO + i).padStart(3, '0'),
+		// columnas/filas por breakpoint
+		cd: pos.d[0], rd: pos.d[1],
+		ct: pos.t[0], rt: pos.t[1],
+		cm: (cell % 2) + 1, rm: Math.floor(cell / 2) + 1, // móvil: 2 cols secuencial
+	};
+});
 
 // Puntos por breakpoint (intersecciones de cada grilla).
 function makeDots(cols: number, rows: number) {
@@ -85,8 +92,17 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 					))}
 				</ul>
 				<a href={projectsPath} class="hp-more text-mono-lg uppercase" data-reveal data-reveal-radius="28px">
-					<span class="hp-more__base">--{t.projects.moreResults}:</span>
-					<span class="hp-more__reveal reveal-layer" aria-hidden="true">--{t.projects.moreResults}:</span>
+					<span class="hp-more__base">
+						--{t.projects.moreResults}:
+						<!-- Círculo a mano alzada (siempre visible): indica que es navegable -->
+						<svg class="hp-more__circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" /></svg>
+					</span>
+					<span class="hp-more__reveal reveal-layer" aria-hidden="true">
+						<span class="hp-more__reveal-text">
+							--{t.projects.moreResults}:
+							<svg class="hp-more__circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" /></svg>
+						</span>
+					</span>
 				</a>
 			</div>
 
@@ -133,8 +149,17 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 				))}
 			</ul>
 			<a href={projectsPath} class="hp-more text-mono-lg uppercase" data-reveal data-reveal-radius="28px">
-				<span class="hp-more__base">--{t.projects.moreResults}:</span>
-				<span class="hp-more__reveal reveal-layer" aria-hidden="true">--{t.projects.moreResults}:</span>
+				<span class="hp-more__base">
+					--{t.projects.moreResults}:
+					<!-- Círculo a mano alzada (siempre visible): indica que es navegable -->
+					<svg class="hp-more__circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" /></svg>
+				</span>
+				<span class="hp-more__reveal reveal-layer" aria-hidden="true">
+					<span class="hp-more__reveal-text">
+						--{t.projects.moreResults}:
+						<svg class="hp-more__circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" /></svg>
+					</span>
+				</span>
 			</a>
 		</div>
 
@@ -318,6 +343,14 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 		white-space: nowrap;
 	}
 
+	// Capa base: relative para anclar su círculo; padding para que el óvalo
+	// a mano respire alrededor del texto.
+	.hp-more__base {
+		position: relative;
+		display: inline-block;
+		padding: 0.65em 1.1em;
+	}
+
 	// Capa reveal: clon con colores invertidos. El padding compensa el extend
 	// para que el texto siga alineado con la capa base.
 	.hp-more__reveal {
@@ -329,6 +362,33 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 
 		// Móvil (táctil): no hay reveal; se oculta la capa para que no asome.
 		@media (max-width: 767px) { display: none; }
+	}
+
+	// El texto clon del reveal lleva el mismo padding que la base para alinear.
+	.hp-more__reveal-text {
+		position: relative;
+		display: inline-block;
+		padding: 0.65em 1.1em;
+	}
+
+	// Círculo a mano alzada que rodea el texto (siempre visible).
+	// Hereda el color de su capa: secundario en la base, invertido en el reveal.
+	.hp-more__circle {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+		fill: none;
+		pointer-events: none;
+
+		path {
+			fill: none;
+			stroke: currentColor;
+			stroke-width: 2;
+			stroke-linecap: round;
+			vector-effect: non-scaling-stroke;
+		}
 	}
 
 	// Cabecera con peso: mismo tamaño que el label de WhatIDo (.text-mono-label).

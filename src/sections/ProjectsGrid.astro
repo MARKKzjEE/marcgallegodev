@@ -207,9 +207,15 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 	justify-content: center;
 	aspect-ratio: 4 / 3;
 	padding: 1rem 0.5rem;
+	overflow: hidden;   // recorta la imagen cover en móvil
 
 	@media (min-width: 768px) {
 		padding: 1.5rem 1rem;
+	}
+
+	// Móvil: sin padding → la imagen (cover) llena toda la celda.
+	@media (max-width: 767px) {
+		padding: 0;
 	}
 }
 
@@ -275,6 +281,19 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 	.catalog-cell:hover & {
 		transform: scale(1.04);
 	}
+
+	// Móvil: la imagen LLENA la celda (cover) en vez de flotar centrada.
+	// Sin efecto de hover/scale (en táctil se queda "pegado" tras el tap).
+	@media (max-width: 767px) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: none;
+	}
+
+	@media (max-width: 767px) {
+		.catalog-cell:hover & { transform: none; }
+	}
 }
 
 // ─── Ficha: Título + bloque de Datos ───
@@ -299,5 +318,13 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 
 .catalog-cell__tagline {
 	opacity: 0.55;
+}
+
+// ─── Móvil: textos algo mayores y más aire entre imagen y ficha ───
+@media (max-width: 767px) {
+	// Separación imagen → título.
+	.catalog-cell__info { margin-top: 1.25rem; }
+	.catalog-cell__name { font-size: 1.25rem; }
+	.catalog-cell__data { font-size: 14px; }
 }
 </style>

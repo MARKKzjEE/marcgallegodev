@@ -58,24 +58,21 @@ export const es = {
 		footNote: "Ver mi trayectoria",
 	},
 
-	// ── About ──
-	about: {
-		title: "Sobre mi",
+	// ── About (sección editorial: nombre grande + foto superpuesta) ──
+	aboutCover: {
 		profileAlt: "Marc Gallego, desarrollador Full Stack en Barcelona",
-		// Frase decorativa repetida en los extremos (2 líneas)
-		cornerPhrase: ["SOLO DISFRUTA DONDE", "ESTÁS AHORA"],
-		// Palabras NORD apiladas en la columna central (que me definen).
-		// Primeras 4 → arriba de la foto · últimas 4 → debajo.
-		// "{age}" se reemplaza con la edad calculada en el componente.
-		statements: [
-			"Sobre mí",
-			"{age} años",
-			"Barcelona",
-			"Creativo",
-			"Confianza",
-			"Transparencia",
-			"Valor",
-			"Cercanía",
+		location: "Barcelona",
+		ageLabel: "{age} años",   // {age} se calcula en el componente
+		roleTop: "Fullstack",
+		firstName: "Marc",
+		lastName: "Gallego",
+		secondLastName: "Gines",
+		roleBottom: "Developer",
+		photoCredit: "By m",
+		// Párrafos del resumen (cada uno en su línea, separados por aire).
+		summary: [
+			"Graduado en Ingeniería Informática, siempre he tenido una pasión por los ordenadores y por la creación tecnológica.",
+			"Fuera del código tengo dos pasiones que me influyen en la forma de cómo veo las cosas. Una es la moda, con la que amplío mi percepción de gustos, colores, formas y posibilidades, y la otra es el mar, donde desconecto y reorganizo ideas.",
 		],
 	},
 
@@ -95,7 +92,7 @@ export const es = {
 		statement: "Estudio creativo / Desarrollo web / Diseño & / Branding / nacido en Valencia.",
 		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
 		studioText1: "Colaboro con Doko aportando mi experiencia y servicios, tanto de forma puntual como en proyectos de mayor envergadura.",
-		studioText2: "Cuando un proyecto necesita más —branding, diseño, desarrollo y puesta en producción— lo construyo de la mano de su equipo.",
+		studioText2: "Si tu proyecto necesita más recursos, podemos abarcar cada fase con perfiles especializados. Incluso podríamos integrarnos como equipo en tu proyecto.",
 	},
 
 	// ── FAQ ──
@@ -151,16 +148,16 @@ export const es = {
 		// → Placeholders: REVISAR Y CUADRAR (tipo de proyecto y frase corta de catálogo).
 		items: [
 			{
-				title: 'Viviq',
-				description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.',
-				type: 'Plataforma web',
-				tagline: 'CMS inmobiliario adaptable a cada cliente.',
+				title: 'PlanIT',
+				description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.',
+				type: 'Startup · App social',
+				tagline: 'Conectar personas a través de planes.',
 			},
 			{
-				title: 'Cor de suro',
-				description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.',
-				type: 'Web · Narrativa visual',
-				tagline: 'Narrativa visual artesanal y sostenible.',
+				title: 'Loyic',
+				description: 'Portal del empleado que permite gestionar todos los datos de usuarios internos de la empresa como registro horario, documentación, nóminas, encuestas internas, etc.',
+				type: 'Portal interno',
+				tagline: 'Portal del empleado',
 			},
 			{
 				title: 'Lateua',
@@ -169,28 +166,28 @@ export const es = {
 				tagline: 'Marketplace de interiorismo con IA.',
 			},
 			{
-				title: 'Loyic',
-				description: 'Portal del empleado que permite gestionar todos los datos de usuarios internos de la empresa como registro horario, documentación, nóminas, encuestas internas, etc.',
-				type: 'Portal interno',
-				tagline: 'Portal del empleado todo-en-uno.',
+				title: 'Cor de suro',
+				description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.',
+				type: 'Web · Narrativa visual',
+				tagline: 'Narrativa visual artesanal y sostenible.',
 			},
 			{
-				title: 'Pillositio',
-				description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.',
-				type: 'App + Plataforma web',
-				tagline: 'App para bares, restaurantes y clientes.',
-			},
-			{
-				title: 'PlanIT',
-				description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.',
-				type: 'Startup · App social',
-				tagline: 'Conectar personas a través de planes.',
+				title: 'Viviq',
+				description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.',
+				type: 'Plataforma web',
+				tagline: 'CMS inmobiliario adaptable a cada cliente.',
 			},
 			{
 				title: 'RTTH',
 				description: 'Generación del territorio de la marca con un servicio que transforma las ondas de sonido de un archivo a imágenes como recursos de diseño con las ondas integradas.',
 				type: 'Branding · Herramienta',
 				tagline: 'Del sonido a recursos de diseño.',
+			},
+			{
+				title: 'Pillositio',
+				description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.',
+				type: 'App + Plataforma web',
+				tagline: 'App para bares, restaurantes y clientes.',
 			},
 		],
 	},
@@ -207,7 +204,7 @@ export const es = {
 	// ── Footer ──
 	footer: {
 		headline: "Trabajemos juntos.",
-		headlineReveal: "Trabajemos juntos",
+		headlineReveal: "Trabajemos juntos.",
 		copyright: "Todos los derechos reservados.",
 		scrollTop: "Quiero volver arriba",
 		linkedinLabel: "LinkedIn",

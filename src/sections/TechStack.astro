@@ -48,17 +48,33 @@ const filters = [
 		<h2 id="tech-heading" class="tech-title font-nord font-normal text-secondary">{t.techStack.heading}</h2>
 	</div>
 
-	<!-- Tabs en celdas, fila fija pegada encima del carrusel -->
-	<div class="tech-tabs" role="tablist" aria-label={t.techStack.heading}>
-		{filters.map((f, i) => (
-			<button
-				type="button"
-				class:list={['tech-tab text-mono-label', { 'is-active': i === 0 }]}
-				role="tab"
-				aria-selected={i === 0 ? 'true' : 'false'}
-				data-tech-filter={f.key}
-			>{f.label}</button>
-		))}
+	<!-- Filtros. Desktop/tablet: fila de celdas. Móvil: dropdown (trigger + panel). -->
+	<div class="tech-filters" data-tech-filters>
+
+		<!-- Trigger (solo móvil): celda con el filtro activo + flecha -->
+		<button
+			type="button"
+			class="tech-tabs-trigger text-mono-label"
+			data-tech-trigger
+			aria-haspopup="true"
+			aria-expanded="false"
+		>
+			<span class="tech-tabs-trigger__label" data-tech-trigger-label>{filters[0].label}</span>
+			<span class="tech-tabs-trigger__arrow" aria-hidden="true">▾</span>
+		</button>
+
+		<!-- Panel de opciones. Desktop: fila siempre visible · Móvil: se despliega -->
+		<div class="tech-tabs" role="tablist" aria-label={t.techStack.heading}>
+			{filters.map((f, i) => (
+				<button
+					type="button"
+					class:list={['tech-tab text-mono-label', { 'is-active': i === 0 }]}
+					role="tab"
+					aria-selected={i === 0 ? 'true' : 'false'}
+					data-tech-filter={f.key}
+				>{f.label}</button>
+			))}
+		</div>
 	</div>
 
 	<!-- Carrusel horizontal: drag + cursor custom (scroll nativo de fondo) -->
@@ -96,8 +112,17 @@ const filters = [
 	<div class="tech-foot px-4 md:px-10">
 		<span class="tech-foot__meta text-mono-label">{t.techStack.footMeta.replace('{count}', String(techs.length))}</span>
 		<a href={experiencePath} class="tech-foot__note text-mono-label uppercase" data-reveal data-reveal-radius="24px">
-			<span class="tech-foot__base">--{t.techStack.footNote}</span>
-			<span class="tech-foot__reveal reveal-layer" aria-hidden="true">--{t.techStack.footNote}:</span>
+			<span class="tech-foot__base">
+				--{t.techStack.footNote}
+				<!-- Círculo a mano alzada (siempre visible): indica que es navegable -->
+				<svg class="tech-foot__circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" /></svg>
+			</span>
+			<span class="tech-foot__reveal reveal-layer" aria-hidden="true">
+				<span class="tech-foot__reveal-text">
+					--{t.techStack.footNote}
+					<svg class="tech-foot__circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" /></svg>
+				</span>
+			</span>
 		</a>
 	</div>
 
@@ -113,13 +138,74 @@ const filters = [
 		line-height: 1;
 	}
 
-	// ─── Tabs en celdas (fila fija, no scrollea con el carrusel) ───
-	// Pegada justo encima de la fila de cabeceras del carrusel.
+	// ─── Filtros: contenedor ───
+	// Desktop/tablet: fila de celdas. Móvil: dropdown (trigger + panel apilado).
+	.tech-filters {
+		position: relative;
+	}
+
+	// Trigger del dropdown: solo móvil. Celda con el filtro activo + flecha,
+	// ancho de una celda del carrusel (64vw) para conectar con él.
+	.tech-tabs-trigger {
+		display: none;
+
+		@media (max-width: 767px) {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			width: 64vw;
+			padding: 0.75rem 1.25rem;
+			background: none;
+			cursor: pointer;
+			color: var(--secondary);
+			// Va pegado al extremo izquierdo. Borde superior + derecho (cierra la
+			// celda como las del carrusel). El inferior lo aporta el border-top
+			// del carrusel (si no, se pisan dos líneas).
+			border: none;
+			border-top: 1px solid var(--secondary);
+			border-right: 1px solid var(--secondary);
+		}
+	}
+
+	.tech-tabs-trigger__arrow {
+		font-size: 1.4em;
+		line-height: 1;
+		transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	// Flecha girada cuando el panel está abierto
+	[data-tech-filters].is-open .tech-tabs-trigger__arrow {
+		transform: rotate(180deg);
+	}
+
+	// ─── Panel de opciones ───
 	.tech-tabs {
 		display: flex;
 		width: fit-content;
 		// Borde superior solo bajo las celdas de tabs (no hasta el final)
 		border-top: 1px solid var(--secondary);
+
+		// Móvil: panel desplegable bajo el trigger (oculto hasta abrir).
+		// Flota sobre el carrusel → cierra su lateral derecho con border.
+		@media (max-width: 767px) {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			z-index: 10;
+			flex-direction: column;
+			width: 64vw;
+			border-top: none;
+			border-right: 1px solid var(--secondary);
+			background-color: var(--primary);
+			// Oculto por defecto; se revela con is-open.
+			display: none;
+		}
+	}
+
+	[data-tech-filters].is-open .tech-tabs {
+		@media (max-width: 767px) {
+			display: flex;
+		}
 	}
 
 	.tech-tab {
@@ -141,6 +227,16 @@ const filters = [
 		&.is-active {
 			background-color: var(--secondary);
 			color: var(--primary);
+		}
+
+		// Móvil: opción del dropdown apilada. Separador inferior en todas (el panel
+		// flota sobre el carrusel, así que la última también cierra por abajo).
+		// Sin border-right (no hay celda al lado en columna).
+		@media (max-width: 767px) {
+			width: 100%;
+			text-align: left;
+			border-right: none;
+			border-bottom: 1px solid var(--secondary);
 		}
 	}
 
@@ -320,12 +416,47 @@ const filters = [
 		margin-left: auto;
 	}
 
+	// Capa base: relative para anclar su círculo; padding lateral para que el
+	// óvalo a mano respire alrededor del texto sin pegarse a las letras.
+	.tech-foot__base {
+		position: relative;
+		display: inline-block;
+		padding: 0.65em 1.1em;
+	}
+
 	.tech-foot__reveal {
 		display: block;
 		padding: var(--reveal-extend);
 		background: var(--secondary);
 		color: var(--primary);
 		white-space: nowrap;
+	}
+
+	// El texto clon del reveal lleva el mismo padding que la base para alinear.
+	.tech-foot__reveal-text {
+		position: relative;
+		display: inline-block;
+		padding: 0.65em 1.1em;
+	}
+
+	// Círculo a mano alzada que rodea el texto (siempre visible).
+	// Hereda el color de su capa: secundario en la base, invertido en el reveal.
+	.tech-foot__circle {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+		fill: none;
+		pointer-events: none;
+
+		path {
+			fill: none;
+			stroke: currentColor;
+			stroke-width: 2;
+			stroke-linecap: round;
+			vector-effect: non-scaling-stroke;
+		}
 	}
 </style>
 
@@ -451,6 +582,27 @@ const filters = [
 			}, total(visible.length));
 		}
 
+		// Dropdown móvil: trigger abre/cierra el panel; el label refleja el activo.
+		const filters = document.querySelector<HTMLElement>('[data-tech-filters]');
+		const trigger = document.querySelector<HTMLElement>('[data-tech-trigger]');
+		const triggerLabel = document.querySelector<HTMLElement>('[data-tech-trigger-label]');
+
+		const closeDropdown = () => {
+			filters?.classList.remove('is-open');
+			trigger?.setAttribute('aria-expanded', 'false');
+		};
+
+		trigger?.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const open = filters?.classList.toggle('is-open');
+			trigger.setAttribute('aria-expanded', String(!!open));
+		});
+
+		// Cerrar al tocar fuera del bloque de filtros.
+		document.addEventListener('click', (e) => {
+			if (filters && !filters.contains(e.target as Node)) closeDropdown();
+		});
+
 		tabs.forEach((tab) => {
 			tab.addEventListener('click', () => {
 				const cat = tab.dataset.techFilter || 'all';
@@ -460,6 +612,9 @@ const filters = [
 					t.setAttribute('aria-selected', String(active));
 				});
 				applyFilter(cat);
+				// Móvil: refleja la selección en el trigger y cierra el panel.
+				if (triggerLabel) triggerLabel.textContent = tab.textContent;
+				closeDropdown();
 			});
 		});
 	}

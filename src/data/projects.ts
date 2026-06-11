@@ -6,5 +6,6 @@ import planit from '../assets/projects/planit.png';
 import rtth from '../assets/projects/rtth.png';
 import viviq from '../assets/projects/viviq.png';
 
-export const projectImages = [viviq, cordesuro, lateua, loyic, pillositio, planit, rtth];
-export const projectColors = ['#00676A', '#8C4216', '#BD7D60', '#280F41', '#DFD9C7', '#FA4D6E', '#7470D5'];
+// Orden: PlanIT · Loyic · Lateua · Cor de suro · Viviq · RTTH · Pillositio (031→037).
+export const projectImages = [planit, loyic, lateua, cordesuro, viviq, rtth, pillositio];
+export const projectColors = ['#FA4D6E', '#280F41', '#BD7D60', '#8C4216', '#00676A', '#7470D5', '#DFD9C7'];

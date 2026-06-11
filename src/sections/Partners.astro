@@ -11,10 +11,10 @@ const statementLines = t.partners.statement.split(' / ');
 // Indentación (%) por línea → escalada irregular tipo editorial (como la ref).
 // "Branding" (4ª línea) sobresale más que "Diseño &" (3ª).
 const indents = [0, 22, 40, 60, 12];
-// Móvil: offset (vw) desde el centro, ALTERNANDO lado → zigzag.
-// Negativo = izquierda · positivo = derecha. Valores contenidos para que las
-// líneas largas no se salgan por los laterales (van junto a max-width: 72vw).
-const mobileShifts = [-5, 6, -4, 7, -4];
+// Móvil: offset (vw) desde el centro, ALTERNANDO lado → zigzag marcado.
+// Negativo = izquierda · positivo = derecha. Amplitud generosa pero contenida
+// por max-width: 70vw (deja ~15vw de holgura a cada lado).
+const mobileShifts = [-13, 11, -9, 13, -10];
 ---
 
 <section id="partners" class="partners py-16 md:py-30" aria-labelledby="partners-heading">
@@ -124,7 +124,7 @@ const mobileShifts = [-5, 6, -4, 7, -4];
 			margin-left: 0;
 			transform: translateX(calc(var(--shift, 0) * 1vw));
 			// Deja holgura a los lados para que el desplazamiento no se salga.
-			max-width: 72vw;
+			max-width: 70vw;
 			margin-inline: auto;
 		}
 	}
