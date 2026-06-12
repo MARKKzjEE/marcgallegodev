@@ -70,10 +70,11 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 
 		display: flex;
 		justify-content: center;
+		// Padding estándar del sitio (py-16/md:py-30 vertical · px-4/md:px-10 lateral).
 		padding: 4rem 1rem;
 
 		@media (min-width: 768px) {
-			padding: 6rem 2.5rem;
+			padding: 7.5rem 2.5rem;
 		}
 	}
 
@@ -244,10 +245,9 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 	// El alto fijo deja un vacío enorme y el contenido se aprieta; aquí el
 	// contenido manda, se da más aire y se anula la rotación (que cortaba la hoja).
 	@media (max-width: 767px) {
-		// Mismo margen lateral que los títulos del resto de secciones (px-4 = 1rem)
-		// → la hoja respira en los extremos igual que ellas.
+		// Padding estándar móvil del sitio (py-16 = 4rem vertical · px-4 = 1rem lateral).
 		.faq-note {
-			padding: 3rem 1rem;
+			padding: 4rem 1rem;
 		}
 
 		.faq-note__sheet {

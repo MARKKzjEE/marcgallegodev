@@ -49,8 +49,7 @@ export const es = {
 			all: "Todos",
 			frontend: "Frontend",
 			backend: "Backend",
-			devops: "DevOps",
-			seo: "SEO",
+			otros: "Otros",
 		},
 		// Pie de la sección (bajo el carrusel). {count} = nº de tecnologías.
 		// footMeta solo en tablet/desktop; en móvil se oculta.
@@ -76,11 +75,6 @@ export const es = {
 		],
 	},
 
-	// ── MarqueeBands ──
-	marquee: {
-		linkedin: "CONECTEMOS EN LINKEDIN",
-		call: "HAZME UNA LLAMADA",
-	},
 
 	// ── Partners ──
 	partners: {
@@ -130,10 +124,6 @@ export const es = {
 		resultsLabel: "resultados",
 		// CTA de la galería de la home hacia el catálogo completo
 		moreResults: "más resultados",
-		carousel: {
-			title: "Proyectos destacados",
-			subtitle: "Arrastra para explorar",
-		},
 		grid: {
 			// Pie del catálogo. {range} se sustituye por la numeración real (ej. 031–039).
 			foot: "CAT. No. {range} · EDICIÓN 01",

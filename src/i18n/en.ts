@@ -51,8 +51,7 @@ export const en: Translations = {
 			all: "All",
 			frontend: "Frontend",
 			backend: "Backend",
-			devops: "DevOps",
-			seo: "SEO",
+			otros: "Other",
 		},
 		// Section foot (below the carousel). {count} = number of technologies.
 		// footMeta only on tablet/desktop; hidden on mobile.
@@ -78,11 +77,6 @@ export const en: Translations = {
 		],
 	},
 
-	// ── MarqueeBands ──
-	marquee: {
-		linkedin: "LET'S CONNECT ON LINKEDIN",
-		call: "GIVE ME A CALL",
-	},
 
 	// ── Partners ──
 	partners: {
@@ -132,10 +126,6 @@ export const en: Translations = {
 		resultsLabel: "results",
 		// Home gallery CTA towards the full catalog
 		moreResults: "more results",
-		carousel: {
-			title: "Featured projects",
-			subtitle: "Drag to explore",
-		},
 		grid: {
 			// Catalog foot. {range} is replaced by the real numbering (e.g. 031–039).
 			foot: "CAT. No. {range} · EDITION 01",

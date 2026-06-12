@@ -212,10 +212,8 @@
 }
 
 @theme {
-	--font-vogun: "Vogun", system-ui, -apple-system, sans-serif;
 	--font-nord: "NORD", system-ui, -apple-system, sans-serif;
 	--font-cottor: "CottorwayPro", system-ui, -apple-system, sans-serif;
-	--font-pixelbots: "PixelBots", system-ui, -apple-system, sans-serif;
 	--font-monoblock: "Monoblock", system-ui, -apple-system, sans-serif;
 	--font-corinthia: "Corinthia", cursive;
 	--font-reenie: "Reenie Beanie", cursive;

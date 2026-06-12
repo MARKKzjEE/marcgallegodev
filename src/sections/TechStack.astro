@@ -9,12 +9,6 @@ const experiencePath = getLocalePath(lang, '/experience');
 
 // Iconos en /public/tech-icons/ con convención {slug}-d.svg (claro) y {slug}-l.svg (oscuro).
 const techs = [
-	// Backend
-	{ name: "Laravel",    slug: "laravel",      cat: "backend" },
-	{ name: "Django",     slug: "django",       cat: "backend" },
-	{ name: "PHP",        slug: "php",          cat: "backend" },
-	{ name: "Python",     slug: "python",       cat: "backend" },
-	{ name: "SQL",        slug: "sqldeveloper", cat: "backend" },
 	// Frontend
 	{ name: "JavaScript", slug: "js",           cat: "frontend" },
 	{ name: "TypeScript", slug: "typescript",   cat: "frontend" },
@@ -24,11 +18,17 @@ const techs = [
 	{ name: "CSS",        slug: "css3",         cat: "frontend" },
 	{ name: "Tailwind",   slug: "tailwindcss",  cat: "frontend" },
 	{ name: "Astro",      slug: "astro",        cat: "frontend" },
-	// DevOps
-	{ name: "Docker",     slug: "docker",       cat: "devops" },
-	{ name: "CI/CD",      slug: "git",          cat: "devops" },
-	// SEO
-	{ name: "SEO",        slug: "google",       cat: "seo" },
+	// Backend
+	{ name: "Laravel",    slug: "laravel",      cat: "backend" },
+	{ name: "Django",     slug: "django",       cat: "backend" },
+	{ name: "PHP",        slug: "php",          cat: "backend" },
+	{ name: "Python",     slug: "python",       cat: "backend" },
+	// Otros (BBDD, contenedores, CI/CD en repos Git, SEO)
+	{ name: "PostgreSQL", slug: "postgresql",   cat: "otros" },
+	{ name: "MySQL",      slug: "mysql",        cat: "otros" },
+	{ name: "Docker",     slug: "docker",       cat: "otros" },
+	{ name: "CI/CD",      slug: "git",          cat: "otros" },
+	{ name: "SEO",        slug: "google",       cat: "otros" },
 ];
 
 // Tabs de filtrado (clave → label vía i18n)
@@ -36,8 +36,7 @@ const filters = [
 	{ key: "all",      label: t.techStack.filters.all },
 	{ key: "frontend", label: t.techStack.filters.frontend },
 	{ key: "backend",  label: t.techStack.filters.backend },
-	{ key: "devops",   label: t.techStack.filters.devops },
-	{ key: "seo",      label: t.techStack.filters.seo },
+	{ key: "otros",    label: t.techStack.filters.otros },
 ];
 ---
 
