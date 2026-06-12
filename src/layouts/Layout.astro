@@ -145,13 +145,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 				<span class="splash-inner">
 					<span class="splash-word splash-word--name" data-splash-word>
 						<span class="splash-text">MARC GALLEGO</span>
-						<span class="deco deco--underline" aria-hidden="true"></span>
-						<span class="deco deco--strike" aria-hidden="true"></span>
-						<span class="deco deco--bracket" aria-hidden="true"><i class="bk bk--l">[</i><i class="bk bk--r">]</i></span>
-						<svg class="deco deco--circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true">
-							<path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" />
-						</svg>
-						<!-- Asteriscos a mano (estilo FAQ) salpicados en la esquina derecha -->
+						<!-- Asteriscos a mano (estilo FAQ): destellan de uno en uno -->
 						<span class="deco deco--stars" aria-hidden="true">
 							<svg class="deco-star deco-star--1" viewBox="0 0 40 40" fill="none"><path d="M20 4 L20 36 M6 12 L34 28 M34 12 L6 28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
 							<svg class="deco-star deco-star--2" viewBox="0 0 40 40" fill="none"><path d="M20 4 L20 36 M6 12 L34 28 M34 12 L6 28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
@@ -163,9 +157,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 
 					<span class="splash-word splash-word--role" data-splash-word>
 						<span class="splash-text">portfolio</span>
-						<span class="deco deco--underline" aria-hidden="true"></span>
 						<span class="deco deco--strike" aria-hidden="true"></span>
-						<span class="deco deco--bracket" aria-hidden="true"><i class="bk bk--l">«</i><i class="bk bk--r">»</i></span>
 						<svg class="deco deco--circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true">
 							<path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" />
 						</svg>
@@ -189,7 +181,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 
 				// Cada paso: { word: índice de palabra (0=name, 1=role), deco }
 				var SEQUENCE = [
-					{ word: 0, deco: 'stars' },      // asteriscos en MARC GALLEGO (esquina der)
+					{ word: 0, deco: 'stars' },      // asteriscos en MARC GALLEGO
 					{ word: 1, deco: 'circle' },     // círculo en portfolio
 					{ word: 1, deco: 'strike' },     // tachar portfolio
 				];
@@ -245,8 +237,17 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 					setTimeout(function() { splash.remove(); }, 600); // Espera a que termine la transición antes de remover del DOM
 				}
 
-				runDecoLoop();
+				// Arrancar las decoraciones cuando las fuentes (NORD, Monoblock) estén
+				// listas → el texto no "salta" (FOUT) al cambiar de la fuente de
+				// fallback a la real. Si la API no existe, arranca igualmente.
+				if (document.fonts && document.fonts.ready) {
+					document.fonts.ready.then(runDecoLoop);
+				} else {
+					runDecoLoop();
+				}
 
+				// Cierre: mínimo 3s visible Y página cargada. Si la carga tarda más,
+				// el splash se alarga (las animaciones siguen en bucle, no queda estático).
 				setTimeout(function() {
 					splashReady = true;
 					if (splashLoaded) hideSplash();
@@ -346,11 +347,11 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 		z-index: 2;
 	}
 
-	/* ── Underline / Strike: línea real que se traza con scaleX ── */
-	.deco--underline,
+	/* ── Tachado: línea real que se traza con scaleX ── */
 	.deco--strike {
 		left: -0.1em;
 		right: -0.1em;
+		top: 50%;
 		width: auto;
 		height: 1px;
 		background-color: var(--secondary);
@@ -358,19 +359,23 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 		transform-origin: left center;
 		transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 120ms ease;
 	}
-	.deco--underline { bottom: -0.18em; }
-	.deco--strike    { top: 50%; }
 
-	/* ── Círculo a mano alzada (SVG envolviendo la caja) ── */
+	/* ── Círculo a mano alzada ── */
+	/* Ancho FIJO en ch+em (no depende de la caja del texto, que iOS y el Mac
+	   miden distinto) → el óvalo es idéntico en todos los dispositivos.
+	   "portfolio" = 9 caracteres · letter-spacing 0.5em. */
 	.deco--circle {
-		left: -0.7em;
-		right: -0.7em;
-		top: -45%;
-		bottom: -45%;
-		width: auto;
-		height: auto;
+		left: 50%;
+		top: 50%;
+		width: calc(9ch + 4.5em);
+		height: 2.4em;
+		transform: translate(-50%, -50%);
 		overflow: visible;
 		fill: none;
+	}
+	/* Móvil: texto más pequeño → el óvalo necesita algo menos de margen extra. */
+	@media (max-width: 767px) {
+		.deco--circle { width: calc(9ch + 3.5em); }
 	}
 	.deco--circle path {
 		fill: none;
@@ -383,26 +388,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 		transition: stroke-dashoffset 480ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
-	/* ── Corchetes / comillas ── */
-	.deco--bracket {
-		inset: 0;
-		display: block;
-	}
-	.deco--bracket .bk {
-		position: absolute;
-		top: 50%;
-		font-family: "Monoblock", system-ui, sans-serif;
-		font-style: normal;
-		font-weight: 400;
-		font-size: 1.5em;
-		line-height: 1;
-		color: var(--secondary);
-		transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	.deco--bracket .bk--l { left: 0;  transform: translate(0.2em, -50%); }
-	.deco--bracket .bk--r { right: 0; transform: translate(-0.2em, -50%); }
-
-	/* ── Asteriscos a mano salpicados (esquina derecha) ── */
+	/* ── Asteriscos a mano salpicados (a la izquierda del nombre) ── */
 	.deco--stars {
 		inset: 0;
 		display: block;
@@ -415,10 +401,11 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 		transform: scale(0) rotate(-20deg);
 		transform-origin: center;
 	}
-	/* Tres posiciones/tamaños distintos, salpicados por la esquina sup. derecha */
-	.deco-star--1 { width: 22px; height: 22px; top: -0.7em;  right: -0.6em; }
-	.deco-star--2 { width: 15px; height: 15px; top: 0.1em;   right: -1.1em; }
-	.deco-star--3 { width: 12px; height: 12px; top: -1.1em;  right: 0.9em; }
+	/* Tres posiciones/tamaños distintos, salpicados a la izquierda del nombre,
+	   separados del texto para que no lo pisen. */
+	.deco-star--1 { width: 22px; height: 22px; top: -0.7em;  left: -1.6em; }
+	.deco-star--2 { width: 15px; height: 15px; top: 0.1em;   left: -2.2em; }
+	.deco-star--3 { width: 12px; height: 12px; top: -1.3em;  left: -1.2em; }
 
 	/* Cada asterisco hace su destello (pop in → out) en su propia ventana,
 	   de forma que solo se ve UNO a la vez, saltando por las posiciones. */
@@ -430,8 +417,7 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 	}
 
 	/* ── Estados activados por data-deco ── */
-	.splash-word[data-deco="underline"] .deco--underline,
-	.splash-word[data-deco="strike"]    .deco--strike { opacity: 1; transform: scaleX(1); }
+	.splash-word[data-deco="strike"] .deco--strike { opacity: 1; transform: scaleX(1); }
 
 	/* Asteriscos de uno en uno: cada uno destella en su turno (≈220ms),
 	   encadenados con animation-delay → solo se ve uno a la vez saltando. */
@@ -445,10 +431,6 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 
 	.splash-word[data-deco="circle"]  .deco--circle { opacity: 1; }
 	.splash-word[data-deco="circle"]  .deco--circle path { stroke-dashoffset: 0; }
-
-	.splash-word[data-deco="bracket"] .deco--bracket { opacity: 1; }
-	.splash-word[data-deco="bracket"] .deco--bracket .bk--l { transform: translate(-0.55em, -50%); }
-	.splash-word[data-deco="bracket"] .deco--bracket .bk--r { transform: translate(0.55em, -50%); }
 
 	/* ── Borrado: fade out rápido (sin re-animar el trazado) ── */
 	.splash-word[data-deco-erase] .deco {
