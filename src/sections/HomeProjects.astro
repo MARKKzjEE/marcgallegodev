@@ -1,0 +1,433 @@
+---
+import { Image } from 'astro:assets';
+import { getLang, useTranslations, getLocalePath } from '../i18n/index';
+import { projectImages } from '../data/projects';
+
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+
+// CTA "--MÁS RESULTADOS:" hacia el catálogo completo (en ambos bloques de resultados).
+const projectsPath = getLocalePath(lang, '/projects');
+
+// Numeración coherente con el catálogo de /proyectos (empieza en 31).
+const START_NO = 31;
+
+// Grids por breakpoint:
+// · Desktop: 6 cols × 3 filas, escalonado con huecos laterales.
+// · Tablet:  4 cols × 3 filas (mismo escalonado, sin las columnas vacías de los extremos → desktop −1).
+// · Móvil:   2 cols × 3 filas, secuencial (sin huecos).
+const GRID = {
+	desktop: { cols: 6, rows: 3 },
+	tablet:  { cols: 4, rows: 3 },
+	mobile:  { cols: 2, rows: 3 },
+};
+
+// Coordenadas [col, fila] por breakpoint. Móvil se calcula secuencial (i).
+const layout: { d: [number, number]; t: [number, number] }[] = [
+	{ d: [2, 1], t: [1, 1] },
+	{ d: [3, 1], t: [2, 1] },
+	{ d: [4, 1], t: [3, 1] },
+	{ d: [4, 2], t: [3, 2] },
+	{ d: [5, 2], t: [4, 2] },
+	{ d: [5, 3], t: [4, 3] },
+];
+
+// Qué proyecto va en cada celda del collage. Se muestra 031-035 y 037 (se
+// salta el 036/RTTH en la home; sí aparece en el catálogo de /proyectos).
+const projectIndices = [0, 1, 2, 3, 4, 6];
+
+const items = layout.map((pos, cell) => {
+	const i = projectIndices[cell];
+	return {
+		title: t.projects.items[i].title,
+		description: t.projects.items[i].description,
+		image: projectImages[i],
+		no: String(START_NO + i).padStart(3, '0'),
+		// columnas/filas por breakpoint
+		cd: pos.d[0], rd: pos.d[1],
+		ct: pos.t[0], rt: pos.t[1],
+		cm: (cell % 2) + 1, rm: Math.floor(cell / 2) + 1, // móvil: 2 cols secuencial
+	};
+});
+
+// Puntos por breakpoint (intersecciones de cada grilla).
+function makeDots(cols: number, rows: number) {
+	const d: { x: number; y: number }[] = [];
+	for (let r = 0; r <= rows; r++)
+		for (let c = 0; c <= cols; c++)
+			d.push({ x: (c / cols) * 100, y: (r / rows) * 100 });
+	return d;
+}
+const dotsDesktop = makeDots(GRID.desktop.cols, GRID.desktop.rows);
+const dotsTablet  = makeDots(GRID.tablet.cols, GRID.tablet.rows);
+const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
+---
+
+<section id="home-projects" class="hp py-16 md:py-30" aria-labelledby="hp-heading">
+	<div class="hp-inner px-4 md:px-10">
+
+		<!-- Título -->
+		<h2 id="hp-heading" class="hp-title font-nord font-normal text-secondary">{t.projects.title}</h2>
+
+		<!-- Collage: grid escalonado, columnas según breakpoint -->
+		<div class="hp-collage">
+
+			<!-- ── Solo tablet/desktop: índice (celda última fila 1) ── -->
+			<!-- Índice de títulos: última celda de la 1ª fila del collage. -->
+			<div class="hp-index" aria-hidden="true">
+				<ul class="hp-index__list">
+					{items.map((item) => (
+						<li class="hp-index__item text-mono-lg">{item.title}</li>
+					))}
+				</ul>
+			</div>
+
+			<!-- ── Solo tablet/desktop: resultados (primera celda última fila) ── -->
+			<!-- header --RESULTADOS: · lista IMG-0XX (solo números) · CTA --MÁS RESULTADOS: (reveal). -->
+			<div class="hp-results">
+				<span class="hp-results__label text-mono-lg uppercase">--{t.projects.resultsLabel}:</span>
+				<ul class="hp-results__list" aria-hidden="true">
+					{items.map((item) => (
+						<li class="hp-results__item text-mono-lg">IMG-{item.no}</li>
+					))}
+				</ul>
+				<a href={projectsPath} class="hp-more text-mono-lg uppercase" data-reveal data-reveal-radius="28px">
+					<span class="hp-more__base">
+						--{t.projects.moreResults}:
+						<!-- Círculo a mano alzada (siempre visible): indica que es navegable -->
+						<svg class="hp-more__circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" /></svg>
+					</span>
+					<span class="hp-more__reveal reveal-layer" aria-hidden="true">
+						<span class="hp-more__reveal-text">
+							--{t.projects.moreResults}:
+							<svg class="hp-more__circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" /></svg>
+						</span>
+					</span>
+				</a>
+			</div>
+
+			<!-- Capas de puntos (una por breakpoint; el CSS muestra la que toca) -->
+			<div class="hp-dots hp-dots--desktop" aria-hidden="true">
+				{dotsDesktop.map((d) => <span class="hp-dot" style={`left:${d.x}%;top:${d.y}%;`}></span>)}
+			</div>
+			<div class="hp-dots hp-dots--tablet" aria-hidden="true">
+				{dotsTablet.map((d) => <span class="hp-dot" style={`left:${d.x}%;top:${d.y}%;`}></span>)}
+			</div>
+			<div class="hp-dots hp-dots--mobile" aria-hidden="true">
+				{dotsMobile.map((d) => <span class="hp-dot" style={`left:${d.x}%;top:${d.y}%;`}></span>)}
+			</div>
+
+			<!-- Imágenes: 3 sets de coordenadas en custom properties -->
+			{items.map((item) => (
+				<figure class="hp-card" style={`--cd:${item.cd};--rd:${item.rd};--ct:${item.ct};--rt:${item.rt};--cm:${item.cm};--rm:${item.rm};`}>
+					<figcaption class="hp-card__head font-monoblock">IMG-{item.no}</figcaption>
+					<div class="hp-card__media">
+						<Image
+							src={item.image}
+							alt={`${item.title} — ${item.description}`}
+							widths={[400, 600, 900]}
+							sizes="(max-width: 768px) 45vw, 20vw"
+							format="webp"
+							quality={90}
+							loading="lazy"
+							draggable={false}
+							class="hp-card__img"
+						/>
+					</div>
+				</figure>
+			))}
+
+		</div>
+
+		<!-- ── Solo móvil: bloque único FUERA del collage, abajo a la derecha ── -->
+		<!-- header --RESULTADOS: · lista IMG-0XX: Título · CTA --MÁS RESULTADOS: (reveal). -->
+		<div class="hp-results-mobile">
+			<span class="hp-results__label text-mono-lg uppercase">--{t.projects.resultsLabel}:</span>
+			<ul class="hp-results__list" aria-hidden="true">
+				{items.map((item) => (
+					<li class="hp-results__item text-mono-lg">IMG-{item.no}: {item.title}</li>
+				))}
+			</ul>
+			<a href={projectsPath} class="hp-more text-mono-lg uppercase" data-reveal data-reveal-radius="28px">
+				<span class="hp-more__base">
+					--{t.projects.moreResults}:
+					<!-- Círculo a mano alzada (siempre visible): indica que es navegable -->
+					<svg class="hp-more__circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" /></svg>
+				</span>
+				<span class="hp-more__reveal reveal-layer" aria-hidden="true">
+					<span class="hp-more__reveal-text">
+						--{t.projects.moreResults}:
+						<svg class="hp-more__circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><path d="M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8" /></svg>
+					</span>
+				</span>
+			</a>
+		</div>
+
+	</div>
+</section>
+
+<style lang="scss">
+	// Una columna apilada: título · collage · (móvil) bloque de resultados.
+	// Tablet/desktop: índice y resultados viven DENTRO del collage, en celdas
+	// concretas de su grid. Móvil: .hp-results-mobile va fuera, al final.
+	.hp-inner {
+		display: grid;
+		grid-template-columns: 1fr;
+		row-gap: 3rem;
+		align-items: start;
+	}
+
+	.hp-title {
+		font-size: clamp(35px, 8vw, 80px);
+		line-height: 1;
+	}
+
+	// ─── Índice de títulos (última celda de la 1ª fila del collage) ───
+	.hp-index {
+		grid-column: var(--cols);   // última columna
+		grid-row: 1;
+		align-self: start;
+		justify-self: start;
+		z-index: 4;          // el texto por encima de los puntos (z-index: 3)
+		padding: 0.75rem;
+		text-align: left;
+
+		// Móvil: lo cubre .hp-results-mobile (número + título).
+		@media (max-width: 767px) { display: none; }
+	}
+
+	.hp-index__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+	}
+
+	// Tipografía heredada de .text-mono-lg (escala mono grande).
+	.hp-index__item {
+		white-space: nowrap;
+	}
+
+	// ─── Collage: grid escalonado, celdas verticales (~3:4) ───
+	// --cols cambia por breakpoint; el alto de fila se calcula a 3:4 con cqw.
+	// Desktop 6 cols · Tablet 4 cols · Móvil 2 cols.
+	.hp-collage {
+		--cols: 6;
+		container-type: inline-size;
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(var(--cols), 1fr);
+		grid-auto-rows: calc((100cqw / var(--cols)) * 4 / 3);
+		gap: 0;
+
+		@media (max-width: 1023px) { --cols: 4; }
+		@media (max-width: 767px)  { --cols: 2; }
+	}
+
+	// Capa de puntos: cubre exactamente el grid; cada punto en su intersección %.
+	.hp-dots {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: 3;
+	}
+
+	// Mostrar solo la capa de puntos del breakpoint actual
+	.hp-dots--tablet,
+	.hp-dots--mobile { display: none; }
+
+	@media (max-width: 1023px) {
+		.hp-dots--desktop { display: none; }
+		.hp-dots--tablet  { display: block; }
+	}
+	@media (max-width: 767px) {
+		.hp-dots--tablet  { display: none; }
+		.hp-dots--mobile  { display: block; }
+	}
+
+	.hp-dot {
+		position: absolute;
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background-color: var(--secondary);
+		// centra el punto sobre la intersección
+		transform: translate(-50%, -50%);
+	}
+
+	// ─── Tarjeta tipo foto pegada (llena su celda del grid) ───
+	// Posición según breakpoint + padding que separa el contenido del borde
+	// de la celda (donde caen los puntos de la rejilla).
+	.hp-card {
+		position: relative;
+		margin: 0;
+		background-color: var(--primary);
+		z-index: 1;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		padding: 0.75rem;
+
+		grid-column: var(--cd);
+		grid-row: var(--rd);
+
+		@media (max-width: 1023px) {
+			grid-column: var(--ct);
+			grid-row: var(--rt);
+		}
+		@media (max-width: 767px) {
+			grid-column: var(--cm);
+			grid-row: var(--rm);
+		}
+	}
+
+	// ─── Bloque de resultados (tablet/desktop: primera celda de la última fila) ───
+	// header --RESULTADOS: · lista IMG-0XX (solo números) · CTA --MÁS RESULTADOS: (reveal).
+	// En esa celda no hay card (el collage está escalonado), así que no tapa nada.
+	.hp-results {
+		grid-column: 1;
+		grid-row: 3;
+		align-self: end;
+		justify-self: start;
+		z-index: 4;          // el texto por encima de los puntos (z-index: 3)
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.1rem;
+		padding: 0.75rem;
+
+		// Móvil: lo sustituye .hp-results-mobile (fuera del collage).
+		@media (max-width: 767px) { display: none; }
+	}
+
+	// ─── Bloque de resultados móvil (fuera del collage, abajo a la derecha) ───
+	// Mismo contenido pero con título: IMG-0XX: Nombre. Oculto en tablet/desktop.
+	.hp-results-mobile {
+		display: none;
+
+		@media (max-width: 767px) {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;   // texto alineado por la izquierda…
+			justify-self: end;         // …pero el bloque pegado a la derecha
+			gap: 0.1rem;
+		}
+	}
+
+	.hp-results__label {
+		text-decoration: none;
+	}
+
+	.hp-results__list {
+		list-style: none;
+		margin: 0.4rem 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+	}
+
+	.hp-results__item {
+		white-space: nowrap;
+	}
+
+	// CTA "más resultados" con circle-reveal compartido: capa base + .reveal-layer.
+	// --reveal-extend evita que el círculo se corte con el borde del contenedor.
+	.hp-more {
+		--reveal-extend: 30px;
+		position: relative;
+		padding: 0;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	// Capa base: relative para anclar su círculo; padding para que el óvalo
+	// a mano respire alrededor del texto.
+	.hp-more__base {
+		position: relative;
+		display: inline-block;
+		padding: 0.65em 1.1em;
+	}
+
+	// Capa reveal: clon con colores invertidos. El padding compensa el extend
+	// para que el texto siga alineado con la capa base.
+	.hp-more__reveal {
+		display: block;
+		padding: var(--reveal-extend, 0px);
+		background: var(--secondary);
+		color: var(--primary);
+		white-space: nowrap;
+
+		// Móvil (táctil): no hay reveal; se oculta la capa para que no asome.
+		@media (max-width: 767px) { display: none; }
+	}
+
+	// El texto clon del reveal lleva el mismo padding que la base para alinear.
+	.hp-more__reveal-text {
+		position: relative;
+		display: inline-block;
+		padding: 0.65em 1.1em;
+	}
+
+	// Círculo a mano alzada que rodea el texto (siempre visible).
+	// Hereda el color de su capa: secundario en la base, invertido en el reveal.
+	.hp-more__circle {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+		fill: none;
+		pointer-events: none;
+
+		path {
+			fill: none;
+			stroke: currentColor;
+			stroke-width: 2;
+			stroke-linecap: round;
+			vector-effect: non-scaling-stroke;
+		}
+	}
+
+	// Cabecera con peso: mismo tamaño que el label de WhatIDo (.text-mono-label).
+	// Se come algo de imagen a propósito; la card mantiene su ratio de celda.
+	.hp-card__head {
+		flex-shrink: 0;
+		background-color: var(--terciary);
+		padding: 0.55rem 0.7rem;
+		font-size: clamp(14px, 1.2vw, 16px);
+		letter-spacing: 0.05em;
+		line-height: 1.4;
+		color: var(--secondary);
+		text-align: center;
+	}
+
+	.hp-card__media {
+		flex: 1;
+		min-height: 0;
+		overflow: hidden;
+	}
+
+	.hp-card__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		-webkit-user-drag: none;
+		transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.hp-card:hover .hp-card__img {
+		transform: scale(1.04);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hp-card__img { transition: none; }
+	}
+</style>
+
+<script>
+	import '../scripts/circle-reveal.ts';
+</script>

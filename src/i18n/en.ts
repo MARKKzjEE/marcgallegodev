@@ -35,27 +35,11 @@ export const en: Translations = {
 
 	// ── Hero ──
 	hero: {
-		role: "Software Engineer",
-		rolePrefix: "Full Stack ",
-		yearsLabel: "+5",
-		yearsDesc: "yrs exp.",
-		projectsLabel: "+60",
-		projectsDesc: "projects",
-		ctaLabel: "Experience",
-		ctaLabelShort: "CV",
-		aboutTrigger: "Click me",
-		available: "Available for projects",
-		degree: "Graduated in Computer Engineering",
-		linkedinAriaLabel: "Marc Gallego on LinkedIn",
-		phoneAriaLabel: "Call Marc Gallego",
-		emailAriaLabel: "Contact Marc Gallego",
-		ctaAriaLabel: "View Marc Gallego's experience",
 		sectionAriaLabel: "Marc Gallego introduction",
-		videoTitle: "Sea background video",
 	},
 
-	// ── WhatWeDo ──
-	whatWeDo: {
+	// ── WhatIDo ──
+	whatIDo: {
 		label: "What I do",
 		text: "I transform ideas into digital solutions, creating websites, apps and products that start as a vision and become something real. For me, it's not just about building a solution, but about understanding the project beyond the technical goal. The kind of things that sometimes can't be explained with words, but can be felt when a project is built the right way.",
 	},
@@ -63,46 +47,48 @@ export const en: Translations = {
 	// ── TechStack ──
 	techStack: {
 		heading: "Stack",
-		descCorner: "These are the technologies I use in my daily work. I always enjoy exploring new tools to choose the best solution for the needs of each project.",
-		toggleShow: "Show technologies",
-		toggleHide: "Hide technologies",
-		typewriterPhrases: [
-			"These are my most used technologies.",
-			"Interact with the icon to see the names.",
-			"Always exploring new tools.",
-			"The best tool depends on the project.",
+		filters: {
+			all: "All",
+			frontend: "Frontend",
+			backend: "Backend",
+			otros: "Other",
+		},
+		// Section foot (below the carousel). {count} = number of technologies.
+		// footMeta only on tablet/desktop; hidden on mobile.
+		footMeta: "STACK / {count} tools · since 2018",
+		footNote: "See my experience",
+	},
+
+	// ── About (editorial section: big name + overlapping photo) ──
+	aboutCover: {
+		profileAlt: "Marc Gallego, Full Stack developer in Barcelona",
+		location: "Barcelona",
+		ageLabel: "{age} years",   // {age} computed in the component
+		roleTop: "Fullstack",
+		firstName: "Marc",
+		lastName: "Gallego",
+		secondLastName: "Gines",
+		roleBottom: "Developer",
+		photoCredit: "By m",
+		// Summary paragraphs (each on its own line, separated by space).
+		summary: [
+			"A Computer Engineering graduate, I've always had a passion for computers and for building with technology.",
+			"Beyond code, two passions shape the way I see things. One is fashion, which broadens my sense of taste, colors, shapes and possibilities, and the other is the sea, where I disconnect and reorganize ideas.",
 		],
 	},
 
-	// ── About ──
-	about: {
-		title: "About me",
-		titleDecorative: "ABOUT ME",
-		tagline: "Creative and technical design by Marc Gallego",
-		bioMobile: "Born in Barcelona, from a young age I had a love for computers and software. The creative capacity they allow drew me into this world and today I do something I genuinely enjoy. Outside of code, I have two great passions: the sea and fashion. In one I find calm and my chaos, and with the other I get to experiment and be creative.",
-		bioDesktop1: "Born in Barcelona, from a young age I watched my father fix computers for friends because he enjoyed it, and that's how I started spending hours taking them apart and putting them back together. \n\nAs I grew up I found myself drawn into the world of software. The creative capacity I saw in operating systems and video games fascinated me. So little by little I started exploring software development, and here I am today.",
-		bioDesktop2: "Beyond development, my passion is the sea where I find my balance. The place where I disconnect, organise ideas and come back with clarity. \n\nI'm also a lover of art and fashion. I'm drawn to people's capacity for expression and the diversity of styles that emerge. I apply that creativity and taste to the way I dress and design, as well as the personal touch I bring to my digital solutions.",
-		profileAlt: "Marc Gallego, Full Stack developer in Barcelona",
-	},
-
-	// ── MarqueeBands ──
-	marquee: {
-		linkedin: "LET'S CONNECT ON LINKEDIN",
-		call: "GIVE ME A CALL",
-	},
 
 	// ── Partners ──
 	partners: {
-		heading: "Partners",
-		subtitle: "Collaborations with studios and professionals",
-		badge: "since 2024",
-		dokoDesc: "Branding, web design and development studio",
-		dokoLogoAlt: "Doko Studio logo",
+		// Metadata in [ brackets ] (corners + center)
+		metaName: "Doko Studio",
+		metaCenter: "Partners",
+		metaSince: "since 2024",
+		// Large statement (font-nord). " / " separates the fragments shown on lines.
+		statement: "Creative studio / Web development / Design & / Branding / born in Valencia.",
 		dokoImgAlt: "Doko Studio — web design and development studio",
-		studioLabel: "How do I collaborate?",
-		studioText1: "On my side, I contribute my experience and services, participating on a project basis or working jointly on larger-scale projects.",
-		studioText2: "They are a small studio with specialised profiles for every phase of a project: branding, design, development and deployment. They can deliver a full solution or integrate into existing teams to cover specific needs at any stage.",
-		studioLink: "Learn more",
+		studioText1: "I collaborate with Doko bringing my experience and services, on a project basis or on larger-scale work.",
+		studioText2: "If your project needs more resources, we can cover every phase with specialized profiles. We could even join your project as a team.",
 	},
 
 	// ── FAQ ──
@@ -134,30 +120,73 @@ export const en: Translations = {
 
 	// ── Projects ──
 	projects: {
-		carousel: {
-			title: "Featured projects",
-			subtitle: "Drag to explore",
-		},
+		// Unified projects title (home + catalog /projects)
+		title: "Projects",
+		// Results block header (home gallery)
+		resultsLabel: "results",
+		// Home gallery CTA towards the full catalog
+		moreResults: "more results",
 		grid: {
-			title: "Selected work",
-			subtitle: "A selection of work I've been part of",
+			// Catalog foot. {range} is replaced by the real numbering (e.g. 031–039).
+			foot: "CAT. No. {range} · EDITION 01",
+			// Catalog placeholder cells (decorative)
+			placeholders: [
+				{ type: "In progress", tagline: "Something new in the works." },
+				{ type: "Coming soon", tagline: "Reserved for what's next." },
+			],
 		},
+		// NOTE: `description` feeds the image alt text (home collage + catalog).
+		// `type` and `tagline` feed the catalog sheet (/en/projects).
+		// → Placeholders: REVIEW (project type, short catalog line).
 		items: [
-			{ title: 'Viviq', description: 'Real estate platform with a CMS adaptable to each client.' },
-			{ title: 'Cor de suro', description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.' },
-			{ title: 'Lateua', description: 'SaaS with marketplace for product management and AI-powered interior design solutions.' },
-			{ title: 'Loyic', description: 'Employee portal for managing all internal company user data including time tracking, documentation, payroll, internal surveys, and more.' },
-			{ title: 'Pillositio', description: 'App and web platform for bars and restaurants with services for businesses and customers.' },
-			{ title: 'PlanIT', description: 'My side project that evolved into a startup connecting people around any kind of plan or activity.' },
-			{ title: 'RTTH', description: 'Brand territory built through a service that transforms sound waves from audio files into design assets with integrated waveforms.' },
+			{
+				title: 'PlanIT',
+				description: 'My side project that evolved into a startup connecting people around any kind of plan or activity.',
+				type: 'Startup · Social app',
+				tagline: 'Connecting people through plans.',
+			},
+			{
+				title: 'Loyic',
+				description: 'Employee portal for managing all internal company user data including time tracking, documentation, payroll, internal surveys, and more.',
+				type: 'Internal portal',
+				tagline: 'Employee portal',
+			},
+			{
+				title: 'Lateua',
+				description: 'SaaS with marketplace for product management and AI-powered interior design solutions.',
+				type: 'SaaS · Marketplace',
+				tagline: 'AI-powered interior design marketplace.',
+			},
+			{
+				title: 'Cor de suro',
+				description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.',
+				type: 'Web · Visual narrative',
+				tagline: 'Craft-driven, sustainable visual narrative.',
+			},
+			{
+				title: 'Viviq',
+				description: 'Real estate platform with a CMS adaptable to each client.',
+				type: 'Web platform',
+				tagline: 'Adaptable real-estate CMS per client.',
+			},
+			{
+				title: 'RTTH',
+				description: 'Brand territory built through a service that transforms sound waves from audio files into design assets with integrated waveforms.',
+				type: 'Branding · Tool',
+				tagline: 'From sound waves to design assets.',
+			},
+			{
+				title: 'Pillositio',
+				description: 'App and web platform for bars and restaurants with services for businesses and customers.',
+				type: 'App + Web platform',
+				tagline: 'App for bars, restaurants and guests.',
+			},
 		],
 	},
 
 	// ── Contact ──
 	contact: {
 		title: "Let's talk",
-		subtitle: "Have a project in mind or just want to say hi?",
-		writeLabel: "Send me a message",
 		namePlaceholder: "Name",
 		emailPlaceholder: "Email",
 		messagePlaceholder: "Message",
@@ -167,7 +196,7 @@ export const en: Translations = {
 	// ── Footer ──
 	footer: {
 		headline: "Let's work together.",
-		headlineReveal: "Let's work together",
+		headlineReveal: "Let's work together.",
 		copyright: "All rights reserved.",
 		scrollTop: "Back to top",
 		linkedinLabel: "LinkedIn",

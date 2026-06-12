@@ -33,27 +33,11 @@ export const es = {
 
 	// ── Hero ──
 	hero: {
-		role: "Software Engineer",
-		rolePrefix: "Full Stack ",
-		yearsLabel: "+5",
-		yearsDesc: "años exp.",
-		projectsLabel: "+60",
-		projectsDesc: "proyectos",
-		ctaLabel: "Trayectoria",
-		ctaLabelShort: "CV",
-		aboutTrigger: "Púlsame",
-		available: "Disponible para proyectos",
-		degree: "Graduado en Ingeniería informática",
-		linkedinAriaLabel: "LinkedIn de Marc Gallego",
-		phoneAriaLabel: "Llamar a Marc Gallego",
-		emailAriaLabel: "Contactar con Marc Gallego",
-		ctaAriaLabel: "Ver trayectoria de Marc Gallego",
 		sectionAriaLabel: "Presentación de Marc Gallego",
-		videoTitle: "Vídeo de fondo del mar",
 	},
 
-	// ── WhatWeDo ──
-	whatWeDo: {
+	// ── WhatIDo ──
+	whatIDo: {
 		label: "Qué es lo que hago",
 		text: "Transformo ideas en soluciones digitales, creando webs, apps y productos que nacen como una visión y se convierten en algo real. Para mí no se trata solo de desarrollar una solución, sino de entender el proyecto más allá del objetivo técnico. Esas cosas que a veces no se explican con palabras, pero se perciben cuando un proyecto se construye bien.",
 	},
@@ -61,46 +45,48 @@ export const es = {
 	// ── TechStack ──
 	techStack: {
 		heading: "Tecnologías",
-		descCorner: "Estas son las tecnologías que utilizo en mi día a día. Siempre me gusta seguir explorando nuevas herramientas para poder elegir la mejor solución según las necesidades de cada proyecto.",
-		toggleShow: "Ver tecnologías",
-		toggleHide: "Ocultar tecnologías",
-		typewriterPhrases: [
-			"Estas son mis tecnologías más usadas.",
-			"Interactúa con el icono para ver los nombres.",
-			"Siempre explorando nuevas herramientas.",
-			"La mejor herramienta depende del proyecto.",
+		filters: {
+			all: "Todos",
+			frontend: "Frontend",
+			backend: "Backend",
+			otros: "Otros",
+		},
+		// Pie de la sección (bajo el carrusel). {count} = nº de tecnologías.
+		// footMeta solo en tablet/desktop; en móvil se oculta.
+		footMeta: "STACK / {count} herramientas · desde 2018",
+		footNote: "Ver mi trayectoria",
+	},
+
+	// ── About (sección editorial: nombre grande + foto superpuesta) ──
+	aboutCover: {
+		profileAlt: "Marc Gallego, desarrollador Full Stack en Barcelona",
+		location: "Barcelona",
+		ageLabel: "{age} años",   // {age} se calcula en el componente
+		roleTop: "Fullstack",
+		firstName: "Marc",
+		lastName: "Gallego",
+		secondLastName: "Gines",
+		roleBottom: "Developer",
+		photoCredit: "By m",
+		// Párrafos del resumen (cada uno en su línea, separados por aire).
+		summary: [
+			"Graduado en Ingeniería Informática, siempre he tenido una pasión por los ordenadores y por la creación tecnológica.",
+			"Fuera del código tengo dos pasiones que me influyen en la forma de cómo veo las cosas. Una es la moda, con la que amplío mi percepción de gustos, colores, formas y posibilidades, y la otra es el mar, donde desconecto y reorganizo ideas.",
 		],
 	},
 
-	// ── About ──
-	about: {
-		title: "Sobre mi",
-		titleDecorative: "SOBRE MI",
-		tagline: "Diseño creativo y técnico por Marc Gallego",
-		bioMobile: "Nacido en Barcelona, desde pequeño he tenido un amor por los ordenadores. La capacidad creativa que te permiten me hizo entrar en este mundo y a día de hoy me dedico a algo que disfruto. Fuera del código tengo dos grandes pasiones que son el mar y la moda. En el primero encuentro la calma y en la segunda, un espacio para experimentar y expresar mi creatividad.",
-		bioDesktop1: "Nacido en Barcelona, desde pequeño veía a mi padre arreglar ordenadores a amigos porque le gustaba y así empecé yo a pasarme horas desmontando y montándolos. \n\nCuando fui creciendo me fui adentrando en el mundo del software, la capacidad de creatividad que veía en programas de sistemas operativos y videojuegos era algo que me fascinaba. Así que poco a poco fui probando con el desarrollo de software hasta el día de hoy.",
-		bioDesktop2: "Más allá del desarrollo, mi pasión es el mar donde encuentro mi equilibrio. El lugar donde desconecto, ordeno ideas y vuelvo con claridad. \n\nTambién soy un amante del arte y de la moda, me encanta la capacidad de expresión de la gente y la diversidad que se crea en cuanto a estilos. Aplico esta creatividad y gusto en la forma de vestirme y diseñar, como también cuando le doy mi toque a mis soluciones digitales.",
-		profileAlt: "Marc Gallego, desarrollador Full Stack en Barcelona",
-	},
-
-	// ── MarqueeBands ──
-	marquee: {
-		linkedin: "CONECTEMOS EN LINKEDIN",
-		call: "HAZME UNA LLAMADA",
-	},
 
 	// ── Partners ──
 	partners: {
-		heading: "Partners",
-		subtitle: "Colaboraciones con estudios y profesionales",
-		badge: "desde 2024",
-		dokoDesc: "Estudio de branding, diseño y desarrollo web",
-		dokoLogoAlt: "Logo Doko Studio",
+		// Metadatos en [ corchetes ] (esquinas + centro)
+		metaName: "Doko Studio",
+		metaCenter: "Colaboraciones",
+		metaSince: "desde 2024",
+		// Statement grande (font-nord). El " / " separa los fragmentos que van en líneas.
+		statement: "Estudio creativo / Desarrollo web / Diseño & / Branding / nacido en Valencia.",
 		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
-		studioLabel: "¿Cómo colaboro?",
-		studioText1: "Por mi parte, colaboro aportando mi experiencia y servicios, participando tanto de forma puntual como trabajando conjuntamente en proyectos de mayor envergadura.",
-		studioText2: "Ellos son un pequeño estudio que cuenta con perfiles especializados para cada fase de un proyecto: branding, diseño, desarrollo y puesta en producción. Pueden ofrecer una solución completa o integrarse en equipos existentes para cubrir necesidades concretas en cualquier etapa.",
-		studioLink: "Saber más",
+		studioText1: "Colaboro con Doko aportando mi experiencia y servicios, tanto de forma puntual como en proyectos de mayor envergadura.",
+		studioText2: "Si tu proyecto necesita más recursos, podemos abarcar cada fase con perfiles especializados. Incluso podríamos integrarnos como equipo en tu proyecto.",
 	},
 
 	// ── FAQ ──
@@ -132,30 +118,73 @@ export const es = {
 
 	// ── Projects ──
 	projects: {
-		carousel: {
-			title: "Proyectos destacados",
-			subtitle: "Arrastra para explorar",
-		},
+		// Título único de proyectos (home + catálogo /proyectos)
+		title: "Proyectos",
+		// Cabecera del bloque de resultados (galería home)
+		resultsLabel: "resultados",
+		// CTA de la galería de la home hacia el catálogo completo
+		moreResults: "más resultados",
 		grid: {
-			title: "Trabajos seleccionados",
-			subtitle: "Una selección de trabajos en los que he participado",
+			// Pie del catálogo. {range} se sustituye por la numeración real (ej. 031–039).
+			foot: "CAT. No. {range} · EDICIÓN 01",
+			// Celdas placeholder del catálogo (decorativas)
+			placeholders: [
+				{ type: "En desarrollo", tagline: "Algo nuevo cociéndose." },
+				{ type: "Próximamente", tagline: "Reservado para el próximo." },
+			],
 		},
+		// NOTA: `description` alimenta el alt de las imágenes (collage home + catálogo).
+		// `type` y `tagline` alimentan la ficha del catálogo (/proyectos).
+		// → Placeholders: REVISAR Y CUADRAR (tipo de proyecto y frase corta de catálogo).
 		items: [
-			{ title: 'Viviq', description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.' },
-			{ title: 'Cor de suro', description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.' },
-			{ title: 'Lateua', description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo apoyadas con modelos IA.' },
-			{ title: 'Loyic', description: 'Portal del empleado que permite gestionar todos los datos de usuarios internos de la empresa como registro horario, documentación, nóminas, encuestas internas, etc.' },
-			{ title: 'Pillositio', description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.' },
-			{ title: 'PlanIT', description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.' },
-			{ title: 'RTTH', description: 'Generación del territorio de la marca con un servicio que transforma las ondas de sonido de un archivo a imágenes como recursos de diseño con las ondas integradas.' },
+			{
+				title: 'PlanIT',
+				description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.',
+				type: 'Startup · App social',
+				tagline: 'Conectar personas a través de planes.',
+			},
+			{
+				title: 'Loyic',
+				description: 'Portal del empleado que permite gestionar todos los datos de usuarios internos de la empresa como registro horario, documentación, nóminas, encuestas internas, etc.',
+				type: 'Portal interno',
+				tagline: 'Portal del empleado',
+			},
+			{
+				title: 'Lateua',
+				description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo apoyadas con modelos IA.',
+				type: 'SaaS · Marketplace',
+				tagline: 'Marketplace de interiorismo con IA.',
+			},
+			{
+				title: 'Cor de suro',
+				description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.',
+				type: 'Web · Narrativa visual',
+				tagline: 'Narrativa visual artesanal y sostenible.',
+			},
+			{
+				title: 'Viviq',
+				description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.',
+				type: 'Plataforma web',
+				tagline: 'CMS inmobiliario adaptable a cada cliente.',
+			},
+			{
+				title: 'RTTH',
+				description: 'Generación del territorio de la marca con un servicio que transforma las ondas de sonido de un archivo a imágenes como recursos de diseño con las ondas integradas.',
+				type: 'Branding · Herramienta',
+				tagline: 'Del sonido a recursos de diseño.',
+			},
+			{
+				title: 'Pillositio',
+				description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.',
+				type: 'App + Plataforma web',
+				tagline: 'App para bares, restaurantes y clientes.',
+			},
 		],
 	},
 
 	// ── Contact ──
 	contact: {
 		title: "Hablemos",
-		subtitle: "¿Tienes un proyecto en mente o simplemente quieres saludar?",
-		writeLabel: "Escríbeme un mensaje",
 		namePlaceholder: "Nombre",
 		emailPlaceholder: "Email",
 		messagePlaceholder: "Mensaje",
@@ -165,7 +194,7 @@ export const es = {
 	// ── Footer ──
 	footer: {
 		headline: "Trabajemos juntos.",
-		headlineReveal: "Trabajemos juntos",
+		headlineReveal: "Trabajemos juntos.",
 		copyright: "Todos los derechos reservados.",
 		scrollTop: "Quiero volver arriba",
 		linkedinLabel: "LinkedIn",

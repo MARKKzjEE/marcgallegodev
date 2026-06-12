@@ -3,12 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../sections/Header.astro';
 import Hero from '../sections/Hero.astro';
 import TechStack from '../sections/TechStack.astro';
-import WhatWeDo from '../sections/WhatWeDo.astro';
+import WhatIDo from '../sections/WhatIDo.astro';
+import HomeProjects from '../sections/HomeProjects.astro';
 import Partners from '../sections/Partners.astro';
-import FAQ from '../sections/FAQ.astro';
-import AboutSection from '../sections/AboutSection.astro';
-import MarqueeBands from '../sections/MarqueeBands.astro';
-import Projects from '../sections/Projects.astro';
+import FAQNote from '../sections/FAQNote.astro';
+import AboutCover from '../sections/AboutCover.astro';
 import Footer from '../sections/Footer.astro';
 import { useTranslations } from '../i18n/index';
 
@@ -24,12 +23,12 @@ const t = useTranslations('es');
 	<Header />
 	<main>
 		<Hero />
-		<WhatWeDo />
+		<WhatIDo />
+		<HomeProjects />
+		<AboutCover />
 		<TechStack />
-		<Projects indices={[1, 4, 0, 2]} />
 		<Partners />
-		<AboutSection />
-		<FAQ />
+		<FAQNote />
 	</main>
 	<Footer />
 </Layout>
