@@ -17,7 +17,7 @@ const indents = [0, 22, 40, 60, 12];
 const mobileShifts = [-13, 11, -9, 13, -10];
 ---
 
-<section id="partners" class="partners py-16 md:py-30" aria-labelledby="partners-heading">
+<section id="partners" class="partners pt-20 md:pt-30" aria-labelledby="partners-heading">
 	<div class="partners-inner px-4 md:px-10">
 
 		<!-- Metadatos en [ corchetes ] (esquinas superiores) -->
@@ -69,7 +69,7 @@ const mobileShifts = [-13, 11, -9, 13, -10];
 	.partners-inner {
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
+		gap: 2rem;   // meta pegado al título (forma parte de la cabecera)
 	}
 
 	// ─── Metadatos [ ] (esquinas + centro absoluto) ───
@@ -100,12 +100,11 @@ const mobileShifts = [-13, 11, -9, 13, -10];
 		line-height: 1.02;
 		letter-spacing: -0.02em;
 		text-transform: uppercase;
-		// Espacio meta↔statement = 5rem (gap 2rem del inner + este margen),
-		// igual que statement↔bio.
-		margin-top: 3rem;
+		// Sin margen extra: el meta queda pegado al título (solo el gap del inner).
 
-		// Móvil: bloque centrado en pantalla (las líneas mantienen su escalonado)
-		@media (max-width: 767px) {
+		// Compacto/centrado desde 1152px (antes solo en móvil): el título grande
+		// pasa antes a su disposición centrada para no quedar disperso.
+		@media (max-width: 1152px) {
 			align-items: center;
 			text-align: center;
 			// Red de seguridad: el zigzag nunca provoca scroll lateral.
@@ -118,9 +117,9 @@ const mobileShifts = [-13, 11, -9, 13, -10];
 		// Tablet/desktop: escalonado desde la izquierda (offset empuja a la derecha)
 		margin-left: calc(var(--indent, 0) * 1%);
 
-		// Móvil: offset desde el centro alternando lado (izq/der) → zigzag.
+		// Desde 1152px: offset desde el centro alternando lado (izq/der) → zigzag.
 		// En vw (relativo al viewport), no al ancho de la línea → predecible.
-		@media (max-width: 767px) {
+		@media (max-width: 1152px) {
 			margin-left: 0;
 			transform: translateX(calc(var(--shift, 0) * 1vw));
 			// Deja holgura a los lados para que el desplazamiento no se salga.

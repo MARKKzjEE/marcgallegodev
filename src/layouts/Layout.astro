@@ -380,7 +380,8 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 	.deco--circle path {
 		fill: none;
 		stroke: var(--secondary);
-		stroke-width: 2;
+		/* 1px (non-scaling) → mismo grosor que el tachado y el separador. */
+		stroke-width: 1;
 		stroke-linecap: round;
 		vector-effect: non-scaling-stroke;
 		stroke-dasharray: 620;
