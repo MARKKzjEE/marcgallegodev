@@ -130,6 +130,12 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 			// Si no hay preferencia guardada, respeta el sistema; si no hay dato de sistema, usa oscuro por defecto
 			const isDark = stored === "dark" || (!stored && (prefersDark ?? false));
 			root.classList.toggle("dark", isDark);
+
+			// Splash solo la 1ª vez por sesión: si ya se vio en esta sesión,
+			// marcamos html antes del paint para ocultarlo por CSS (sin flash).
+			if (sessionStorage.getItem("splashSeen")) {
+				root.classList.add("splash-seen");
+			}
 		</script>
 	</head>
 	<body>
@@ -168,7 +174,12 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 			</div>
 		)}
 		<script is:inline define:vars={{ showSplash }}>
-			if (showSplash) {
+			// El splash solo se reproduce la 1ª vez por sesión. Si ya se vio en esta
+			// sesión (marca en sessionStorage + clase html.splash-seen del pre-paint),
+			// se trata como si no hubiera splash: arranca el Hero directamente.
+			var splashAlreadySeen = sessionStorage.getItem("splashSeen");
+			if (showSplash && !splashAlreadySeen) {
+				sessionStorage.setItem("splashSeen", "1");
 				var splashReady = false;
 				var splashLoaded = false;
 				var splashDone = false;
@@ -246,8 +257,12 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 					if (splashReady) hideSplash();
 				});
 			} else {
-				// Sin splash: disparamos splash:done cuando el DOM esté listo,
-				// para que los listeners (typewriter del Hero, etc.) ya estén registrados.
+				// Sin splash (no es home, o ya se vio en esta sesión): quitamos el
+				// splash del DOM si estaba renderizado (visita repetida) y disparamos
+				// splash:done para que el Hero arranque ya.
+				var existingSplash = document.getElementById('splash');
+				if (existingSplash) existingSplash.remove();
+
 				function fireDone() { window.dispatchEvent(new CustomEvent('splash:done')); }
 				if (document.readyState === 'loading') {
 					document.addEventListener('DOMContentLoaded', fireDone, { once: true });
@@ -278,6 +293,11 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 	#splash.is-hidden {
 		opacity: 0;
 		visibility: hidden;
+	}
+
+	/* Ya visto en esta sesión: ocultar de inmediato (sin flash ni transición) */
+	:global(html.splash-seen) #splash {
+		display: none;
 	}
 
 	.splash-inner {
