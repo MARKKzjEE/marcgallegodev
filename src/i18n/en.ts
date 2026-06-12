@@ -135,7 +135,7 @@ export const en: Translations = {
 				{ type: "Coming soon", tagline: "Reserved for what's next." },
 			],
 		},
-		// NOTE: `description` is used in the home carousel and image alt text.
+		// NOTE: `description` feeds the image alt text (home collage + catalog).
 		// `type` and `tagline` feed the catalog sheet (/en/projects).
 		// → Placeholders: REVIEW (project type, short catalog line).
 		items: [

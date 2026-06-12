@@ -133,7 +133,7 @@ export const es = {
 				{ type: "Próximamente", tagline: "Reservado para el próximo." },
 			],
 		},
-		// NOTA: `description` se usa en el carrusel del home y en el alt de las imágenes.
+		// NOTA: `description` alimenta el alt de las imágenes (collage home + catálogo).
 		// `type` y `tagline` alimentan la ficha del catálogo (/proyectos).
 		// → Placeholders: REVISAR Y CUADRAR (tipo de proyecto y frase corta de catálogo).
 		items: [

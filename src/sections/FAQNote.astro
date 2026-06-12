@@ -1,10 +1,20 @@
 ---
+import { getImage } from 'astro:assets';
 import { getLang, useTranslations } from '../i18n/index';
-import paperBg from '../assets/white-crumpled-paper-texture-background.jpg';
+import paperBgSrc from '../assets/white-crumpled-paper-texture-background.jpg';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 const faqs = t.faq.items;
+
+// La textura de papel va como background-image (CSS), así que getImage() la
+// optimiza a WebP comprimido en el build (la hoja máx es 640px → 1000px sobra).
+const paperBg = await getImage({
+	src: paperBgSrc,
+	format: 'webp',
+	width: 1000,
+	quality: 72,
+});
 
 // Rotaciones sutiles e irregulares por pregunta (look "escrito a mano").
 const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
