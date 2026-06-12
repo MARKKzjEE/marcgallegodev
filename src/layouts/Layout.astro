@@ -9,11 +9,16 @@ interface Props {
 	lang?: Lang;
 }
 
-const defaultDescription = "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance en Barcelona. Desarrollo web, aplicaciones móviles y soluciones digitales a medida.";
+const defaultDescription = "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance en Barcelona. Desarrollo web, apps móviles y soluciones a medida.";
 const defaultKeywords = "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles";
 const { title = "Marc Gallego | Ingeniero de Software Full Stack en Barcelona", description = defaultDescription, keywords = defaultKeywords, lang = 'es' } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://marcgallego.com').href;
+
+// Alt de la imagen OG, localizado por idioma.
+const ogImageAlt = lang === 'en'
+	? 'Marc Gallego — Full Stack Software Engineer in Barcelona'
+	: 'Marc Gallego — Ingeniero de Software Full Stack en Barcelona';
 
 // ┌─────────────────────────────────────────────────────────┐
 // │  SPLASH DE CARGA — interruptor único                      │
@@ -70,20 +75,39 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content="https://marcgallego.com/assets/og-image.webp" />
-		<meta property="og:image:alt" content="Marc Gallego — Full Stack Software Engineer" />
+		<meta property="og:image:type" content="image/webp" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={ogImageAlt} />
 		<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
 		<meta property="og:site_name" content="Marc Gallego" />
 
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content="@marcgallegodev" />
+		<meta name="twitter:creator" content="@marcgallegodev" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content="https://marcgallego.com/assets/og-image.webp" />
+		<meta name="twitter:image:alt" content={ogImageAlt} />
 
 		<!-- Theme color -->
 		<meta name="theme-color" content="rgb(212, 212, 212)" media="(prefers-color-scheme: light)" />
 		<meta name="theme-color" content="rgb(18, 18, 18)" media="(prefers-color-scheme: dark)" />
+
+		<!-- JSON-LD: WebSite schema (autoridad del sitio + idioma) -->
+		<script is:inline type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			"name": "Marc Gallego",
+			"url": "https://marcgallego.com",
+			"description": defaultDescription,
+			"inLanguage": lang === 'en' ? 'en' : 'es',
+			"author": {
+				"@type": "Person",
+				"name": "Marc Gallego"
+			}
+		})} />
 
 		<!-- JSON-LD: Person schema -->
 		<script is:inline type="application/ld+json" set:html={JSON.stringify({
