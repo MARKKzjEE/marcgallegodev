@@ -22,9 +22,9 @@ const mobileShifts = [-13, 11, -9, 13, -10];
 
 		<!-- Metadatos en [ corchetes ] (esquinas superiores) -->
 		<div class="partners-meta">
-			<span class="text-mono-label-soft">[ {t.partners.metaName} ]</span>
-			<span class="text-mono-label-soft partners-meta__center">[ {t.partners.metaCenter} ]</span>
-			<span class="text-mono-label-soft">[ {t.partners.metaSince} ]</span>
+			<span class="text-mono-label">[ {t.partners.metaName} ]</span>
+			<span class="text-mono-label partners-meta__center">[ {t.partners.metaCenter} ]</span>
+			<span class="text-mono-label">[ {t.partners.metaSince} ]</span>
 		</div>
 
 		<!-- Statement grande (font-nord), escalonado por línea.
@@ -48,8 +48,8 @@ const mobileShifts = [-13, 11, -9, 13, -10];
 		<!-- Pie: bio mono (centro, con corchetes de recorte) + imagen Doko (der) -->
 		<div class="partners-bottom">
 			<div class="partners-bio">
-				<p class="text-mono-label-soft">{t.partners.studioText1}</p>
-				<p class="text-mono-label-soft">{t.partners.studioText2}</p>
+				<p class="text-mono-label">{t.partners.studioText1}</p>
+				<p class="text-mono-label">{t.partners.studioText2}</p>
 				<!-- Marcas de recorte en las esquinas -->
 				<span class="partners-bio__crop partners-bio__crop--tl" aria-hidden="true"></span>
 				<span class="partners-bio__crop partners-bio__crop--tr" aria-hidden="true"></span>
@@ -190,12 +190,13 @@ const mobileShifts = [-13, 11, -9, 13, -10];
 		}
 	}
 
-	// Marcas de recorte ⌐ ¬ en las esquinas de la bio
+	// Marcas de recorte ⌐ ¬ en las esquinas de la bio (color soft, como antes
+	// tenían los textos → ahora el contraste lo dan los textos sólidos).
 	.partners-bio__crop {
 		position: absolute;
 		width: 12px;
 		height: 12px;
-		border: 1px solid color-mix(in srgb, var(--secondary) 45%, transparent);
+		border: 1px solid var(--secondary-soft);
 	}
 	.partners-bio__crop--tl { top: 0; left: 0;  border-right: none; border-bottom: none; }
 	.partners-bio__crop--tr { top: 0; right: 0; border-left: none;  border-bottom: none; }

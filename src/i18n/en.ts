@@ -147,7 +147,7 @@ export const en: Translations = {
 			},
 			{
 				title: 'Loyic',
-				description: 'Employee portal for managing all internal company user data including time tracking, documentation, payroll, internal surveys, and more.',
+				description: 'Internal employee portal: time tracking, document uploads, charts and reports of the company\'s internal data.',
 				type: 'Internal portal',
 				tagline: 'Employee portal',
 			},
@@ -161,7 +161,7 @@ export const en: Translations = {
 				title: 'Cor de suro',
 				description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.',
 				type: 'Web · Visual narrative',
-				tagline: 'Craft-driven, sustainable visual narrative.',
+				tagline: 'Immersive site about craft and sustainability.',
 			},
 			{
 				title: 'Viviq',
@@ -176,7 +176,7 @@ export const en: Translations = {
 				tagline: 'From sound waves to design assets.',
 			},
 			{
-				title: 'Pillositio',
+				title: 'PilloSitio',
 				description: 'App and web platform for bars and restaurants with services for businesses and customers.',
 				type: 'App + Web platform',
 				tagline: 'App for bars, restaurants and guests.',

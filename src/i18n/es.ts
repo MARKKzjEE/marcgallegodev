@@ -145,7 +145,7 @@ export const es = {
 			},
 			{
 				title: 'Loyic',
-				description: 'Portal del empleado que permite gestionar todos los datos de usuarios internos de la empresa como registro horario, documentación, nóminas, encuestas internas, etc.',
+				description: 'Portal interno del empleado: fichaje horario, subida de documentación, gráficos y reportes de datos internos de la empresa.',
 				type: 'Portal interno',
 				tagline: 'Portal del empleado',
 			},
@@ -159,7 +159,7 @@ export const es = {
 				title: 'Cor de suro',
 				description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.',
 				type: 'Web · Narrativa visual',
-				tagline: 'Narrativa visual artesanal y sostenible.',
+				tagline: 'Web inmersiva sobre lo artesanal y sostenible.',
 			},
 			{
 				title: 'Viviq',
@@ -174,7 +174,7 @@ export const es = {
 				tagline: 'Del sonido a recursos de diseño.',
 			},
 			{
-				title: 'Pillositio',
+				title: 'PilloSitio',
 				description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.',
 				type: 'App + Plataforma web',
 				tagline: 'App para bares, restaurantes y clientes.',

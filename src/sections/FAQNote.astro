@@ -71,7 +71,8 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 <style lang="scss">
 	// ─── Sección: la hoja va centrada sobre el fondo del tema ───
 	.faq-note {
-		// Tinta de bolígrafo azul BIC (azul royal vivo) sobre papel claro.
+		// Tinta única (azul BIC vivo) al 100% en todo. La jerarquía de "peso" se
+		// logra con un text-stroke sutil en títulos y numeración, no con color.
 		--ink: #2b3fd4;
 		--ink-soft: color-mix(in srgb, var(--ink) 75%, transparent);
 		--paper: #f4f1e9;
@@ -144,6 +145,8 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		font-family: var(--font-reenie);
 		font-weight: 400;
 		color: var(--ink);
+		// Stroke sutil → da "peso" al título sin cambiar de color.
+		-webkit-text-stroke: 0.6px var(--ink);
 		font-size: clamp(44px, 9vw, 76px);
 		line-height: 0.95;
 		margin: 0;
@@ -199,6 +202,8 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		font-size: 30px;
 		line-height: 1;
 		color: var(--ink);
+		// Stroke sutil → mismo peso que el título.
+		-webkit-text-stroke: 0.6px var(--ink);
 	}
 
 	.faq-note__num-ring {
@@ -207,6 +212,12 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		width: calc(100% + 4px);
 		height: calc(100% + 4px);
 		color: var(--ink);
+
+		// Grosor del trazo del círculo, independiente del escalado del viewBox.
+		path {
+			stroke-width: 2.5px;
+			vector-effect: non-scaling-stroke;
+		}
 	}
 
 	.faq-note__qa {
@@ -222,16 +233,19 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		font-size: clamp(24px, 3.2vw, 34px);
 		line-height: 1.05;
 		color: var(--ink);
+		// Stroke sutil → mismo peso que título y numeración (jerarquía sobre respuesta).
+		-webkit-text-stroke: 0.6px var(--ink);
 		margin: 0 0 0.2rem;
 	}
 
-	// Respuesta: debajo, tamaño normal, con flecha delante
+	// Respuesta: debajo, tamaño normal, con flecha delante.
+	// Color vivo (--ink) → es el contenido que destaca sobre la estructura.
 	.faq-note__answer {
 		font-family: var(--font-reenie);
 		font-weight: 400;
 		font-size: clamp(22px, 2.6vw, 29px);
 		line-height: 1.2;
-		color: var(--ink-soft);
+		color: var(--ink);
 		margin: 0;
 		max-width: 52ch;
 	}
@@ -246,7 +260,7 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 	.faq-note__sign {
 		font-family: var(--font-reenie);
 		font-size: clamp(18px, 2.2vw, 23px);
-		color: var(--ink-soft);
+		color: var(--ink);
 		text-align: right;
 		margin: 2.5rem 0 0;
 		transform: rotate(-1.2deg);
