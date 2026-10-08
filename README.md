@@ -1,46 +1,32 @@
-# Astro Starter Kit: Basics
+# marcgallego.com
+
+Portfolio personal de Marc Gallego, Ingeniero de Software Full Stack en Barcelona.
+
+Web estática multi-página con Astro 5, Tailwind CSS v4 y TypeScript vanilla. Versión en español (por defecto, sin prefijo) e inglés (`/en/`). Desplegada en Vercel.
+
+## Comandos
 
 ```sh
-pnpm create astro@latest -- --template basics
+pnpm install   # instalar dependencias
+pnpm dev       # servidor de desarrollo en localhost:4321
+pnpm build     # build de producción en ./dist/
+pnpm preview   # previsualizar el build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+src/
+├── pages/       # rutas: /, /experiencia, /proyectos, /contacto, /404 y /en/*
+├── layouts/     # Layout.astro: <head>, SEO, JSON-LD, tema pre-paint, splash
+├── sections/    # secciones a ancho completo (Header, Hero, Footer…)
+├── scripts/     # scripts de cliente compartidos (circle reveal, gradient UnicornStudio)
+├── i18n/        # textos es.ts / en.ts y helpers de URLs
+├── data/        # imágenes de proyectos
+├── utils/       # helpers pequeños compartidos
+└── styles/      # config de Tailwind v4 y tokens de diseño (tailwind.css)
+public/          # fuentes, iconos, imagen OG, CVs en PDF, escenas de UnicornStudio
+cv/              # fuentes LaTeX de los CVs de public/cv/
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Todas las URLs canónicas acaban en `/`; `vercel.json` redirige las versiones sin barra.

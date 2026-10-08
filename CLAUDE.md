@@ -2,11 +2,11 @@
 
 ## Project Overview
 
-Portfolio personal de Marc Gallego (Ingeniero del Software / Full Stack Developer). Multi-page static site con Astro 5, Tailwind CSS v4 y vanilla TypeScript. Todo el contenido está en español (`lang="es"`).
+Portfolio personal de Marc Gallego (Ingeniero del Software / Full Stack Developer). Multi-page static site con Astro 5, Tailwind CSS v4 y vanilla TypeScript. Bilingüe: español por defecto (sin prefijo) e inglés bajo `/en/`. Deploy en Vercel.
 
 **Visión de diseño:** Estilo moderno y minimalista mezclado con estética de revista/magazine vanguardista. El portfolio debe tener carácter y personalidad propia — nunca debe parecer un template genérico ni generado por IA. Cada sección debe sentirse intencionada y con criterio.
 
-Dominio: `marcgallegodev.com`
+Dominio: `marcgallego.com` (configurado como `site` en `astro.config.mjs`)
 
 ## Commands
 
@@ -22,46 +22,53 @@ Package manager: **pnpm** — no usar npm ni yarn.
 
 ### Estructura de página
 
-Multi-page con file-based routing de Astro. Cada página tiene sus propios meta tags para SEO:
+Multi-page con file-based routing de Astro. Cada página pasa `title`/`description` (de `src/i18n`) al Layout:
 
-- `/` → `src/pages/index.astro` — Home (Hero + AboutCard)
-- `/experiencia` → `src/pages/experiencia.astro` — Trayectoria profesional
-- `/proyectos` → `src/pages/proyectos.astro` — Portfolio de proyectos
-- Contacto se mantiene como ancla `#contact` dentro de cada página
+- `/` ↔ `/en/` — Home: Hero, WhatIDo, HomeProjects, AboutCover, TechStack, Partners, FAQNote
+- `/experiencia/` ↔ `/en/experience/` — CV completo con descarga de PDF
+- `/proyectos/` ↔ `/en/projects/` — Catálogo de proyectos
+- `/contacto/` ↔ `/en/contact/` — Formulario (Formspree) + gradient
+- `/404` — `noindex`
 
 Estructura compartida:
-- `src/layouts/Layout.astro` — Shell HTML con props dinámicos (`title`, `description`), meta tags, dark mode pre-paint
-- `src/sections/` — Secciones full-width: Header, Hero
-- `src/components/` — Subcomponentes reutilizables (ej. `AboutCard.astro` dentro de Hero)
+- `src/layouts/Layout.astro` — `<head>` completo: canonical, hreflang, OG/Twitter, JSON-LD (WebSite + Person con `@id`), dark mode pre-paint, splash (solo home)
+- `src/sections/` — Secciones full-width
+- `src/scripts/` — Scripts compartidos: `circle-reveal.ts`, `unicorn-scene.ts`
+- `src/i18n/` — `es.ts`/`en.ts` (mismas claves, `en` tipado como `Translations`) + helpers `getLang`, `useTranslations`, `getLocalePath`, `getAlternatePath`, `withSlash`
+- `src/utils/` — Helpers pequeños (ej. `age.ts`)
+
+### SEO y URLs
+
+- Todas las URLs internas, canonical, hreflang y sitemap acaban en `/`. Generar links siempre con `getLocalePath`/`getAlternatePath`, nunca a mano. `vercel.json` (`trailingSlash: true`) redirige las versiones sin barra.
+- JSON-LD extra de una página que hable de Marc → usar el mismo `@id` de Person (`https://marcgallego.com/#person`), no crear otra entidad.
+- Nada de email/teléfono en claro en el HTML: el Footer los monta en cliente.
 
 ### Estado actual
 
-**Hero:** Fondo de vídeo del mar (MP4 + poster WebP) con overlay adaptado al tema. Grid de 2 columnas: foto de perfil a la izquierda (variantes light/dark) + AboutCard a la derecha con glassmorphism.
+**Hero:** Gradient interactivo de UnicornStudio (escenas light/dark en `public/unicorn/`) + banda inferior con nombre "Marc Gallego" (typewriter) y bandas de rol/stats con separadores `/` con glitch binario.
 
-**AboutCard:** Tarjeta interactiva con dos estados:
-- *Compacto:* Título "INGENIERO DEL SOFTWARE", nombre, texto de bienvenida, botón "SOBRE MI"
-- *Expandido:* Modal full-screen con biografía en columnas, foto en blanco y negro, tagline vertical "DISEÑO CREATIVO & DESARROLLO DIGITAL DESDE 2018", heading grande "SOBRE MI"
-
-**Header:** Navegación sticky con links a páginas (/experiencia, /proyectos) y ancla (#contact), selector de idioma ES/EN y toggle de tema.
+**Header:** Fixed. Desktop = toolbar grid 2 filas (logo, nav, ES/EN, tema, LinkedIn, disponible). Móvil = barra + hamburguesa + overlay con clip-path (`inert` cuando está cerrado, focus trap al abrir).
 
 ### Styling
 
 **Tailwind CSS v4** configurado enteramente por CSS (sin `tailwind.config.js`). Tokens en `src/styles/tailwind.css` con `@theme`:
 
-- **Fuentes** (self-hosted en `public/fonts/`):
-  - **Vogun** — Headings (serif, elegante)
-  - **CottorwayPro** — Body text (300-600 weights)
-  - **NORD** — Nav, botones, UI elements (100-900 weights)
+- **Fuentes** (self-hosted en `public/fonts/`, solo se suben los pesos que se usan):
+  - **NORD** — Headings grandes, UI (`font-nord`)
+  - **CottorwayPro** — Body text (`font-cottor`)
+  - **Monoblock** — Labels mono, header (`font-monoblock`)
+  - **Corinthia** / **Reenie Beanie** — Acentos caligráficos (Partners, FAQ)
 
-- **Paleta de colores (3 tokens semánticos):**
-  - `--primary`: fondo de la web — `#ebebeb` light / `#000000` dark
+- **Paleta de colores (tokens semánticos):**
+  - `--primary`: fondo de la web — `#ffffff` light / `#000000` dark
   - `--secondary`: headers, textos — `#1D1D1F` light / `#FFFFFF` dark
-  - `--terciary`: fondo de tarjetas — `#f5f5f7` light / `#1D1D1F` dark
-  - Clases Tailwind: `bg-primary`, `text-secondary`, `bg-tertiary`, etc.
+  - `--terciary` / `--quaternary`: fondos de tarjetas, `--secondary` al 5%/8% (light) y 8%/13% (dark)
+  - `--secondary-soft`: `--secondary` al 80%
+  - Clases Tailwind: `bg-primary`, `text-secondary`, `bg-tertiary`, `bg-quaternary`
 
 - **Dark mode:** Class-based (`.dark` en `<html>`), variant `@custom-variant dark (&:where(.dark, .dark *))`
 - **Animations:** Plugin `tailwind-animations`
-- **SCSS:** Estilos específicos de componente en archivos `.scss` separados (ej. `about-card.scss`)
+- **SCSS:** Estilos de componente en `<style lang="scss">` dentro de cada `.astro`
 
 ### Interactividad
 
@@ -74,9 +81,9 @@ Estructura compartida:
 
 ### Assets
 
-- `public/assets/` tracked con **Git LFS**: vídeo de fondo (MP4 + poster WebP)
-- `src/assets/` — Imágenes de perfil (variantes light/dark), fotos para AboutCard (blanco y negro)
-- Imágenes optimizadas con `<Image>` de Astro (sharp → WebP, quality 90-92%)
+- `public/assets/og-image.jpg` — Imagen OG (1200×630, JPEG por compatibilidad con LinkedIn y otros)
+- `public/cv/` — CVs en PDF; sus fuentes LaTeX están en `cv/` (fuera de `public/` para no publicarlas)
+- `src/assets/` — Imágenes de perfil (light/dark), proyectos y clientes, optimizadas con `<Image>` de Astro
 
 ## Conventions
 
@@ -85,4 +92,4 @@ Estructura compartida:
 - Glassmorphism: `color-mix(in srgb, var(--terciary) %, transparent)` + `backdrop-filter: blur()`
 - TypeScript strict mode
 - Toda interacción debe respetar `prefers-reduced-motion`
-- Contenido en español, tono personal y cercano
+- Contenido en español e inglés, tono personal y cercano. Ningún texto visible ni aria-label hardcodeado: todo pasa por `src/i18n`

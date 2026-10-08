@@ -3,20 +3,16 @@ import { Image } from 'astro:assets';
 import profileLight from '../assets/me/hero-profile-light.png';
 import profileDark from '../assets/me/hero-profile-dark.png';
 import { getLang, useTranslations } from '../i18n/index';
+import { getAge } from '../utils/age';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 const c = t.aboutCover;
 
-// Edad calculada desde la fecha de nacimiento (se actualiza sola cada año).
-const BIRTH_DATE = new Date(1997, 4, 31); // 31 mayo 1997 (mes 0-indexado)
-const now = new Date();
-let age = now.getFullYear() - BIRTH_DATE.getFullYear();
-const hadBirthday =
-	now.getMonth() > BIRTH_DATE.getMonth() ||
-	(now.getMonth() === BIRTH_DATE.getMonth() && now.getDate() >= BIRTH_DATE.getDate());
-if (!hadBirthday) age -= 1;
-const ageLabel = c.ageLabel.replace('{age}', String(age));
+// Edad: se calcula en el build y el script la recalcula en el navegador,
+// así se mantiene correcta aunque la web no se vuelva a publicar.
+const BIRTH_DATE = '1997-05-31';
+const ageLabel = c.ageLabel.replace('{age}', String(getAge(BIRTH_DATE)));
 ---
 
 <!--
@@ -30,7 +26,7 @@ const ageLabel = c.ageLabel.replace('{age}', String(age));
 		<!-- Metadatos superiores -->
 		<div class="cover-meta">
 			<span class="cover-meta__item text-mono-label">{c.location}</span>
-			<span class="cover-meta__item text-mono-label">{ageLabel}</span>
+			<span class="cover-meta__item text-mono-label" data-age={BIRTH_DATE} data-age-template={c.ageLabel}>{ageLabel}</span>
 		</div>
 
 		<!-- Nombre escalonado con la foto superpuesta -->
@@ -227,3 +223,13 @@ const ageLabel = c.ageLabel.replace('{age}', String(age));
 		.cover-stage { margin-block: 2rem; }
 	}
 </style>
+
+<script>
+	import { getAge } from '../utils/age';
+
+	// Recalcula la edad con la fecha del visitante (ver frontmatter)
+	const ageEl = document.querySelector<HTMLElement>('[data-age]');
+	if (ageEl?.dataset.age && ageEl.dataset.ageTemplate) {
+		ageEl.textContent = ageEl.dataset.ageTemplate.replace('{age}', String(getAge(ageEl.dataset.age)));
+	}
+</script>

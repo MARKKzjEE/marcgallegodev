@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { getLang, useTranslations, getLocalePath } from '../i18n/index';
-import { projectImages, projectColors } from '../data/projects';
+import { projectImages } from '../data/projects';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
@@ -18,7 +18,6 @@ const breadcrumb = {
 const projects = t.projects.items.map((item, i) => ({
 	...item,
 	image: projectImages[i],
-	color: projectColors[i],
 }));
 
 // Catálogo 3×3: 9 celdas. Tras los proyectos, las celdas sobrantes muestran
