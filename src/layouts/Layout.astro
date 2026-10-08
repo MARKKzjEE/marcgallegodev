@@ -312,8 +312,13 @@ const enURL = new URL(enHref, site).href;
 	}
 
 	/* Ya visto en esta sesión: ocultar de inmediato (sin flash ni transición) */
-	:global(html.splash-seen) #splash {
+	html.splash-seen #splash {
 		display: none;
+	}
+
+	/* Sin JS nadie quitaría el splash: no se muestra */
+	@media (scripting: none) {
+		#splash { display: none; }
 	}
 
 	.splash-inner {

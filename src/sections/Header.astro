@@ -511,6 +511,11 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 			if (restoreFocus) _hamburger.focus();
 		}
 
+		// Al pasar a desktop (ej. girar la tablet) el overlay móvil no debe quedarse abierto
+		window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => {
+			if (e.matches && _menu.classList.contains('is-open')) closeMenu({ restoreFocus: false });
+		});
+
 		hamburger.addEventListener('click', openMenu);
 		closeBtn.addEventListener('click', () => closeMenu());
 
