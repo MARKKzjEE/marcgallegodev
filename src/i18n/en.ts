@@ -23,6 +23,10 @@ export const en: Translations = {
 		contact: "Contact",
 		mobileMenuOpen: "Open menu",
 		mobileMenuClose: "Close menu",
+		home: "Home",
+		mainNav: "Main navigation",
+		mobileNav: "Mobile navigation",
+		toggleTheme: "Toggle theme",
 	},
 
 	// ── Hero ──
@@ -86,6 +90,7 @@ export const en: Translations = {
 	// ── FAQ ──
 	faq: {
 		heading: "Frequently asked questions",
+		signature: "* marc, somewhere in a café in barcelona",
 		items: [
 			{
 				question: "What kind of projects do you work on?",
@@ -183,6 +188,8 @@ export const en: Translations = {
 		emailPlaceholder: "Email",
 		messagePlaceholder: "Message",
 		submitLabel: "Send",
+		successMessage: "✓ Message sent. I'll get back to you soon.",
+		errorMessage: "Something went wrong. Try again or write to me directly.",
 	},
 
 	// ── Footer ──
@@ -195,6 +202,7 @@ export const en: Translations = {
 		navExperience: "Experience",
 		navProjects: "Projects",
 		navContact: "Contact",
+		navLabel: "Footer navigation",
 	},
 
 	// ── Experience page ──
@@ -298,7 +306,7 @@ export const en: Translations = {
 					"Definition of workflows and pitch strategies oriented towards attracting investment.",
 					"The project reached the pre-investment stage but was paused due to the COVID-19 pandemic.",
 				],
-				logoAlt: "Planit logo, travel planning startup",
+				logoAlt: "Planit logo, social app to connect people through plans",
 			},
 		],
 	},

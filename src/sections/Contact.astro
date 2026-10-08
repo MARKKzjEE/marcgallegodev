@@ -31,7 +31,9 @@ const breadcrumb = {
 
 	<!-- Form horizontal (3 columnas) -->
 	<div class="contact-form-wrap px-4 md:px-10">
-		<form class="contact-form" data-contact-form action="https://formspree.io/f/xjgaoedy" method="POST">
+		<form class="contact-form" data-contact-form action="https://formspree.io/f/xjgaoedy" method="POST" data-success={t.contact.successMessage} data-error={t.contact.errorMessage}>
+			<!-- Honeypot anti-spam de Formspree: invisible para personas, los bots lo rellenan -->
+			<input type="text" name="_gotcha" class="contact-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
 			<!-- Col 1: Nombre + Mail apilados -->
 			<div class="contact-col contact-col--identity">
 				<div class="contact-field">
@@ -201,6 +203,14 @@ const breadcrumb = {
 		}
 	}
 
+	.contact-honeypot {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+	}
+
 	.contact-feedback {
 		grid-column: 1 / -1;
 		min-height: 1.25rem;
@@ -240,7 +250,7 @@ const breadcrumb = {
 			if (res.ok) {
 				form.reset();
 				feedback.classList.remove('is-error');
-				feedback.textContent = '✓ Mensaje enviado. Te respondo pronto.';
+				feedback.textContent = form.dataset.success ?? '';
 				btn.textContent = originalText;
 				btn.disabled = false;
 			} else {
@@ -248,7 +258,7 @@ const breadcrumb = {
 			}
 		} catch {
 			feedback.classList.add('is-error');
-			feedback.textContent = 'Algo ha ido mal. Prueba de nuevo o escríbeme directamente.';
+			feedback.textContent = form.dataset.error ?? '';
 			btn.textContent = originalText;
 			btn.disabled = false;
 		}

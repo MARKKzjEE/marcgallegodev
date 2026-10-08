@@ -18,11 +18,11 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 <header class="site-header font-monoblock font-normal text-base border-t border-secondary" data-site-header>
 
 	<!-- ─── Desktop toolbar (2 filas × 6 cols) ─── -->
-	<div class="toolbar hidden lg:block" aria-label="Cabecera">
+	<div class="toolbar hidden lg:block">
 		<div class="toolbar-grid">
 
 			<!-- Logo M — col 1, filas 1-2 -->
-			<a href={homePath} class="cell" style="grid-column:1; grid-row:1/3;" aria-label="Inicio">
+			<a href={homePath} class="cell" style="grid-column:1; grid-row:1/3;" aria-label={t.header.home}>
 				<svg width="22" height="24" viewBox="0 0 521 557" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 					<path d="M132.499 548.5V41.3049H196.552V548.5H324.554V41.3049H388.501V548.5H516.5V0.500017H4.5V548.5H132.499Z" fill="currentColor"/>
 				</svg>
@@ -32,7 +32,7 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 			<div class="cell" style="grid-column:2; grid-row:1/3;"></div>
 
 			<!-- Nav — col 3, filas 1-2 -->
-			<nav class="cell nav-group" style="grid-column:3; grid-row:1/3;" aria-label="Navegación principal">
+			<nav class="cell nav-group" style="grid-column:3; grid-row:1/3;" aria-label={t.header.mainNav}>
 				{navItems.map((item) => {
 					const isActive = currentPath.startsWith(item.href);
 					return (
@@ -44,13 +44,13 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 			</nav>
 
 			<!-- ES — col 4, fila 1 -->
-			<a href={esHref} class={`cell lang-cell${lang === 'es' ? ' lang-active' : ''}`} style="grid-column:4; grid-row:1;" aria-label="Español"><span>ES</span></a>
+			<a href={esHref} class={`cell lang-cell${lang === 'es' ? ' lang-active' : ''}`} style="grid-column:4; grid-row:1;" aria-label="Español" lang="es" hreflang="es"><span>ES</span></a>
 			<!-- EN — col 4, fila 2 -->
-			<a href={enHref} class={`cell lang-cell${lang === 'en' ? ' lang-active' : ''}`} style="grid-column:4; grid-row:2;" aria-label="English"><span>EN</span></a>
+			<a href={enHref} class={`cell lang-cell${lang === 'en' ? ' lang-active' : ''}`} style="grid-column:4; grid-row:2;" aria-label="English" lang="en" hreflang="en"><span>EN</span></a>
 
 			<!-- Toggle tema — col 5, filas 1-2 -->
 			<div class="cell theme-cell" style="grid-column:5; grid-row:1/3;">
-				<label id="theme-toggle" aria-label="Cambiar tema">
+				<label id="theme-toggle" aria-label={t.header.toggleTheme}>
 					<input type="checkbox" class="sr-only" data-theme-checkbox>
 					<!-- Sol: visible en modo claro -->
 					<svg class="theme-icon theme-icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -88,9 +88,9 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 	</div>
 
 	<!-- ─── Mobile bar ─── -->
-	<div class="mobile-bar lg:hidden" aria-label="Cabecera móvil">
+	<div class="mobile-bar lg:hidden">
 		<!-- Logo M con borde -->
-		<a href={homePath} class="mobile-logo-cell" aria-label="Inicio">
+		<a href={homePath} class="mobile-logo-cell" aria-label={t.header.home}>
 			<svg width="22" height="24" viewBox="0 0 521 557" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 				<path d="M132.499 548.5V41.3049H196.552V548.5H324.554V41.3049H388.501V548.5H516.5V0.500017H4.5V548.5H132.499Z" fill="currentColor"/>
 			</svg>
@@ -103,10 +103,10 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 		<!-- Controles derecha: ES | EN | tema | hamburguesa -->
 		<div class="mobile-controls-bar">
 			<div class="mobile-lang-stack">
-				<a href={esHref} class={`mobile-lang-item${lang === 'es' ? ' lang-active' : ''}`} aria-label="Español">ES</a>
-				<a href={enHref} class={`mobile-lang-item${lang === 'en' ? ' lang-active' : ''}`} aria-label="English">EN</a>
+				<a href={esHref} class={`mobile-lang-item${lang === 'es' ? ' lang-active' : ''}`} aria-label="Español" lang="es" hreflang="es">ES</a>
+				<a href={enHref} class={`mobile-lang-item${lang === 'en' ? ' lang-active' : ''}`} aria-label="English" lang="en" hreflang="en">EN</a>
 			</div>
-			<button type="button" class="mobile-ctrl-cell mobile-theme-cell" aria-label="Cambiar tema" data-theme-mobile-btn>
+			<button type="button" class="mobile-ctrl-cell mobile-theme-cell" aria-label={t.header.toggleTheme} data-theme-mobile-btn>
 				<svg class="theme-icon theme-icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 					<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -140,7 +140,7 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 				</svg>
 			</button>
 		</div>
-		<nav class="mobile-nav" aria-label="Navegación móvil">
+		<nav class="mobile-nav" aria-label={t.header.mobileNav}>
 			{navItems.map((item) => {
 				const isActive = currentPath.startsWith(item.href);
 				return (

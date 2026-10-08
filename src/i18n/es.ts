@@ -21,6 +21,10 @@ export const es = {
 		contact: "Contacto",
 		mobileMenuOpen: "Abrir menú",
 		mobileMenuClose: "Cerrar menú",
+		home: "Inicio",
+		mainNav: "Navegación principal",
+		mobileNav: "Navegación móvil",
+		toggleTheme: "Cambiar tema",
 	},
 
 	// ── Hero ──
@@ -84,6 +88,7 @@ export const es = {
 	// ── FAQ ──
 	faq: {
 		heading: "Preguntas frecuentes",
+		signature: "* marc, en algún café de barcelona",
 		items: [
 			{
 				question: "¿Con qué tipo de proyectos trabajas?",
@@ -181,6 +186,8 @@ export const es = {
 		emailPlaceholder: "Email",
 		messagePlaceholder: "Mensaje",
 		submitLabel: "Enviar",
+		successMessage: "✓ Mensaje enviado. Te respondo pronto.",
+		errorMessage: "Algo ha ido mal. Prueba de nuevo o escríbeme directamente.",
 	},
 
 	// ── Footer ──
@@ -193,6 +200,7 @@ export const es = {
 		navExperience: "Experiencia",
 		navProjects: "Proyectos",
 		navContact: "Contacto",
+		navLabel: "Navegación del footer",
 	},
 
 	// ── Experience page ──
@@ -296,7 +304,7 @@ export const es = {
 					"Definición de workflows y estrategias de pitch orientadas a la captación de inversión.",
 					"El proyecto alcanzó fase de pre-inversión pero fue pausado a causa de la pandemia de COVID-19.",
 				],
-				logoAlt: "Logo Planit, startup de planificación de viajes",
+				logoAlt: "Logo Planit, app social para conectar personas a través de planes",
 			},
 		],
 	},
