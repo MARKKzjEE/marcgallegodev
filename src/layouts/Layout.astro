@@ -64,8 +64,9 @@ const enURL = new URL(enHref, site).href;
 				<link rel="alternate" hreflang="x-default" href={esURL} />
 			</>
 		)}
-		<!-- Preload fuentes críticas above-the-fold (NORD Bold solo la usa el splash de la home) -->
-		<link rel="preload" href="/fonts/NORD/NORD-Black.woff2" as="font" type="font/woff2" crossorigin />
+		<!-- Preload fuentes críticas above-the-fold: h1 de la home en NORD Black (+ Bold del splash),
+		     h1 del resto de páginas en NORD Regular -->
+		<link rel="preload" href={isHome ? '/fonts/NORD/NORD-Black.woff2' : '/fonts/NORD/NORD-Regular.woff2'} as="font" type="font/woff2" crossorigin />
 		{showSplash && <link rel="preload" href="/fonts/NORD/NORD-Bold.woff2" as="font" type="font/woff2" crossorigin />}
 		<link rel="preload" href="/fonts/Monoblock/Monoblock-Regular.woff2" as="font" type="font/woff2" crossorigin />
 		<title>{title}</title>

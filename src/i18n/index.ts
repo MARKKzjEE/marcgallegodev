@@ -3,7 +3,7 @@ import { en } from './en';
 
 export type Lang = 'es' | 'en';
 
-export const languages: Record<Lang, typeof es> = { es, en };
+const languages: Record<Lang, typeof es> = { es, en };
 
 export function getLang(url: URL): Lang {
 	return url.pathname.startsWith('/en') ? 'en' : 'es';

@@ -64,7 +64,7 @@ Estructura compartida:
   - `--secondary`: headers, textos — `#1D1D1F` light / `#FFFFFF` dark
   - `--terciary` / `--quaternary`: fondos de tarjetas, `--secondary` al 5%/8% (light) y 8%/13% (dark)
   - `--secondary-soft`: `--secondary` al 80%
-  - Clases Tailwind: `bg-primary`, `text-secondary`, `bg-tertiary`, `bg-quaternary`
+  - Clases Tailwind: `bg-primary`, `text-secondary`, etc. `--terciary`/`--quaternary` se usan como `var()` en CSS
 
 - **Dark mode:** Class-based (`.dark` en `<html>`), variant `@custom-variant dark (&:where(.dark, .dark *))`
 - **Animations:** Plugin `tailwind-animations`

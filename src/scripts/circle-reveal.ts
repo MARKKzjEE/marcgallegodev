@@ -9,7 +9,7 @@
  * The wrapper must have `position: relative` and `overflow: hidden`.
  * The reveal layer uses CSS vars: --r (radius), --cx / --cy (position).
  */
-export function initCircleReveal() {
+function initCircleReveal() {
 	if (window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer: coarse)').matches) return;
 
 	document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((wrapper) => {
