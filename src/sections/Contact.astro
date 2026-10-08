@@ -228,6 +228,10 @@ const breadcrumb = {
 </style>
 
 <script>
+	import { mountUnicornScene } from '../scripts/unicorn-scene';
+
+	mountUnicornScene('contact-gradient');
+
 	const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
 	const feedback = document.querySelector<HTMLElement>('[data-contact-feedback]');
 	const btn = document.querySelector<HTMLButtonElement>('[data-submit-btn]');
@@ -263,49 +267,4 @@ const breadcrumb = {
 			btn.disabled = false;
 		}
 	});
-</script>
-
-<script src="/unicorn/unicornStudio.umd.js" is:inline></script>
-<script is:inline>
-	(function() {
-		var contactScene = null;
-
-		function getGradientFile() {
-			return document.documentElement.classList.contains('dark')
-				? '/unicorn/mouse-tracking-gradient.json'
-				: '/unicorn/mouse-tracking-gradient-light.json';
-		}
-
-		function loadContactScene() {
-			if (contactScene) {
-				contactScene.destroy();
-				contactScene = null;
-			}
-			if (typeof UnicornStudio === 'undefined') return;
-			UnicornStudio.addScene({
-				elementId: 'contact-gradient',
-				fps: 60,
-				scale: 1,
-				dpi: window.devicePixelRatio || 1,
-				filePath: getGradientFile(),
-				interactivity: { mouse: { disableMobile: false } }
-			}).then(function(scene) {
-				contactScene = scene;
-			});
-		}
-
-		document.addEventListener('DOMContentLoaded', function() {
-			loadContactScene();
-
-			var observer = new MutationObserver(function(mutations) {
-				mutations.forEach(function(mutation) {
-					if (mutation.attributeName === 'class') {
-						loadContactScene();
-					}
-				});
-			});
-			observer.observe(document.documentElement, { attributes: true });
-
-		});
-	})();
 </script>

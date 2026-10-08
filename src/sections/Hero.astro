@@ -10,48 +10,6 @@ const t = useTranslations(lang);
 	<!-- Gradient Unicorn -->
 	<div id="hero-gradient" aria-hidden="true"></div>
 
-	<script src="/unicorn/unicornStudio.umd.js" is:inline></script>
-	<script is:inline>
-		var unicornScene = null;
-
-		function getGradientFile() {
-			return document.documentElement.classList.contains('dark')
-				? '/unicorn/mouse-tracking-gradient.json'
-				: '/unicorn/mouse-tracking-gradient-light.json';
-		}
-
-		function loadScene() {
-			if (unicornScene) {
-				unicornScene.destroy();
-				unicornScene = null;
-			}
-			UnicornStudio.addScene({
-				elementId: 'hero-gradient',
-				fps: 60,
-				scale: 1,
-				dpi: window.devicePixelRatio || 1,
-				filePath: getGradientFile(),
-				interactivity: { mouse: { disableMobile: false } }
-			}).then(function(scene) {
-				unicornScene = scene;
-			});
-		}
-
-		document.addEventListener('DOMContentLoaded', function () {
-			loadScene();
-
-			const observer = new MutationObserver(function(mutations) {
-				mutations.forEach(function(mutation) {
-					if (mutation.attributeName === 'class') {
-						loadScene();
-					}
-				});
-			});
-			observer.observe(document.documentElement, { attributes: true });
-
-		});
-	</script>
-
 	<!-- Banda nombre -->
 	<div class="name-band">
 
@@ -86,6 +44,10 @@ const t = useTranslations(lang);
 </section>
 
 <script>
+	import { mountUnicornScene } from '../scripts/unicorn-scene';
+
+	mountUnicornScene('hero-gradient');
+
 	const CHAR_MS        = 75;
 	const WORD_GAP       = 220;
 	const CURSOR_LINGER  = 900;
@@ -236,11 +198,32 @@ const t = useTranslations(lang);
 			return arr;
 		}
 
+		// El bucle se pausa con el Hero fuera de pantalla o la pestaña en segundo plano
+		let heroInView = true;
+		let resume: (() => void) | null = null;
+		const canRun = () => heroInView && !document.hidden;
+		const wakeUp = () => { if (canRun()) resume?.(); };
+
+		const heroEl = document.getElementById('hero');
+		if (heroEl) {
+			new IntersectionObserver(([entry]) => {
+				heroInView = entry.isIntersecting;
+				wakeUp();
+			}).observe(heroEl);
+		}
+		document.addEventListener('visibilitychange', wakeUp);
+
+		function whenVisible(): Promise<void> {
+			if (canRun()) return Promise.resolve();
+			return new Promise((r) => { resume = () => { resume = null; r(); }; });
+		}
+
 		async function runGlitch() {
 			const CHAR_DELAY = 30;   // ms entre cada carácter
 			const HOLD       = 1200; // ms que se mantiene en binario
 
 			while (true) {
+				await whenVisible();
 				// Fase 1: / → binario
 				const chars = shuffle(getAllSepChars());
 				for (const { el, index } of chars) {
@@ -249,6 +232,7 @@ const t = useTranslations(lang);
 				}
 
 				await new Promise(r => setTimeout(r, HOLD));
+				await whenVisible();
 
 				// Fase 2: binario → /
 				const chars2 = shuffle(getAllSepChars());
