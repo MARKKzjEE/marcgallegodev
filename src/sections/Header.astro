@@ -163,6 +163,7 @@ const { esHref, enHref } = getAlternatePath(currentPath);
     background-color: var(--primary);
     color: var(--secondary);
     transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+    @media (prefers-reduced-motion: reduce) { transition: none; }
 
     &.is-hidden {
       transform: translateY(-100%);
@@ -251,6 +252,12 @@ const { esHref, enHref } = getAlternatePath(currentPath);
       justify-content: center;
       padding: 0 1rem;
       cursor: pointer;
+    }
+
+    // Foco de teclado visible (el checkbox real es sr-only)
+    &:has(input:focus-visible) {
+      outline: 2px solid var(--secondary);
+      outline-offset: -4px;
     }
   }
 
@@ -466,17 +473,29 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 <script>
 	// ─── Theme toggle (desktop) ───
 	const checkbox = document.querySelector<HTMLInputElement>('[data-theme-checkbox]');
+	const mobileThemeBtn = document.querySelector<HTMLButtonElement>('[data-theme-mobile-btn]');
+
+	// Estado del toggle móvil + color de la UI del navegador según el tema elegido a mano
+	function syncThemeUI(dark: boolean) {
+		mobileThemeBtn?.setAttribute('aria-pressed', String(dark));
+		document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+			meta.setAttribute('content', dark ? '#000000' : '#ffffff');
+		});
+	}
+	syncThemeUI(document.documentElement.classList.contains('dark'));
+
 	if (checkbox) {
 		checkbox.checked = document.documentElement.classList.contains('dark');
 		checkbox.addEventListener('change', () => {
 			const dark = checkbox.checked;
 			document.documentElement.classList.toggle('dark', dark);
+			syncThemeUI(dark);
 			try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
 		});
 	}
 
 	// ─── Theme toggle (mobile btn) ───
-	document.querySelector<HTMLButtonElement>('[data-theme-mobile-btn]')?.addEventListener('click', () => {
+	mobileThemeBtn?.addEventListener('click', () => {
 		if (checkbox) {
 			checkbox.checked = !checkbox.checked;
 			checkbox.dispatchEvent(new Event('change', { bubbles: true }));

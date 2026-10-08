@@ -24,7 +24,7 @@ export const es = {
 		home: "Inicio",
 		mainNav: "Navegación principal",
 		mobileNav: "Navegación móvil",
-		toggleTheme: "Cambiar tema",
+		toggleTheme: "Modo oscuro",
 	},
 
 	// ── Hero ──
@@ -207,7 +207,7 @@ export const es = {
 	experience: {
 		pageTitle: "Mi trayectoria profesional",
 		downloadLabel: "Descargar PDF",
-		downloadAriaLabel: "Descargar CV en PDF",
+		downloadAriaLabel: "Descargar PDF del CV",
 		cvFile: "/cv/CV_MarcGallego_es.pdf",
 		sections: {
 			summary: "Resumen",

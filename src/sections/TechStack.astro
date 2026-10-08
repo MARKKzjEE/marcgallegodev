@@ -76,7 +76,7 @@ const filters = [
 
 	<!-- Carrusel horizontal: drag + cursor custom (scroll nativo de fondo) -->
 	<div class="tech-carousel-wrap" data-tech-carousel>
-		<div class="tech-carousel" data-tech-track role="list">
+		<div class="tech-carousel" data-tech-track role="list" tabindex="0" aria-label={t.techStack.heading}>
 			{techs.map((tech, i) => (
 				<article class="tech-cell" role="listitem" data-cat={tech.cat}>
 					<!-- Cabecera: número + nombre -->
@@ -250,6 +250,12 @@ const filters = [
 	.tech-carousel {
 		display: flex;
 		overflow-x: auto;
+
+		// Navegable con teclado (flechas) al recibir el foco
+		&:focus-visible {
+			outline: 2px solid var(--secondary);
+			outline-offset: -2px;
+		}
 		// Marco superior/inferior que cierra la fila (estética catálogo)
 		border-top: 1px solid var(--secondary);
 		border-bottom: 1px solid var(--secondary);
@@ -282,6 +288,10 @@ const filters = [
 		transition:
 			transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
 			opacity 240ms cubic-bezier(0.22, 1, 0.36, 1);
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
 
 		@media (max-width: 767px) {
 			--cell-w: 64vw;

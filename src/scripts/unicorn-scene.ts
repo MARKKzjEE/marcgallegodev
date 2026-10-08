@@ -2,9 +2,11 @@
 // - La librería se carga bajo demanda, sin bloquear el parseo del HTML.
 // - La escena solo se recarga cuando cambia el tema (light/dark), no con
 //   cualquier cambio de clase en <html>.
-// - Con prefers-reduced-motion se desactiva el seguimiento del ratón.
+// - Con prefers-reduced-motion se desactiva el ratón y la escena se congela
+//   tras pintarse (queda como gradient estático).
 
 interface UnicornScene {
+	paused: boolean;
 	destroy(): void;
 }
 
@@ -17,6 +19,7 @@ declare global {
 }
 
 const LIB_SRC = '/unicorn/unicornStudio.umd.js';
+const REDUCED_MOTION_FREEZE_MS = 500;
 let libPromise: Promise<void> | null = null;
 
 function loadLib(): Promise<void> {
@@ -64,8 +67,16 @@ export function mountUnicornScene(elementId: string) {
 			interactivity: { mouse: { disableMobile: false, disabled: reduceMotion } },
 		});
 
-		if (id !== loadId) next.destroy();
-		else scene = next;
+		if (id !== loadId) {
+			next.destroy();
+			return;
+		}
+		scene = next;
+		// Deja pintar unos frames y congela la animación. El rAF solo corre con la
+		// pestaña visible, así nunca se congela antes del primer pintado.
+		if (reduceMotion) {
+			requestAnimationFrame(() => setTimeout(() => { next.paused = true; }, REDUCED_MOTION_FREEZE_MS));
+		}
 	}
 
 	load().catch(() => {});

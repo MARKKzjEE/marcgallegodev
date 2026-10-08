@@ -21,8 +21,10 @@ const t = useTranslations(lang);
 		<div class="name-bar"></div>
 		<div class="name-content">
 			<h1 class="font-nord font-black text-secondary hero-name" data-typewriter>
-				<div class="name-clip"><span class="name-word">Marc</span></div>
-				<div class="name-clip"><span class="name-word">Gallego</span></div>
+				<!-- Texto real para lectores de pantalla; la versión visual se parte en letras (typewriter) -->
+				<span class="sr-only">Marc Gallego</span>
+				<span class="name-clip" aria-hidden="true"><span class="name-word">Marc</span></span>
+				<span class="name-clip" aria-hidden="true"><span class="name-word">Gallego</span></span>
 			</h1>
 		</div>
 
@@ -30,11 +32,11 @@ const t = useTranslations(lang);
 		<div class="name-bar"></div>
 		<div class="info-band info-band--stats text-mono-label" data-stats-band>
 			<span class="stat-item">{lang === 'en' ? '+5 years exp.' : '+5 años exp.'}</span>
-			<span class="sep" data-sep></span>
+			<span class="sep" data-sep aria-hidden="true"></span>
 			<span class="stat-item">{lang === 'en' ? '+60 projects' : '+60 proyectos'}</span>
-			<span class="sep" data-sep></span>
+			<span class="sep" data-sep aria-hidden="true"></span>
 			<span class="stat-item hidden md:inline">{lang === 'en' ? 'since 2018' : 'desde 2018'}</span>
-			<span class="sep hidden md:inline" data-sep></span>
+			<span class="sep hidden md:inline" data-sep aria-hidden="true"></span>
 			<span class="stat-item">Barcelona</span>
 		</div>
 		<div class="name-bar"></div>
@@ -120,10 +122,13 @@ const t = useTranslations(lang);
 				const item = document.createElement('span');
 				item.className = 'role-item';
 				item.textContent = roleText!;
+				// Solo la primera repetición del rol se lee; el resto es decorativo
+				if (i > 0) item.setAttribute('aria-hidden', 'true');
 				band!.appendChild(item);
 				if (i < n - 1) {
 					const sep = document.createElement('span');
 					sep.className = 'role-sep';
+					sep.setAttribute('aria-hidden', 'true');
 					band!.appendChild(sep);
 				}
 			}
@@ -342,7 +347,7 @@ const t = useTranslations(lang);
 		gap: 0 0.22em;
 	}
 
-	.name-clip { overflow: hidden; }
+	.name-clip { display: block; overflow: hidden; }
 	.name-word { display: block; }
 	// Oculto solo si el typewriter va a correr (JS activo y sin reduced motion);
 	// en cualquier otro caso el nombre se ve directamente.

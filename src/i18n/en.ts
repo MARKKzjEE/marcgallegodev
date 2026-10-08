@@ -26,7 +26,7 @@ export const en: Translations = {
 		home: "Home",
 		mainNav: "Main navigation",
 		mobileNav: "Mobile navigation",
-		toggleTheme: "Toggle theme",
+		toggleTheme: "Dark mode",
 	},
 
 	// ── Hero ──
@@ -209,7 +209,7 @@ export const en: Translations = {
 	experience: {
 		pageTitle: "My professional journey",
 		downloadLabel: "Download PDF",
-		downloadAriaLabel: "Download CV as PDF",
+		downloadAriaLabel: "Download PDF of my CV",
 		cvFile: "/cv/CV_MarcGallego_en.pdf",
 		sections: {
 			summary: "Summary",
