@@ -85,6 +85,12 @@ const breadcrumb = {
 			padding-bottom: 2.5rem;
 			gap: 2rem;
 		}
+
+		// Pantallas muy bajas (móvil en horizontal): no cabe en un viewport,
+		// la sección crece y el gradient pasa a altura fija (ver abajo)
+		@media (max-height: 500px) {
+			height: auto;
+		}
 	}
 
 	.contact-header {
@@ -101,6 +107,11 @@ const breadcrumb = {
 		flex: 1;
 		min-height: 0;
 		display: flex;
+
+		@media (max-height: 500px) {
+			flex: none;
+			height: 160px;
+		}
 	}
 
 	.contact-gradient {
