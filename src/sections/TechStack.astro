@@ -55,7 +55,6 @@ const filters = [
 			type="button"
 			class="tech-tabs-trigger text-mono-label"
 			data-tech-trigger
-			aria-haspopup="true"
 			aria-expanded="false"
 		>
 			<span class="tech-tabs-trigger__label" data-tech-trigger-label>{filters[0].label}</span>
@@ -63,13 +62,12 @@ const filters = [
 		</button>
 
 		<!-- Panel de opciones. Desktop: fila siempre visible · Móvil: se despliega -->
-		<div class="tech-tabs" role="tablist" aria-label={t.techStack.heading}>
+		<div class="tech-tabs" role="group" aria-label={t.techStack.heading}>
 			{filters.map((f, i) => (
 				<button
 					type="button"
 					class:list={['tech-tab text-mono-label', { 'is-active': i === 0 }]}
-					role="tab"
-					aria-selected={i === 0 ? 'true' : 'false'}
+					aria-pressed={i === 0 ? 'true' : 'false'}
 					data-tech-filter={f.key}
 				>{f.label}</button>
 			))}
@@ -88,8 +86,8 @@ const filters = [
 					</header>
 					<!-- Icono -->
 					<div class="tech-cell__media">
-						<img class="tech-icon__svg tech-icon__svg--light" src={`/tech-icons/${tech.slug}-d.svg`} alt={tech.name} loading="lazy" draggable={false} />
-						<img class="tech-icon__svg tech-icon__svg--dark" src={`/tech-icons/${tech.slug}-l.svg`} alt={tech.name} loading="lazy" draggable={false} />
+						<img class="tech-icon__svg tech-icon__svg--light" src={`/tech-icons/${tech.slug}-d.svg`} alt="" loading="lazy" draggable={false} />
+						<img class="tech-icon__svg tech-icon__svg--dark" src={`/tech-icons/${tech.slug}-l.svg`} alt="" loading="lazy" draggable={false} />
 					</div>
 				</article>
 			))}
@@ -604,11 +602,13 @@ const filters = [
 
 		tabs.forEach((tab) => {
 			tab.addEventListener('click', () => {
+				// Mientras anima un filtro se ignora el clic: así pestaña activa y celdas nunca se desincronizan
+				if (filtering) return;
 				const cat = tab.dataset.techFilter || 'all';
 				tabs.forEach((t) => {
 					const active = t === tab;
 					t.classList.toggle('is-active', active);
-					t.setAttribute('aria-selected', String(active));
+					t.setAttribute('aria-pressed', String(active));
 				});
 				applyFilter(cat);
 				// Móvil: refleja la selección en el trigger y cierra el panel.

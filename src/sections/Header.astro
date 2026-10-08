@@ -131,7 +131,7 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 	</div>
 
 	<!-- ─── Mobile overlay ─── -->
-	<div id="mobile-menu" class="mobile-overlay" aria-hidden="true" data-mobile-menu>
+	<div id="mobile-menu" class="mobile-overlay" inert data-mobile-menu>
 		<div class="mobile-overlay-bar">
 			<div class="mobile-overlay-spacer"></div>
 			<button type="button" class="mobile-close-btn" aria-label={t.header.mobileMenuClose} data-menu-close>
@@ -394,6 +394,7 @@ const { esHref, enHref } = getAlternatePath(currentPath);
     pointer-events: none;
     z-index: 50;
     &.is-open { clip-path: inset(0 0 0% 0); pointer-events: all; }
+    @media (prefers-reduced-motion: reduce) { transition: none; }
   }
 
   .mobile-overlay-bar {
@@ -491,41 +492,71 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 		const _menu = menu;
 		const _hamburger = hamburger;
 
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		// Cerrado: `inert` lo saca del orden de tabulación y del árbol de accesibilidad
 		function openMenu() {
 			_menu.classList.add('is-open');
-			_menu.removeAttribute('aria-hidden');
+			_menu.inert = false;
 			_hamburger.setAttribute('aria-expanded', 'true');
 			document.body.style.overflow = 'hidden';
+			closeBtn!.focus();
 		}
 
-		function closeMenu() {
+		function closeMenu({ restoreFocus = true } = {}) {
 			_menu.classList.remove('is-open');
-			_menu.setAttribute('aria-hidden', 'true');
+			_menu.inert = true;
 			_hamburger.setAttribute('aria-expanded', 'false');
 			document.body.style.overflow = '';
+			if (restoreFocus) _hamburger.focus();
 		}
 
 		hamburger.addEventListener('click', openMenu);
-		closeBtn.addEventListener('click', closeMenu);
+		closeBtn.addEventListener('click', () => closeMenu());
 
 		menu.querySelectorAll<HTMLAnchorElement>('.mobile-nav-link').forEach(link => {
 			link.addEventListener('click', (e) => {
 				const href = link.getAttribute('href');
-				if (!href) return;
+				// Cmd/Ctrl/Shift-clic (nueva pestaña/ventana): comportamiento nativo
+				if (!href || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+				closeMenu({ restoreFocus: false });
+				if (reduceMotion) return;
+				// Deja que la cortina se cierre antes de navegar
 				e.preventDefault();
-				closeMenu();
 				setTimeout(() => { window.location.href = href; }, 600);
 			});
 		});
 
 		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape' && _menu.classList.contains('is-open')) closeMenu();
+			if (!_menu.classList.contains('is-open')) return;
+			if (e.key === 'Escape') {
+				closeMenu();
+				return;
+			}
+			// Focus trap: Tab no sale del menú abierto
+			if (e.key === 'Tab') {
+				const focusables = [..._menu.querySelectorAll<HTMLElement>('button, a[href]')];
+				const first = focusables[0];
+				const last = focusables[focusables.length - 1];
+				if (e.shiftKey && document.activeElement === first) {
+					e.preventDefault();
+					last.focus();
+				} else if (!e.shiftKey && document.activeElement === last) {
+					e.preventDefault();
+					first.focus();
+				}
+			}
 		});
 	}
 
 	// ─── Mobile scroll hide/show ───
 	const header = document.querySelector<HTMLElement>('[data-site-header]');
 	if (header) {
+		// Al pasar a desktop, el header nunca debe quedarse oculto
+		window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => {
+			if (e.matches) header.classList.remove('is-hidden');
+		});
+
 		let lastY = window.scrollY;
 		window.addEventListener('scroll', () => {
 			if (window.innerWidth >= 1024) return;
