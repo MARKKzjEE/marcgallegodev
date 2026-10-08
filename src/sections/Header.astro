@@ -470,7 +470,7 @@ const { esHref, enHref } = getAlternatePath(pathname);
 		checkbox.addEventListener('change', () => {
 			const dark = checkbox.checked;
 			document.documentElement.classList.toggle('dark', dark);
-			localStorage.setItem('theme', dark ? 'dark' : 'light');
+			try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
 		});
 	}
 

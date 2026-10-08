@@ -358,7 +358,12 @@ const t = useTranslations(lang);
 	}
 
 	.name-clip { overflow: hidden; }
-	.name-word { display: block; visibility: hidden; }
+	.name-word { display: block; }
+	// Oculto solo si el typewriter va a correr (JS activo y sin reduced motion);
+	// en cualquier otro caso el nombre se ve directamente.
+	@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+		.name-word { visibility: hidden; }
+	}
 
 	// ─── Typewriter ───
 	:global(.char) {

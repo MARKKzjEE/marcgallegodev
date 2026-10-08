@@ -149,7 +149,10 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 
 		<script is:inline>
 			const root = document.documentElement;
-			const stored = localStorage.getItem("theme");
+			// Con cookies/almacenamiento bloqueados, acceder a localStorage o
+			// sessionStorage lanza SecurityError → siempre dentro de try/catch.
+			let stored = null;
+			try { stored = localStorage.getItem("theme"); } catch (e) {}
 			const prefersDark = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : null;
 			// Si no hay preferencia guardada, respeta el sistema; si no hay dato de sistema, usa oscuro por defecto
 			const isDark = stored === "dark" || (!stored && (prefersDark ?? false));
@@ -157,9 +160,9 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 
 			// Splash solo la 1ª vez por sesión: si ya se vio en esta sesión,
 			// marcamos html antes del paint para ocultarlo por CSS (sin flash).
-			if (sessionStorage.getItem("splashSeen")) {
-				root.classList.add("splash-seen");
-			}
+			try {
+				if (sessionStorage.getItem("splashSeen")) root.classList.add("splash-seen");
+			} catch (e) {}
 		</script>
 	</head>
 	<body>
@@ -193,9 +196,10 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 			// El splash solo se reproduce la 1ª vez por sesión. Si ya se vio en esta
 			// sesión (marca en sessionStorage + clase html.splash-seen del pre-paint),
 			// se trata como si no hubiera splash: arranca el Hero directamente.
-			var splashAlreadySeen = sessionStorage.getItem("splashSeen");
+			var splashAlreadySeen = false;
+			try { splashAlreadySeen = !!sessionStorage.getItem("splashSeen"); } catch (e) {}
 			if (showSplash && !splashAlreadySeen) {
-				sessionStorage.setItem("splashSeen", "1");
+				try { sessionStorage.setItem("splashSeen", "1"); } catch (e) {}
 				var splashReady = false;
 				var splashLoaded = false;
 				var splashDone = false;

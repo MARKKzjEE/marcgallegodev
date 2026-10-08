@@ -42,6 +42,11 @@ const words = t.whatIDo.text.split(' ');
 
 	.reveal-word {
 		color: color-mix(in srgb, var(--secondary) 20%, transparent);
+
+		// Sin animación de scroll: texto completo desde el inicio
+		@media (prefers-reduced-motion: reduce) {
+			color: var(--secondary);
+		}
 	}
 </style>
 
