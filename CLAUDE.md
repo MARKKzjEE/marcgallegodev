@@ -12,7 +12,8 @@ Dominio: `marcgallego.com` (configurado como `site` en `astro.config.mjs`)
 
 ```bash
 pnpm dev        # Dev server localhost:4321
-pnpm build      # Build a ./dist/
+pnpm check      # Chequeo de tipos (astro check)
+pnpm build      # astro check + build a ./dist/ (falla si hay errores de tipos)
 pnpm preview    # Preview del build
 ```
 

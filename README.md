@@ -9,7 +9,8 @@ Web estática multi-página con Astro 5, Tailwind CSS v4 y TypeScript vanilla. V
 ```sh
 pnpm install   # instalar dependencias
 pnpm dev       # servidor de desarrollo en localhost:4321
-pnpm build     # build de producción en ./dist/
+pnpm check     # chequeo de tipos (astro check)
+pnpm build     # chequeo de tipos + build de producción en ./dist/
 pnpm preview   # previsualizar el build
 ```
 
