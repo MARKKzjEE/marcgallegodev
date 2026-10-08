@@ -21,10 +21,7 @@ const siteURL = new URL('/', site).href;
 const personId = `${siteURL}#person`;
 const ogImage = new URL('/assets/og-image.jpg', site).href;
 
-// Alt de la imagen OG, localizado por idioma.
-const ogImageAlt = lang === 'en'
-	? 'Marc Gallego — Full Stack Software Engineer in Barcelona'
-	: 'Marc Gallego — Ingeniero de Software Full Stack en Barcelona';
+const ogImageAlt = t.meta.ogImageAlt;
 
 // ┌─────────────────────────────────────────────────────────┐
 // │  SPLASH DE CARGA — interruptor único                      │
@@ -52,7 +49,7 @@ const enURL = new URL(enHref, site).href;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<meta name="apple-mobile-web-app-title" content="MarcGallego" />
+		<meta name="apple-mobile-web-app-title" content="Marc Gallego" />
 		<link rel="manifest" href="/site.webmanifest" />
 		{noindex ? (
 			<meta name="robots" content="noindex, follow" />
@@ -75,7 +72,7 @@ const enURL = new URL(enHref, site).href;
 
 		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content={canonicalURL} />
+		{!noindex && <meta property="og:url" content={canonicalURL} />}
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={ogImage} />
@@ -117,7 +114,7 @@ const enURL = new URL(enHref, site).href;
 			"@id": personId,
 			"name": "Marc Gallego",
 			"url": siteURL,
-			"jobTitle": "Full Stack Software Engineer",
+			"jobTitle": t.meta.jobTitle,
 			"description": t.meta.defaultDescription,
 			"image": ogImage,
 			"sameAs": [

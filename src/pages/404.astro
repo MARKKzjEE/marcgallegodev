@@ -1,19 +1,66 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../sections/Header.astro';
+import { useTranslations, getLocalePath } from '../i18n/index';
+
+// Vercel sirve esta única 404 para cualquier URL. Se genera en español y,
+// si la URL es /en/..., el script de abajo la pasa a inglés antes de pintar.
+const es = useTranslations('es');
+const en = useTranslations('en');
+
+// Textos del Header ES → EN (mismas claves en ambos diccionarios)
+const headerText = Object.fromEntries(
+	Object.keys(es.header).map((key) => [es.header[key as keyof typeof es.header], en.header[key as keyof typeof en.header]])
+);
+// Rutas ES → EN de los links del Header
+const headerHref = Object.fromEntries(
+	['/', '/experience', '/projects', '/contact'].map((path) => [getLocalePath('es', path), getLocalePath('en', path)])
+);
+const enPage = { ...en.notFound, home: getLocalePath('en', '/') };
 ---
 
 <Layout
-	title="404 — Marc Gallego"
-	description="Página no encontrada. Vuelve al inicio del portfolio de Marc Gallego."
+	title={es.notFound.title}
+	description={es.notFound.description}
 	noindex
 >
 	<Header />
 	<main class="notfound">
 		<p class="notfound__code font-nord">404</p>
-		<h1 class="notfound__title font-nord font-light text-secondary" data-404-title>Página no encontrada</h1>
-		<a href="/" class="notfound__link font-nord text-secondary" data-404-link>← Volver al inicio</a>
+		<h1 class="notfound__title font-nord font-light text-secondary" data-404-title>{es.notFound.heading}</h1>
+		<a href="/" class="notfound__link font-nord text-secondary" data-404-link>{es.notFound.backHome}</a>
 	</main>
+
+	<script is:inline define:vars={{ enPage, headerText, headerHref }}>
+		if (location.pathname.startsWith('/en/') || location.pathname === '/en') {
+			document.documentElement.lang = 'en';
+			document.title = enPage.title;
+			document.querySelector('meta[name="description"]')?.setAttribute('content', enPage.description);
+
+			var title = document.querySelector('[data-404-title]');
+			var link = document.querySelector('[data-404-link]');
+			if (title) title.textContent = enPage.heading;
+			if (link) {
+				link.textContent = enPage.backHome;
+				link.setAttribute('href', enPage.home);
+			}
+
+			var header = document.querySelector('[data-site-header]');
+			if (header) {
+				header.querySelectorAll('*').forEach(function (el) {
+					var label = el.getAttribute('aria-label');
+					if (label && headerText[label]) el.setAttribute('aria-label', headerText[label]);
+					var href = el.getAttribute('href');
+					if (href && headerHref[href] && !el.hasAttribute('hreflang')) el.setAttribute('href', headerHref[href]);
+					if (el.children.length === 0 && headerText[el.textContent.trim()]) el.textContent = headerText[el.textContent.trim()];
+				});
+				// Selector de idioma: marcar EN como activo
+				header.querySelectorAll('[hreflang]').forEach(function (el) {
+					el.classList.toggle('lang-active', el.getAttribute('hreflang') === 'en');
+				});
+			}
+		}
+	</script>
 </Layout>
 
 <style lang="scss">
@@ -47,16 +94,3 @@ import Header from '../sections/Header.astro';
 		&:hover { opacity: 1; }
 	}
 </style>
-
-<script>
-	const isEn = window.location.pathname.startsWith('/en');
-
-	const title = document.querySelector('[data-404-title]');
-	const link = document.querySelector<HTMLAnchorElement>('[data-404-link]');
-
-	if (isEn && title && link) {
-		title.textContent = 'Page not found';
-		link.textContent = '← Back to home';
-		link.href = '/en/';
-	}
-</script>

@@ -31,11 +31,11 @@ const t = useTranslations(lang);
 		<!-- Banda inferior: stats -->
 		<div class="name-bar"></div>
 		<div class="info-band info-band--stats text-mono-label" data-stats-band>
-			<span class="stat-item">{lang === 'en' ? '+5 years exp.' : '+5 años exp.'}</span>
+			<span class="stat-item">{t.hero.stats.years}</span>
 			<span class="sep" data-sep aria-hidden="true"></span>
-			<span class="stat-item">{lang === 'en' ? '+60 projects' : '+60 proyectos'}</span>
+			<span class="stat-item">{t.hero.stats.projects}</span>
 			<span class="sep" data-sep aria-hidden="true"></span>
-			<span class="stat-item hidden md:inline">{lang === 'en' ? 'since 2018' : 'desde 2018'}</span>
+			<span class="stat-item hidden md:inline">{t.hero.stats.since}</span>
 			<span class="sep hidden md:inline" data-sep aria-hidden="true"></span>
 			<span class="stat-item">Barcelona</span>
 		</div>

@@ -3,15 +3,17 @@ export const es = {
 	meta: {
 		siteName: "Marc Gallego",
 		defaultTitle: "Marc Gallego | Ingeniero de Software Full Stack en Barcelona",
-		defaultDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance en Barcelona. Desarrollo web, aplicaciones móviles y soluciones digitales a medida.",
+		defaultDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance en Barcelona. Desarrollo web, apps móviles y soluciones a medida.",
+		jobTitle: "Ingeniero de Software Full Stack",
+		ogImageAlt: "Marc Gallego — Ingeniero de Software Full Stack en Barcelona",
 		indexTitle: "Marc Gallego | Ingeniero de Software Full Stack en Barcelona",
 		indexDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance en Barcelona. Desarrollo web, apps móviles y soluciones a medida.",
-		experienceTitle: "Experiencia profesional | Marc Gallego — Full Stack Developer",
+		experienceTitle: "Experiencia | Marc Gallego — Desarrollador Full Stack",
 		experienceDescription: "Trayectoria profesional de Marc Gallego: +5 años como ingeniero de software Full Stack en Barcelona. Laravel, Django, React, Angular, DevOps y apps móviles.",
 		projectsTitle: "Proyectos | Marc Gallego — Desarrollo web y apps a medida",
 		projectsDescription: "Proyectos de Marc Gallego: plataformas web, SaaS, apps móviles y soluciones a medida. Desarrollados con Laravel, React, Django y más en Barcelona.",
 		contactTitle: "Contacto | Marc Gallego — Desarrollador freelance Barcelona",
-		contactDescription: "¿Tienes un proyecto en mente? Contacta con Marc Gallego, desarrollador Full Stack freelance en Barcelona. Desarrollo web, apps móviles y soluciones digitales a medida.",
+		contactDescription: "¿Tienes un proyecto en mente? Contacta con Marc Gallego, desarrollador Full Stack freelance en Barcelona. Desarrollo web, apps móviles y soluciones a medida.",
 	},
 
 	// ── Header / Nav ──
@@ -25,11 +27,19 @@ export const es = {
 		mainNav: "Navegación principal",
 		mobileNav: "Navegación móvil",
 		toggleTheme: "Modo oscuro",
+		linkedinCta: "Hablemos por LinkedIn",
+		available: "Disponible para proyectos",
+		availableShort: "Disponible",
 	},
 
 	// ── Hero ──
 	hero: {
 		sectionAriaLabel: "Presentación de Marc Gallego",
+		stats: {
+			years: "+5 años exp.",
+			projects: "+60 proyectos",
+			since: "desde 2018",
+		},
 	},
 
 	// ── WhatIDo ──
@@ -307,6 +317,14 @@ export const es = {
 				logoAlt: "Logo Planit, app social para conectar personas a través de planes",
 			},
 		],
+	},
+
+	// ── 404 ──
+	notFound: {
+		title: "404 — Marc Gallego",
+		description: "Página no encontrada. Vuelve al inicio del portfolio de Marc Gallego.",
+		heading: "Página no encontrada",
+		backHome: "← Volver al inicio",
 	},
 
 	// ── Breadcrumbs ──

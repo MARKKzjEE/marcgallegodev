@@ -6,9 +6,11 @@ export const en: Translations = {
 		siteName: "Marc Gallego",
 		defaultTitle: "Marc Gallego | Full Stack Software Engineer in Barcelona",
 		defaultDescription: "Portfolio of Marc Gallego, Software Engineer and Full Stack freelance developer in Barcelona. Web development, mobile apps and custom digital solutions.",
+		jobTitle: "Full Stack Software Engineer",
+		ogImageAlt: "Marc Gallego — Full Stack Software Engineer in Barcelona",
 		indexTitle: "Marc Gallego | Full Stack Software Engineer in Barcelona",
 		indexDescription: "Portfolio of Marc Gallego, Software Engineer and Full Stack freelance developer in Barcelona. Web development, mobile apps and custom digital solutions.",
-		experienceTitle: "Professional experience | Marc Gallego — Full Stack Developer",
+		experienceTitle: "Experience | Marc Gallego — Full Stack Developer",
 		experienceDescription: "Professional background of Marc Gallego: 5+ years as a Full Stack Software Engineer in Barcelona. Laravel, Django, React, Angular, DevOps and mobile apps.",
 		projectsTitle: "Projects | Marc Gallego — Web development and custom apps",
 		projectsDescription: "Project portfolio of Marc Gallego: web platforms, SaaS, mobile apps and custom digital solutions. Built with Laravel, React, Django and more in Barcelona.",
@@ -27,11 +29,19 @@ export const en: Translations = {
 		mainNav: "Main navigation",
 		mobileNav: "Mobile navigation",
 		toggleTheme: "Dark mode",
+		linkedinCta: "Let's talk on LinkedIn",
+		available: "Available for projects",
+		availableShort: "Available",
 	},
 
 	// ── Hero ──
 	hero: {
 		sectionAriaLabel: "Marc Gallego introduction",
+		stats: {
+			years: "+5 years exp.",
+			projects: "+60 projects",
+			since: "since 2018",
+		},
 	},
 
 	// ── WhatIDo ──
@@ -309,6 +319,14 @@ export const en: Translations = {
 				logoAlt: "Planit logo, social app to connect people through plans",
 			},
 		],
+	},
+
+	// ── 404 ──
+	notFound: {
+		title: "404 — Marc Gallego",
+		description: "Page not found. Go back to the home page of Marc Gallego's portfolio.",
+		heading: "Page not found",
+		backHome: "← Back to home",
 	},
 
 	// ── Breadcrumbs ──

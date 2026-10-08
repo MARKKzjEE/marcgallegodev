@@ -12,7 +12,10 @@ const navItems = [
 
 const homePath = getLocalePath(lang, '/');
 const currentPath = withSlash(Astro.url.pathname);
-const { esHref, enHref } = getAlternatePath(currentPath);
+// En la 404 el selector de idioma lleva al inicio de cada idioma
+const { esHref, enHref } = currentPath === '/404/'
+	? { esHref: getLocalePath('es', '/'), enHref: getLocalePath('en', '/') }
+	: getAlternatePath(currentPath);
 ---
 
 <header class="site-header font-monoblock font-normal text-base border-t border-secondary" data-site-header>
@@ -76,12 +79,12 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 				<svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;">
 					<path d="M22 17C22 17.5304 21.7893 18.0391 21.4142 18.4142C21.0391 18.7893 20.5304 19 20 19H6.828C6.29761 19.0001 5.78899 19.2109 5.414 19.586L3.212 21.788C3.1127 21.8873 2.9862 21.9549 2.84849 21.9823C2.71077 22.0097 2.56803 21.9956 2.43831 21.9419C2.30858 21.8881 2.1977 21.7971 2.11969 21.6804C2.04167 21.5637 2.00002 21.4264 2 21.286V5C2 4.46957 2.21071 3.96086 2.58579 3.58579C2.96086 3.21071 3.46957 3 4 3H20C20.5304 3 21.0391 3.21071 21.4142 3.58579C21.7893 3.96086 22 4.46957 22 5V17Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
-				<span class="text-sm">{lang === 'en' ? "Let's talk on LinkedIn" : 'Hablemos por LinkedIn'}</span>
+				<span class="text-sm">{t.header.linkedinCta}</span>
 			</a>
 			<!-- Info fila 2 — col 6, fila 2 -->
 			<div class="cell info-cell" style="grid-column:6; grid-row:2;">
 				<span class="status-dot" aria-hidden="true"></span>
-				<span class="text-sm">{lang === 'en' ? 'Available for projects' : 'Disponible para proyectos'}</span>
+				<span class="text-sm">{t.header.available}</span>
 			</div>
 
 		</div>
@@ -98,7 +101,7 @@ const { esHref, enHref } = getAlternatePath(currentPath);
 		<!-- Disponible -->
 		<div class="mobile-ctrl-cell mobile-available-cell">
 			<span class="status-dot" aria-hidden="true"></span>
-			<span>{lang === 'en' ? 'Available' : 'Disponible'}</span>
+			<span>{t.header.availableShort}</span>
 		</div>
 		<!-- Controles derecha: ES | EN | tema | hamburguesa -->
 		<div class="mobile-controls-bar">
