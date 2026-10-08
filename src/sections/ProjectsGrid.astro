@@ -1,18 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import { getLang, useTranslations } from '../i18n/index';
+import { getLang, useTranslations, getLocalePath } from '../i18n/index';
 import { projectImages, projectColors } from '../data/projects';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 
-const isEn = lang === 'en';
 const breadcrumb = {
 	"@context": "https://schema.org",
 	"@type": "BreadcrumbList",
 	"itemListElement": [
-		{ "@type": "ListItem", "position": 1, "name": isEn ? "Home" : "Inicio", "item": isEn ? "https://marcgallego.com/en/" : "https://marcgallego.com/" },
-		{ "@type": "ListItem", "position": 2, "name": isEn ? "Projects" : "Proyectos", "item": isEn ? "https://marcgallego.com/en/projects/" : "https://marcgallego.com/proyectos/" }
+		{ "@type": "ListItem", "position": 1, "name": t.breadcrumbs.home, "item": new URL(getLocalePath(lang, '/'), Astro.site).href },
+		{ "@type": "ListItem", "position": 2, "name": t.breadcrumbs.projects, "item": new URL(getLocalePath(lang, '/projects'), Astro.site).href }
 	]
 };
 

@@ -1,19 +1,25 @@
 ---
 import type { Lang } from '../i18n/index';
-import { getAlternatePath } from '../i18n/index';
+import { getAlternatePath, useTranslations, withSlash } from '../i18n/index';
 
 interface Props {
 	title?: string;
 	description?: string;
-	keywords?: string;
 	lang?: Lang;
+	/** Páginas que no deben indexarse (ej. 404): noindex y sin canonical/hreflang */
+	noindex?: boolean;
 }
 
-const defaultDescription = "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance en Barcelona. Desarrollo web, apps móviles y soluciones a medida.";
-const defaultKeywords = "Marc Gallego, desarrollador Full Stack, Software Engineer, Barcelona, freelance developer, desarrollo web, aplicaciones móviles";
-const { title = "Marc Gallego | Ingeniero de Software Full Stack en Barcelona", description = defaultDescription, keywords = defaultKeywords, lang = 'es' } = Astro.props;
+const { lang = 'es', noindex = false } = Astro.props;
+const t = useTranslations(lang);
+const { title = t.meta.defaultTitle, description = t.meta.defaultDescription } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, 'https://marcgallego.com').href;
+const site = Astro.site!;
+const currentPath = withSlash(Astro.url.pathname);
+const canonicalURL = new URL(currentPath, site).href;
+const siteURL = new URL('/', site).href;
+const personId = `${siteURL}#person`;
+const ogImage = new URL('/assets/og-image.jpg', site).href;
 
 // Alt de la imagen OG, localizado por idioma.
 const ogImageAlt = lang === 'en'
@@ -27,14 +33,14 @@ const ogImageAlt = lang === 'en'
 // └─────────────────────────────────────────────────────────┘
 const SPLASH_ENABLED = true;
 
-// hreflang alternate URLs
-const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
-const isHome = pathname === '/' || pathname === '/en';
+const isHome = currentPath === '/' || currentPath === '/en/';
 // Solo se muestra el splash si está activado Y estamos en home
 const showSplash = SPLASH_ENABLED && isHome;
-const { esHref, enHref } = getAlternatePath(pathname);
-const esURL = new URL(esHref, 'https://marcgallego.com').href;
-const enURL = new URL(enHref, 'https://marcgallego.com').href;
+
+// hreflang alternate URLs
+const { esHref, enHref } = getAlternatePath(currentPath);
+const esURL = new URL(esHref, site).href;
+const enURL = new URL(enHref, site).href;
 ---
 
 <!doctype html>
@@ -48,39 +54,37 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		<meta name="apple-mobile-web-app-title" content="MarcGallego" />
 		<link rel="manifest" href="/site.webmanifest" />
-		<link rel="canonical" href={canonicalURL} />
-		<link rel="alternate" hreflang="es" href={esURL} />
-		<link rel="alternate" hreflang="en" href={enURL} />
-		<link rel="alternate" hreflang="x-default" href={esURL} />
-		<!-- Preload fuentes críticas above-the-fold -->
+		{noindex ? (
+			<meta name="robots" content="noindex, follow" />
+		) : (
+			<>
+				<link rel="canonical" href={canonicalURL} />
+				<link rel="alternate" hreflang="es" href={esURL} />
+				<link rel="alternate" hreflang="en" href={enURL} />
+				<link rel="alternate" hreflang="x-default" href={esURL} />
+			</>
+		)}
+		<!-- Preload fuentes críticas above-the-fold (NORD Bold solo la usa el splash de la home) -->
 		<link rel="preload" href="/fonts/NORD/NORD-Black.woff2" as="font" type="font/woff2" crossorigin />
-		<link rel="preload" href="/fonts/NORD/NORD-Bold.woff2" as="font" type="font/woff2" crossorigin />
+		{showSplash && <link rel="preload" href="/fonts/NORD/NORD-Bold.woff2" as="font" type="font/woff2" crossorigin />}
 		<link rel="preload" href="/fonts/Monoblock/Monoblock-Regular.woff2" as="font" type="font/woff2" crossorigin />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<meta name="keywords" content={keywords} />
 		<meta name="author" content="Marc Gallego" />
-		<meta name="robots" content="index, follow" />
-		<meta name="geo.region" content="ES-CT" />
-		<meta name="geo.placename" content="Barcelona" />
-		<meta name="geo.position" content="41.3851;2.1734" />
-		<meta name="ICBM" content="41.3851, 2.1734" />
-		<meta name="googlebot" content="index, follow" />
-		<meta name="bingbot" content="index, follow" />
-		<meta name="yandexbot" content="index, follow" />
 
 		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content="https://marcgallego.com/assets/og-image.webp" />
-		<meta property="og:image:type" content="image/webp" />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:type" content="image/jpeg" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content={ogImageAlt} />
 		<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
-		<meta property="og:site_name" content="Marc Gallego" />
+		<meta property="og:locale:alternate" content={lang === 'en' ? 'es_ES' : 'en_US'} />
+		<meta property="og:site_name" content={t.meta.siteName} />
 
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
@@ -88,58 +92,43 @@ const enURL = new URL(enHref, 'https://marcgallego.com').href;
 		<meta name="twitter:creator" content="@marcgallegodev" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content="https://marcgallego.com/assets/og-image.webp" />
+		<meta name="twitter:image" content={ogImage} />
 		<meta name="twitter:image:alt" content={ogImageAlt} />
 
-		<!-- Theme color -->
-		<meta name="theme-color" content="rgb(212, 212, 212)" media="(prefers-color-scheme: light)" />
-		<meta name="theme-color" content="rgb(18, 18, 18)" media="(prefers-color-scheme: dark)" />
+		<!-- Theme color (= --primary de cada tema) -->
+		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
 
 		<!-- JSON-LD: WebSite schema (autoridad del sitio + idioma) -->
 		<script is:inline type="application/ld+json" set:html={JSON.stringify({
 			"@context": "https://schema.org",
 			"@type": "WebSite",
-			"name": "Marc Gallego",
-			"url": "https://marcgallego.com",
-			"description": defaultDescription,
-			"inLanguage": lang === 'en' ? 'en' : 'es',
-			"author": {
-				"@type": "Person",
-				"name": "Marc Gallego"
-			}
+			"@id": `${siteURL}#website`,
+			"name": t.meta.siteName,
+			"url": siteURL,
+			"description": t.meta.defaultDescription,
+			"inLanguage": lang,
+			"author": { "@id": personId }
 		})} />
 
-		<!-- JSON-LD: Person schema -->
+		<!-- JSON-LD: Person schema (las páginas lo amplían referenciando el mismo @id) -->
 		<script is:inline type="application/ld+json" set:html={JSON.stringify({
 			"@context": "https://schema.org",
 			"@type": "Person",
+			"@id": personId,
 			"name": "Marc Gallego",
-			"url": "https://marcgallego.com",
+			"url": siteURL,
 			"jobTitle": "Full Stack Software Engineer",
-			"description": defaultDescription,
-			"image": "https://marcgallego.com/assets/og-image.webp",
+			"description": t.meta.defaultDescription,
+			"image": ogImage,
 			"sameAs": [
-				"https://linkedin.com/in/marcgallegodev",
-				"https://github.com/marcgallegodev"
+				"https://linkedin.com/in/marcgallegodev"
 			],
 			"address": {
 				"@type": "PostalAddress",
 				"addressLocality": "Barcelona",
 				"addressCountry": "ES"
 			},
-			"contactPoint": [
-				{
-					"@type": "ContactPoint",
-					"telephone": "+34-647-604-048",
-					"contactType": "customer support",
-					"availableLanguage": ["Spanish", "Catalan", "English"]
-				},
-				{
-					"@type": "ContactPoint",
-					"email": "mark.gallego.gines@gmail.com",
-					"contactType": "customer support"
-				}
-			],
 			"alumniOf": {
 				"@type": "EducationalOrganization",
 				"name": "Universitat Autònoma de Barcelona"

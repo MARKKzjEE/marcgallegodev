@@ -6,7 +6,7 @@ import Header from '../sections/Header.astro';
 <Layout
 	title="404 — Marc Gallego"
 	description="Página no encontrada. Vuelve al inicio del portfolio de Marc Gallego."
-	keywords="404, página no encontrada, Marc Gallego"
+	noindex
 >
 	<Header />
 	<main class="notfound">
@@ -57,6 +57,6 @@ import Header from '../sections/Header.astro';
 	if (isEn && title && link) {
 		title.textContent = 'Page not found';
 		link.textContent = '← Back to home';
-		link.href = '/en';
+		link.href = '/en/';
 	}
 </script>
