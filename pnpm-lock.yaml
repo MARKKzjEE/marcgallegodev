@@ -30,6 +30,9 @@ importers:
       '@astrojs/check':
         specifier: ^0.9.10
         version: 0.9.10(@emnapi/runtime@1.8.1)(prettier@3.9.9)(typescript@6.0.3)
+      '@emnapi/runtime':
+        specifier: ^1.8.1
+        version: 1.8.1
       sass:
         specifier: ^1.97.3
         version: 1.97.3

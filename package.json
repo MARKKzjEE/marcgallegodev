@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@emnapi/runtime": "^1.8.1",
     "sass": "^1.97.3",
     "typescript": "^6.0.3"
   }
