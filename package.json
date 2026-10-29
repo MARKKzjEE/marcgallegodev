@@ -9,7 +9,7 @@
     "astro": "astro",
     "check": "astro check"
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.34.7",
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
