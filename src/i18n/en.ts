@@ -231,7 +231,7 @@ export const en: Translations = {
 			languages: "Languages",
 			extracurricular: "Extracurricular",
 		},
-		summary: "I've been building websites and apps for over 5 years, and I've been lucky to go through incredible projects and teams that helped me grow, both professionally and personally. Now I'm putting all of that into my own brand, as a freelancer.",
+		summary: "I started as a junior lending a hand on projects for brands like Coca-Cola and Bimbo, launched my own startup, ended up leading a team and dove headfirst into building AI, with models that detect colors and shapes, generate images or chat with users. More than 5 years later, everything I've picked up along the way goes into my own brand, as a freelancer.",
 		jobs: [
 			{
 				company: "Doko Studio",

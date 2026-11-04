@@ -229,7 +229,7 @@ export const es = {
 			languages: "Idiomas",
 			extracurricular: "Extracurricular",
 		},
-		summary: "Llevo más de 5 años haciendo webs y apps, y he tenido la suerte de pasar por proyectos y equipos increíbles que me han hecho crecer, como profesional y como persona. Ahora todo eso lo pongo en mi propia marca, como freelance.",
+		summary: "Empecé como junior echando una mano en proyectos para marcas como Coca-Cola o Bimbo, monté mi propia startup, acabé liderando un equipo y me metí de lleno a desarrollar IA, con modelos que detectan colores y formas, generan imágenes o charlan con los usuarios. Más de 5 años después, todo lo que he aprendido por el camino lo pongo en mi propia marca, como freelance.",
 		jobs: [
 			{
 				company: "Doko Studio",
