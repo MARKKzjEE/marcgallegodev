@@ -5,17 +5,17 @@ export const en: Translations = {
 	meta: {
 		siteName: "Marc Gallego",
 		defaultTitle: "Marc Gallego | Full Stack Software Engineer in Barcelona",
-		defaultDescription: "Portfolio of Marc Gallego, Software Engineer and Full Stack freelance developer in Barcelona. Web development, mobile apps and custom digital solutions.",
+		defaultDescription: "I'm Marc Gallego, a freelance Full Stack developer in Barcelona. Bring me an idea and we'll turn it into a website, an app or whatever software it needs.",
 		jobTitle: "Full Stack Software Engineer",
 		ogImageAlt: "Marc Gallego — Full Stack Software Engineer in Barcelona",
 		indexTitle: "Marc Gallego | Full Stack Software Engineer in Barcelona",
-		indexDescription: "Portfolio of Marc Gallego, Software Engineer and Full Stack freelance developer in Barcelona. Web development, mobile apps and custom digital solutions.",
+		indexDescription: "I'm Marc Gallego, a freelance Full Stack developer in Barcelona. Bring me an idea and we'll turn it into a website, an app or whatever software it needs.",
 		experienceTitle: "Experience | Marc Gallego — Full Stack Developer",
-		experienceDescription: "Professional background of Marc Gallego: 5+ years as a Full Stack Software Engineer in Barcelona. Laravel, Django, React, Angular, DevOps and mobile apps.",
+		experienceDescription: "Marc Gallego's journey as a Full Stack software engineer in Barcelona. 5+ years with Laravel, Django, React, Angular, AI and mobile apps.",
 		projectsTitle: "Projects | Marc Gallego — Web development and custom apps",
-		projectsDescription: "Project portfolio of Marc Gallego: web platforms, SaaS, mobile apps and custom digital solutions. Built with Laravel, React, Django and more in Barcelona.",
+		projectsDescription: "Startups, SaaS, web platforms and custom apps. Projects by Marc Gallego, freelance developer in Barcelona, from idea to production.",
 		contactTitle: "Contact | Marc Gallego — Freelance developer in Barcelona",
-		contactDescription: "Have a project in mind? Get in touch with Marc Gallego, Full Stack freelance developer in Barcelona. Web development, mobile apps and custom digital solutions.",
+		contactDescription: "Got a project in mind? Tell me about it and we'll talk it through. Marc Gallego, freelance Full Stack developer in Barcelona.",
 	},
 
 	// ── Header / Nav ──
@@ -70,6 +70,8 @@ export const en: Translations = {
 
 	// ── About (editorial section: big name + overlapping photo) ──
 	aboutCover: {
+		// Section heading for search engines and screen readers (the visible one is the staggered name)
+		heading: "About Marc Gallego Gines, Full Stack developer in Barcelona",
 		profileAlt: "Marc Gallego, Full Stack developer in Barcelona",
 		location: "Barcelona",
 		ageLabel: "{age} years",   // {age} computed in the component

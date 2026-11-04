@@ -3,17 +3,17 @@ export const es = {
 	meta: {
 		siteName: "Marc Gallego",
 		defaultTitle: "Marc Gallego | Ingeniero de Software Full Stack en Barcelona",
-		defaultDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance en Barcelona. Desarrollo web, apps móviles y soluciones a medida.",
+		defaultDescription: "Soy Marc Gallego, desarrollador Full Stack freelance en Barcelona. Me traes una idea y la convertimos en una web, una app o el software que haga falta.",
 		jobTitle: "Ingeniero de Software Full Stack",
 		ogImageAlt: "Marc Gallego — Ingeniero de Software Full Stack en Barcelona",
 		indexTitle: "Marc Gallego | Ingeniero de Software Full Stack en Barcelona",
-		indexDescription: "Portfolio de Marc Gallego, Ingeniero del Software y desarrollador Full Stack freelance en Barcelona. Desarrollo web, apps móviles y soluciones a medida.",
+		indexDescription: "Soy Marc Gallego, desarrollador Full Stack freelance en Barcelona. Me traes una idea y la convertimos en una web, una app o el software que haga falta.",
 		experienceTitle: "Experiencia | Marc Gallego — Desarrollador Full Stack",
-		experienceDescription: "Trayectoria profesional de Marc Gallego: +5 años como ingeniero de software Full Stack en Barcelona. Laravel, Django, React, Angular, DevOps y apps móviles.",
+		experienceDescription: "La trayectoria de Marc Gallego, ingeniero de software Full Stack en Barcelona. Más de 5 años con Laravel, Django, React, Angular, IA y apps móviles.",
 		projectsTitle: "Proyectos | Marc Gallego — Desarrollo web y apps a medida",
-		projectsDescription: "Proyectos de Marc Gallego: plataformas web, SaaS, apps móviles y soluciones a medida. Desarrollados con Laravel, React, Django y más en Barcelona.",
+		projectsDescription: "Startups, SaaS, plataformas web y apps a medida. Los proyectos de Marc Gallego, desarrollador freelance en Barcelona, de la idea a producción.",
 		contactTitle: "Contacto | Marc Gallego — Desarrollador freelance Barcelona",
-		contactDescription: "¿Tienes un proyecto en mente? Contacta con Marc Gallego, desarrollador Full Stack freelance en Barcelona. Desarrollo web, apps móviles y soluciones a medida.",
+		contactDescription: "¿Tienes un proyecto en mente? Cuéntamelo y lo hablamos con calma. Marc Gallego, desarrollador Full Stack freelance en Barcelona.",
 	},
 
 	// ── Header / Nav ──
@@ -68,6 +68,8 @@ export const es = {
 
 	// ── About (sección editorial: nombre grande + foto superpuesta) ──
 	aboutCover: {
+		// Título de la sección para buscadores y lectores de pantalla (el visible es el nombre escalonado)
+		heading: "Sobre Marc Gallego Gines, desarrollador Full Stack en Barcelona",
 		profileAlt: "Marc Gallego, desarrollador Full Stack en Barcelona",
 		location: "Barcelona",
 		ageLabel: "{age} años",   // {age} se calcula en el componente

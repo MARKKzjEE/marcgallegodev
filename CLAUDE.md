@@ -43,6 +43,10 @@ Estructura compartida:
 - Todas las URLs internas, canonical, hreflang y sitemap acaban en `/`. Generar links siempre con `getLocalePath`/`getAlternatePath`, nunca a mano. `vercel.json` (`trailingSlash: true`) redirige las versiones sin barra.
 - JSON-LD extra de una página que hable de Marc → usar el mismo `@id` de Person (`https://marcgallego.com/#person`), no crear otra entidad.
 - Nada de email/teléfono en claro en el HTML: el Footer los monta en cliente.
+- La Person enlaza con Doko por su `@id` (`https://doko.studio/#organization`, el que publica doko.studio) en `memberOf`/`worksFor`, y con Barcelona en Wikidata (Q1492) en `workLocation`. `/proyectos` publica un `ItemList` de `CreativeWork` (con su web si sigue online).
+- `/llms.txt` (`src/pages/llms.txt.ts`) se genera desde i18n, `data/projects.ts` y `data/tech.ts`: no se edita a mano. Solo hechos publicados, sin email ni teléfono.
+- Títulos ≤ 60 y descripciones ≤ 160 caracteres. Tabla con lo publicado en `../notas/seo-metadatos.md` (regenerarla tras cambiar `meta`).
+- IndexNow: la clave es `public/<clave>.txt`; tras publicar cambios se avisa con OpenSEO (`submit_indexnow_urls`). Analítica: Vercel Web Analytics (sin cookies), solo en producción; se activa en el panel de Vercel.
 
 ### Estado actual
 

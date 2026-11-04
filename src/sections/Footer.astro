@@ -44,7 +44,8 @@ const currentYear = new Date().getFullYear();
 	<!-- Capa reveal (clon visual) -->
 	<div class="footer-reveal reveal-layer" aria-hidden="true">
 		<div class="footer-top">
-			<h2 class="footer-title font-monoblock tracking-[-0.05em] leading-12">{t.footer.headlineReveal}</h2>
+			<!-- Clon visual: <p>, no <h2>, para no duplicar el título en el HTML -->
+			<p class="footer-title font-monoblock tracking-[-0.05em] leading-12">{t.footer.headlineReveal}</p>
 			<div class="footer-contact">
 				<a href="https://linkedin.com/in/marcgallegodev" target="_blank" rel="noopener noreferrer" class="footer-contact-link text-mono-label-soft text-[clamp(10px,1vw,14px)]" tabindex="-1">{t.footer.linkedinLabel}</a>
 				<a class="footer-contact-link text-mono-label-soft text-[clamp(10px,1vw,14px)]" data-contact="tel" tabindex="-1" hidden></a>

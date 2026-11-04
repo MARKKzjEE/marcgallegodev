@@ -17,6 +17,27 @@ const breadcrumb = {
 	]
 };
 
+// Los proyectos como datos estructurados: una lista de CreativeWork de Marc
+// (mismo @id de Person que el Layout), con su web real si sigue online.
+const projectList = {
+	"@context": "https://schema.org",
+	"@type": "ItemList",
+	"name": t.projects.title,
+	"itemListElement": t.projects.items.map((item, i) => ({
+		"@type": "ListItem",
+		"position": i + 1,
+		"item": {
+			"@type": "CreativeWork",
+			"name": item.title,
+			"description": item.description,
+			"genre": item.type,
+			"image": new URL(projectImages[i].src, Astro.site).href,
+			...(projectUrls[i] ? { "url": projectUrls[i] } : {}),
+			"creator": { "@id": new URL('/#person', Astro.site).href },
+		},
+	})),
+};
+
 const projects = t.projects.items.map((item, i) => ({
 	...item,
 	image: projectImages[i],
@@ -47,6 +68,7 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 ---
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(projectList)} />
 
 <main class="min-h-screen bg-primary pt-18">
 <section class="projects-grid-section pt-16" id="proyectos">

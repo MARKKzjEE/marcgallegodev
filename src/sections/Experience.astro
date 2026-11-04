@@ -28,7 +28,7 @@ const person = {
 	"@type": "Person",
 	"@id": new URL('/#person', Astro.site).href,
 	"name": "Marc Gallego",
-	"worksFor": { "@type": "Organization", "name": "Doko Studio" },
+	"worksFor": { "@type": "Organization", "@id": "https://doko.studio/#organization", "name": "Doko Studio", "url": "https://doko.studio/" },
 	"hasCredential": {
 		"@type": "EducationalOccupationalCredential",
 		"name": isEn ? "BSc in Computer Science" : "Grado en Ingeniería Informática",

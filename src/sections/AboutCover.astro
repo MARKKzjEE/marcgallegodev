@@ -31,13 +31,16 @@ const ageLabel = c.ageLabel.replace('{age}', String(getAge(BIRTH_DATE)));
 
 		<!-- Nombre escalonado con la foto superpuesta -->
 		<div class="cover-stage">
-			<h2 id="cover-heading" class="cover-name font-nord text-secondary">
+			<!-- Título real (para buscadores y lectores de pantalla); el nombre
+			     escalonado de debajo es solo visual -->
+			<h2 id="cover-heading" class="sr-only">{c.heading}</h2>
+			<div class="cover-name font-nord text-secondary" aria-hidden="true">
 				<span class="cover-name__role cover-name__role--top">{c.roleTop}</span>
 				<span class="cover-name__line cover-name__line--1">{c.firstName}</span>
 				<span class="cover-name__line cover-name__line--2">{c.lastName}</span>
 				<span class="cover-name__line cover-name__line--3">{c.secondLastName}</span>
 				<span class="cover-name__role cover-name__role--bottom">{c.roleBottom}</span>
-			</h2>
+			</div>
 
 			<!-- Foto superpuesta (variante por tema) -->
 			<div class="cover-photo" aria-hidden="false">

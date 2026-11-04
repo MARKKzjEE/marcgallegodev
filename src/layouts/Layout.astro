@@ -1,4 +1,7 @@
 ---
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import type { Lang } from '../i18n/index';
 import { getAlternatePath, useTranslations, withSlash } from '../i18n/index';
 
@@ -19,7 +22,12 @@ const currentPath = withSlash(Astro.url.pathname);
 const canonicalURL = new URL(currentPath, site).href;
 const siteURL = new URL('/', site).href;
 const personId = `${siteURL}#person`;
-const ogImage = new URL('/assets/og-image.jpg', site).href;
+// @id de la organización en el JSON-LD de doko.studio
+const DOKO_ID = 'https://doko.studio/#organization';
+// ?v=<hash del archivo>: si se cambia la imagen, LinkedIn, WhatsApp y demás
+// la vuelven a pedir en vez de quedarse con la cacheada
+const ogVersion = createHash('md5').update(readFileSync(join(process.cwd(), 'public/assets/og-image.jpg'))).digest('hex').slice(0, 8);
+const ogImage = new URL(`/assets/og-image.jpg?v=${ogVersion}`, site).href;
 
 const ogImageAlt = t.meta.ogImageAlt;
 
@@ -126,6 +134,10 @@ const enURL = new URL(enHref, site).href;
 				"addressLocality": "Barcelona",
 				"addressCountry": "ES"
 			},
+			// Barcelona como entidad (Wikidata), no solo como texto
+			"workLocation": { "@type": "City", "name": "Barcelona", "sameAs": "https://www.wikidata.org/wiki/Q1492" },
+			// Mismo @id que publica doko.studio: une a Marc con el estudio
+			"memberOf": { "@type": "Organization", "@id": DOKO_ID, "name": "Doko Studio", "url": "https://doko.studio/" },
 			"alumniOf": {
 				"@type": "EducationalOrganization",
 				"name": "Universitat Autònoma de Barcelona"
@@ -150,6 +162,13 @@ const enURL = new URL(enHref, site).href;
 				if (sessionStorage.getItem("splashSeen")) root.classList.add("splash-seen");
 			} catch (e) {}
 		</script>
+		<!-- Vercel Web Analytics: sin cookies (no pide consentimiento); solo en producción -->
+		{import.meta.env.PROD && (
+			<>
+				<script is:inline>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+				<script is:inline defer src="/_vercel/insights/script.js"></script>
+			</>
+		)}
 	</head>
 	<body>
 		<!-- ─── Splash screen (solo home) ─── -->
