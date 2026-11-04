@@ -193,6 +193,9 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		display: flex;
 		flex-direction: column;
 		gap: 1.5rem;
+		// Tamaño del número con su círculo; la respuesta se sangra con este ancho
+		--num-box: 56px;
+		--num-font: 44px;
 	}
 
 	.faq-note__item {
@@ -223,15 +226,15 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 	.faq-note__num {
 		position: relative;
 		flex-shrink: 0;
-		width: 44px;
-		height: 44px;
+		width: var(--num-box);
+		height: var(--num-box);
 		display: grid;
 		place-items: center;
 	}
 
 	.faq-note__num-text {
 		font-family: var(--font-reenie);
-		font-size: 30px;
+		font-size: var(--num-font);
 		line-height: 1;
 		color: var(--ink);
 		// Stroke sutil → mismo peso que el título.
@@ -307,8 +310,8 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		line-height: 1.2;
 		color: var(--ink);
 		margin: 0;
-		padding: 0.4rem 0 0 calc(44px + 1rem);
-		max-width: calc(52ch + 44px + 1rem);
+		padding: 0.4rem 0 0 calc(var(--num-box) + 1rem);
+		max-width: calc(52ch + var(--num-box) + 1rem);
 	}
 
 	// inline-block → cada palabra se puede recortar (clip-path) al escribirse
@@ -363,6 +366,8 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 
 		.faq-note__list {
 			gap: 1.75rem;                 // algo más de aire entre apuntes
+			--num-box: 48px;
+			--num-font: 38px;
 		}
 
 		// Número al lado de la pregunta (plegadas ocupan poco) y respuesta a todo el ancho.
@@ -397,8 +402,8 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 	const OPEN_MS = 500;
 	const CLOSE_MS = 320;
 	const FADE_MS = 180;     // la tinta se borra antes de que acabe de recogerse
-	const LINE_MS = 420;     // lo que tarda el boli en escribir una línea entera
-	const WRITE_DELAY = 160; // empieza a escribir con el círculo a medio trazar
+	const LINE_MS = 240;     // lo que tarda el boli en escribir una línea entera
+	const WRITE_DELAY = 100; // empieza a escribir con el círculo a medio trazar
 
 	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	const items = [...document.querySelectorAll<HTMLDetailsElement>('[data-faq-item]')];
