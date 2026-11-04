@@ -96,8 +96,8 @@ export const en: Translations = {
 		// Large statement (font-nord). " / " separates the fragments shown on lines.
 		statement: "Creative studio / Web development / Design & / Branding / born in Valencia.",
 		dokoImgAlt: "Doko Studio — web design and development studio",
-		studioText1: "I work side by side with Doko: sometimes I lend a hand on something specific, and other times we dive into bigger projects together.",
-		studioText2: "If your project needs more hands, no problem: together we cover every phase with specialized people. And if needed, we jump in as part of your team.",
+		studioText1: "Doko is my ace up the sleeve. We've been working side by side since 2024, sometimes lending a hand on something specific and other times diving into big projects together.",
+		studioText2: "If your project needs more hands, I play it and a whole team of design, branding and development shows up. And if you'd rather, we sit inside your team like we've been there all along.",
 	},
 
 	// ── FAQ ──

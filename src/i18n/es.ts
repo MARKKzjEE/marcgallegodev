@@ -94,8 +94,8 @@ export const es = {
 		// Statement grande (font-nord). El " / " separa los fragmentos que van en líneas.
 		statement: "Estudio creativo / Desarrollo web / Diseño & / Branding / nacido en Valencia.",
 		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
-		studioText1: "Con Doko trabajo codo con codo: a veces echo una mano puntual y otras nos metemos juntos en proyectos más grandes.",
-		studioText2: "Si tu proyecto pide más manos, sin problema: entre todos cubrimos cada fase con gente especializada. Y si hace falta, nos sumamos a tu equipo como uno más.",
+		studioText1: "Doko es mi as en la manga. Desde 2024 trabajamos codo con codo, a veces echando una mano puntual y otras metidos juntos en proyectos grandes.",
+		studioText2: "Si tu proyecto pide más manos, lo saco y aparece un equipo entero de diseño, branding y desarrollo. Y si lo prefieres, nos sentamos dentro de tu equipo como si fuéramos de la casa.",
 	},
 
 	// ── FAQ ──
