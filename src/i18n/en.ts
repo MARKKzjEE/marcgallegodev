@@ -50,7 +50,7 @@ export const en: Translations = {
 	// ── WhatIDo ──
 	whatIDo: {
 		label: "What I do",
-		text: "I transform ideas into digital solutions, creating websites, apps and products that start as a vision and become something real. For me, it's not just about building a solution, but about understanding the project beyond the technical goal. The kind of things that sometimes can't be explained with words, but can be felt when a project is built the right way.",
+		text: "You bring me an idea and we turn it into something real, whether it's a website, an app or whatever it takes. I build it with an engineer's brain and a stylist's eye, and yes, both come as standard. It's solid on the inside and good-looking on the outside, so all you have to worry about is showing it off.",
 	},
 
 	// ── TechStack ──
@@ -81,8 +81,8 @@ export const en: Translations = {
 		photoCredit: "By m",
 		// Summary paragraphs (each on its own line, separated by space).
 		summary: [
-			"A Computer Engineering graduate, I've always had a passion for computers and for building with technology.",
-			"Beyond code, two passions shape the way I see things. One is fashion, which broadens my sense of taste, colors, shapes and possibilities, and the other is the sea, where I disconnect and reorganize ideas.",
+			"What's on my CV you already know, computer engineer and in love with creating things on a computer.",
+			"What it doesn't show is where the rest comes from. Fashion sharpens my eye for colors, shapes and details. And the sea is my reset button, where I switch off and come back with my ideas in place.",
 		],
 	},
 

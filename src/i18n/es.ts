@@ -48,7 +48,7 @@ export const es = {
 	// ── WhatIDo ──
 	whatIDo: {
 		label: "Qué es lo que hago",
-		text: "Transformo ideas en soluciones digitales, creando webs, apps y productos que nacen como una visión y se convierten en algo real. Para mí no se trata solo de desarrollar una solución, sino de entender el proyecto más allá del objetivo técnico. Esas cosas que a veces no se explican con palabras, pero se perciben cuando un proyecto se construye bien.",
+		text: "Me traes una idea y la convertimos en algo real, ya sea una web, una app o lo que haga falta. Lo hago con cabeza de ingeniero y con gusto, y lo digo en los dos sentidos. Sale sólido por dentro y bonito por fuera, así que tú solo tienes que preocuparte de estrenarlo.",
 	},
 
 	// ── TechStack ──
@@ -79,8 +79,8 @@ export const es = {
 		photoCredit: "By m",
 		// Párrafos del resumen (cada uno en su línea, separados por aire).
 		summary: [
-			"Graduado en Ingeniería Informática, siempre he tenido una pasión por los ordenadores y por la creación tecnológica.",
-			"Fuera del código tengo dos pasiones que me influyen en la forma de cómo veo las cosas. Una es la moda, con la que amplío mi percepción de gustos, colores, formas y posibilidades, y la otra es el mar, donde desconecto y reorganizo ideas.",
+			"Lo que sale en el CV ya lo sabes, ingeniero informático y enamorado de crear cosas con un ordenador.",
+			"Lo que no sale es de dónde viene el resto. La moda me afina el ojo para los colores, las formas y los detalles. Y el mar es mi botón de reinicio, donde desconecto y vuelvo con las ideas en su sitio.",
 		],
 	},
 
