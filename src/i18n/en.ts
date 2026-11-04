@@ -195,7 +195,7 @@ export const en: Translations = {
 			{
 				title: 'Trama World',
 				description: 'Built on the idea that “everything fits in a QR”, Trama World digitises any event to cut queues, add gamification and measure everything that happens.',
-				type: 'SaaS · Nightlife',
+				type: 'SaaS · Events & venues',
 			},
 		],
 	},

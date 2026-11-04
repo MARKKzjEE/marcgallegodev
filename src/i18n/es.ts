@@ -193,7 +193,7 @@ export const es = {
 			{
 				title: 'Trama World',
 				description: 'Bajo la filosofía de «todo cabe en un QR», Trama World digitaliza cualquier evento para ahorrar colas, proponer gamificaciones y medir todo lo que pasa.',
-				type: 'SaaS · Ocio nocturno',
+				type: 'SaaS · Eventos y recintos',
 			},
 		],
 	},
