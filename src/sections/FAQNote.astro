@@ -21,10 +21,11 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 ---
 
 <!--
-  FAQ "hoja de apuntes": una sola hoja de papel vertical, escrita del tirón a
-  bolígrafo (Reenie Beanie), sin acordeón. Todo visible: título + preguntas
-  numeradas + respuestas, con signos de estudiante (números rodeados, subrayado
-  ondulado, flechas, asteriscos, palabras destacadas) dibujados con SVG inline.
+  FAQ "hoja de apuntes": una hoja de papel vertical escrita a bolígrafo
+  (Reenie Beanie). Cada pregunta es un <details>: la primera viene abierta y
+  solo hay una abierta a la vez. Al abrir, el círculo del número se dibuja y
+  la respuesta se escribe línea a línea, como tinta saliendo del boli; al
+  cerrar se borra rápido. Sin JS o con reduced motion, abre y cierra sin más.
 -->
 <section id="faq" class="faq-note" aria-labelledby="faq-note-heading">
 	<div class="faq-note__sheet" style={`--paper-url: url(${paperBg.src});`}>
@@ -44,21 +45,35 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		<ol class="faq-note__list">
 			{faqs.map((faq, i) => (
 				<li class="faq-note__item" style={`--tilt:${tilts[i] ?? 0}deg;`}>
-					<!-- Número rodeado con un círculo dibujado a mano -->
-					<span class="faq-note__num" aria-hidden="true">
-						<span class="faq-note__num-text">{i + 1}</span>
-						<svg class="faq-note__num-ring" viewBox="0 0 48 48" fill="none">
-							<path d="M24 4 C 38 5, 45 16, 44 26 C 43 38, 30 45, 19 43 C 7 41, 3 28, 6 18 C 8 9, 16 4, 26 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-						</svg>
-					</span>
-
-					<div class="faq-note__qa">
-						<p class="faq-note__question">{faq.question}</p>
-						<p class="faq-note__answer">
-							<span class="faq-note__arrow" aria-hidden="true">→</span>
-							{faq.answer}
-						</p>
-					</div>
+					<details class="faq-note__details" open={i === 0} data-faq-item>
+						<summary class="faq-note__summary">
+							<span class="faq-note__row">
+								<!-- Número: el círculo a mano se dibuja cuando la pregunta está abierta -->
+								<span class="faq-note__num" aria-hidden="true">
+									<span class="faq-note__num-text">{i + 1}</span>
+									<svg class="faq-note__num-ring" viewBox="0 0 48 48" fill="none">
+										<path pathLength="1" d="M24 4 C 38 5, 45 16, 44 26 C 43 38, 30 45, 19 43 C 7 41, 3 28, 6 18 C 8 9, 16 4, 26 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+									</svg>
+								</span>
+								<span class="faq-note__question">
+									{faq.question}
+									<!-- Subrayado a mano al pasar el ratón (pregunta cerrada) -->
+									<svg class="faq-note__question-line" viewBox="0 0 300 12" fill="none" aria-hidden="true" preserveAspectRatio="none">
+										<path pathLength="1" d="M2 7 C 40 2, 70 11, 110 6 S 180 2, 220 7 S 280 10, 298 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+									</svg>
+								</span>
+							</span>
+						</summary>
+						<div class="faq-note__body" data-faq-body>
+							<!-- Cada palabra en su span: el script las "escribe" una tras otra -->
+							<p class="faq-note__answer" data-faq-answer>
+								<span class="faq-note__word faq-note__arrow" aria-hidden="true">→</span>{' '}
+								{faq.answer.split(' ').map((word) => (
+									<><span class="faq-note__word">{word}</span>{' '}</>
+								))}
+							</p>
+						</div>
+					</details>
 				</li>
 			))}
 		</ol>
@@ -177,14 +192,31 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		padding: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
+		gap: 1.5rem;
 	}
 
 	.faq-note__item {
-		display: flex;
-		gap: 1rem;
 		// Cada apunte ligeramente torcido (look manuscrito irregular).
 		transform: rotate(var(--tilt, 0deg));
+	}
+
+	// ─── Pregunta (summary): número + texto ───
+	.faq-note__summary {
+		list-style: none;
+		cursor: pointer;
+		&::-webkit-details-marker { display: none; }
+
+		// Foco de teclado: recuadro a boli discontinuo
+		&:focus-visible {
+			outline: 2px dashed var(--ink);
+			outline-offset: 4px;
+		}
+	}
+
+	.faq-note__row {
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
 	}
 
 	// Número con círculo dibujado a mano alrededor
@@ -212,21 +244,28 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		width: calc(100% + 4px);
 		height: calc(100% + 4px);
 		color: var(--ink);
-
-		// Grosor del trazo del círculo, independiente del escalado del viewBox.
-		path {
-			stroke-width: 2.5px;
-			vector-effect: non-scaling-stroke;
-		}
 	}
 
-	.faq-note__qa {
-		flex: 1;
-		min-width: 0;
+	// Trazos que se dibujan (círculo y subrayado): pathLength="1" → dasharray 1.
+	// Oculto: se desvanece y, ya invisible, se rebobina para el siguiente trazo.
+	.faq-note__num-ring path,
+	.faq-note__question-line path {
+		stroke-dasharray: 1 1;
+		stroke-dashoffset: 1;
+		opacity: 0;
+		transition: opacity 200ms ease, stroke-dashoffset 0s 200ms;
+	}
+
+	// Abierta (y no cerrándose): el círculo se traza alrededor del número
+	.faq-note__details[open]:not(.is-closing) .faq-note__num-ring path {
+		stroke-dashoffset: 0;
+		opacity: 1;
+		transition: stroke-dashoffset 450ms cubic-bezier(0.22, 1, 0.36, 1), opacity 0s;
 	}
 
 	// Pregunta: mayúsculas, más cuerpo
 	.faq-note__question {
+		position: relative;
 		font-family: var(--font-reenie);
 		font-weight: 400;
 		text-transform: uppercase;
@@ -235,25 +274,58 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		color: var(--ink);
 		// Stroke sutil → mismo peso que título y numeración (jerarquía sobre respuesta).
 		-webkit-text-stroke: 0.6px var(--ink);
-		margin: 0 0 0.2rem;
+		padding-top: 0.3rem;
 	}
 
-	// Respuesta: debajo, tamaño normal, con flecha delante.
-	// Color vivo (--ink) → es el contenido que destaca sobre la estructura.
+	.faq-note__question-line {
+		position: absolute;
+		left: 0;
+		bottom: -0.35rem;
+		width: 100%;
+		height: 8px;
+		color: var(--ink-soft);
+		pointer-events: none;
+	}
+
+	// Pregunta cerrada + ratón encima: se subraya a mano (invita a abrirla)
+	@media (hover: hover) {
+		.faq-note__details:not([open]) .faq-note__summary:hover .faq-note__question-line path {
+			stroke-dashoffset: 0;
+			opacity: 1;
+			transition: stroke-dashoffset 400ms cubic-bezier(0.22, 1, 0.36, 1), opacity 0s;
+		}
+	}
+
+	// ─── Respuesta ───
+	// Va sangrada bajo la pregunta (ancho del número + gap). Color vivo (--ink):
+	// es el contenido que destaca sobre la estructura.
 	.faq-note__answer {
+		position: relative;   // referencia de offsetLeft/offsetTop de cada palabra (script)
 		font-family: var(--font-reenie);
 		font-weight: 400;
 		font-size: clamp(22px, 2.6vw, 29px);
 		line-height: 1.2;
 		color: var(--ink);
 		margin: 0;
-		max-width: 52ch;
+		padding: 0.4rem 0 0 calc(44px + 1rem);
+		max-width: calc(52ch + 44px + 1rem);
+	}
+
+	// inline-block → cada palabra se puede recortar (clip-path) al escribirse
+	.faq-note__word {
+		display: inline-block;
 	}
 
 	.faq-note__arrow {
-		color: var(--ink);
 		margin-right: 0.3rem;
-		font-family: var(--font-reenie);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.faq-note__num-ring path,
+		.faq-note__question-line path,
+		.faq-note__details[open]:not(.is-closing) .faq-note__num-ring path {
+			transition: none;
+		}
 	}
 
 	// ─── Firma al pie ───
@@ -290,14 +362,16 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		}
 
 		.faq-note__list {
-			gap: 2.5rem;                  // más separación entre apuntes
+			gap: 1.75rem;                 // algo más de aire entre apuntes
 		}
 
-		// Número (con círculo) ENCIMA de la pregunta, y el texto a todo el ancho.
+		// Número al lado de la pregunta (plegadas ocupan poco) y respuesta a todo el ancho.
 		.faq-note__item {
-			flex-direction: column;
-			gap: 0.6rem;
 			transform: none;              // sin tilt → más legible y sin desborde
+		}
+
+		.faq-note__row {
+			gap: 0.75rem;
 		}
 
 		.faq-note__question {
@@ -307,10 +381,105 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		.faq-note__answer {
 			font-size: clamp(23px, 5.6vw, 29px);
 			line-height: 1.25;
+			padding-left: 0;
 			max-width: none;              // el texto se estira a todo el ancho
 		}
 	}
 </style>
+
+<script>
+	// ─── Acordeón "a boli" ───
+	// Solo una pregunta abierta a la vez. Abrir: el alto se despliega, el círculo
+	// se dibuja (CSS) y la respuesta se escribe palabra a palabra, línea a línea.
+	// Cerrar: la respuesta se borra rápido y el alto se recoge; `open` se quita
+	// al final (.is-closing hace que el círculo se vaya ya al empezar).
+	const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
+	const OPEN_MS = 500;
+	const CLOSE_MS = 320;
+	const FADE_MS = 180;     // la tinta se borra antes de que acabe de recogerse
+	const LINE_MS = 420;     // lo que tarda el boli en escribir una línea entera
+	const WRITE_DELAY = 160; // empieza a escribir con el círculo a medio trazar
+
+	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const items = [...document.querySelectorAll<HTMLDetailsElement>('[data-faq-item]')];
+
+	const parts = (d: HTMLDetailsElement) => ({
+		body: d.querySelector<HTMLElement>('[data-faq-body]')!,
+		answer: d.querySelector<HTMLElement>('[data-faq-answer]')!,
+	});
+
+	// Cada palabra se destapa de izquierda a derecha (clip-path). Su retardo sale
+	// de su línea y de su posición en ella → un trazo continuo, como un boli.
+	function write(answer: HTMLElement) {
+		const words = [...answer.querySelectorAll<HTMLElement>('.faq-note__word')];
+		const width = answer.clientWidth || 1;
+		let line = -1;
+		let lineTop = -Infinity;
+		words.forEach((word) => {
+			if (word.offsetTop > lineTop + word.offsetHeight / 2) {
+				line++;
+				lineTop = word.offsetTop;
+			}
+			const start = word.offsetLeft / width;
+			const span = word.offsetWidth / width;
+			// Margen negativo arriba, abajo y a la derecha: los rabitos de la letra
+			// manuscrita no se cortan. A la izquierda 0, o asomaría tinta antes de tiempo.
+			word.animate(
+				[{ clipPath: 'inset(-0.3em 100% -0.3em 0)' }, { clipPath: 'inset(-0.3em -0.3em -0.3em 0)' }],
+				{ delay: WRITE_DELAY + (line + start) * LINE_MS, duration: Math.max(1, span * LINE_MS), easing: 'linear', fill: 'backwards' },
+			);
+		});
+	}
+
+	function open(d: HTMLDetailsElement) {
+		d.open = true;
+		if (reduceMotion) return;
+		const { body, answer } = parts(d);
+		d.dataset.busy = 'true';
+		body.style.overflow = 'hidden';
+		const anim = body.animate([{ height: '0px' }, { height: `${body.scrollHeight}px` }], { duration: OPEN_MS, easing: EASE });
+		write(answer);
+		anim.onfinish = () => {
+			body.style.overflow = '';
+			delete d.dataset.busy;
+		};
+	}
+
+	function close(d: HTMLDetailsElement) {
+		if (reduceMotion) {
+			d.open = false;
+			return;
+		}
+		const { body, answer } = parts(d);
+		// Si aún se estaba abriendo/escribiendo, se corta ahí
+		d.getAnimations({ subtree: true }).forEach((a) => a.cancel());
+		d.dataset.busy = 'true';
+		d.classList.add('is-closing');
+		body.style.overflow = 'hidden';
+		const fade = answer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: FADE_MS, easing: 'ease-out', fill: 'forwards' });
+		const anim = body.animate([{ height: `${body.offsetHeight}px` }, { height: '0px' }], { duration: CLOSE_MS, easing: EASE });
+		anim.onfinish = () => {
+			d.open = false;
+			d.classList.remove('is-closing');
+			body.style.overflow = '';
+			fade.cancel();
+			delete d.dataset.busy;
+		};
+	}
+
+	items.forEach((d) => {
+		d.querySelector('summary')?.addEventListener('click', (e) => {
+			e.preventDefault();
+			if (d.dataset.busy) return;
+			if (d.open) {
+				close(d);
+				return;
+			}
+			items.filter((other) => other !== d && other.open && !other.classList.contains('is-closing')).forEach(close);
+			open(d);
+		});
+	});
+</script>
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify({
 	"@context": "https://schema.org",
