@@ -122,8 +122,12 @@ const tilts = [-0.6, 0.4, -0.3, 0.7, -0.5];
 		min-height: calc(640px * 1.414);   // A-series ~1:1.414
 		background-color: var(--paper);
 		background-image: var(--paper-url);
-		background-size: cover;
-		background-position: center;
+		// Tamaño fijo (el de la imagen, 1000×1371) anclado arriba: con `cover` la
+		// textura se reescalaba al abrir o cerrar cada pregunta y hacía zoom. Así
+		// solo crece la hoja (máx. ~1030px de alto) y el papel se queda quieto.
+		background-size: 1000px auto;
+		background-position: top center;
+		background-repeat: no-repeat;
 		color: var(--ink);
 		padding: clamp(2.5rem, 6vw, 4.5rem) clamp(2rem, 5vw, 3.5rem);
 		// Sombra suave + rotación mínima → hoja apoyada sobre la mesa.
