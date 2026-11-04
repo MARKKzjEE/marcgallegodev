@@ -96,8 +96,8 @@ export const en: Translations = {
 		// Large statement (font-nord). " / " separates the fragments shown on lines.
 		statement: "Creative studio / Web development / Design & / Branding / born in Valencia.",
 		dokoImgAlt: "Doko Studio — web design and development studio",
-		studioText1: "I collaborate with Doko bringing my experience and services, on a project basis or on larger-scale work.",
-		studioText2: "If your project needs more resources, we can cover every phase with specialized profiles. We could even join your project as a team.",
+		studioText1: "I work side by side with Doko: sometimes I lend a hand on something specific, and other times we dive into bigger projects together.",
+		studioText2: "If your project needs more hands, no problem: together we cover every phase with specialized people. And if needed, we jump in as part of your team.",
 	},
 
 	// ── FAQ ──
@@ -107,23 +107,23 @@ export const en: Translations = {
 		items: [
 			{
 				question: "What kind of projects do you work on?",
-				answer: "I work from business ideas all the way to their final web and/or mobile app version.",
+				answer: "Pretty much any. I love taking a business idea that's barely off the ground and seeing it through until it's a real website or app.",
 			},
 			{
-				question: "What services do you offer as a developer?",
-				answer: "I offer services to develop a project from an idea or initial phase, as well as redesigns and maintenance of already functional webs/apps.",
+				question: "What can you do for me?",
+				answer: "Get your project going from scratch or from whatever you already have. And if you already have a website or an app, give it a fresh spin: redesign, improvements or maintenance.",
 			},
 			{
-				question: "What is your work process like?",
-				answer: "First let's have a meeting to settle all requirements and understand the problem clearly. Once all the bases are clear I tackle the problems while always following up and reporting to the client.",
+				question: "How do you work?",
+				answer: "First things first, a meeting (with coffee, ideally) to really understand what you need and what the actual problem is. Once that's clear, I get to work and keep you posted on how everything's going. No surprises.",
 			},
 			{
 				question: "Do you work alone or with a team?",
-				answer: "I work independently but I'm associated with a development studio called Doko Studio with which we can integrate any profile to complete the design and development process.",
+				answer: "I'm independent, but not alone: I work hand in hand with Doko Studio. If you need design, branding or any other profile, we bring them on board and we're good to go.",
 			},
 			{
 				question: "How much does a project with you cost?",
-				answer: "Every project is unique so I don't have a fixed price. First let's talk about what you need and then we'll find the best agreement for everyone.",
+				answer: "It depends, and I'm not dodging the question: every project is its own world. Tell me what you need and we'll find a price that works for both of us.",
 			},
 		],
 	},
@@ -201,14 +201,14 @@ export const en: Translations = {
 		emailPlaceholder: "Email",
 		messagePlaceholder: "Message",
 		submitLabel: "Send",
-		successMessage: "✓ Message sent. I'll get back to you soon.",
-		errorMessage: "Something went wrong. Try again or write to me directly.",
+		successMessage: "✓ Got it! I'll write back in no time.",
+		errorMessage: "Oops, something went wrong. Try again or write to me directly.",
 	},
 
 	// ── Footer ──
 	footer: {
-		headline: "Let's work together.",
-		headlineReveal: "Let's work together.",
+		headline: "Shall we team up?",
+		headlineReveal: "Shall we team up?",
 		copyright: "All rights reserved.",
 		scrollTop: "Back to top",
 		linkedinLabel: "LinkedIn",
@@ -231,7 +231,7 @@ export const en: Translations = {
 			languages: "Languages",
 			extracurricular: "Extracurricular",
 		},
-		summary: "I'm a software developer with more than 5 years of experience building web and mobile solutions. Throughout my career I've been lucky to work on diverse projects with incredible working environments that have allowed me to grow both personally and professionally. I currently apply and invest everything I know into my personal brand as a freelancer.",
+		summary: "I've been building websites and apps for over 5 years, and I've been lucky to go through incredible projects and teams that helped me grow, both professionally and personally. Now I'm putting all of that into my own brand, as a freelancer.",
 		jobs: [
 			{
 				company: "Doko Studio",
@@ -328,7 +328,7 @@ export const en: Translations = {
 	notFound: {
 		title: "404 — Marc Gallego",
 		description: "Page not found. Go back to the home page of Marc Gallego's portfolio.",
-		heading: "Page not found",
+		heading: "Nothing to see here",
 		backHome: "← Back to home",
 	},
 

@@ -94,8 +94,8 @@ export const es = {
 		// Statement grande (font-nord). El " / " separa los fragmentos que van en líneas.
 		statement: "Estudio creativo / Desarrollo web / Diseño & / Branding / nacido en Valencia.",
 		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
-		studioText1: "Colaboro con Doko aportando mi experiencia y servicios, tanto de forma puntual como en proyectos de mayor envergadura.",
-		studioText2: "Si tu proyecto necesita más recursos, podemos abarcar cada fase con perfiles especializados. Incluso podríamos integrarnos como equipo en tu proyecto.",
+		studioText1: "Con Doko trabajo codo con codo: a veces echo una mano puntual y otras nos metemos juntos en proyectos más grandes.",
+		studioText2: "Si tu proyecto pide más manos, sin problema: entre todos cubrimos cada fase con gente especializada. Y si hace falta, nos sumamos a tu equipo como uno más.",
 	},
 
 	// ── FAQ ──
@@ -105,23 +105,23 @@ export const es = {
 		items: [
 			{
 				question: "¿Con qué tipo de proyectos trabajas?",
-				answer: "Trabajo desde ideas de negocio hasta su versión final de web y/o app móvil.",
+				answer: "Con casi cualquiera. Me encanta coger una idea de negocio que está en pañales y acompañarla hasta que es una web o una app de verdad.",
 			},
 			{
-				question: "¿Qué servicios ofreces como desarrollador?",
-				answer: "Ofrezco servicios para desarrollar un proyecto desde una idea o una fase inicial como también rediseños y mantenimientos de webs/apps ya funcionales.",
+				question: "¿Qué puedes hacer por mí?",
+				answer: "Arrancar tu proyecto desde cero o desde lo que ya tengas. Y si ya tienes una web o una app, darle una vuelta: rediseño, mejoras o mantenimiento.",
 			},
 			{
-				question: "¿Cómo es tu proceso de trabajo?",
-				answer: "Primero tengamos una reunión para asentar todos los requerimientos y entender bien cuál es el problema. Una vez todas las bases bien claras ataco los problemas siempre haciendo seguimiento y reportes al cliente.",
+				question: "¿Cómo trabajas?",
+				answer: "Lo primero, una reunión (con café, si puede ser) para entender bien qué necesitas y cuál es el problema de verdad. Con eso claro, me pongo manos a la obra y te voy contando cómo avanza todo. Sin sorpresas.",
 			},
 			{
 				question: "¿Trabajas solo o con equipo?",
-				answer: "Trabajo de forma independiente pero estoy asociado con un estudio de programación llamado Doko Studio con el que podemos integrar cualquier perfil para completar el proceso de diseño y desarrollo.",
+				answer: "Voy por libre, pero no estoy solo: trabajo mano a mano con Doko Studio. Si hace falta diseño, branding u otro perfil, lo sumamos al proyecto y listo.",
 			},
 			{
 				question: "¿Cuánto cuesta un proyecto contigo?",
-				answer: "Cada proyecto es único así que no tengo un precio fijo, primero hablemos de qué necesitas y después encontraremos el mejor acuerdo entre todos.",
+				answer: "Depende, y no es por escaquearme: cada proyecto es un mundo. Cuéntame qué necesitas y buscamos juntos un precio que nos encaje a los dos.",
 			},
 		],
 	},
@@ -199,14 +199,14 @@ export const es = {
 		emailPlaceholder: "Email",
 		messagePlaceholder: "Mensaje",
 		submitLabel: "Enviar",
-		successMessage: "✓ Mensaje enviado. Te respondo pronto.",
-		errorMessage: "Algo ha ido mal. Prueba de nuevo o escríbeme directamente.",
+		successMessage: "✓ ¡Recibido! Te escribo en nada.",
+		errorMessage: "Vaya, algo ha fallado. Prueba otra vez o escríbeme directamente.",
 	},
 
 	// ── Footer ──
 	footer: {
-		headline: "Trabajemos juntos.",
-		headlineReveal: "Trabajemos juntos.",
+		headline: "¿Hacemos algo juntos?",
+		headlineReveal: "¿Hacemos algo juntos?",
 		copyright: "Todos los derechos reservados.",
 		scrollTop: "Quiero volver arriba",
 		linkedinLabel: "LinkedIn",
@@ -229,7 +229,7 @@ export const es = {
 			languages: "Idiomas",
 			extracurricular: "Extracurricular",
 		},
-		summary: "Soy desarrollador de software con más de 5 años de experiencia creando soluciones web y móviles. A lo largo de mi carrera he tenido la suerte de poder trabajar en distintos proyectos con ambientes de trabajo increíbles que me han permitido crecer como persona y de manera profesional. Actualmente aplico y apuesto todo lo que sé en mi marca personal como freelance.",
+		summary: "Llevo más de 5 años haciendo webs y apps, y he tenido la suerte de pasar por proyectos y equipos increíbles que me han hecho crecer, como profesional y como persona. Ahora todo eso lo pongo en mi propia marca, como freelance.",
 		jobs: [
 			{
 				company: "Doko Studio",
@@ -326,7 +326,7 @@ export const es = {
 	notFound: {
 		title: "404 — Marc Gallego",
 		description: "Página no encontrada. Vuelve al inicio del portfolio de Marc Gallego.",
-		heading: "Página no encontrada",
+		heading: "Por aquí no hay nada",
 		backHome: "← Volver al inicio",
 	},
 
