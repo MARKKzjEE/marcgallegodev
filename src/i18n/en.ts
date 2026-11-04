@@ -42,7 +42,7 @@ export const en: Translations = {
 		stats: {
 			years: "+5 years exp.",
 			projects: "+60 projects",
-			since: "since 2019",
+			since: "since 2018",
 			location: "Barcelona",
 		},
 	},
@@ -64,7 +64,7 @@ export const en: Translations = {
 		},
 		// Section foot (below the carousel). {count} = number of technologies.
 		// footMeta only on tablet/desktop; hidden on mobile.
-		footMeta: "STACK / {count} tools · since 2019",
+		footMeta: "STACK / {count} tools · since 2018",
 		footNote: "See my experience",
 	},
 

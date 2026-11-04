@@ -40,7 +40,7 @@ export const es = {
 		stats: {
 			years: "+5 años exp.",
 			projects: "+60 proyectos",
-			since: "desde 2019",
+			since: "desde 2018",
 			location: "Barcelona",
 		},
 	},
@@ -62,7 +62,7 @@ export const es = {
 		},
 		// Pie de la sección (bajo el carrusel). {count} = nº de tecnologías.
 		// footMeta solo en tablet/desktop; en móvil se oculta.
-		footMeta: "STACK / {count} herramientas · desde 2019",
+		footMeta: "STACK / {count} herramientas · desde 2018",
 		footNote: "Ver mi trayectoria",
 	},
 
