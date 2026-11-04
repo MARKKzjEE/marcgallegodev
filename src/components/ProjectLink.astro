@@ -1,0 +1,116 @@
+---
+// Enlace a la web de un proyecto: texto + flecha ↗, en otra pestaña. Al pasar
+// el ratón, el circle-reveal compartido (como "más resultados"): un círculo que
+// sigue al cursor y descubre un clon con los colores invertidos. Hereda la
+// tipografía de donde se pone; la flecha mide lo que las mayúsculas del texto.
+// El padding da aire al círculo y el margen negativo lo compensa, así el texto
+// queda alineado con lo que tiene alrededor. Con `circle`, además, el óvalo a
+// mano de "más resultados" rodeándolo siempre.
+
+interface Props {
+	href: string;
+	text: string;
+	/** Nombre accesible (incluye que se abre en otra pestaña) */
+	label: string;
+	/** Radio del círculo del reveal */
+	radius?: string;
+	/** Óvalo a mano alrededor (como "más resultados") */
+	circle?: boolean;
+}
+
+const { href, text, label, radius = '26px', circle = false } = Astro.props;
+// Óvalo a mano alzada, el mismo que "--MÁS RESULTADOS:" en la home
+const oval = 'M120,6 C200,2 236,22 234,42 C232,66 150,76 90,75 C30,74 6,60 6,40 C6,20 44,7 130,8';
+---
+
+<a class:list={['project-link', { 'project-link--circle': circle }]} href={href} target="_blank" rel="noopener" aria-label={label} data-reveal data-reveal-radius={radius} style={`--reveal-extend: ${radius}`}>
+	<span class="project-link__text">
+		{text}
+		<svg class="project-link__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 9 9 1M2.5 1H9v6.5" /></svg>
+		{circle && <svg class="project-link__circle" viewBox="0 0 240 80" preserveAspectRatio="none" aria-hidden="true"><path d={oval} /></svg>}
+	</span>
+	<span class="project-link__reveal reveal-layer" aria-hidden="true">
+		<span class="project-link__text">
+			{text}
+			<svg class="project-link__arrow" viewBox="0 0 10 10"><path d="M1 9 9 1M2.5 1H9v6.5" /></svg>
+			{circle && <svg class="project-link__circle" viewBox="0 0 240 80" preserveAspectRatio="none"><path d={oval} /></svg>}
+		</span>
+	</span>
+</a>
+
+<style lang="scss">
+	// --reveal-extend (lo que la capa del reveal sobresale del enlace) = el radio
+	// del círculo, inline: así el círculo nunca se corta aunque el cursor esté
+	// en el borde.
+	.project-link {
+		position: relative;
+		display: inline-block;
+		margin: -0.45em -0.7em;
+		color: inherit;
+		text-decoration: none;
+
+		&:focus-visible {
+			outline: 2px solid var(--secondary);
+			outline-offset: 0;
+		}
+	}
+
+	.project-link__text {
+		position: relative;   // ancla el óvalo
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.35em;
+		padding: 0.45em 0.7em;
+		white-space: nowrap;
+	}
+
+	// Con óvalo: más aire alrededor, como "más resultados". Sin margen lateral
+	// negativo: el que se alinea con el texto de alrededor es el óvalo.
+	.project-link--circle {
+		margin: -0.65em 0;
+
+		.project-link__text { padding: 0.65em 1.1em; }
+	}
+
+	.project-link__circle {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+		pointer-events: none;
+
+		path {
+			fill: none;
+			stroke: currentColor;
+			stroke-width: 2;
+			stroke-linecap: round;
+			vector-effect: non-scaling-stroke;
+		}
+	}
+
+	.project-link__reveal {
+		display: block;
+		padding: var(--reveal-extend);
+		background: var(--secondary);
+		color: var(--primary);
+
+		// Táctil: no hay reveal; se oculta la capa para que no asome
+		@media (hover: none), (pointer: coarse) { display: none; }
+	}
+
+	.project-link__arrow {
+		// Tan alta como las mayúsculas, apoyada en la línea base y con su mismo grosor
+		width: 0.7em;
+		height: 0.7em;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.5px;
+		vector-effect: non-scaling-stroke;
+		stroke-linecap: square;
+	}
+</style>
+
+<script>
+	import '../scripts/circle-reveal.ts';
+</script>

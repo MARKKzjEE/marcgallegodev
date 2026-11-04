@@ -1,7 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import { getLang, useTranslations, getLocalePath } from '../i18n/index';
-import { projectImages } from '../data/projects';
+import ProjectLink from '../components/ProjectLink.astro';
+import ProjectVideo from '../components/ProjectVideo.astro';
+import { projectImages, projectUrls, projectVideos } from '../data/projects';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
@@ -18,6 +20,8 @@ const breadcrumb = {
 const projects = t.projects.items.map((item, i) => ({
 	...item,
 	image: projectImages[i],
+	video: projectVideos[i],
+	url: projectUrls[i],
 }));
 
 // Catálogo 3×3: 9 celdas. Tras los proyectos, las celdas sobrantes muestran
@@ -65,6 +69,8 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 						<>
 							<!-- Imagen del proyecto -->
 							<div class="catalog-cell__media">
+								<!-- Marco 4:3 = la imagen; el vídeo animado va encima, del mismo tamaño -->
+								<div class="catalog-cell__frame">
 								<Image
 									src={cell.project.image}
 									alt={`${cell.project.title} — ${cell.project.description}`}
@@ -76,6 +82,8 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 									draggable={false}
 									class="catalog-cell__img"
 								/>
+								<ProjectVideo video={cell.project.video} />
+								</div>
 							</div>
 							<!-- Ficha técnica (estética catálogo) -->
 							<div class="catalog-cell__info">
@@ -84,6 +92,18 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 									<span class="catalog-cell__type">{cell.project.type}</span>
 									<span class="catalog-cell__tagline">{cell.project.tagline}</span>
 								</div>
+								<!-- Estado: con web, enlace "Ver web ↗"; sin web, archivado -->
+								{cell.project.url ? (
+									<span class="catalog-cell__status font-monoblock">
+										<ProjectLink
+											href={cell.project.url}
+											text={t.projects.grid.visit}
+											label={t.projects.grid.visitLabel.replace('{title}', cell.project.title)}
+										/>
+									</span>
+								) : (
+									<span class="catalog-cell__status catalog-cell__status--off font-monoblock">{t.projects.grid.archived}</span>
+								)}
 							</div>
 						</>
 					) : (
@@ -266,32 +286,36 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 }
 
 
-.catalog-cell__img {
+// Marco de la imagen (4:3, como las imágenes y los vídeos): lo que crece al
+// pasar el ratón, con el vídeo dentro.
+.catalog-cell__frame {
+	position: relative;
+	height: 100%;
 	max-width: 100%;
-	max-height: 100%;
-	width: auto;
-	height: auto;
-	object-fit: contain;
-	display: block;
-	-webkit-user-drag: none;
+	aspect-ratio: 4 / 3;
+	overflow: hidden;
 	transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 
 	.catalog-cell:hover & {
 		transform: scale(1.04);
 	}
 
-	// Móvil: la imagen LLENA la celda (cover) en vez de flotar centrada.
-	// Sin efecto de hover/scale (en táctil se queda "pegado" tras el tap).
+	// Móvil: llena la celda. Sin hover/scale (en táctil se queda "pegado" tras el tap).
 	@media (max-width: 767px) {
 		width: 100%;
-		height: 100%;
-		object-fit: cover;
 		transition: none;
-	}
-
-	@media (max-width: 767px) {
 		.catalog-cell:hover & { transform: none; }
 	}
+
+	@media (prefers-reduced-motion: reduce) { transition: none; }
+}
+
+.catalog-cell__img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	-webkit-user-drag: none;
 }
 
 // ─── Ficha: Título + bloque de Datos ───
@@ -318,11 +342,26 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 	opacity: 0.7; // ≥ 4.5:1 de contraste en texto pequeño
 }
 
+// ─── Estado del proyecto (última línea de la ficha) ───
+.catalog-cell__status {
+	align-self: flex-start;
+	font-size: clamp(11px, 1vw, 13px);
+	line-height: 1.35;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--secondary);
+}
+
+.catalog-cell__status--off {
+	opacity: 0.7;
+}
+
 // ─── Móvil: textos algo mayores y más aire entre imagen y ficha ───
 @media (max-width: 767px) {
 	// Separación imagen → título.
 	.catalog-cell__info { margin-top: 1.25rem; }
 	.catalog-cell__name { font-size: 1.25rem; }
-	.catalog-cell__data { font-size: 14px; }
+	.catalog-cell__data,
+	.catalog-cell__status { font-size: 14px; }
 }
 </style>

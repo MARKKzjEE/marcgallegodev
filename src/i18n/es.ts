@@ -94,8 +94,11 @@ export const es = {
 		// Statement grande (font-nord). El " / " separa los fragmentos que van en líneas.
 		statement: "Estudio creativo / Desarrollo web / Diseño & / Branding / nacido en Valencia.",
 		dokoImgAlt: "Doko Studio — estudio de branding, diseño y desarrollo",
+		// Enlace bajo la bio, a la web de Doko
+		dokoVisit: "Visita la web",
+		dokoLinkLabel: "Doko Studio: visita la web (se abre en otra pestaña)",
 		studioText1: "Doko es mi as en la manga. Desde 2024 trabajamos codo con codo, a veces echando una mano puntual y otras metidos juntos en proyectos grandes.",
-		studioText2: "Si tu proyecto pide más manos, lo saco y aparece un equipo entero de diseño, branding y desarrollo. Y si lo prefieres, nos sentamos dentro de tu equipo como si fuéramos de la casa.",
+		studioText2: "Si tu proyecto necesita más manos, aparecemos como un equipo entero de diseño y desarrollo.",
 	},
 
 	// ── FAQ ──
@@ -137,6 +140,10 @@ export const es = {
 		grid: {
 			// Pie del catálogo. {range} se sustituye por la numeración real (ej. 031–039).
 			foot: "CAT. No. {range} · EDICIÓN 01",
+			// Estado de cada proyecto en su ficha: con web, enlace; sin web, archivado.
+			visit: "Ver web",
+			visitLabel: "{title}: ver su web (se abre en otra pestaña)",
+			archived: "Archivado",
 			// Celdas placeholder del catálogo (decorativas)
 			placeholders: [
 				{ type: "En desarrollo", tagline: "Algo nuevo cociéndose." },
@@ -188,6 +195,12 @@ export const es = {
 				description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.',
 				type: 'App + Plataforma web',
 				tagline: 'App para bares, restaurantes y clientes.',
+			},
+			{
+				title: 'Trama World',
+				description: 'SaaS para clubes y discotecas que junta entradas, guardarropa y consumiciones en un solo QR.',
+				type: 'SaaS · Ocio nocturno',
+				tagline: 'Un QR para toda la noche.',
 			},
 		],
 	},

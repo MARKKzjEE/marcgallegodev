@@ -1,7 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import { getLang, useTranslations, getLocalePath } from '../i18n/index';
-import { projectImages } from '../data/projects';
+import ProjectLink from '../components/ProjectLink.astro';
+import ProjectVideo from '../components/ProjectVideo.astro';
+import { projectImages, projectUrls, projectVideos } from '../data/projects';
 
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
@@ -13,28 +15,29 @@ const projectsPath = getLocalePath(lang, '/projects');
 const START_NO = 31;
 
 // Grids por breakpoint:
-// · Desktop: 6 cols × 3 filas, escalonado con huecos laterales.
-// · Tablet:  4 cols × 3 filas (mismo escalonado, sin las columnas vacías de los extremos → desktop −1).
-// · Móvil:   2 cols × 3 filas, secuencial (sin huecos).
+// · Desktop: 6 cols × 3 filas, escalonado: 2 · 3 · 2 tarjetas (cols 1–2 · 3–5 · 5–6).
+// · Tablet:  4 cols × 3 filas, el mismo escalonado comprimido (cols 1–2 · 2–4 · 3–4).
+// · Móvil:   2 cols, secuencial (sin huecos); tantas filas como hagan falta.
+// Coordenadas [col, fila] por breakpoint. Móvil se calcula secuencial (i).
+const layout: { d: [number, number]; t: [number, number] }[] = [
+	{ d: [1, 1], t: [1, 1] },
+	{ d: [2, 1], t: [2, 1] },
+	{ d: [3, 2], t: [2, 2] },
+	{ d: [4, 2], t: [3, 2] },
+	{ d: [5, 2], t: [4, 2] },
+	{ d: [5, 3], t: [3, 3] },
+	{ d: [6, 3], t: [4, 3] },
+];
+
 const GRID = {
 	desktop: { cols: 6, rows: 3 },
 	tablet:  { cols: 4, rows: 3 },
-	mobile:  { cols: 2, rows: 3 },
+	mobile:  { cols: 2, rows: Math.ceil(layout.length / 2) },
 };
 
-// Coordenadas [col, fila] por breakpoint. Móvil se calcula secuencial (i).
-const layout: { d: [number, number]; t: [number, number] }[] = [
-	{ d: [2, 1], t: [1, 1] },
-	{ d: [3, 1], t: [2, 1] },
-	{ d: [4, 1], t: [3, 1] },
-	{ d: [4, 2], t: [3, 2] },
-	{ d: [5, 2], t: [4, 2] },
-	{ d: [5, 3], t: [4, 3] },
-];
-
-// Qué proyecto va en cada celda del collage. Se muestra 031-035 y 037 (se
-// salta el 036/RTTH en la home; sí aparece en el catálogo de /proyectos).
-const projectIndices = [0, 1, 2, 3, 4, 6];
+// Qué proyecto va en cada celda del collage, en el orden del catálogo de
+// /proyectos. Se salta el 032/Loyic (sí aparece en el catálogo).
+const projectIndices = [0, 2, 3, 4, 5, 6, 7];
 
 const items = layout.map((pos, cell) => {
 	const i = projectIndices[cell];
@@ -42,6 +45,10 @@ const items = layout.map((pos, cell) => {
 		title: t.projects.items[i].title,
 		description: t.projects.items[i].description,
 		image: projectImages[i],
+		video: projectVideos[i],
+		url: projectUrls[i],
+		// Nombre accesible del enlace a su web
+		urlLabel: t.projects.grid.visitLabel.replace('{title}', t.projects.items[i].title),
 		no: String(START_NO + i).padStart(3, '0'),
 		// columnas/filas por breakpoint
 		cd: pos.d[0], rd: pos.d[1],
@@ -73,13 +80,37 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 		<div class="hp-collage">
 
 			<!-- ── Solo tablet/desktop: índice (celda última fila 1) ── -->
-			<!-- Índice de títulos: última celda de la 1ª fila del collage. -->
-			<div class="hp-index" aria-hidden="true">
+			<!-- Índice de títulos: última celda de la 1ª fila del collage. Los que
+			     tienen web enlazan a ella (↗). Un solo circle-reveal para toda la
+			     lista: el círculo se abre sobre los enlaces (data-reveal-trigger) y
+			     pasa de uno a otro sin cerrarse. La capa reveal es un clon invertido. -->
+			<div class="hp-index" data-reveal data-reveal-radius="28px">
 				<ul class="hp-index__list">
 					{items.map((item) => (
-						<li class="hp-index__item text-mono-lg">{item.title}</li>
+						<li class="hp-index__item text-mono-lg">
+							{item.url ? (
+								<a class="hp-index__link" href={item.url} target="_blank" rel="noopener" aria-label={item.urlLabel} data-reveal-trigger>
+									{item.title}
+									<svg class="hp-index__arrow" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 9 9 1M2.5 1H9v6.5" /></svg>
+								</a>
+							) : item.title}
+						</li>
 					))}
 				</ul>
+				<div class="hp-index__reveal reveal-layer" aria-hidden="true">
+					<ul class="hp-index__list">
+						{items.map((item) => (
+							<li class="hp-index__item text-mono-lg">
+								{item.url ? (
+									<span class="hp-index__link">
+										{item.title}
+										<svg class="hp-index__arrow" viewBox="0 0 10 10"><path d="M1 9 9 1M2.5 1H9v6.5" /></svg>
+									</span>
+								) : item.title}
+							</li>
+						))}
+					</ul>
+				</div>
 			</div>
 
 			<!-- ── Solo tablet/desktop: resultados (primera celda última fila) ── -->
@@ -119,7 +150,7 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 
 			<!-- Imágenes: 3 sets de coordenadas en custom properties -->
 			{items.map((item) => (
-				<figure class="hp-card" style={`--cd:${item.cd};--rd:${item.rd};--ct:${item.ct};--rt:${item.rt};--cm:${item.cm};--rm:${item.rm};`}>
+				<figure class="hp-card" data-hover-target style={`--cd:${item.cd};--rd:${item.rd};--ct:${item.ct};--rt:${item.rt};--cm:${item.cm};--rm:${item.rm};`}>
 					<figcaption class="hp-card__head font-monoblock">IMG-{item.no}</figcaption>
 					<div class="hp-card__media">
 						<Image
@@ -133,6 +164,8 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 							draggable={false}
 							class="hp-card__img"
 						/>
+						<!-- Quieta: se anima al pasar el ratón por la tarjeta -->
+						<ProjectVideo video={item.video} play="hover" />
 					</div>
 				</figure>
 			))}
@@ -143,9 +176,11 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 		<!-- header --RESULTADOS: · lista IMG-0XX: Título · CTA --MÁS RESULTADOS: (reveal). -->
 		<div class="hp-results-mobile">
 			<span class="hp-results__label text-mono-lg uppercase">--{t.projects.resultsLabel}:</span>
-			<ul class="hp-results__list" aria-hidden="true">
+			<ul class="hp-results__list">
 				{items.map((item) => (
-					<li class="hp-results__item text-mono-lg">IMG-{item.no}: {item.title}</li>
+					<li class="hp-results__item text-mono-lg">
+						IMG-{item.no}: {item.url ? <ProjectLink href={item.url} text={item.title} label={item.urlLabel} /> : item.title}
+					</li>
 				))}
 			</ul>
 			<a href={projectsPath} class="hp-more text-mono-lg uppercase" data-reveal data-reveal-radius="28px">
@@ -184,6 +219,8 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 
 	// ─── Índice de títulos (última celda de la 1ª fila del collage) ───
 	.hp-index {
+		--reveal-extend: 28px;      // = radio del círculo: nunca se corta
+		position: relative;         // ancla la capa del reveal
 		grid-column: var(--cols);   // última columna
 		grid-row: 1;
 		align-self: start;
@@ -210,6 +247,42 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 		white-space: nowrap;
 	}
 
+	// Enlace a la web del proyecto: nombre + ↗ (alta como las mayúsculas)
+	.hp-index__link {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.35em;
+		color: inherit;
+		text-decoration: none;
+
+		&:focus-visible {
+			outline: 2px solid var(--secondary);
+			outline-offset: 4px;
+		}
+	}
+
+	.hp-index__arrow {
+		width: 0.7em;
+		height: 0.7em;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.5px;
+		vector-effect: non-scaling-stroke;
+		stroke-linecap: square;
+	}
+
+	// Clon invertido de la lista, del mismo tamaño y en el mismo sitio (el
+	// padding suma lo que la capa sobresale + el de .hp-index)
+	.hp-index__reveal {
+		--reveal-extend: 28px;
+		padding: calc(var(--reveal-extend) + 0.75rem);
+		background: var(--secondary);
+		color: var(--primary);
+
+		// .text-mono-lg fija su color: aquí va invertido
+		.hp-index__item { color: var(--primary); }
+	}
+
 	// ─── Collage: grid escalonado, celdas verticales (~3:4) ───
 	// --cols cambia por breakpoint; el alto de fila se calcula a 3:4 con cqw.
 	// Desktop 6 cols · Tablet 4 cols · Móvil 2 cols.
@@ -218,7 +291,9 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 		container-type: inline-size;
 		position: relative;
 		display: grid;
-		grid-template-columns: repeat(var(--cols), 1fr);
+		// minmax(0, 1fr): columnas siempre iguales. Con 1fr, el texto sin cortes
+		// del índice o de los resultados ensancha su columna y descuadra las tarjetas.
+		grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
 		grid-auto-rows: calc((100cqw / var(--cols)) * 4 / 3);
 		gap: 0;
 
@@ -395,7 +470,10 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 	// Se come algo de imagen a propósito; la card mantiene su ratio de celda.
 	.hp-card__head {
 		flex-shrink: 0;
-		background-color: var(--terciary);
+		// El mismo tono que se ve en la sección de la foto (AboutCover): se
+		// despega del fondo de la página en los dos temas
+		background-color: color-mix(in srgb, var(--secondary) 10%, var(--primary));
+		:global(.dark) & { background-color: color-mix(in srgb, var(--secondary) 13%, var(--primary)); }
 		padding: 0.55rem 0.7rem;
 		font-size: clamp(14px, 1.2vw, 16px);
 		letter-spacing: 0.05em;
@@ -405,6 +483,7 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 	}
 
 	.hp-card__media {
+		position: relative;   // el vídeo animado va encima de la imagen
 		flex: 1;
 		min-height: 0;
 		overflow: hidden;
@@ -419,7 +498,8 @@ const dotsMobile  = makeDots(GRID.mobile.cols, GRID.mobile.rows);
 		transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
-	.hp-card:hover .hp-card__img {
+	.hp-card:hover .hp-card__img,
+	.hp-card:hover :global(.project-video) {
 		transform: scale(1.04);
 	}
 

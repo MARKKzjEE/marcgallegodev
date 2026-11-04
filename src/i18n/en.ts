@@ -96,8 +96,11 @@ export const en: Translations = {
 		// Large statement (font-nord). " / " separates the fragments shown on lines.
 		statement: "Creative studio / Web development / Design & / Branding / born in Valencia.",
 		dokoImgAlt: "Doko Studio — web design and development studio",
+		// Link under the bio, to Doko's site
+		dokoVisit: "Visit the site",
+		dokoLinkLabel: "Doko Studio: visit the site (opens in a new tab)",
 		studioText1: "Doko is my ace up the sleeve. We've been working side by side since 2024, sometimes lending a hand on something specific and other times diving into big projects together.",
-		studioText2: "If your project needs more hands, I play it and a whole team of design, branding and development shows up. And if you'd rather, we sit inside your team like we've been there all along.",
+		studioText2: "If your project needs more hands, we show up as a full design and development team.",
 	},
 
 	// ── FAQ ──
@@ -139,6 +142,10 @@ export const en: Translations = {
 		grid: {
 			// Catalog foot. {range} is replaced by the real numbering (e.g. 031–039).
 			foot: "CAT. No. {range} · EDITION 01",
+			// Each project's status in its card: live site → link; no site → archived.
+			visit: "Visit site",
+			visitLabel: "{title}: visit the site (opens in a new tab)",
+			archived: "Archived",
 			// Catalog placeholder cells (decorative)
 			placeholders: [
 				{ type: "In progress", tagline: "Something new in the works." },
@@ -190,6 +197,12 @@ export const en: Translations = {
 				description: 'App and web platform for bars and restaurants with services for businesses and customers.',
 				type: 'App + Web platform',
 				tagline: 'App for bars, restaurants and guests.',
+			},
+			{
+				title: 'Trama World',
+				description: 'SaaS for clubs and nightclubs that brings tickets, cloakroom and drinks together in a single QR.',
+				type: 'SaaS · Nightlife',
+				tagline: 'One QR for the whole night.',
 			},
 		],
 	},

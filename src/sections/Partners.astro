@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import ProjectLink from '../components/ProjectLink.astro';
 import dokostudio from '../assets/projects/dokostudio.png';
 import { getLang, useTranslations } from '../i18n';
 
@@ -50,6 +51,10 @@ const mobileShifts = [-13, 11, -9, 13, -10];
 			<div class="partners-bio">
 				<p class="text-mono-label">{t.partners.studioText1}</p>
 				<p class="text-mono-label">{t.partners.studioText2}</p>
+				<!-- A la web de Doko: ↗ + círculo al pasar el ratón, como los de proyectos -->
+				<p class="partners-bio__visit text-mono-label">
+					<ProjectLink href="https://doko.studio/" text={t.partners.dokoVisit} label={t.partners.dokoLinkLabel} radius="28px" circle />
+				</p>
 				<!-- Marcas de recorte en las esquinas -->
 				<span class="partners-bio__crop partners-bio__crop--tl" aria-hidden="true"></span>
 				<span class="partners-bio__crop partners-bio__crop--tr" aria-hidden="true"></span>
@@ -155,8 +160,10 @@ const mobileShifts = [-13, 11, -9, 13, -10];
 		gap: 2.5rem;
 		margin-top: 3rem;
 
-		// xl: imagen a la derecha; la bio se centra en el viewport (absolute)
-		@media (min-width: 1280px) {
+		// Desde 1480px: imagen a la derecha y la bio centrada en el viewport
+		// (absolute). Antes no caben las dos con aire (cajas de 440px) y se
+		// solapaban; por debajo van una al lado de la otra, centradas.
+		@media (min-width: 1480px) {
 			justify-content: flex-end;
 			min-height: calc(var(--box-w) * 3 / 4); // reserva el alto de una caja
 		}
@@ -175,8 +182,8 @@ const mobileShifts = [-13, 11, -9, 13, -10];
 		gap: 1rem;
 		padding: 2rem;
 
-		// xl: centrada en el ancho del viewport
-		@media (min-width: 1280px) {
+		// Desde 1480px: centrada en el ancho del viewport
+		@media (min-width: 1480px) {
 			position: absolute;
 			left: 50%;
 			top: 50%;
@@ -188,6 +195,12 @@ const mobileShifts = [-13, 11, -9, 13, -10];
 			min-height: 0;        // en móvil manda el texto (sin forzar alto)
 			padding: 1.5rem;      // espacio entre corchetes y texto
 		}
+	}
+
+	// "Visita su web ↗": a la derecha y separado del texto
+	.partners-bio__visit {
+		margin-top: 1rem;
+		text-align: right;
 	}
 
 	// Marcas de recorte ⌐ ¬ en las esquinas de la bio (color soft, como antes

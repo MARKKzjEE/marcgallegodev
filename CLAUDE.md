@@ -85,6 +85,8 @@ Estructura compartida:
 - `public/assets/og-image.jpg` — Imagen OG (1200×630, JPEG por compatibilidad con LinkedIn y otros)
 - `public/cv/` — CVs en PDF; sus fuentes LaTeX están en `cv/` (fuera de `public/` para no publicarlas)
 - `src/assets/` — Imágenes de perfil (light/dark), proyectos y clientes, optimizadas con `<Image>` de Astro
+- `public/projects/` — Miniaturas animadas de cada proyecto (vídeo en bucle 960×720, `.mp4` H.264 + `.av1.mp4`), encima de su imagen en el catálogo y la home (`ProjectVideo.astro`, `scripts/project-video.ts`: en el catálogo arrancan al verse; en la home, al pasar el ratón). Se generan en `marcgallego-motion` con `bash miniaturas/preparar.sh`. Las imágenes de RTTH y Trama World son el fotograma 0 de su vídeo (sin salto al arrancar); si cambia el vídeo, se regeneran (comando en `preparar.sh`)
+- Webs de los proyectos: `projectUrls` en `src/data/projects.ts` (`null` = archivado). Enlace con ↗ + circle-reveal en `components/ProjectLink.astro` (catálogo, lista móvil de la home y Doko); el índice de la home usa un solo reveal para toda la lista
 
 ## Conventions
 
