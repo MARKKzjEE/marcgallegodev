@@ -121,13 +121,18 @@ const enURL = new URL(enHref, site).href;
 			"@type": "Person",
 			"@id": personId,
 			"name": "Marc Gallego",
+			// Nombre completo: lo distingue de otros Marc Gallego (incluido otro desarrollador)
+			"alternateName": "Marc Gallego Gines",
+			"givenName": "Marc",
+			"familyName": "Gallego Gines",
 			"url": siteURL,
 			"jobTitle": t.meta.jobTitle,
 			"description": t.meta.defaultDescription,
 			"image": ogImage,
 			"sameAs": [
-				"https://linkedin.com/in/marcgallegodev",
-				"https://www.instagram.com/markgallego/"
+				"https://www.linkedin.com/in/marcgallegodev/",
+				"https://github.com/MARKKzjEE",
+				"https://www.instagram.com/devemeworks/"
 			],
 			"address": {
 				"@type": "PostalAddress",

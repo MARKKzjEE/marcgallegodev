@@ -80,5 +80,5 @@ acaban en `/`, y `vercel.json` redirige las que llegan sin barra.
 <p align="center">
   <a href="https://marcgallego.com">marcgallego.com</a> ·
   <a href="https://www.linkedin.com/in/marcgallegodev/">LinkedIn</a> ·
-  <a href="https://www.instagram.com/markgallego/">Instagram</a>
+  <a href="https://www.instagram.com/devemeworks/">Instagram</a>
 </p>
