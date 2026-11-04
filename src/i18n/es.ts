@@ -150,57 +150,48 @@ export const es = {
 				{ type: "Próximamente", tagline: "Reservado para el próximo." },
 			],
 		},
-		// NOTA: `description` alimenta el alt de las imágenes (collage home + catálogo).
-		// `type` y `tagline` alimentan la ficha del catálogo (/proyectos).
-		// → Placeholders: REVISAR Y CUADRAR (tipo de proyecto y frase corta de catálogo).
+		// `type` y `description` son la ficha del catálogo (/proyectos);
+		// `description` es también el alt de las imágenes (home + catálogo).
 		items: [
 			{
 				title: 'PlanIT',
-				description: 'Mi pequeño proyecto que acabó siendo una startup que permitía conectar personas haciendo cualquier tipo de plan o actividad.',
+				description: 'Mi startup y mi primer emprendimiento. Una app para conectar con gente a través de planes, que se quedó por el camino cuando llegó el COVID.',
 				type: 'Startup · App social',
-				tagline: 'Conectar personas a través de planes.',
 			},
 			{
 				title: 'Loyic',
-				description: 'Portal interno del empleado: fichaje horario, subida de documentación, gráficos y reportes de datos internos de la empresa.',
+				description: 'Todo el portal del empleado de la empresa, desarrollado desde cero. Fichajes, documentación, nóminas y mucho más.',
 				type: 'Portal interno',
-				tagline: 'Portal del empleado',
 			},
 			{
 				title: 'Lateua',
-				description: 'SaaS con marketplace que permite la gestión de producto para clientes y ofrece soluciones de interiorismo apoyadas con modelos IA.',
+				description: 'Un proyecto muy prometedor que hacía propuestas de diseño de interiores con IA. Trabajé los modelos, las integraciones y el 3D.',
 				type: 'SaaS · Marketplace',
-				tagline: 'Marketplace de interiorismo con IA.',
 			},
 			{
 				title: 'Cor de suro',
-				description: 'Web que integra una narrativa visual que pone en valor lo artesanal, la fuerza de la comunidad y el compromiso con la sostenibilidad.',
+				description: 'Una web muy inmersiva que apuesta por un producto sostenible y artesanal.',
 				type: 'Web · Narrativa visual',
-				tagline: 'Web inmersiva sobre lo artesanal y sostenible.',
 			},
 			{
 				title: 'Viviq',
-				description: 'Plataforma inmobiliaria con CMS adaptable a cada cliente.',
+				description: 'Webs a medida para inmobiliarias, cada una con su propio CMS integrado.',
 				type: 'Plataforma web',
-				tagline: 'CMS inmobiliario adaptable a cada cliente.',
 			},
 			{
 				title: 'RTTH',
-				description: 'Generación del territorio de la marca con un servicio que transforma las ondas de sonido de un archivo a imágenes como recursos de diseño con las ondas integradas.',
+				description: 'Convierte las ondas de sonido de una grabación en recursos de branding y diseño.',
 				type: 'Branding · Herramienta',
-				tagline: 'Del sonido a recursos de diseño.',
 			},
 			{
 				title: 'PilloSitio',
-				description: 'App y plataforma web para bares y restaurantes con servicios para negocios y clientes.',
+				description: 'Mi proyecto más grande hasta el momento. Pagos, mesas, comandas, delivery y mucho más, todo en un mismo entorno.',
 				type: 'App + Plataforma web',
-				tagline: 'App para bares, restaurantes y clientes.',
 			},
 			{
 				title: 'Trama World',
-				description: 'SaaS para clubes y discotecas que junta entradas, guardarropa y consumiciones en un solo QR.',
+				description: 'Bajo la filosofía de «todo cabe en un QR», Trama World digitaliza cualquier evento para ahorrar colas, proponer gamificaciones y medir todo lo que pasa.',
 				type: 'SaaS · Ocio nocturno',
-				tagline: 'Un QR para toda la noche.',
 			},
 		],
 	},

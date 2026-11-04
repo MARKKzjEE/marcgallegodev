@@ -152,57 +152,48 @@ export const en: Translations = {
 				{ type: "Coming soon", tagline: "Reserved for what's next." },
 			],
 		},
-		// NOTE: `description` feeds the image alt text (home collage + catalog).
-		// `type` and `tagline` feed the catalog sheet (/en/projects).
-		// → Placeholders: REVIEW (project type, short catalog line).
+		// `type` and `description` are the catalog sheet (/en/projects);
+		// `description` is also the image alt text (home + catalog).
 		items: [
 			{
 				title: 'PlanIT',
-				description: 'My side project that evolved into a startup connecting people around any kind of plan or activity.',
+				description: 'My startup and my first venture. An app to connect with people through plans, which fell by the wayside when COVID hit.',
 				type: 'Startup · Social app',
-				tagline: 'Connecting people through plans.',
 			},
 			{
 				title: 'Loyic',
-				description: 'Internal employee portal: time tracking, document uploads, charts and reports of the company\'s internal data.',
+				description: 'The company\'s entire employee portal, built from scratch. Time tracking, documents, payslips and much more.',
 				type: 'Internal portal',
-				tagline: 'Employee portal',
 			},
 			{
 				title: 'Lateua',
-				description: 'SaaS with marketplace for product management and AI-powered interior design solutions.',
+				description: 'A very promising project that created interior design proposals with AI. I worked on the models, the integrations and the 3D.',
 				type: 'SaaS · Marketplace',
-				tagline: 'AI-powered interior design marketplace.',
 			},
 			{
 				title: 'Cor de suro',
-				description: 'Website that integrates a visual narrative highlighting craftsmanship, community strength and commitment to sustainability.',
+				description: 'A truly immersive site that champions a sustainable, handcrafted product.',
 				type: 'Web · Visual narrative',
-				tagline: 'Immersive site about craft and sustainability.',
 			},
 			{
 				title: 'Viviq',
-				description: 'Real estate platform with a CMS adaptable to each client.',
+				description: 'Custom websites for real estate agencies, each with its own built-in CMS.',
 				type: 'Web platform',
-				tagline: 'Adaptable real-estate CMS per client.',
 			},
 			{
 				title: 'RTTH',
-				description: 'Brand territory built through a service that transforms sound waves from audio files into design assets with integrated waveforms.',
+				description: 'Turns the sound waves of a recording into branding and design assets.',
 				type: 'Branding · Tool',
-				tagline: 'From sound waves to design assets.',
 			},
 			{
 				title: 'PilloSitio',
-				description: 'App and web platform for bars and restaurants with services for businesses and customers.',
+				description: 'My biggest project to date. Payments, tables, orders, delivery and much more, all in one place.',
 				type: 'App + Web platform',
-				tagline: 'App for bars, restaurants and guests.',
 			},
 			{
 				title: 'Trama World',
-				description: 'SaaS for clubs and nightclubs that brings tickets, cloakroom and drinks together in a single QR.',
+				description: 'Built on the idea that “everything fits in a QR”, Trama World digitises any event to cut queues, add gamification and measure everything that happens.',
 				type: 'SaaS · Nightlife',
-				tagline: 'One QR for the whole night.',
 			},
 		],
 	},

@@ -90,7 +90,7 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 								<h2 class="catalog-cell__name font-monoblock font-medium text-secondary">{cell.project.title}</h2>
 								<div class="catalog-cell__data font-monoblock">
 									<span class="catalog-cell__type">{cell.project.type}</span>
-									<span class="catalog-cell__tagline">{cell.project.tagline}</span>
+									<span class="catalog-cell__tagline">{cell.project.description}</span>
 								</div>
 								<!-- Estado: con web, enlace "Ver web ↗"; sin web, archivado -->
 								{cell.project.url ? (
@@ -320,6 +320,7 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 
 // ─── Ficha: Título + bloque de Datos ───
 .catalog-cell__info {
+	flex: 1;   // llena la casilla: el estado se pega abajo
 	display: flex;
 	flex-direction: column;
 	gap: 0.6rem;
@@ -335,7 +336,20 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 	flex-direction: column;
 	font-size: clamp(11px, 1vw, 13px);
 	line-height: 1.35;
+	// Alto reservado: tipo + aire + las líneas que ocupa el texto más largo en
+	// cada ancho (--desc-lines), así el estado cae a la misma altura en todas
+	// las casillas sin dejar hueco de más. En móvil (una columna) no hace falta.
+	--desc-lines: 4;
+	min-height: calc((var(--desc-lines) + 1) * 1.35em + 0.5em);
+
+	@media (max-width: 767px) { min-height: 0; }
+	@media (min-width: 1024px) and (max-width: 1199px) { --desc-lines: 5; }
+	@media (min-width: 1600px) { --desc-lines: 3; }
 	color: var(--secondary);
+}
+
+.catalog-cell__type + .catalog-cell__tagline {
+	margin-top: 0.5em;   // aire entre el tipo y el texto
 }
 
 .catalog-cell__tagline {
@@ -345,6 +359,7 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 // ─── Estado del proyecto (última línea de la ficha) ───
 .catalog-cell__status {
 	align-self: flex-start;
+	margin-top: auto;   // abajo del todo: "Ver web" y "Archivado" en la misma línea por fila
 	font-size: clamp(11px, 1vw, 13px);
 	line-height: 1.35;
 	text-transform: uppercase;
@@ -352,8 +367,12 @@ const catalogRange = `${String(START_NO).padStart(3, '0')}–${String(START_NO +
 	color: var(--secondary);
 }
 
+// Archivado: tachado, como un artículo retirado del catálogo (se distingue
+// de la ficha de encima, que va en el mismo gris)
 .catalog-cell__status--off {
 	opacity: 0.7;
+	text-decoration: line-through;
+	text-decoration-thickness: 1px;
 }
 
 // ─── Móvil: textos algo mayores y más aire entre imagen y ficha ───
