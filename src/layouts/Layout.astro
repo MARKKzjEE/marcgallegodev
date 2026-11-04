@@ -118,7 +118,8 @@ const enURL = new URL(enHref, site).href;
 			"description": t.meta.defaultDescription,
 			"image": ogImage,
 			"sameAs": [
-				"https://linkedin.com/in/marcgallegodev"
+				"https://linkedin.com/in/marcgallegodev",
+				"https://www.instagram.com/markgallego/"
 			],
 			"address": {
 				"@type": "PostalAddress",
@@ -139,7 +140,7 @@ const enURL = new URL(enHref, site).href;
 			let stored = null;
 			try { stored = localStorage.getItem("theme"); } catch (e) {}
 			const prefersDark = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)").matches : null;
-			// Si no hay preferencia guardada, respeta el sistema; si no hay dato de sistema, usa oscuro por defecto
+			// Si no hay preferencia guardada, respeta el sistema; si no hay dato de sistema, usa claro por defecto
 			const isDark = stored === "dark" || (!stored && (prefersDark ?? false));
 			root.classList.toggle("dark", isDark);
 

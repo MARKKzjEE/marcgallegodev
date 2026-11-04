@@ -35,10 +35,13 @@ export const es = {
 	// ── Hero ──
 	hero: {
 		sectionAriaLabel: "Presentación de Marc Gallego",
+		// Banda superior: se repite a lo ancho con separadores "/"
+		role: "Full Stack Software Engineer",
 		stats: {
 			years: "+5 años exp.",
 			projects: "+60 proyectos",
-			since: "desde 2018",
+			since: "desde 2019",
+			location: "Barcelona",
 		},
 	},
 
@@ -59,7 +62,7 @@ export const es = {
 		},
 		// Pie de la sección (bajo el carrusel). {count} = nº de tecnologías.
 		// footMeta solo en tablet/desktop; en móvil se oculta.
-		footMeta: "STACK / {count} herramientas · desde 2018",
+		footMeta: "STACK / {count} herramientas · desde 2019",
 		footNote: "Ver mi trayectoria",
 	},
 
@@ -110,7 +113,7 @@ export const es = {
 			},
 			{
 				question: "¿Cómo es tu proceso de trabajo?",
-				answer: "Primero tengamos una reunión para asentar todos los requerimientos y entender bien cual es el problema. Una vez todas las bases bien claras ataco los problemas siempre haciendo seguimiento y reportes al cliente.",
+				answer: "Primero tengamos una reunión para asentar todos los requerimientos y entender bien cuál es el problema. Una vez todas las bases bien claras ataco los problemas siempre haciendo seguimiento y reportes al cliente.",
 			},
 			{
 				question: "¿Trabajas solo o con equipo?",
@@ -118,7 +121,7 @@ export const es = {
 			},
 			{
 				question: "¿Cuánto cuesta un proyecto contigo?",
-				answer: "Cada proyecto es único así que no tengo un precio fijo, primero hablemos de qué necesitas y despues encontraremos el mejor acuerdo entre todos.",
+				answer: "Cada proyecto es único así que no tengo un precio fijo, primero hablemos de qué necesitas y después encontraremos el mejor acuerdo entre todos.",
 			},
 		],
 	},

@@ -37,10 +37,13 @@ export const en: Translations = {
 	// ── Hero ──
 	hero: {
 		sectionAriaLabel: "Marc Gallego introduction",
+		// Top band: repeated across the width with "/" separators
+		role: "Full Stack Software Engineer",
 		stats: {
 			years: "+5 years exp.",
 			projects: "+60 projects",
-			since: "since 2018",
+			since: "since 2019",
+			location: "Barcelona",
 		},
 	},
 
@@ -61,7 +64,7 @@ export const en: Translations = {
 		},
 		// Section foot (below the carousel). {count} = number of technologies.
 		// footMeta only on tablet/desktop; hidden on mobile.
-		footMeta: "STACK / {count} tools · since 2018",
+		footMeta: "STACK / {count} tools · since 2019",
 		footNote: "See my experience",
 	},
 
